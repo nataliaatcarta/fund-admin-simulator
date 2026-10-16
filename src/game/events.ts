@@ -3,6 +3,7 @@ import { FILLER_EVENTS } from "../content/events-filler";
 import { INVITES } from "../content/dialogue";
 import { rng } from "./rng";
 import { season } from "./constants";
+import { personalize } from "./personalize";
 import { Choice, Cond, GameEvent, GameState, InboxItem, Line, NpcId } from "./types";
 
 export const SYS_CAPITAL_CALL: GameEvent = {
@@ -40,6 +41,9 @@ export function checkCond(c: Cond | undefined, g: GameState): boolean {
 
 /** Pick the text for a Line: callback flags first, then the speaker's mood, then default. */
 export function lineText(l: Line | undefined, speaker: NpcId | "system", g: GameState): string {
+  return personalize(rawLine(l, speaker, g), g.player);
+}
+function rawLine(l: Line | undefined, speaker: NpcId | "system", g: GameState): string {
   if (l === undefined) return "";
   if (typeof l === "string") return l;
   if (l.flags) for (const [f, t] of Object.entries(l.flags)) if (g.flags[f]) return t;
