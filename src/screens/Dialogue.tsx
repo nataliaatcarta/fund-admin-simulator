@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Sprite } from "../engine/Sprite";
 import { sfx } from "../engine/audio";
-import { Portrait, useTyper } from "../engine/ui";
+import { useTyper } from "../engine/ui";
 import { NPCS } from "../game/npcs";
 import { SayProps } from "../game/uiStore";
 import { setTalking } from "../game/actions";
@@ -22,7 +22,7 @@ export function EventCard({ art, category = "lp", s = 2, title }: { art: string;
 }
 
 export function Dialogue({ props, done }: { props: SayProps & { category?: string; title?: string }; done: (v: number) => void }) {
-  const { npc, mood = "neutral", special, text, illustration, options } = props;
+  const { npc, text, illustration, options } = props;
   const t = useTyper(text, 70);
   const sys = npc === "system";
   useEffect(() => {
@@ -42,8 +42,7 @@ export function Dialogue({ props, done }: { props: SayProps & { category?: strin
           <EventCard art={illustration} category={props.category ?? "lp"} s={1.4} />
         </div>
       )}
-      {!sys && <Portrait npc={npc as never} mood={mood} special={special} x={8 * A} y={66 * A} s={A} />}
-      <At box={[70, 102, 76, 11]} style={{ display: "flex", alignItems: "center", paddingLeft: 12, fontFamily: "var(--font-display)", fontSize: 24, color: "var(--ink)" }}>
+      <At box={[18, 102, 76, 11]} style={{ display: "flex", alignItems: "center", paddingLeft: 12, fontFamily: "var(--font-display)", fontSize: 24, color: "var(--ink)" }}>
         {sys ? "Inbox" : NPCS[npc as NpcId].name}
       </At>
       <At box={[16, 118, 288, 50]} onClick={advance} style={{ pointerEvents: "auto", padding: "4px 12px", fontSize: 25, lineHeight: 1.25, fontWeight: 700, color: "var(--ink)", overflow: "hidden" }} data-hot="">

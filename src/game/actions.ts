@@ -1,12 +1,11 @@
 import { sfx } from "../engine/audio";
 import { NPCS } from "./npcs";
 import { NpcId } from "./types";
-import { setOffice, sleep, useOffice } from "./officeStore";
-import { actorSprites } from "./actors";
+import { ACTOR_FADE_MS, setOffice, sleep, useOffice } from "./officeStore";
 
 const now = () => performance.now();
 
-/** Door choreography: how each character arrives, sits across the desk, and later leaves. */
+/** Door choreography: how each character announces themselves, then fades in across the desk. */
 export async function enter(npc: NpcId, video = false) {
   if (video) {
     setOffice({ laptop: "videocall", phone: "idle", actor: null, videoNpc: npc });
@@ -30,46 +29,21 @@ export async function enter(npc: NpcId, video = false) {
     await sleep(1300);
     setOffice({ sticky: false });
     await knock("knockTap");
-    open();
-    await sleep(300);
-  } else if (e === "shave") {
-    await knock("knockShave");
-    open();
-    setOffice({ actor: { npc, phase: "peek", since: now() } });
-    await sleep(1000);
-  } else if (e === "peek") {
-    await knock("knockTap");
-    open();
-    setOffice({ actor: { npc, phase: "peek", since: now() } });
-    await sleep(1100);
-  } else if (e === "barge") {
-    sfx.play("barge");
-    open();
-    setOffice({ actor: { npc, phase: "peek", since: now() } });
-    await sleep(600);
-  } else if (e === "scooter") {
-    sfx.play("scooter");
-    open();
-    setOffice({ actor: { npc, phase: "peek", since: now() } });
-    await sleep(800);
-  } else if (e === "lean") {
-    open();
-    setOffice({ actor: { npc, phase: "lean", since: now(), entrance: "lean" } });
-    await sleep(900);
+  } else if (e === "shave") await knock("knockShave");
+  else if (e === "peek" || e === "tap") await knock("knockTap");
+  else if (e === "barge") sfx.play("barge");
+  else if (e === "scooter") sfx.play("scooter");
+  else if (e !== "lean") await knock("knock");
+  open();
+  if (e === "lean") {
+    setOffice({ actor: { npc, phase: "lean", since: now() } });
+    await sleep(ACTOR_FADE_MS + 300);
     return;
-  } else if (e === "tap") {
-    await knock("knockTap");
-    open();
-    setOffice({ actor: { npc, phase: "peek", since: now() } });
-    await sleep(900);
-  } else {
-    await knock("knock");
-    open();
-    await sleep(300);
   }
-  setOffice({ actor: { npc, phase: "walkin", since: now(), entrance: e } });
-  await sleep(e === "scooter" ? 1500 : 2000);
-  setOffice({ door: "closed", actor: { npc, phase: "sit", since: now() } });
+  await sleep(250);
+  setOffice({ actor: { npc, phase: "sit", since: now() } });
+  await sleep(ACTOR_FADE_MS);
+  setOffice({ door: "closed" });
   sfx.play("door");
 }
 
@@ -86,17 +60,9 @@ export async function leave(npc: NpcId) {
   }
   const a = v.actor;
   if (!a) return;
-  if (a.phase === "lean") {
-    setOffice({ actor: null });
-    return;
-  }
-  void actorSprites;
-  setOffice({ door: "open-empty" });
-  sfx.play("door");
-  setOffice({ actor: { npc, phase: "walkout", since: now() } });
-  await sleep(1800);
+  setOffice({ actor: { ...a, npc, since: now(), out: true } });
+  await sleep(ACTOR_FADE_MS);
   setOffice({ actor: null, door: "closed" });
-  sfx.play("door");
 }
 
 export function resetOffice() {
