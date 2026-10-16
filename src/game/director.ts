@@ -97,8 +97,8 @@ async function kickoff(id: number) {
 }
 
 // ----------------------------------------------------------------------- day
-/** What the player did in the room (resolved by the hotspots / the day overlay). `idle` = nobody clicked for a while, so a visitor may knock. */
-export type DayAction = { kind: "inbox" | "desk" | "out" | "break" | "end" | "idle" };
+/** What the player did in the room (resolved by the hotspots / the day overlay). */
+export type DayAction = { kind: "inbox" | "desk" | "out" | "break" | "end" };
 
 const spend = (n: number) => mutate((g) => { g.energy = Math.max(0, g.energy - n); g.weekStats.spent += n; });
 
@@ -149,7 +149,8 @@ async function playDay(id: number, w: number) {
   if (w === 10) await closeVisit(id);
   live(id);
 
-  let acted = false;
+  // visitors arrive at the start of the day and after each thing you do, never on a timer
+  let acted = true;
   for (;;) {
     live(id);
     updateTod();
@@ -167,7 +168,6 @@ async function playDay(id: number, w: number) {
     if (v && acted) { acted = false; await visit(id, v); continue; }
     const a = await ask<DayAction>("day", { visitor: !!v });
     live(id);
-    if (a.kind === "idle") { acted = true; continue; }
     if (a.kind === "end") break;
     await doAction(id, a);
     acted = true;

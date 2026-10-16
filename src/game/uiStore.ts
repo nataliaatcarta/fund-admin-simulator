@@ -81,8 +81,29 @@ export interface SayProps {
   illustration?: string;
   category?: string;
   options?: { text: string; disabled?: boolean; hint?: string }[];
+  /** narration panel: no speaker tag */
+  narration?: boolean;
   /** don't wait for a click (returns immediately after typing) */
   video?: boolean;
 }
-export const say = (p: SayProps) => ask<void>("dialogue", p);
-export const choose = (p: SayProps) => ask<number>("dialogue", p);
+/** Narration and speech get their own panels: quoted text is the speaker's (tagged), everything else is untagged narration. */
+function panels(p: SayProps): SayProps[] {
+  if (p.npc === "system") return [p];
+  const out: SayProps[] = [];
+  for (const m of p.text.matchAll(/["“]([^"”]*)["”]|([^"“”]+)/g)) {
+    const quoted = m[1] !== undefined;
+    const text = (quoted ? m[1] : m[2]).trim();
+    if (text) out.push({ ...p, text, narration: !quoted, options: undefined });
+  }
+  if (!out.length) return [p];
+  out[out.length - 1].options = p.options;
+  return out;
+}
+export async function say(p: SayProps): Promise<void> {
+  for (const q of panels(p)) await ask<number>("dialogue", q);
+}
+export async function choose(p: SayProps): Promise<number> {
+  let r = 0;
+  for (const q of panels(p)) r = await ask<number>("dialogue", q);
+  return r;
+}
