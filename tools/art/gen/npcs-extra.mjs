@@ -109,6 +109,7 @@ const brows = (c, ox, oy, col, thick = 2) => { R(c, ox + 16, oy + 17, 6, thick, 
 const SILVER = { fill: "#ece6f2", hi: P.white, lo: "#c4b9cb" };
 const SPECS = {
   finch: {
+    faceMap: { neutral: "mild" },
     // kindly owl of an auditor: shiny dome, cloud-puff tufts, bushy brows, little round specs, walrus moustache, bow tie
     head: "dome", tone: TONES.fair, brow: P.greyD,
     hair: { style: "none" },
@@ -147,6 +148,7 @@ const SPECS = {
     }],
   },
   lawyer: {
+    faceMap: { neutral: "smarmy" },
     // silver fox: combed-back silver hair with a clean part, half-moon glasses, pinstripes, gold tie and a pocket square
     head: "round", tone: TONES.light, brow: P.greyD,
     hair: { style: "none" },
@@ -166,6 +168,7 @@ const SPECS = {
     }],
   },
   kenji: {
+    faceMap: { neutral: "earnest" },
     // earnest pension analyst: soft round face, tidy side part with a cowlick, round glasses, cardigan, lanyard
     head: "soft", tone: TONES.tan, brow: "#5a4660",
     hair: { style: "none" },
@@ -182,6 +185,7 @@ const SPECS = {
     }],
   },
   calloway: {
+    faceMap: { neutral: "stern" },
     // SEC examiner: crisp line-up fade, neat full beard, sharp dark suit, skinny tie, the badge
     head: "jaw", tone: TONES.brown, brow: "#463550",
     hair: { style: "none" },
@@ -197,10 +201,11 @@ const SPECS = {
       paint(c, ox, oy, or(beard, rr(20, 28, 8, 1.2, 0.5)), { fill: "#4e3d55", hi: "#5f4c68", lo: "#3d2f45" }, { ol: null });
 
       brows(c, ox, oy, "#463550", 1);
-      badge(c, ox + 31, oy + 38);
+      badge(c, ox + 26, oy + 38);
     }],
   },
   associate: {
+    faceMap: { neutral: "eager" },
     // eager first hire: big ginger curls, freckles, mint blouse, lanyard
     head: "soft", tone: TONES.light, brow: "#b3704b",
     hair: { style: "none" },
