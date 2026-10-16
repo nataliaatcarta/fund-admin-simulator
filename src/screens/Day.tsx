@@ -5,7 +5,7 @@ import { Button, CupText } from "../engine/ui";
 import { COST, OVERWORK } from "../game/constants";
 import { EVENT, lineText, visibleChoices } from "../game/events";
 import { NPCS } from "../game/npcs";
-import { quickReply, newTips, DayAction } from "../game/director";
+import { quickReply, newTips, hasAct, DayAction } from "../game/director";
 import { useGame } from "../game/state";
 import { personalize } from "../game/personalize";
 
@@ -35,7 +35,7 @@ export function DayOverlay({ props, done }: { props: { visitor: boolean }; done:
 }
 
 // ------------------------------------------------------------------ mail
-export function Inbox({ done }: { done: (r?: { desk?: string }) => void }) {
+export function Inbox({ done }: { done: (r?: { desk?: string; act?: { uid: string; idx: number } }) => void }) {
   const g = useGame((s) => s.g);
   const items = g.inbox.filter((i) => EVENT(i.eventId)?.mode !== "meeting" && i.eventId !== "sys_capital_call");
   const [sel, setSel] = useState(Math.max(0, items.findIndex((i) => i.status === "new")));
@@ -47,6 +47,7 @@ export function Inbox({ done }: { done: (r?: { desk?: string }) => void }) {
   // a concept this mail is the first to mention: explained here, saved to the glossary once you reply
   const tips = ev && !resolved ? newTips(ev.teaches, g) : [];
   const reply = (idx: number) => {
+    if (ev && chs[idx] && hasAct(ev, chs[idx])) { sfx.play("paper"); done({ act: { uid: item.uid, idx } }); return; }
     const r = quickReply(item.uid, idx);
     if (r) setReplied((p) => ({ ...p, [item.uid]: r.text || "Sent." }));
   };

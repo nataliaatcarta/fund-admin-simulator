@@ -7,14 +7,23 @@ export type Spec = { title: string; npc: NpcId; intro: string; result: string } 
   | { kind: "pick"; rounds: { prompt: string; options: { text: string; score: 0 | 1 | 2; react: string }[] }[] }
   | { kind: "slider"; evidence: string[]; lo: number; hi: number; min: number; max: number; unit: string; name: string }
   | { kind: "breathe" }
+  | { kind: "type"; lines: string[] }
+  | { kind: "order"; steps: string[] }
 );
 
-const sort = (title: string, npc: NpcId, intro: string, result: string, bins: string[], items: [string, number][]): Spec =>
+export const sort = (title: string, npc: NpcId, intro: string, result: string, bins: string[], items: [string, number][]): Spec =>
   ({ kind: "sort", title, npc, intro: intro + " Drag each one into a box.", result, bins, items: items.map(([text, bin]) => ({ text, bin })) });
-const spot = (title: string, npc: NpcId, intro: string, result: string, items: string[], targets: number[], grid?: number): Spec =>
+export const spot = (title: string, npc: NpcId, intro: string, result: string, items: string[], targets: number[], grid?: number): Spec =>
   ({ kind: "spot", title, npc, intro, result, items, targets, grid });
-const pick = (title: string, npc: NpcId, intro: string, result: string, rounds: [string, [string, 0 | 1 | 2, string][]][]): Spec =>
+export const pick = (title: string, npc: NpcId, intro: string, result: string, rounds: [string, [string, 0 | 1 | 2, string][]][]): Spec =>
   ({ kind: "pick", title, npc, intro, result, rounds: rounds.map(([prompt, o]) => ({ prompt, options: o.map(([text, score, react]) => ({ text, score, react })) })) });
+
+/** Type the words yourself: a note, a reply, a clause. Mistakes cost stars. */
+export const type = (title: string, npc: NpcId, intro: string, result: string, lines: string[]): Spec =>
+  ({ kind: "type", title, npc, intro: intro + " Type it out.", result, lines });
+/** Do the steps in the right sequence: tap them one by one, first step first. */
+export const order = (title: string, npc: NpcId, intro: string, result: string, steps: string[]): Spec =>
+  ({ kind: "order", title, npc, intro: intro + " Tap the steps in order, first one first.", result, steps });
 
 export const SPECS: Record<string, Spec> = {
   // ---------------------------------------------------------------- desk work
