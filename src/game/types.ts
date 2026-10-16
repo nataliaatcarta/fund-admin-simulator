@@ -107,7 +107,7 @@ export interface GameEvent {
   mode: "quick" | "meeting" | "desk";
   meetingCost?: 1 | 2;
   /** mode "desk": handling this item = playing this mini-game at the desk (1 energy). `choices` may be empty. */
-  desk?: { game: "wire-check" | "pitch-day"; context?: Record<string, unknown> };
+  desk?: { game: "wire-check" | "pitch-day" | "capital-call"; context?: Record<string, unknown> };
   choices: Choice[];
   /** if the player ignores it all week */
   ignored?: Effects;
@@ -197,6 +197,7 @@ export interface Seed {
   label: string;
   planted: { quarter: number; week: number };
   fired?: boolean;
+  result?: "good" | "bad";
 }
 
 export interface NpcState {
@@ -224,6 +225,8 @@ export interface PlannedAction {
   /** meeting: inbox item uid; desk: task id; out: event type */
   target?: string;
   label: string;
+  /** scheduled beat, can't be removed */
+  locked?: boolean;
 }
 
 export interface GameState {
@@ -248,6 +251,8 @@ export interface GameState {
   plan: PlannedAction[];
   /** event ids already shown (story events fire once) */
   seen: string[];
+  /** last absolute week (quarter*12+week) each event id was shown */
+  seenAt: Record<string, number>;
   trinkets: string[];
   badges: string[];
   glossary: string[];
@@ -265,6 +270,8 @@ export interface GameState {
   overlay?: string;
   window?: string;
   ending?: "oversubscribed" | "comeback" | "consultant";
+  /** weekly bookkeeping */
+  weekStats: { spent: number; resolved: number };
   settings: { music: boolean; sfx: boolean; reduceMotion: boolean; bigText: boolean };
 }
 

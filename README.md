@@ -3,7 +3,19 @@
 A cozy-satire job-simulator: you are a General Partner running a small venture firm,
 from a single first-person view of your office. Design: [issue #1](https://github.com/nataliaatcarta/fund-admin-simulator/issues/1).
 
-> Status: very early. No tech stack chosen yet; this repo is mostly a home for assets and design.
+> Status: playable MVP (Fund I, 8 quarters). Vite + React + TypeScript; see [docs/dev/architecture.md](docs/dev/architecture.md).
+
+## Run it
+
+```bash
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # type-check + production build
+```
+
+Dev shortcuts: `/?quick` skips the menus, `/?auto` lets a bot play all 8 quarters instantly (smoke test), `/?mg=wire-check|capital-call|pitch-day` runs one mini-game, `/?office` shows the room. Esc pauses.
+
+Fonts are optional: drop `PixelifySans.ttf` and `AtkinsonHyperlegible-Regular.ttf` / `-Bold.ttf` into `assets/fonts/` (see the README there); system fonts are used until then.
 
 ## Layout
 
@@ -21,7 +33,7 @@ from a single first-person view of your office. Design: [issue #1](https://githu
 | `assets/audio/music`, `sfx` | Soundtrack, knocks, stamps, paper, coffee |
 | `assets/fonts/` | Typefaces |
 | `assets/reference/` | Moodboards, inspiration, sketches (not shipped) |
-| `content/` | Scripted dialogue, events and mini-game data (npcs, events, mini-games) |
+| `src/` | The game: `engine/` (stage, sprites, cursor, audio, UI kit), `game/` (state, director, office), `screens/`, `minigames/`, `content/` (all scripted events and dialogue) |
 | `docs/design/` | Design doc v1 and the art inventory (from issue #1) |
 | `tools/art/` | The generator that produces every PNG in `assets/art/` (see its README) |
 
