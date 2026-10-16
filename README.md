@@ -16,12 +16,23 @@ from a single first-person view of your office. Design: [issue #1](https://githu
 | `assets/art/cursors/` | Point, grab, holding, stamp, pen |
 | `assets/art/npcs/<name>/` | Portraits and poses per character (`supporting/` for Finch, Chad, Kenji, etc.) |
 | `assets/art/mini-games/<game>/` | Wire Check, Capital Call Builder, Pitch Day |
+| `assets/art/events/`, `story/`, `effects/`, `marketing/`, `startup-logos/` | Event card frames + illustrations, story cards and endings, particles/animations, store art |
+| `assets/art/manifest/` | Generated file list (size, frame counts) per module |
 | `assets/audio/music`, `sfx` | Soundtrack, knocks, stamps, paper, coffee |
 | `assets/fonts/` | Typefaces |
 | `assets/reference/` | Moodboards, inspiration, sketches (not shipped) |
 | `content/` | Scripted dialogue, events and mini-game data (npcs, events, mini-games) |
-| `docs/design/` | Design docs |
+| `docs/design/` | Design doc v1 and the art inventory (from issue #1) |
+| `tools/art/` | The generator that produces every PNG in `assets/art/` (see its README) |
 
 ## Asset naming
 
 Lowercase, kebab-case, `subject-variant-state.ext`, e.g. `priya-worried.png`, `stamp-approve.png`, `door-knock-ricky.ogg`.
+
+## Regenerating art
+
+```bash
+cd tools/art && npm install && node generate.mjs
+```
+
+Contact sheets for reviewing each batch are in `assets/reference/contact-sheets/`.

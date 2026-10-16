@@ -1,0 +1,13 @@
+{
+  "size": [
+    64,
+    16
+  ],
+  "textBox": {
+    "x": 7,
+    "y": 4,
+    "w": 50,
+    "h": 7
+  },
+  "note": "Brass plate is blank; render player + firm name with the UI font inside textBox."
+}

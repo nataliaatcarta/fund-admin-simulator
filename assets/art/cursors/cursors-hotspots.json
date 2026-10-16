@@ -1,0 +1,45 @@
+{
+  "note": "Pixel coordinates inside each 32x32 frame (art pixels = PNG pixels). Strips: frames laid out horizontally. 'holding' is only shown when no held sprite is available; normally the cursor hides and the lifted sprite follows the mouse.",
+  "cursors": {
+    "pointer": {
+      "x": 8,
+      "y": 8
+    },
+    "hover": {
+      "x": 8,
+      "y": 8,
+      "frames": 4,
+      "frameW": 32,
+      "frameH": 32,
+      "fps": 6
+    },
+    "lift": {
+      "x": 8,
+      "y": 8
+    },
+    "holding": {
+      "x": 18,
+      "y": 14
+    },
+    "stamp-mode": {
+      "x": 14,
+      "y": 25
+    },
+    "pen-mode": {
+      "x": 9,
+      "y": 26
+    },
+    "no-drop": {
+      "x": 14,
+      "y": 15
+    },
+    "waiting": {
+      "x": 14,
+      "y": 16,
+      "frames": 3,
+      "frameW": 32,
+      "frameH": 32,
+      "fps": 6
+    }
+  }
+}

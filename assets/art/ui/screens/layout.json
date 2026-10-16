@@ -1,0 +1,1475 @@
+{
+  "title": {
+    "logo": {
+      "x": 32,
+      "y": 22,
+      "w": 196,
+      "h": 74
+    },
+    "press-start": {
+      "x": 60,
+      "y": 112,
+      "w": 140,
+      "h": 16,
+      "type": "text-prompt"
+    },
+    "version": {
+      "x": 4,
+      "y": 168,
+      "w": 60,
+      "h": 10
+    },
+    "credits": {
+      "x": 200,
+      "y": 168,
+      "w": 116,
+      "h": 10
+    }
+  },
+  "main-menu": {
+    "logo-wordmark": {
+      "x": 36,
+      "y": 12,
+      "w": 248,
+      "h": 22
+    },
+    "new-game": {
+      "x": 108,
+      "y": 50,
+      "w": 104,
+      "h": 19,
+      "type": "button"
+    },
+    "continue": {
+      "x": 108,
+      "y": 73,
+      "w": 104,
+      "h": 19,
+      "type": "button"
+    },
+    "glossary": {
+      "x": 108,
+      "y": 96,
+      "w": 104,
+      "h": 19,
+      "type": "button"
+    },
+    "settings": {
+      "x": 108,
+      "y": 119,
+      "w": 104,
+      "h": 19,
+      "type": "button"
+    },
+    "quit": {
+      "x": 108,
+      "y": 142,
+      "w": 104,
+      "h": 19,
+      "type": "button"
+    }
+  },
+  "morning-inbox": {
+    "hud": {
+      "x": 0,
+      "y": 0,
+      "w": 320,
+      "h": 22
+    },
+    "list-title": {
+      "x": 52,
+      "y": 23,
+      "w": 60,
+      "h": 16
+    },
+    "row1": {
+      "x": 10,
+      "y": 44,
+      "w": 144,
+      "h": 22,
+      "itemType": "email"
+    },
+    "row1-text": {
+      "x": 32,
+      "y": 47,
+      "w": 108,
+      "h": 16
+    },
+    "row2": {
+      "x": 10,
+      "y": 70,
+      "w": 144,
+      "h": 22,
+      "itemType": "call"
+    },
+    "row2-text": {
+      "x": 32,
+      "y": 73,
+      "w": 108,
+      "h": 16
+    },
+    "row3": {
+      "x": 10,
+      "y": 96,
+      "w": 144,
+      "h": 22,
+      "itemType": "email"
+    },
+    "row3-text": {
+      "x": 32,
+      "y": 99,
+      "w": 108,
+      "h": 16
+    },
+    "row4": {
+      "x": 10,
+      "y": 122,
+      "w": 144,
+      "h": 22,
+      "itemType": "sticky-note"
+    },
+    "row4-text": {
+      "x": 32,
+      "y": 125,
+      "w": 108,
+      "h": 16
+    },
+    "row5": {
+      "x": 10,
+      "y": 148,
+      "w": 144,
+      "h": 22,
+      "itemType": "call"
+    },
+    "row5-text": {
+      "x": 32,
+      "y": 151,
+      "w": 108,
+      "h": 16
+    },
+    "preview-header": {
+      "x": 172,
+      "y": 34,
+      "w": 134,
+      "h": 22
+    },
+    "preview-body": {
+      "x": 172,
+      "y": 60,
+      "w": 134,
+      "h": 78
+    },
+    "reply-a": {
+      "x": 164,
+      "y": 151,
+      "w": 72,
+      "h": 20,
+      "type": "button"
+    },
+    "reply-b": {
+      "x": 242,
+      "y": 151,
+      "w": 72,
+      "h": 20,
+      "type": "button"
+    }
+  },
+  "week-planner": {
+    "week-strip": {
+      "x": 6,
+      "y": 25,
+      "w": 244,
+      "h": 34
+    },
+    "energy-left": {
+      "x": 258,
+      "y": 27,
+      "w": 54,
+      "h": 30
+    },
+    "energy-text": {
+      "x": 280,
+      "y": 36,
+      "w": 30,
+      "h": 12
+    },
+    "plan-slot1": {
+      "x": 14,
+      "y": 69,
+      "w": 52,
+      "h": 44
+    },
+    "plan-slot1-cost": {
+      "x": 32,
+      "y": 102,
+      "w": 30,
+      "h": 10
+    },
+    "plan-slot2": {
+      "x": 74,
+      "y": 69,
+      "w": 52,
+      "h": 44
+    },
+    "plan-slot2-cost": {
+      "x": 92,
+      "y": 102,
+      "w": 30,
+      "h": 10
+    },
+    "plan-slot3": {
+      "x": 134,
+      "y": 69,
+      "w": 52,
+      "h": 44
+    },
+    "plan-slot3-cost": {
+      "x": 152,
+      "y": 102,
+      "w": 30,
+      "h": 10
+    },
+    "plan-slot4": {
+      "x": 194,
+      "y": 69,
+      "w": 52,
+      "h": 44
+    },
+    "plan-slot4-cost": {
+      "x": 212,
+      "y": 102,
+      "w": 30,
+      "h": 10
+    },
+    "plan-slot5": {
+      "x": 254,
+      "y": 69,
+      "w": 52,
+      "h": 44
+    },
+    "plan-slot5-cost": {
+      "x": 272,
+      "y": 102,
+      "w": 30,
+      "h": 10
+    },
+    "action1-text": {
+      "x": 46,
+      "y": 129,
+      "w": 30,
+      "h": 24
+    },
+    "action1-cost": {
+      "x": 34,
+      "y": 162,
+      "w": 22,
+      "h": 11
+    },
+    "action1": {
+      "x": 6,
+      "y": 124,
+      "w": 74,
+      "h": 52,
+      "icon": "action-meeting"
+    },
+    "action2-text": {
+      "x": 124,
+      "y": 129,
+      "w": 30,
+      "h": 24
+    },
+    "action2-cost": {
+      "x": 112,
+      "y": 162,
+      "w": 22,
+      "h": 11
+    },
+    "action2": {
+      "x": 84,
+      "y": 124,
+      "w": 74,
+      "h": 52,
+      "icon": "action-desk-work"
+    },
+    "action3-text": {
+      "x": 202,
+      "y": 129,
+      "w": 30,
+      "h": 24
+    },
+    "action3-cost": {
+      "x": 190,
+      "y": 162,
+      "w": 22,
+      "h": 11
+    },
+    "action3": {
+      "x": 162,
+      "y": 124,
+      "w": 74,
+      "h": 52,
+      "icon": "action-go-out"
+    },
+    "action4-text": {
+      "x": 280,
+      "y": 129,
+      "w": 30,
+      "h": 24
+    },
+    "action4-cost": {
+      "x": 268,
+      "y": 162,
+      "w": 22,
+      "h": 11
+    },
+    "action4": {
+      "x": 240,
+      "y": 124,
+      "w": 74,
+      "h": 52,
+      "icon": "action-rest"
+    }
+  },
+  "friday-wrapup": {
+    "title": {
+      "x": 80,
+      "y": 10,
+      "w": 74,
+      "h": 16
+    },
+    "line1": {
+      "x": 34,
+      "y": 42,
+      "w": 176,
+      "h": 14
+    },
+    "line2": {
+      "x": 34,
+      "y": 62,
+      "w": 176,
+      "h": 14
+    },
+    "line3": {
+      "x": 34,
+      "y": 82,
+      "w": 176,
+      "h": 14
+    },
+    "line4": {
+      "x": 34,
+      "y": 102,
+      "w": 176,
+      "h": 14
+    },
+    "line5": {
+      "x": 34,
+      "y": 122,
+      "w": 176,
+      "h": 14
+    },
+    "summary": {
+      "x": 24,
+      "y": 38,
+      "w": 188,
+      "h": 102
+    },
+    "sticky-text": {
+      "x": 232,
+      "y": 12,
+      "w": 28,
+      "h": 20
+    },
+    "meter1-label": {
+      "x": 250,
+      "y": 39,
+      "w": 40,
+      "h": 16
+    },
+    "meter1-delta": {
+      "x": 294,
+      "y": 41,
+      "w": 18,
+      "h": 12,
+      "note": "floaty +/- sprite goes here"
+    },
+    "meter2-label": {
+      "x": 250,
+      "y": 65,
+      "w": 40,
+      "h": 16
+    },
+    "meter2-delta": {
+      "x": 294,
+      "y": 67,
+      "w": 18,
+      "h": 12,
+      "note": "floaty +/- sprite goes here"
+    },
+    "meter3-label": {
+      "x": 250,
+      "y": 91,
+      "w": 40,
+      "h": 16
+    },
+    "meter3-delta": {
+      "x": 294,
+      "y": 93,
+      "w": 18,
+      "h": 12,
+      "note": "floaty +/- sprite goes here"
+    },
+    "meter4-label": {
+      "x": 250,
+      "y": 117,
+      "w": 40,
+      "h": 16
+    },
+    "meter4-delta": {
+      "x": 294,
+      "y": 119,
+      "w": 18,
+      "h": 12,
+      "note": "floaty +/- sprite goes here"
+    },
+    "next-week": {
+      "x": 236,
+      "y": 144,
+      "w": 78,
+      "h": 22,
+      "type": "button"
+    }
+  },
+  "quarter-kickoff": {
+    "title": {
+      "x": 100,
+      "y": 6,
+      "w": 120,
+      "h": 16
+    },
+    "focus1-name": {
+      "x": 16,
+      "y": 74,
+      "w": 56,
+      "h": 12
+    },
+    "focus1-desc": {
+      "x": 16,
+      "y": 90,
+      "w": 56,
+      "h": 28
+    },
+    "focus1-select": {
+      "x": 18,
+      "y": 122,
+      "w": 52,
+      "h": 14,
+      "type": "button"
+    },
+    "focus1": {
+      "x": 10,
+      "y": 28,
+      "w": 68,
+      "h": 112
+    },
+    "focus2-name": {
+      "x": 92,
+      "y": 74,
+      "w": 56,
+      "h": 12
+    },
+    "focus2-desc": {
+      "x": 92,
+      "y": 90,
+      "w": 56,
+      "h": 28
+    },
+    "focus2-select": {
+      "x": 94,
+      "y": 122,
+      "w": 52,
+      "h": 14,
+      "type": "button"
+    },
+    "focus2": {
+      "x": 86,
+      "y": 28,
+      "w": 68,
+      "h": 112
+    },
+    "focus3-name": {
+      "x": 168,
+      "y": 74,
+      "w": 56,
+      "h": 12
+    },
+    "focus3-desc": {
+      "x": 168,
+      "y": 90,
+      "w": 56,
+      "h": 28
+    },
+    "focus3-select": {
+      "x": 170,
+      "y": 122,
+      "w": 52,
+      "h": 14,
+      "type": "button"
+    },
+    "focus3": {
+      "x": 162,
+      "y": 28,
+      "w": 68,
+      "h": 112
+    },
+    "focus4-name": {
+      "x": 244,
+      "y": 74,
+      "w": 56,
+      "h": 12
+    },
+    "focus4-desc": {
+      "x": 244,
+      "y": 90,
+      "w": 56,
+      "h": 28
+    },
+    "focus4-select": {
+      "x": 246,
+      "y": 122,
+      "w": 52,
+      "h": 14,
+      "type": "button"
+    },
+    "focus4": {
+      "x": 238,
+      "y": 28,
+      "w": 68,
+      "h": 112
+    },
+    "brooke-line": {
+      "x": 18,
+      "y": 151,
+      "w": 214,
+      "h": 18
+    },
+    "confirm": {
+      "x": 246,
+      "y": 150,
+      "w": 64,
+      "h": 22,
+      "type": "button"
+    }
+  },
+  "quarter-close-checklist": {
+    "title": {
+      "x": 94,
+      "y": 24,
+      "w": 144,
+      "h": 12
+    },
+    "item1": {
+      "x": 112,
+      "y": 40,
+      "w": 126,
+      "h": 16
+    },
+    "item1-box": {
+      "x": 94,
+      "y": 42,
+      "w": 12,
+      "h": 12
+    },
+    "item2": {
+      "x": 112,
+      "y": 60,
+      "w": 126,
+      "h": 16
+    },
+    "item2-box": {
+      "x": 94,
+      "y": 62,
+      "w": 12,
+      "h": 12
+    },
+    "item3": {
+      "x": 112,
+      "y": 80,
+      "w": 126,
+      "h": 16
+    },
+    "item3-box": {
+      "x": 94,
+      "y": 82,
+      "w": 12,
+      "h": 12
+    },
+    "item4": {
+      "x": 112,
+      "y": 100,
+      "w": 126,
+      "h": 16
+    },
+    "item4-box": {
+      "x": 94,
+      "y": 102,
+      "w": 12,
+      "h": 12
+    },
+    "item5": {
+      "x": 112,
+      "y": 120,
+      "w": 126,
+      "h": 16
+    },
+    "item5-box": {
+      "x": 94,
+      "y": 122,
+      "w": 12,
+      "h": 12
+    },
+    "item6": {
+      "x": 112,
+      "y": 140,
+      "w": 126,
+      "h": 16
+    },
+    "item6-box": {
+      "x": 94,
+      "y": 142,
+      "w": 12,
+      "h": 12
+    },
+    "priya-portrait": {
+      "x": 12,
+      "y": 24,
+      "w": 48,
+      "h": 48
+    },
+    "priya-name": {
+      "x": 12,
+      "y": 80,
+      "w": 48,
+      "h": 10
+    },
+    "sticky-text": {
+      "x": 262,
+      "y": 62,
+      "w": 26,
+      "h": 20
+    },
+    "risk-stamp": {
+      "x": 262,
+      "y": 112,
+      "w": 44,
+      "h": 36
+    },
+    "submit": {
+      "x": 258,
+      "y": 154,
+      "w": 56,
+      "h": 20,
+      "type": "button"
+    }
+  },
+  "lp-report-preview": {
+    "tab-summary": {
+      "x": 28,
+      "y": 28,
+      "w": 62,
+      "h": 22,
+      "type": "tab"
+    },
+    "tab-performance": {
+      "x": 28,
+      "y": 62,
+      "w": 62,
+      "h": 22,
+      "type": "tab"
+    },
+    "tab-notes": {
+      "x": 28,
+      "y": 96,
+      "w": 62,
+      "h": 22,
+      "type": "tab"
+    },
+    "page-title": {
+      "x": 114,
+      "y": 15,
+      "w": 108,
+      "h": 14
+    },
+    "chart": {
+      "x": 98,
+      "y": 36,
+      "w": 128,
+      "h": 54
+    },
+    "body": {
+      "x": 100,
+      "y": 96,
+      "w": 124,
+      "h": 54
+    },
+    "signature": {
+      "x": 104,
+      "y": 148,
+      "w": 70,
+      "h": 12
+    },
+    "send": {
+      "x": 240,
+      "y": 112,
+      "w": 72,
+      "h": 24,
+      "type": "button"
+    },
+    "edit": {
+      "x": 240,
+      "y": 142,
+      "w": 72,
+      "h": 22,
+      "type": "button"
+    },
+    "back": {
+      "x": 240,
+      "y": 24,
+      "w": 48,
+      "h": 18,
+      "type": "button"
+    },
+    "page-number": {
+      "x": 190,
+      "y": 160,
+      "w": 34,
+      "h": 10
+    }
+  },
+  "quarter-review": {
+    "meter1": {
+      "x": 30,
+      "y": 12,
+      "w": 44,
+      "h": 18
+    },
+    "meter2": {
+      "x": 106,
+      "y": 12,
+      "w": 44,
+      "h": 18
+    },
+    "meter3": {
+      "x": 182,
+      "y": 12,
+      "w": 44,
+      "h": 18
+    },
+    "meter4": {
+      "x": 258,
+      "y": 12,
+      "w": 44,
+      "h": 18
+    },
+    "title": {
+      "x": 100,
+      "y": 40,
+      "w": 120,
+      "h": 12
+    },
+    "plot1": {
+      "x": 24,
+      "y": 84,
+      "w": 48,
+      "h": 48,
+      "note": "seed/sprout/bloom sprite 32x32 sits at bottom-centre"
+    },
+    "plot2": {
+      "x": 79,
+      "y": 84,
+      "w": 48,
+      "h": 48,
+      "note": "seed/sprout/bloom sprite 32x32 sits at bottom-centre"
+    },
+    "plot3": {
+      "x": 134,
+      "y": 84,
+      "w": 48,
+      "h": 48,
+      "note": "seed/sprout/bloom sprite 32x32 sits at bottom-centre"
+    },
+    "plot4": {
+      "x": 189,
+      "y": 84,
+      "w": 48,
+      "h": 48,
+      "note": "seed/sprout/bloom sprite 32x32 sits at bottom-centre"
+    },
+    "plot5": {
+      "x": 244,
+      "y": 84,
+      "w": 48,
+      "h": 48,
+      "note": "seed/sprout/bloom sprite 32x32 sits at bottom-centre"
+    },
+    "summary": {
+      "x": 14,
+      "y": 154,
+      "w": 190,
+      "h": 18
+    },
+    "next-quarter": {
+      "x": 218,
+      "y": 152,
+      "w": 94,
+      "h": 22,
+      "type": "button"
+    }
+  },
+  "dialogue-box": {
+    "text": {
+      "x": 16,
+      "y": 120,
+      "w": 288,
+      "h": 46
+    },
+    "portrait": {
+      "x": 10,
+      "y": 68,
+      "w": 48,
+      "h": 48
+    },
+    "name": {
+      "x": 70,
+      "y": 102,
+      "w": 76,
+      "h": 11
+    },
+    "response1": {
+      "x": 160,
+      "y": 20,
+      "w": 152,
+      "h": 18,
+      "note": "2 responses: use slots 3-4; 3: slots 2-4; 4: 1-4. Use response-button-* 9-slice (left 14, right 6)."
+    },
+    "response2": {
+      "x": 160,
+      "y": 42,
+      "w": 152,
+      "h": 18,
+      "note": "2 responses: use slots 3-4; 3: slots 2-4; 4: 1-4. Use response-button-* 9-slice (left 14, right 6)."
+    },
+    "response3": {
+      "x": 160,
+      "y": 64,
+      "w": 152,
+      "h": 18,
+      "note": "2 responses: use slots 3-4; 3: slots 2-4; 4: 1-4. Use response-button-* 9-slice (left 14, right 6)."
+    },
+    "response4": {
+      "x": 160,
+      "y": 86,
+      "w": 152,
+      "h": 18,
+      "note": "2 responses: use slots 3-4; 3: slots 2-4; 4: 1-4. Use response-button-* 9-slice (left 14, right 6)."
+    }
+  },
+  "glossary": {
+    "tab-terms": {
+      "x": 12,
+      "y": 9,
+      "w": 52,
+      "h": 11,
+      "type": "tab"
+    },
+    "tab-people": {
+      "x": 74,
+      "y": 9,
+      "w": 52,
+      "h": 11,
+      "type": "tab"
+    },
+    "tab-events": {
+      "x": 136,
+      "y": 9,
+      "w": 52,
+      "h": 11,
+      "type": "tab"
+    },
+    "entry1": {
+      "x": 13,
+      "y": 27,
+      "w": 34,
+      "h": 34,
+      "id": "tvpi",
+      "locked": false
+    },
+    "entry2": {
+      "x": 49,
+      "y": 27,
+      "w": 34,
+      "h": 34,
+      "id": "dpi",
+      "locked": false
+    },
+    "entry3": {
+      "x": 85,
+      "y": 27,
+      "w": 34,
+      "h": 34,
+      "id": "irr",
+      "locked": false
+    },
+    "entry4": {
+      "x": 121,
+      "y": 27,
+      "w": 34,
+      "h": 34,
+      "id": "dry-powder",
+      "locked": false
+    },
+    "entry5": {
+      "x": 157,
+      "y": 27,
+      "w": 34,
+      "h": 34,
+      "id": "commitment",
+      "locked": false
+    },
+    "entry6": {
+      "x": 13,
+      "y": 63,
+      "w": 34,
+      "h": 34,
+      "id": "capital-call",
+      "locked": false
+    },
+    "entry7": {
+      "x": 49,
+      "y": 63,
+      "w": 34,
+      "h": 34,
+      "id": "pro-rata",
+      "locked": false
+    },
+    "entry8": {
+      "x": 85,
+      "y": 63,
+      "w": 34,
+      "h": 34,
+      "id": "side-letter",
+      "locked": false
+    },
+    "entry9": {
+      "x": 121,
+      "y": 63,
+      "w": 34,
+      "h": 34,
+      "id": "mfn",
+      "locked": false
+    },
+    "entry10": {
+      "x": 157,
+      "y": 63,
+      "w": 34,
+      "h": 34,
+      "id": "management-fee",
+      "locked": false
+    },
+    "entry11": {
+      "x": 13,
+      "y": 99,
+      "w": 34,
+      "h": 34,
+      "id": "fund-vs-mgmt-expense",
+      "locked": false
+    },
+    "entry12": {
+      "x": 49,
+      "y": 99,
+      "w": 34,
+      "h": 34,
+      "id": "valuation-mark",
+      "locked": false
+    },
+    "entry13": {
+      "x": 85,
+      "y": 99,
+      "w": 34,
+      "h": 34,
+      "id": "wire-fraud",
+      "locked": false
+    },
+    "entry14": {
+      "x": 121,
+      "y": 99,
+      "w": 34,
+      "h": 34,
+      "id": "reserves",
+      "locked": false
+    },
+    "entry15": {
+      "x": 157,
+      "y": 99,
+      "w": 34,
+      "h": 34,
+      "id": "k1",
+      "locked": true
+    },
+    "entry16": {
+      "x": 13,
+      "y": 135,
+      "w": 34,
+      "h": 34,
+      "id": "waterfall",
+      "locked": true
+    },
+    "entry17": {
+      "x": 49,
+      "y": 135,
+      "w": 34,
+      "h": 34,
+      "id": "preferred-return",
+      "locked": true
+    },
+    "entry18": {
+      "x": 85,
+      "y": 135,
+      "w": 34,
+      "h": 34,
+      "id": "catch-up",
+      "locked": true
+    },
+    "entry19": {
+      "x": 121,
+      "y": 135,
+      "w": 34,
+      "h": 34,
+      "id": "carry",
+      "locked": true
+    },
+    "entry20": {
+      "x": 157,
+      "y": 135,
+      "w": 34,
+      "h": 34,
+      "id": "term-sheet",
+      "locked": true
+    },
+    "detail-icon": {
+      "x": 232,
+      "y": 28,
+      "w": 52,
+      "h": 52
+    },
+    "detail-name": {
+      "x": 210,
+      "y": 86,
+      "w": 96,
+      "h": 12
+    },
+    "detail-body": {
+      "x": 210,
+      "y": 102,
+      "w": 96,
+      "h": 52
+    },
+    "prev": {
+      "x": 216,
+      "y": 158,
+      "w": 10,
+      "h": 12,
+      "type": "button"
+    },
+    "next": {
+      "x": 288,
+      "y": 158,
+      "w": 10,
+      "h": 12,
+      "type": "button"
+    }
+  },
+  "trophy-shelf": {
+    "title": {
+      "x": 100,
+      "y": 4,
+      "w": 120,
+      "h": 16
+    },
+    "slot-r1-1": {
+      "x": 24,
+      "y": 27,
+      "w": 32,
+      "h": 32,
+      "note": "badge sprite 32x32 stands on shelf"
+    },
+    "slot-r1-2": {
+      "x": 71,
+      "y": 27,
+      "w": 32,
+      "h": 32,
+      "note": "badge sprite 32x32 stands on shelf"
+    },
+    "slot-r1-3": {
+      "x": 118,
+      "y": 27,
+      "w": 32,
+      "h": 32,
+      "note": "badge sprite 32x32 stands on shelf"
+    },
+    "slot-r1-4": {
+      "x": 165,
+      "y": 27,
+      "w": 32,
+      "h": 32,
+      "note": "badge sprite 32x32 stands on shelf"
+    },
+    "slot-r1-5": {
+      "x": 212,
+      "y": 27,
+      "w": 32,
+      "h": 32,
+      "note": "badge sprite 32x32 stands on shelf"
+    },
+    "slot-r1-6": {
+      "x": 259,
+      "y": 27,
+      "w": 32,
+      "h": 32,
+      "note": "badge sprite 32x32 stands on shelf"
+    },
+    "slot-r2-1": {
+      "x": 24,
+      "y": 61,
+      "w": 32,
+      "h": 32,
+      "note": "badge sprite 32x32 stands on shelf"
+    },
+    "slot-r2-2": {
+      "x": 71,
+      "y": 61,
+      "w": 32,
+      "h": 32,
+      "note": "badge sprite 32x32 stands on shelf"
+    },
+    "slot-r2-3": {
+      "x": 118,
+      "y": 61,
+      "w": 32,
+      "h": 32,
+      "note": "badge sprite 32x32 stands on shelf"
+    },
+    "slot-r2-4": {
+      "x": 165,
+      "y": 61,
+      "w": 32,
+      "h": 32,
+      "note": "badge sprite 32x32 stands on shelf"
+    },
+    "slot-r2-5": {
+      "x": 212,
+      "y": 61,
+      "w": 32,
+      "h": 32,
+      "note": "badge sprite 32x32 stands on shelf"
+    },
+    "slot-r2-6": {
+      "x": 259,
+      "y": 61,
+      "w": 32,
+      "h": 32,
+      "note": "badge sprite 32x32 stands on shelf"
+    },
+    "slot-r3-1": {
+      "x": 24,
+      "y": 95,
+      "w": 32,
+      "h": 32,
+      "note": "badge sprite 32x32 stands on shelf"
+    },
+    "slot-r3-2": {
+      "x": 71,
+      "y": 95,
+      "w": 32,
+      "h": 32,
+      "note": "badge sprite 32x32 stands on shelf"
+    },
+    "slot-r3-3": {
+      "x": 118,
+      "y": 95,
+      "w": 32,
+      "h": 32,
+      "note": "badge sprite 32x32 stands on shelf"
+    },
+    "slot-r3-4": {
+      "x": 165,
+      "y": 95,
+      "w": 32,
+      "h": 32,
+      "note": "badge sprite 32x32 stands on shelf"
+    },
+    "slot-r3-5": {
+      "x": 212,
+      "y": 95,
+      "w": 32,
+      "h": 32,
+      "note": "badge sprite 32x32 stands on shelf"
+    },
+    "slot-r3-6": {
+      "x": 259,
+      "y": 95,
+      "w": 32,
+      "h": 32,
+      "note": "badge sprite 32x32 stands on shelf"
+    },
+    "detail": {
+      "x": 18,
+      "y": 154,
+      "w": 226,
+      "h": 18
+    },
+    "back": {
+      "x": 258,
+      "y": 152,
+      "w": 54,
+      "h": 22,
+      "type": "button"
+    }
+  },
+  "settings": {
+    "title": {
+      "x": 120,
+      "y": 6,
+      "w": 80,
+      "h": 16
+    },
+    "music-label": {
+      "x": 42,
+      "y": 32,
+      "w": 100,
+      "h": 14
+    },
+    "sfx-label": {
+      "x": 42,
+      "y": 54,
+      "w": 100,
+      "h": 14
+    },
+    "text-size-label": {
+      "x": 42,
+      "y": 76,
+      "w": 100,
+      "h": 14
+    },
+    "reduce-motion-label": {
+      "x": 42,
+      "y": 98,
+      "w": 100,
+      "h": 14
+    },
+    "fullscreen-label": {
+      "x": 42,
+      "y": 120,
+      "w": 100,
+      "h": 14
+    },
+    "music-slider": {
+      "x": 156,
+      "y": 33,
+      "w": 100,
+      "h": 14
+    },
+    "sfx-slider": {
+      "x": 156,
+      "y": 55,
+      "w": 100,
+      "h": 14
+    },
+    "text-size-a": {
+      "x": 156,
+      "y": 76,
+      "w": 30,
+      "h": 16,
+      "type": "button"
+    },
+    "text-size-b": {
+      "x": 190,
+      "y": 76,
+      "w": 30,
+      "h": 16,
+      "type": "button"
+    },
+    "text-size-c": {
+      "x": 224,
+      "y": 76,
+      "w": 30,
+      "h": 16,
+      "type": "button"
+    },
+    "reduce-motion-toggle": {
+      "x": 156,
+      "y": 102,
+      "w": 24,
+      "h": 12
+    },
+    "fullscreen-toggle": {
+      "x": 156,
+      "y": 124,
+      "w": 24,
+      "h": 12
+    },
+    "back": {
+      "x": 200,
+      "y": 146,
+      "w": 80,
+      "h": 18,
+      "type": "button"
+    },
+    "reset": {
+      "x": 42,
+      "y": 146,
+      "w": 80,
+      "h": 18,
+      "type": "button"
+    }
+  },
+  "save-load": {
+    "title": {
+      "x": 120,
+      "y": 4,
+      "w": 80,
+      "h": 16
+    },
+    "slot1-thumb": {
+      "x": 32,
+      "y": 33,
+      "w": 54,
+      "h": 28
+    },
+    "slot1-text": {
+      "x": 96,
+      "y": 33,
+      "w": 120,
+      "h": 28
+    },
+    "slot1-action": {
+      "x": 222,
+      "y": 34,
+      "w": 66,
+      "h": 14,
+      "type": "button"
+    },
+    "slot1-delete": {
+      "x": 222,
+      "y": 50,
+      "w": 66,
+      "h": 12,
+      "type": "button"
+    },
+    "slot1": {
+      "x": 26,
+      "y": 28,
+      "w": 268,
+      "h": 38
+    },
+    "slot2-thumb": {
+      "x": 32,
+      "y": 75,
+      "w": 54,
+      "h": 28
+    },
+    "slot2-text": {
+      "x": 96,
+      "y": 75,
+      "w": 120,
+      "h": 28
+    },
+    "slot2-action": {
+      "x": 222,
+      "y": 76,
+      "w": 66,
+      "h": 14,
+      "type": "button"
+    },
+    "slot2-delete": {
+      "x": 222,
+      "y": 92,
+      "w": 66,
+      "h": 12,
+      "type": "button"
+    },
+    "slot2": {
+      "x": 26,
+      "y": 70,
+      "w": 268,
+      "h": 38
+    },
+    "slot3-thumb": {
+      "x": 32,
+      "y": 117,
+      "w": 54,
+      "h": 28
+    },
+    "slot3-text": {
+      "x": 96,
+      "y": 117,
+      "w": 120,
+      "h": 28
+    },
+    "slot3-action": {
+      "x": 222,
+      "y": 124,
+      "w": 66,
+      "h": 14,
+      "type": "button"
+    },
+    "slot3": {
+      "x": 26,
+      "y": 112,
+      "w": 268,
+      "h": 38
+    },
+    "back": {
+      "x": 40,
+      "y": 150,
+      "w": 70,
+      "h": 18,
+      "type": "button"
+    }
+  },
+  "pause-menu": {
+    "title": {
+      "x": 120,
+      "y": 14,
+      "w": 80,
+      "h": 16
+    },
+    "resume": {
+      "x": 106,
+      "y": 40,
+      "w": 108,
+      "h": 22,
+      "type": "button"
+    },
+    "settings": {
+      "x": 106,
+      "y": 68,
+      "w": 108,
+      "h": 22,
+      "type": "button"
+    },
+    "save": {
+      "x": 106,
+      "y": 96,
+      "w": 108,
+      "h": 22,
+      "type": "button"
+    },
+    "quit-to-menu": {
+      "x": 106,
+      "y": 124,
+      "w": 108,
+      "h": 22,
+      "type": "button"
+    }
+  }
+}

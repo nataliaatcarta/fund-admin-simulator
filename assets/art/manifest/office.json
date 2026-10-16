@@ -1,0 +1,783 @@
+[
+  {
+    "file": "assets/art/office/tier1-hot-desk.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier1/wall.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier1/tv.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier1/plant.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier1/trinkets.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier1/shelf.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier1/calendar.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier1/door.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier1/window-glass.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier1/window-frame.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier1/sill-props.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier1/chair.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier1/desk.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier1/stamp-pad.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier1/laptop.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier1/phone.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/tier2-loft.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier2/wall.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier2/tv.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier2/plant.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier2/trinkets.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier2/shelf.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier2/calendar.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier2/door.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier2/window-glass.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier2/window-frame.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier2/sill-props.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier2/chair.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier2/desk.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier2/stamp-pad.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier2/laptop.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier2/phone.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/tier3-corner-office.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier3/wall.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier3/tv.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier3/plant.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier3/trinkets.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier3/shelf.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier3/calendar.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier3/door.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier3/window-glass.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier3/window-frame.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier3/sill-props.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier3/chair.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier3/desk.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier3/stamp-pad.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier3/laptop.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/tier3/phone.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/shared/frame-spots-empty.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/shared/second-desk.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/shared/phone-handset-rest.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/layers/shared/sill-props-q1.png",
+    "w": 60,
+    "h": 26
+  },
+  {
+    "file": "assets/art/office/layers/shared/sill-props-q2.png",
+    "w": 60,
+    "h": 26
+  },
+  {
+    "file": "assets/art/office/layers/shared/sill-props-q3.png",
+    "w": 60,
+    "h": 26
+  },
+  {
+    "file": "assets/art/office/layers/shared/sill-props-q4.png",
+    "w": 60,
+    "h": 26
+  },
+  {
+    "file": "assets/art/office/layers/shared/frame-win-a-photo.png",
+    "w": 23,
+    "h": 30
+  },
+  {
+    "file": "assets/art/office/layers/shared/frame-win-b-certificate.png",
+    "w": 34,
+    "h": 23
+  },
+  {
+    "file": "assets/art/office/layers/shared/frame-win-c-star.png",
+    "w": 17,
+    "h": 17
+  },
+  {
+    "file": "assets/art/office/layers/shared/frame-win-d-drawing.png",
+    "w": 14,
+    "h": 17
+  },
+  {
+    "file": "assets/art/office/objects/laptop-idle.png",
+    "w": 88,
+    "h": 64
+  },
+  {
+    "file": "assets/art/office/objects/laptop-ping-strip.png",
+    "w": 528,
+    "h": 64,
+    "frames": 6,
+    "frameW": 88,
+    "frameH": 64
+  },
+  {
+    "file": "assets/art/office/objects/laptop-videocall.png",
+    "w": 88,
+    "h": 64
+  },
+  {
+    "file": "assets/art/office/objects/laptop-videocall-strip.png",
+    "w": 352,
+    "h": 64,
+    "frames": 4,
+    "frameW": 88,
+    "frameH": 64
+  },
+  {
+    "file": "assets/art/office/objects/phone-idle.png",
+    "w": 70,
+    "h": 50
+  },
+  {
+    "file": "assets/art/office/objects/phone-ringing-strip.png",
+    "w": 420,
+    "h": 50,
+    "frames": 6,
+    "frameW": 70,
+    "frameH": 50
+  },
+  {
+    "file": "assets/art/office/objects/phone-voicemail-strip.png",
+    "w": 420,
+    "h": 50,
+    "frames": 6,
+    "frameW": 70,
+    "frameH": 50
+  },
+  {
+    "file": "assets/art/office/objects/phone-off-hook.png",
+    "w": 100,
+    "h": 40
+  },
+  {
+    "file": "assets/art/office/objects/tv-off.png",
+    "w": 74,
+    "h": 52
+  },
+  {
+    "file": "assets/art/office/objects/tv-screen-off.png",
+    "w": 62,
+    "h": 33
+  },
+  {
+    "file": "assets/art/office/objects/tv-news.png",
+    "w": 74,
+    "h": 52
+  },
+  {
+    "file": "assets/art/office/objects/tv-screen-news.png",
+    "w": 62,
+    "h": 33
+  },
+  {
+    "file": "assets/art/office/objects/tv-linkedin-chad.png",
+    "w": 74,
+    "h": 52
+  },
+  {
+    "file": "assets/art/office/objects/tv-screen-linkedin-chad.png",
+    "w": 62,
+    "h": 33
+  },
+  {
+    "file": "assets/art/office/objects/tv-lp-grid.png",
+    "w": 74,
+    "h": 52
+  },
+  {
+    "file": "assets/art/office/objects/tv-screen-lp-grid.png",
+    "w": 62,
+    "h": 33
+  },
+  {
+    "file": "assets/art/office/objects/tv-chart.png",
+    "w": 74,
+    "h": 52
+  },
+  {
+    "file": "assets/art/office/objects/tv-news-ticker-strip.png",
+    "w": 592,
+    "h": 52,
+    "frames": 8,
+    "frameW": 74,
+    "frameH": 52
+  },
+  {
+    "file": "assets/art/office/objects/tv-lp-grid-strip.png",
+    "w": 592,
+    "h": 52,
+    "frames": 8,
+    "frameW": 74,
+    "frameH": 52
+  },
+  {
+    "file": "assets/art/office/objects/tv-screen-news-ticker-strip.png",
+    "w": 496,
+    "h": 33,
+    "frames": 8,
+    "frameW": 62,
+    "frameH": 33
+  },
+  {
+    "file": "assets/art/office/objects/door-closed.png",
+    "w": 68,
+    "h": 126
+  },
+  {
+    "file": "assets/art/office/objects/door-knock-strip.png",
+    "w": 408,
+    "h": 126,
+    "frames": 6,
+    "frameW": 68,
+    "frameH": 126
+  },
+  {
+    "file": "assets/art/office/objects/door-open-empty.png",
+    "w": 68,
+    "h": 126
+  },
+  {
+    "file": "assets/art/office/objects/door-open-silhouette.png",
+    "w": 68,
+    "h": 126
+  },
+  {
+    "file": "assets/art/office/objects/door-open-npc.png",
+    "w": 68,
+    "h": 126
+  },
+  {
+    "file": "assets/art/office/objects/door-open-npc-b.png",
+    "w": 68,
+    "h": 126
+  },
+  {
+    "file": "assets/art/office/objects/sticky-under-door-strip.png",
+    "w": 384,
+    "h": 36,
+    "frames": 8,
+    "frameW": 48,
+    "frameH": 36
+  },
+  {
+    "file": "assets/art/office/objects/inbox-tray-empty.png",
+    "w": 56,
+    "h": 50
+  },
+  {
+    "file": "assets/art/office/objects/inbox-tray-few.png",
+    "w": 56,
+    "h": 50
+  },
+  {
+    "file": "assets/art/office/objects/inbox-tray-overflowing.png",
+    "w": 56,
+    "h": 50
+  },
+  {
+    "file": "assets/art/office/objects/wall-calendar-12wk-strip.png",
+    "w": 348,
+    "h": 41,
+    "frames": 12,
+    "frameW": 29,
+    "frameH": 41
+  },
+  {
+    "file": "assets/art/office/objects/binder-closed.png",
+    "w": 21,
+    "h": 23
+  },
+  {
+    "file": "assets/art/office/objects/binder-open.png",
+    "w": 47,
+    "h": 26
+  },
+  {
+    "file": "assets/art/office/objects/mug-hot-strip.png",
+    "w": 128,
+    "h": 20,
+    "frames": 8,
+    "frameW": 16,
+    "frameH": 20
+  },
+  {
+    "file": "assets/art/office/objects/mug-cold.png",
+    "w": 16,
+    "h": 20
+  },
+  {
+    "file": "assets/art/office/objects/plant-1-sprout.png",
+    "w": 28,
+    "h": 42
+  },
+  {
+    "file": "assets/art/office/objects/plant-2-small.png",
+    "w": 28,
+    "h": 42
+  },
+  {
+    "file": "assets/art/office/objects/plant-3-full.png",
+    "w": 28,
+    "h": 42
+  },
+  {
+    "file": "assets/art/office/objects/plant-4-flowering.png",
+    "w": 28,
+    "h": 42
+  },
+  {
+    "file": "assets/art/seasons/window-q1-morning.png",
+    "w": 48,
+    "h": 52
+  },
+  {
+    "file": "assets/art/seasons/window-q1-afternoon.png",
+    "w": 48,
+    "h": 52
+  },
+  {
+    "file": "assets/art/seasons/window-q1-night.png",
+    "w": 48,
+    "h": 52
+  },
+  {
+    "file": "assets/art/seasons/window-q2-morning.png",
+    "w": 48,
+    "h": 52
+  },
+  {
+    "file": "assets/art/seasons/window-q2-afternoon.png",
+    "w": 48,
+    "h": 52
+  },
+  {
+    "file": "assets/art/seasons/window-q2-night.png",
+    "w": 48,
+    "h": 52
+  },
+  {
+    "file": "assets/art/seasons/window-q3-morning.png",
+    "w": 48,
+    "h": 52
+  },
+  {
+    "file": "assets/art/seasons/window-q3-afternoon.png",
+    "w": 48,
+    "h": 52
+  },
+  {
+    "file": "assets/art/seasons/window-q3-night.png",
+    "w": 48,
+    "h": 52
+  },
+  {
+    "file": "assets/art/seasons/window-q4-morning.png",
+    "w": 48,
+    "h": 52
+  },
+  {
+    "file": "assets/art/seasons/window-q4-afternoon.png",
+    "w": 48,
+    "h": 52
+  },
+  {
+    "file": "assets/art/seasons/window-q4-night.png",
+    "w": 48,
+    "h": 52
+  },
+  {
+    "file": "assets/art/seasons/window-q1-rain-morning-strip.png",
+    "w": 480,
+    "h": 52,
+    "frames": 10,
+    "frameW": 48,
+    "frameH": 52
+  },
+  {
+    "file": "assets/art/seasons/window-q4-snow-morning-strip.png",
+    "w": 768,
+    "h": 52,
+    "frames": 16,
+    "frameW": 48,
+    "frameH": 52
+  },
+  {
+    "file": "assets/art/seasons/window-q1-rain-afternoon-strip.png",
+    "w": 480,
+    "h": 52,
+    "frames": 10,
+    "frameW": 48,
+    "frameH": 52
+  },
+  {
+    "file": "assets/art/seasons/window-q4-snow-afternoon-strip.png",
+    "w": 768,
+    "h": 52,
+    "frames": 16,
+    "frameW": 48,
+    "frameH": 52
+  },
+  {
+    "file": "assets/art/seasons/window-q1-rain-night-strip.png",
+    "w": 480,
+    "h": 52,
+    "frames": 10,
+    "frameW": 48,
+    "frameH": 52
+  },
+  {
+    "file": "assets/art/seasons/window-q4-snow-night-strip.png",
+    "w": 768,
+    "h": 52,
+    "frames": 16,
+    "frameW": 48,
+    "frameH": 52
+  },
+  {
+    "file": "assets/art/seasons/window-special-storm-strip.png",
+    "w": 384,
+    "h": 52,
+    "frames": 8,
+    "frameW": 48,
+    "frameH": 52
+  },
+  {
+    "file": "assets/art/seasons/window-special-fireworks-strip.png",
+    "w": 672,
+    "h": 52,
+    "frames": 14,
+    "frameW": 48,
+    "frameH": 52
+  },
+  {
+    "file": "assets/art/seasons/window-special-storm.png",
+    "w": 48,
+    "h": 52
+  },
+  {
+    "file": "assets/art/seasons/window-special-fireworks.png",
+    "w": 48,
+    "h": 52
+  },
+  {
+    "file": "assets/art/seasons/window-full-q1-afternoon.png",
+    "w": 80,
+    "h": 80
+  },
+  {
+    "file": "assets/art/seasons/window-full-q2-afternoon.png",
+    "w": 80,
+    "h": 80
+  },
+  {
+    "file": "assets/art/seasons/window-full-q3-afternoon.png",
+    "w": 80,
+    "h": 80
+  },
+  {
+    "file": "assets/art/seasons/window-full-q4-afternoon.png",
+    "w": 80,
+    "h": 80
+  },
+  {
+    "file": "assets/art/office/overlays/messy-desk.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/overlays/dim-lights.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/overlays/audit-corner.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/overlays/pitch-parade.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/overlays/pizza-night.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/overlays/holiday-party.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/overlays/bank-wobble-panic.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/overlays/annual-lp-meeting.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/overlays/desk-pileup.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/overlays/tint-morning.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/overlays/tint-afternoon.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/overlays/tint-night.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/office/postcards/postcard-conference.png",
+    "w": 160,
+    "h": 100
+  },
+  {
+    "file": "assets/art/office/postcards/postcard-lp-dinner.png",
+    "w": 160,
+    "h": 100
+  },
+  {
+    "file": "assets/art/office/postcards/postcard-founder-coffee.png",
+    "w": 160,
+    "h": 100
+  },
+  {
+    "file": "assets/art/office/postcards/postcard-napa-offsite.png",
+    "w": 160,
+    "h": 100
+  },
+  {
+    "file": "assets/art/office/transitions/fade-to-postcard-strip.png",
+    "w": 2560,
+    "h": 180,
+    "frames": 8,
+    "frameW": 320,
+    "frameH": 180
+  },
+  {
+    "file": "assets/art/office/transitions/upgrade-tier1-to-tier2-strip.png",
+    "w": 2240,
+    "h": 180,
+    "frames": 7,
+    "frameW": 320,
+    "frameH": 180
+  },
+  {
+    "file": "assets/art/office/transitions/upgrade-tier2-to-tier3-strip.png",
+    "w": 2240,
+    "h": 180,
+    "frames": 7,
+    "frameW": 320,
+    "frameH": 180
+  }
+]

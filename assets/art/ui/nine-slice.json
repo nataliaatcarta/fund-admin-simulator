@@ -1,0 +1,335 @@
+{
+  "note": "Insets in px for 9-slice stretching. Corners are fixed; edges/centre stretch (centre of cap-only pieces stretch horizontally).",
+  "slices": {
+    "ui/hud/fund-health-card-frame.png": {
+      "left": 8,
+      "right": 8,
+      "top": 8,
+      "bottom": 8
+    },
+    "ui/hud/meter-frame.png": {
+      "left": 5,
+      "right": 5,
+      "top": 0,
+      "bottom": 0
+    },
+    "ui/hud/meter-fill-good.png": {
+      "left": 4,
+      "right": 4,
+      "top": 0,
+      "bottom": 0
+    },
+    "ui/hud/meter-fill-warn.png": {
+      "left": 4,
+      "right": 4,
+      "top": 0,
+      "bottom": 0
+    },
+    "ui/hud/meter-fill-low.png": {
+      "left": 4,
+      "right": 4,
+      "top": 0,
+      "bottom": 0
+    },
+    "ui/hud/meter-fill-rep.png": {
+      "left": 4,
+      "right": 4,
+      "top": 0,
+      "bottom": 0
+    },
+    "ui/hud/week-strip-bg.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/hud/hud-bar-bg.png": {
+      "left": 4,
+      "right": 4,
+      "top": 0,
+      "bottom": 0
+    },
+    "ui/widgets/panel-paper.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/panel-cream.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/panel-pink.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/panel-lav.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/panel-mint.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/panel-butter.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/panel-blue.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/panel-wood.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/panel-dark.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/panel-paper-stitch.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/panel-pink-stitch.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/ribbon.png": {
+      "left": 12,
+      "right": 12,
+      "top": 0,
+      "bottom": 0
+    },
+    "ui/widgets/button-pink-normal.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/button-pink-hover.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/button-pink-pressed.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/button-lav-normal.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/button-lav-hover.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/button-lav-pressed.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/button-mint-normal.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/button-mint-hover.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/button-mint-pressed.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/button-butter-normal.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/button-butter-hover.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/button-butter-pressed.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/button-disabled.png": {
+      "left": 6,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/response-button-normal.png": {
+      "left": 14,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/response-button-hover.png": {
+      "left": 14,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/response-button-pressed.png": {
+      "left": 14,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/response-button-disabled.png": {
+      "left": 14,
+      "right": 6,
+      "top": 6,
+      "bottom": 6
+    },
+    "ui/widgets/nameplate.png": {
+      "left": 8,
+      "right": 8,
+      "top": 5,
+      "bottom": 5
+    },
+    "ui/widgets/slider-track.png": {
+      "left": 5,
+      "right": 5,
+      "top": 0,
+      "bottom": 0
+    },
+    "ui/widgets/slider-fill.png": {
+      "left": 3,
+      "right": 3,
+      "top": 0,
+      "bottom": 0
+    },
+    "ui/widgets/tab-active.png": {
+      "left": 8,
+      "right": 8,
+      "top": 6,
+      "bottom": 0
+    },
+    "ui/widgets/tab-inactive.png": {
+      "left": 8,
+      "right": 8,
+      "top": 6,
+      "bottom": 0
+    },
+    "ui/widgets/tab-hover.png": {
+      "left": 8,
+      "right": 8,
+      "top": 6,
+      "bottom": 0
+    },
+    "ui/widgets/inbox-row-email.png": {
+      "left": 8,
+      "right": 8,
+      "top": 7,
+      "bottom": 7
+    },
+    "ui/widgets/inbox-row-email-selected.png": {
+      "left": 8,
+      "right": 8,
+      "top": 7,
+      "bottom": 7
+    },
+    "ui/widgets/inbox-row-call.png": {
+      "left": 8,
+      "right": 8,
+      "top": 7,
+      "bottom": 7
+    },
+    "ui/widgets/inbox-row-call-selected.png": {
+      "left": 8,
+      "right": 8,
+      "top": 7,
+      "bottom": 7
+    },
+    "ui/widgets/inbox-row-sticky-note.png": {
+      "left": 8,
+      "right": 8,
+      "top": 7,
+      "bottom": 7
+    },
+    "ui/widgets/inbox-row-sticky-note-selected.png": {
+      "left": 8,
+      "right": 8,
+      "top": 7,
+      "bottom": 7
+    },
+    "ui/widgets/focus-card.png": {
+      "left": 8,
+      "right": 8,
+      "top": 8,
+      "bottom": 8
+    },
+    "ui/widgets/focus-card-selected.png": {
+      "left": 8,
+      "right": 8,
+      "top": 8,
+      "bottom": 8
+    },
+    "ui/widgets/action-slot-empty.png": {
+      "left": 8,
+      "right": 8,
+      "top": 8,
+      "bottom": 8
+    },
+    "ui/widgets/action-slot-filled.png": {
+      "left": 8,
+      "right": 8,
+      "top": 8,
+      "bottom": 8
+    },
+    "ui/widgets/action-slot-hover.png": {
+      "left": 8,
+      "right": 8,
+      "top": 8,
+      "bottom": 8
+    },
+    "ui/widgets/cost-pill.png": {
+      "left": 6,
+      "right": 6,
+      "top": 5,
+      "bottom": 5
+    }
+  }
+}

@@ -1,0 +1,878 @@
+[
+  {
+    "file": "assets/art/ui/hud/energy-cup-full.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/hud/energy-cup-empty.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/hud/fund-health-star-full.png",
+    "w": 15,
+    "h": 15
+  },
+  {
+    "file": "assets/art/ui/hud/fund-health-star-empty.png",
+    "w": 15,
+    "h": 15
+  },
+  {
+    "file": "assets/art/ui/hud/fund-health-1-stars.png",
+    "w": 79,
+    "h": 15
+  },
+  {
+    "file": "assets/art/ui/hud/fund-health-2-stars.png",
+    "w": 79,
+    "h": 15
+  },
+  {
+    "file": "assets/art/ui/hud/fund-health-3-stars.png",
+    "w": 79,
+    "h": 15
+  },
+  {
+    "file": "assets/art/ui/hud/fund-health-4-stars.png",
+    "w": 79,
+    "h": 15
+  },
+  {
+    "file": "assets/art/ui/hud/fund-health-5-stars.png",
+    "w": 79,
+    "h": 15
+  },
+  {
+    "file": "assets/art/ui/hud/fund-health-0-stars.png",
+    "w": 79,
+    "h": 15
+  },
+  {
+    "file": "assets/art/ui/hud/fund-health-card-frame.png",
+    "w": 48,
+    "h": 40
+  },
+  {
+    "file": "assets/art/ui/hud/hover-card-tail.png",
+    "w": 9,
+    "h": 5
+  },
+  {
+    "file": "assets/art/ui/hud/meter-frame.png",
+    "w": 32,
+    "h": 10
+  },
+  {
+    "file": "assets/art/ui/hud/meter-fill-good.png",
+    "w": 12,
+    "h": 6
+  },
+  {
+    "file": "assets/art/ui/hud/meter-fill-warn.png",
+    "w": 12,
+    "h": 6
+  },
+  {
+    "file": "assets/art/ui/hud/meter-fill-low.png",
+    "w": 12,
+    "h": 6
+  },
+  {
+    "file": "assets/art/ui/hud/meter-fill-rep.png",
+    "w": 12,
+    "h": 6
+  },
+  {
+    "file": "assets/art/ui/hud/runway-icon.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/hud/reputation-icon.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/hud/meter-example-runway.png",
+    "w": 64,
+    "h": 10
+  },
+  {
+    "file": "assets/art/ui/hud/meter-example-reputation.png",
+    "w": 64,
+    "h": 10
+  },
+  {
+    "file": "assets/art/ui/hud/heart-full.png",
+    "w": 12,
+    "h": 11
+  },
+  {
+    "file": "assets/art/ui/hud/heart-half.png",
+    "w": 12,
+    "h": 11
+  },
+  {
+    "file": "assets/art/ui/hud/heart-empty.png",
+    "w": 12,
+    "h": 11
+  },
+  {
+    "file": "assets/art/ui/hud/mood-happy.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/hud/mood-neutral.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/hud/mood-worried.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/hud/mood-grumpy.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/hud/mood-strip.png",
+    "w": 64,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/hud/week-cell-future.png",
+    "w": 18,
+    "h": 18
+  },
+  {
+    "file": "assets/art/ui/hud/week-cell-current.png",
+    "w": 18,
+    "h": 18
+  },
+  {
+    "file": "assets/art/ui/hud/week-cell-done.png",
+    "w": 18,
+    "h": 18
+  },
+  {
+    "file": "assets/art/ui/hud/beat-kickoff.png",
+    "w": 12,
+    "h": 12
+  },
+  {
+    "file": "assets/art/ui/hud/beat-capital-call.png",
+    "w": 12,
+    "h": 12
+  },
+  {
+    "file": "assets/art/ui/hud/beat-close.png",
+    "w": 12,
+    "h": 12
+  },
+  {
+    "file": "assets/art/ui/hud/beat-report.png",
+    "w": 12,
+    "h": 12
+  },
+  {
+    "file": "assets/art/ui/hud/week-strip-bg.png",
+    "w": 32,
+    "h": 34
+  },
+  {
+    "file": "assets/art/ui/hud/week-strip-example.png",
+    "w": 244,
+    "h": 34
+  },
+  {
+    "file": "assets/art/ui/hud/floaty-plus.png",
+    "w": 9,
+    "h": 9
+  },
+  {
+    "file": "assets/art/ui/hud/floaty-minus.png",
+    "w": 9,
+    "h": 5
+  },
+  {
+    "file": "assets/art/ui/hud/floaty-arrow-up.png",
+    "w": 9,
+    "h": 10
+  },
+  {
+    "file": "assets/art/ui/hud/floaty-arrow-down.png",
+    "w": 9,
+    "h": 10
+  },
+  {
+    "file": "assets/art/ui/hud/floaty-heart-plus.png",
+    "w": 12,
+    "h": 11
+  },
+  {
+    "file": "assets/art/ui/hud/hud-bar-bg.png",
+    "w": 320,
+    "h": 22
+  },
+  {
+    "file": "assets/art/ui/hud/hud-example.png",
+    "w": 320,
+    "h": 22
+  },
+  {
+    "file": "assets/art/ui/widgets/panel-paper.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/ui/widgets/panel-cream.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/ui/widgets/panel-pink.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/ui/widgets/panel-lav.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/ui/widgets/panel-mint.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/ui/widgets/panel-butter.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/ui/widgets/panel-blue.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/ui/widgets/panel-wood.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/ui/widgets/panel-dark.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/ui/widgets/panel-paper-stitch.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/ui/widgets/panel-pink-stitch.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/ui/widgets/ribbon.png",
+    "w": 48,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/widgets/button-pink-normal.png",
+    "w": 24,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/widgets/button-pink-hover.png",
+    "w": 24,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/widgets/button-pink-pressed.png",
+    "w": 24,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/widgets/button-lav-normal.png",
+    "w": 24,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/widgets/button-lav-hover.png",
+    "w": 24,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/widgets/button-lav-pressed.png",
+    "w": 24,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/widgets/button-mint-normal.png",
+    "w": 24,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/widgets/button-mint-hover.png",
+    "w": 24,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/widgets/button-mint-pressed.png",
+    "w": 24,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/widgets/button-butter-normal.png",
+    "w": 24,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/widgets/button-butter-hover.png",
+    "w": 24,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/widgets/button-butter-pressed.png",
+    "w": 24,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/widgets/button-disabled.png",
+    "w": 24,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/widgets/response-button-normal.png",
+    "w": 48,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/widgets/response-button-hover.png",
+    "w": 48,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/widgets/response-button-pressed.png",
+    "w": 48,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/widgets/response-button-disabled.png",
+    "w": 48,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/widgets/nameplate.png",
+    "w": 32,
+    "h": 14
+  },
+  {
+    "file": "assets/art/ui/widgets/portrait-frame.png",
+    "w": 52,
+    "h": 52
+  },
+  {
+    "file": "assets/art/ui/widgets/portrait-frame-heart.png",
+    "w": 52,
+    "h": 52
+  },
+  {
+    "file": "assets/art/ui/widgets/toggle-off.png",
+    "w": 24,
+    "h": 12
+  },
+  {
+    "file": "assets/art/ui/widgets/toggle-on.png",
+    "w": 24,
+    "h": 12
+  },
+  {
+    "file": "assets/art/ui/widgets/toggle-off-disabled.png",
+    "w": 24,
+    "h": 12
+  },
+  {
+    "file": "assets/art/ui/widgets/toggle-on-disabled.png",
+    "w": 24,
+    "h": 12
+  },
+  {
+    "file": "assets/art/ui/widgets/checkbox-off.png",
+    "w": 12,
+    "h": 12
+  },
+  {
+    "file": "assets/art/ui/widgets/checkbox-on.png",
+    "w": 12,
+    "h": 12
+  },
+  {
+    "file": "assets/art/ui/widgets/checkbox-hover.png",
+    "w": 12,
+    "h": 12
+  },
+  {
+    "file": "assets/art/ui/widgets/checkbox-disabled.png",
+    "w": 12,
+    "h": 12
+  },
+  {
+    "file": "assets/art/ui/widgets/radio-off.png",
+    "w": 12,
+    "h": 12
+  },
+  {
+    "file": "assets/art/ui/widgets/radio-on.png",
+    "w": 12,
+    "h": 12
+  },
+  {
+    "file": "assets/art/ui/widgets/slider-track.png",
+    "w": 24,
+    "h": 8
+  },
+  {
+    "file": "assets/art/ui/widgets/slider-fill.png",
+    "w": 12,
+    "h": 4
+  },
+  {
+    "file": "assets/art/ui/widgets/slider-thumb-normal.png",
+    "w": 13,
+    "h": 13
+  },
+  {
+    "file": "assets/art/ui/widgets/slider-thumb-hover.png",
+    "w": 13,
+    "h": 13
+  },
+  {
+    "file": "assets/art/ui/widgets/tab-active.png",
+    "w": 32,
+    "h": 14
+  },
+  {
+    "file": "assets/art/ui/widgets/tab-inactive.png",
+    "w": 32,
+    "h": 14
+  },
+  {
+    "file": "assets/art/ui/widgets/tab-hover.png",
+    "w": 32,
+    "h": 14
+  },
+  {
+    "file": "assets/art/ui/widgets/inbox-row-email.png",
+    "w": 32,
+    "h": 20
+  },
+  {
+    "file": "assets/art/ui/widgets/inbox-row-email-selected.png",
+    "w": 32,
+    "h": 20
+  },
+  {
+    "file": "assets/art/ui/widgets/inbox-row-call.png",
+    "w": 32,
+    "h": 20
+  },
+  {
+    "file": "assets/art/ui/widgets/inbox-row-call-selected.png",
+    "w": 32,
+    "h": 20
+  },
+  {
+    "file": "assets/art/ui/widgets/inbox-row-sticky-note.png",
+    "w": 32,
+    "h": 20
+  },
+  {
+    "file": "assets/art/ui/widgets/inbox-row-sticky-note-selected.png",
+    "w": 32,
+    "h": 20
+  },
+  {
+    "file": "assets/art/ui/widgets/unread-dot.png",
+    "w": 5,
+    "h": 4
+  },
+  {
+    "file": "assets/art/ui/widgets/focus-card.png",
+    "w": 40,
+    "h": 60
+  },
+  {
+    "file": "assets/art/ui/widgets/focus-card-selected.png",
+    "w": 40,
+    "h": 60
+  },
+  {
+    "file": "assets/art/ui/widgets/action-slot-empty.png",
+    "w": 40,
+    "h": 40
+  },
+  {
+    "file": "assets/art/ui/widgets/action-slot-filled.png",
+    "w": 40,
+    "h": 40
+  },
+  {
+    "file": "assets/art/ui/widgets/action-slot-hover.png",
+    "w": 40,
+    "h": 40
+  },
+  {
+    "file": "assets/art/ui/widgets/cost-pill.png",
+    "w": 24,
+    "h": 12
+  },
+  {
+    "file": "assets/art/ui/widgets/cost-mini-cup.png",
+    "w": 9,
+    "h": 9
+  },
+  {
+    "file": "assets/art/ui/widgets/arrow-left.png",
+    "w": 10,
+    "h": 12
+  },
+  {
+    "file": "assets/art/ui/widgets/arrow-right.png",
+    "w": 10,
+    "h": 12
+  },
+  {
+    "file": "assets/art/ui/widgets/arrow-left-hover.png",
+    "w": 10,
+    "h": 12
+  },
+  {
+    "file": "assets/art/ui/widgets/arrow-right-hover.png",
+    "w": 10,
+    "h": 12
+  },
+  {
+    "file": "assets/art/ui/widgets/close-button-normal.png",
+    "w": 13,
+    "h": 13
+  },
+  {
+    "file": "assets/art/ui/widgets/close-button-hover.png",
+    "w": 13,
+    "h": 13
+  },
+  {
+    "file": "assets/art/ui/widgets/divider-dotted.png",
+    "w": 16,
+    "h": 3
+  },
+  {
+    "file": "assets/art/ui/widgets/scrim.png",
+    "w": 8,
+    "h": 8
+  },
+  {
+    "file": "assets/art/ui/icons/events/event-portfolio.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/events/event-lp.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/events/event-ops.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/events/event-governance.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/events/event-rival.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/events/event-market.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/actions/action-meeting.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/actions/action-desk-work.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/actions/action-go-out.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/actions/action-rest.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/focus/focus-fundraise.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/focus/focus-invest.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/focus/focus-support-portfolio.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/focus/focus-clean-house.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/inbox/inbox-email.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/inbox/inbox-call.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/inbox/inbox-sticky-note.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/glossary/glossary-tvpi.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/glossary/glossary-dpi.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/glossary/glossary-irr.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/glossary/glossary-dry-powder.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/glossary/glossary-commitment.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/glossary/glossary-capital-call.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/glossary/glossary-pro-rata.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/glossary/glossary-side-letter.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/glossary/glossary-mfn.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/glossary/glossary-management-fee.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/glossary/glossary-fund-vs-mgmt-expense.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/glossary/glossary-valuation-mark.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/glossary/glossary-wire-fraud.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/glossary/glossary-reserves.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/glossary/glossary-k1.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/glossary/glossary-waterfall.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/glossary/glossary-preferred-return.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/glossary/glossary-catch-up.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/glossary/glossary-carry.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/glossary/glossary-term-sheet.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/icons/glossary/glossary-locked.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/ui/branding/pixel-font-atlas.png",
+    "w": 96,
+    "h": 32,
+    "glyphs": 60
+  },
+  {
+    "file": "assets/art/ui/branding/logo.png",
+    "w": 196,
+    "h": 74
+  },
+  {
+    "file": "assets/art/ui/branding/logo-wordmark-small.png",
+    "w": 124,
+    "h": 11
+  },
+  {
+    "file": "assets/art/ui/branding/logo-seal.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/ui/branding/pixel-font-sample.png",
+    "w": 200,
+    "h": 40
+  },
+  {
+    "file": "assets/art/ui/screens/title-screen.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/ui/screens/main-menu.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/ui/screens/morning-inbox.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/ui/screens/week-planner.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/ui/screens/friday-wrapup.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/ui/screens/quarter-kickoff.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/ui/screens/quarter-close-checklist.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/ui/screens/lp-report-preview.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/ui/screens/quarter-review.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/ui/screens/dialogue-box.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/ui/screens/dialogue-box-preview.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/ui/screens/glossary.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/ui/screens/trophy-shelf.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/ui/screens/settings.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/ui/screens/save-load.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/ui/screens/pause-menu.png",
+    "w": 320,
+    "h": 180
+  }
+]
