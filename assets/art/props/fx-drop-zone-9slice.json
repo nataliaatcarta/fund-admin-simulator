@@ -1,0 +1,17 @@
+{
+  "files": [
+    "fx-drop-zone-pink.png",
+    "fx-drop-zone-mint.png"
+  ],
+  "size": [
+    24,
+    24
+  ],
+  "slice": {
+    "left": 6,
+    "top": 6,
+    "right": 6,
+    "bottom": 6
+  },
+  "note": "Edge slices tile with period 6 (4 on / 2 off); stretch or repeat the middle edges."
+}

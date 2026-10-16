@@ -1,0 +1,29 @@
+{
+  "note": "field boxes (x,y,w,h) inside the 80x100 payment-request templates",
+  "fields": {
+    "domain": {
+      "x": 4,
+      "y": 22,
+      "w": 72,
+      "h": 9
+    },
+    "payee": {
+      "x": 4,
+      "y": 41,
+      "w": 72,
+      "h": 9
+    },
+    "account": {
+      "x": 4,
+      "y": 60,
+      "w": 72,
+      "h": 9
+    },
+    "amount": {
+      "x": 42,
+      "y": 74,
+      "w": 34,
+      "h": 12
+    }
+  }
+}

@@ -1,0 +1,758 @@
+[
+  {
+    "file": "assets/art/mini-games/wire-check/desk-view-bg.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/mini-games/wire-check/payment-request-founder-funding.png",
+    "w": 80,
+    "h": 100
+  },
+  {
+    "file": "assets/art/mini-games/wire-check/payment-request-vendor-invoice.png",
+    "w": 80,
+    "h": 100
+  },
+  {
+    "file": "assets/art/mini-games/wire-check/payment-request-lp-distribution.png",
+    "w": 80,
+    "h": 100
+  },
+  {
+    "file": "assets/art/mini-games/wire-check/binder-page-known-bank-details.png",
+    "w": 96,
+    "h": 118
+  },
+  {
+    "file": "assets/art/mini-games/wire-check/stamp-approve.png",
+    "w": 14,
+    "h": 21
+  },
+  {
+    "file": "assets/art/mini-games/wire-check/stamp-reject.png",
+    "w": 14,
+    "h": 21
+  },
+  {
+    "file": "assets/art/mini-games/wire-check/stamp-call-to-verify.png",
+    "w": 14,
+    "h": 21
+  },
+  {
+    "file": "assets/art/mini-games/wire-check/ink-imprint-approve.png",
+    "w": 48,
+    "h": 15
+  },
+  {
+    "file": "assets/art/mini-games/wire-check/stamp-hit-approve-strip.png",
+    "w": 312,
+    "h": 28,
+    "frames": 6,
+    "frameW": 52,
+    "frameH": 28
+  },
+  {
+    "file": "assets/art/mini-games/wire-check/ink-imprint-reject.png",
+    "w": 48,
+    "h": 15
+  },
+  {
+    "file": "assets/art/mini-games/wire-check/stamp-hit-reject-strip.png",
+    "w": 312,
+    "h": 28,
+    "frames": 6,
+    "frameW": 52,
+    "frameH": 28
+  },
+  {
+    "file": "assets/art/mini-games/wire-check/ink-imprint-call-to-verify.png",
+    "w": 48,
+    "h": 15
+  },
+  {
+    "file": "assets/art/mini-games/wire-check/stamp-hit-call-to-verify-strip.png",
+    "w": 312,
+    "h": 28,
+    "frames": 6,
+    "frameW": 52,
+    "frameH": 28
+  },
+  {
+    "file": "assets/art/mini-games/wire-check/phone-call-overlay.png",
+    "w": 150,
+    "h": 58
+  },
+  {
+    "file": "assets/art/mini-games/wire-check/phone-ring-strip.png",
+    "w": 176,
+    "h": 34,
+    "frames": 4,
+    "frameW": 44,
+    "frameH": 34
+  },
+  {
+    "file": "assets/art/mini-games/wire-check/tell-domain-highlight.png",
+    "w": 72,
+    "h": 13
+  },
+  {
+    "file": "assets/art/mini-games/wire-check/tell-urgent-sticker.png",
+    "w": 48,
+    "h": 22
+  },
+  {
+    "file": "assets/art/mini-games/wire-check/tell-account-smudge.png",
+    "w": 74,
+    "h": 11
+  },
+  {
+    "file": "assets/art/mini-games/wire-check/mug-fraud-buster.png",
+    "w": 16,
+    "h": 18
+  },
+  {
+    "file": "assets/art/mini-games/wire-check/mug-fraud-buster-strip.png",
+    "w": 64,
+    "h": 22,
+    "frames": 4,
+    "frameW": 16,
+    "frameH": 22
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/slider-commitment-panel.png",
+    "w": 190,
+    "h": 44
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/slider-knob.png",
+    "w": 13,
+    "h": 13
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/commitment-bar-frame.png",
+    "w": 174,
+    "h": 11
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/commitment-bar-fill-called.png",
+    "w": 8,
+    "h": 9
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/commitment-bar-fill-this-call.png",
+    "w": 8,
+    "h": 9
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/lp-cell-normal.png",
+    "w": 64,
+    "h": 16
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/lp-cell-error.png",
+    "w": 64,
+    "h": 16
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/lp-cell-fixed.png",
+    "w": 64,
+    "h": 16
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/tag-side-letter.png",
+    "w": 12,
+    "h": 12
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/tag-sold-stake.png",
+    "w": 12,
+    "h": 12
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/capital-call-notice-letter.png",
+    "w": 90,
+    "h": 110
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/button-send.png",
+    "w": 56,
+    "h": 18
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/button-send-pressed.png",
+    "w": 56,
+    "h": 18
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/send-plane-strip.png",
+    "w": 384,
+    "h": 32,
+    "frames": 8,
+    "frameW": 48,
+    "frameH": 32
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/fund-jar-stage-0.png",
+    "w": 40,
+    "h": 56
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/fund-jar-stage-1.png",
+    "w": 40,
+    "h": 56
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/fund-jar-stage-2.png",
+    "w": 40,
+    "h": 56
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/fund-jar-stage-3.png",
+    "w": 40,
+    "h": 56
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/fund-jar-stage-4.png",
+    "w": 40,
+    "h": 56
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/fund-jar-fill-strip.png",
+    "w": 200,
+    "h": 56,
+    "frames": 5,
+    "frameW": 40,
+    "frameH": 56
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/payments-arriving-strip.png",
+    "w": 640,
+    "h": 80,
+    "frames": 8,
+    "frameW": 80,
+    "frameH": 80
+  },
+  {
+    "file": "assets/art/mini-games/capital-call-builder/email-card-ricky-scam.png",
+    "w": 150,
+    "h": 72
+  },
+  {
+    "file": "assets/art/mini-games/pitch-day/card-back.png",
+    "w": 24,
+    "h": 32
+  },
+  {
+    "file": "assets/art/mini-games/pitch-day/card-front-team.png",
+    "w": 24,
+    "h": 32
+  },
+  {
+    "file": "assets/art/mini-games/pitch-day/card-front-market.png",
+    "w": 24,
+    "h": 32
+  },
+  {
+    "file": "assets/art/mini-games/pitch-day/card-front-product.png",
+    "w": 24,
+    "h": 32
+  },
+  {
+    "file": "assets/art/mini-games/pitch-day/card-front-traction.png",
+    "w": 24,
+    "h": 32
+  },
+  {
+    "file": "assets/art/mini-games/pitch-day/card-front-vibes.png",
+    "w": 24,
+    "h": 32
+  },
+  {
+    "file": "assets/art/mini-games/pitch-day/bluff-footnote-sample.png",
+    "w": 70,
+    "h": 16
+  },
+  {
+    "file": "assets/art/mini-games/pitch-day/diligence-token.png",
+    "w": 13,
+    "h": 13
+  },
+  {
+    "file": "assets/art/mini-games/pitch-day/diligence-token-spent.png",
+    "w": 13,
+    "h": 13
+  },
+  {
+    "file": "assets/art/mini-games/pitch-day/button-pass.png",
+    "w": 52,
+    "h": 18
+  },
+  {
+    "file": "assets/art/mini-games/pitch-day/button-invest.png",
+    "w": 52,
+    "h": 18
+  },
+  {
+    "file": "assets/art/mini-games/pitch-day/button-watchlist.png",
+    "w": 52,
+    "h": 18
+  },
+  {
+    "file": "assets/art/mini-games/pitch-day/check-size-selector.png",
+    "w": 100,
+    "h": 24
+  },
+  {
+    "file": "assets/art/mini-games/pitch-day/dry-powder-bar-frame.png",
+    "w": 110,
+    "h": 16
+  },
+  {
+    "file": "assets/art/mini-games/pitch-day/dry-powder-bar-fill.png",
+    "w": 8,
+    "h": 10
+  },
+  {
+    "file": "assets/art/mini-games/pitch-day/dry-powder-bar-example.png",
+    "w": 110,
+    "h": 16
+  },
+  {
+    "file": "assets/art/mini-games/pitch-day/card-flip-team-strip.png",
+    "w": 168,
+    "h": 36,
+    "frames": 6,
+    "frameW": 28,
+    "frameH": 36
+  },
+  {
+    "file": "assets/art/mini-games/pitch-day/card-flip-market-strip.png",
+    "w": 168,
+    "h": 36,
+    "frames": 6,
+    "frameW": 28,
+    "frameH": 36
+  },
+  {
+    "file": "assets/art/mini-games/pitch-day/card-flip-product-strip.png",
+    "w": 168,
+    "h": 36,
+    "frames": 6,
+    "frameW": 28,
+    "frameH": 36
+  },
+  {
+    "file": "assets/art/mini-games/pitch-day/card-flip-traction-strip.png",
+    "w": 168,
+    "h": 36,
+    "frames": 6,
+    "frameW": 28,
+    "frameH": 36
+  },
+  {
+    "file": "assets/art/mini-games/pitch-day/card-flip-vibes-strip.png",
+    "w": 168,
+    "h": 36,
+    "frames": 6,
+    "frameW": 28,
+    "frameH": 36
+  },
+  {
+    "file": "assets/art/mini-games/mark-the-portfolio/valuation-slider.png",
+    "w": 130,
+    "h": 24
+  },
+  {
+    "file": "assets/art/mini-games/mark-the-portfolio/evidence-last-round.png",
+    "w": 44,
+    "h": 56
+  },
+  {
+    "file": "assets/art/mini-games/mark-the-portfolio/evidence-comparables.png",
+    "w": 44,
+    "h": 56
+  },
+  {
+    "file": "assets/art/mini-games/mark-the-portfolio/evidence-runway.png",
+    "w": 44,
+    "h": 56
+  },
+  {
+    "file": "assets/art/mini-games/mark-the-portfolio/corner-brooke-pushing-high.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/mini-games/mark-the-portfolio/corner-finch-pushing-back.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/mini-games/expense-sorting/receipt-travel.png",
+    "w": 32,
+    "h": 44
+  },
+  {
+    "file": "assets/art/mini-games/expense-sorting/receipt-legal.png",
+    "w": 32,
+    "h": 44
+  },
+  {
+    "file": "assets/art/mini-games/expense-sorting/receipt-software.png",
+    "w": 32,
+    "h": 44
+  },
+  {
+    "file": "assets/art/mini-games/expense-sorting/receipt-meals.png",
+    "w": 32,
+    "h": 44
+  },
+  {
+    "file": "assets/art/mini-games/expense-sorting/receipt-offsite.png",
+    "w": 32,
+    "h": 44
+  },
+  {
+    "file": "assets/art/mini-games/expense-sorting/receipt-mystery.png",
+    "w": 32,
+    "h": 44
+  },
+  {
+    "file": "assets/art/mini-games/expense-sorting/bin-fund.png",
+    "w": 56,
+    "h": 54
+  },
+  {
+    "file": "assets/art/mini-games/expense-sorting/bin-management-company.png",
+    "w": 56,
+    "h": 54
+  },
+  {
+    "file": "assets/art/mini-games/expense-sorting/drop-correct-strip.png",
+    "w": 240,
+    "h": 40,
+    "frames": 6,
+    "frameW": 40,
+    "frameH": 40
+  },
+  {
+    "file": "assets/art/mini-games/expense-sorting/drop-wrong-strip.png",
+    "w": 240,
+    "h": 40,
+    "frames": 6,
+    "frameW": 40,
+    "frameH": 40
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/pipe-straight-empty.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/pipe-straight-full.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/pipe-straight-flow-strip.png",
+    "w": 64,
+    "h": 16,
+    "frames": 4,
+    "frameW": 16,
+    "frameH": 16
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/pipe-corner-empty.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/pipe-corner-full.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/pipe-corner-flow-strip.png",
+    "w": 64,
+    "h": 16,
+    "frames": 4,
+    "frameW": 16,
+    "frameH": 16
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/pipe-splitter-empty.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/pipe-splitter-full.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/pipe-splitter-flow-strip.png",
+    "w": 64,
+    "h": 16,
+    "frames": 4,
+    "frameW": 16,
+    "frameH": 16
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/pipe-valve-empty.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/pipe-valve-full.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/pipe-valve-flow-strip.png",
+    "w": 64,
+    "h": 16,
+    "frames": 4,
+    "frameW": 16,
+    "frameH": 16
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/tank-return-of-capital-empty.png",
+    "w": 36,
+    "h": 46
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/tank-return-of-capital-full.png",
+    "w": 36,
+    "h": 46
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/tank-return-of-capital-fill-strip.png",
+    "w": 216,
+    "h": 46,
+    "frames": 6,
+    "frameW": 36,
+    "frameH": 46
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/tank-preferred-return-empty.png",
+    "w": 36,
+    "h": 46
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/tank-preferred-return-full.png",
+    "w": 36,
+    "h": 46
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/tank-preferred-return-fill-strip.png",
+    "w": 216,
+    "h": 46,
+    "frames": 6,
+    "frameW": 36,
+    "frameH": 46
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/tank-catch-up-empty.png",
+    "w": 36,
+    "h": 46
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/tank-catch-up-full.png",
+    "w": 36,
+    "h": 46
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/tank-catch-up-fill-strip.png",
+    "w": 216,
+    "h": 46,
+    "frames": 6,
+    "frameW": 36,
+    "frameH": 46
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/tank-carry-empty.png",
+    "w": 36,
+    "h": 46
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/tank-carry-full.png",
+    "w": 36,
+    "h": 46
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/tank-carry-fill-strip.png",
+    "w": 216,
+    "h": 46,
+    "frames": 6,
+    "frameW": 36,
+    "frameH": 46
+  },
+  {
+    "file": "assets/art/mini-games/waterfall-puzzle/flood-strip.png",
+    "w": 576,
+    "h": 56,
+    "frames": 6,
+    "frameW": 96,
+    "frameH": 56
+  },
+  {
+    "file": "assets/art/mini-games/term-sheet-negotiation/term-sheet-document.png",
+    "w": 110,
+    "h": 136
+  },
+  {
+    "file": "assets/art/mini-games/term-sheet-negotiation/slider-valuation.png",
+    "w": 110,
+    "h": 20
+  },
+  {
+    "file": "assets/art/mini-games/term-sheet-negotiation/slider-pro-rata.png",
+    "w": 110,
+    "h": 20
+  },
+  {
+    "file": "assets/art/mini-games/term-sheet-negotiation/slider-board-seat.png",
+    "w": 110,
+    "h": 20
+  },
+  {
+    "file": "assets/art/mini-games/term-sheet-negotiation/patience-meter-strip.png",
+    "w": 400,
+    "h": 16,
+    "frames": 5,
+    "frameW": 80,
+    "frameH": 16
+  },
+  {
+    "file": "assets/art/mini-games/term-sheet-negotiation/patience-meter-frame.png",
+    "w": 80,
+    "h": 16
+  },
+  {
+    "file": "assets/art/mini-games/annual-meeting/slide-deck-builder-frame.png",
+    "w": 220,
+    "h": 130
+  },
+  {
+    "file": "assets/art/mini-games/annual-meeting/fact-card-good-news.png",
+    "w": 40,
+    "h": 52
+  },
+  {
+    "file": "assets/art/mini-games/annual-meeting/fact-card-bad-news.png",
+    "w": 40,
+    "h": 52
+  },
+  {
+    "file": "assets/art/mini-games/annual-meeting/fact-card-neutral.png",
+    "w": 40,
+    "h": 52
+  },
+  {
+    "file": "assets/art/mini-games/annual-meeting/projector-screen.png",
+    "w": 150,
+    "h": 120
+  },
+  {
+    "file": "assets/art/mini-games/annual-meeting/lp-question-bubble-curious.png",
+    "w": 54,
+    "h": 34
+  },
+  {
+    "file": "assets/art/mini-games/annual-meeting/lp-question-bubble-worried.png",
+    "w": 54,
+    "h": 34
+  },
+  {
+    "file": "assets/art/mini-games/annual-meeting/lp-question-bubble-happy.png",
+    "w": 54,
+    "h": 34
+  },
+  {
+    "file": "assets/art/mini-games/k1-rush/k1-form.png",
+    "w": 76,
+    "h": 96
+  },
+  {
+    "file": "assets/art/mini-games/k1-rush/lp-mailbox-slots.png",
+    "w": 150,
+    "h": 100
+  },
+  {
+    "file": "assets/art/mini-games/k1-rush/hourglass-strip.png",
+    "w": 108,
+    "h": 26,
+    "frames": 6,
+    "frameW": 18,
+    "frameH": 26
+  },
+  {
+    "file": "assets/art/mini-games/k1-rush/envelope-ricky-extra-urgent.png",
+    "w": 32,
+    "h": 26
+  },
+  {
+    "file": "assets/art/mini-games/k1-rush/envelope-ricky-extra-urgent-strip.png",
+    "w": 144,
+    "h": 30,
+    "frames": 4,
+    "frameW": 36,
+    "frameH": 30
+  },
+  {
+    "file": "assets/art/mini-games/shared/grade-stars-0.png",
+    "w": 53,
+    "h": 17
+  },
+  {
+    "file": "assets/art/mini-games/shared/grade-stars-1.png",
+    "w": 53,
+    "h": 17
+  },
+  {
+    "file": "assets/art/mini-games/shared/grade-stars-2.png",
+    "w": 53,
+    "h": 17
+  },
+  {
+    "file": "assets/art/mini-games/shared/grade-stars-3.png",
+    "w": 53,
+    "h": 17
+  },
+  {
+    "file": "assets/art/mini-games/shared/star-full.png",
+    "w": 15,
+    "h": 15
+  },
+  {
+    "file": "assets/art/mini-games/shared/star-empty.png",
+    "w": 15,
+    "h": 15
+  },
+  {
+    "file": "assets/art/mini-games/shared/button-just-sign-it.png",
+    "w": 76,
+    "h": 20
+  },
+  {
+    "file": "assets/art/mini-games/shared/button-just-sign-it-pressed.png",
+    "w": 76,
+    "h": 20
+  },
+  {
+    "file": "assets/art/mini-games/shared/results-screen-frame.png",
+    "w": 240,
+    "h": 150
+  },
+  {
+    "file": "assets/art/mini-games/shared/corner-commentary-frame.png",
+    "w": 64,
+    "h": 64
+  },
+  {
+    "file": "assets/art/mini-games/shared/corner-commentary-bubble.png",
+    "w": 72,
+    "h": 30
+  }
+]

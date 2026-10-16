@@ -1,0 +1,792 @@
+[
+  {
+    "file": "assets/art/npcs/supporting/finch/portrait-neutral.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/supporting/finch/portrait-sigh.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/supporting/finch/portrait-approving.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/supporting/finch/special-napa-receipt.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/supporting/finch/sprite-stand.png",
+    "w": 56,
+    "h": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/finch/sprite-seat.png",
+    "w": 56,
+    "h": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/finch/sprite-seat-talk-strip.png",
+    "w": 112,
+    "h": 66,
+    "frames": 2,
+    "frameW": 56,
+    "frameH": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/finch/sprite-walk-suitcase-strip.png",
+    "w": 320,
+    "h": 66,
+    "frames": 4,
+    "frameW": 80,
+    "frameH": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/finch/sprite-folding-desk.png",
+    "w": 80,
+    "h": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/finch/sprite-folding-desk-strip.png",
+    "w": 160,
+    "h": 66,
+    "frames": 2,
+    "frameW": 80,
+    "frameH": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/finch/prop-folder-tower-week1.png",
+    "w": 22,
+    "h": 18
+  },
+  {
+    "file": "assets/art/npcs/supporting/finch/prop-folder-tower-mid.png",
+    "w": 22,
+    "h": 32
+  },
+  {
+    "file": "assets/art/npcs/supporting/finch/prop-folder-tower-final.png",
+    "w": 22,
+    "h": 52
+  },
+  {
+    "file": "assets/art/npcs/supporting/finch/prop-napa-receipt.png",
+    "w": 17,
+    "h": 28
+  },
+  {
+    "file": "assets/art/npcs/supporting/finch/prop-suitcase.png",
+    "w": 18,
+    "h": 28
+  },
+  {
+    "file": "assets/art/npcs/supporting/chad/portrait-smug.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/supporting/chad/portrait-annoyed.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/supporting/chad/special-selfie.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/supporting/chad/sprite-lean-doorframe.png",
+    "w": 64,
+    "h": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/chad/sprite-stand.png",
+    "w": 56,
+    "h": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/chad/sprite-seat.png",
+    "w": 56,
+    "h": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/chad/sprite-seat-talk-strip.png",
+    "w": 112,
+    "h": 66,
+    "frames": 2,
+    "frameW": 56,
+    "frameH": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/chad/sprite-walk-strip.png",
+    "w": 224,
+    "h": 66,
+    "frames": 4,
+    "frameW": 56,
+    "frameH": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/chad/prop-phone.png",
+    "w": 10,
+    "h": 17
+  },
+  {
+    "file": "assets/art/npcs/supporting/chad/prop-fleece-vest.png",
+    "w": 30,
+    "h": 26
+  },
+  {
+    "file": "assets/art/npcs/supporting/lawyer/portrait-neutral.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/supporting/lawyer/portrait-billing.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/supporting/lawyer/sprite-seat.png",
+    "w": 56,
+    "h": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/lawyer/sprite-seat-billing-strip.png",
+    "w": 112,
+    "h": 66,
+    "frames": 2,
+    "frameW": 56,
+    "frameH": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/lawyer/sprite-stand.png",
+    "w": 56,
+    "h": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/lawyer/sprite-walk-strip.png",
+    "w": 224,
+    "h": 66,
+    "frames": 4,
+    "frameW": 56,
+    "frameH": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/lawyer/overlay-billable-counter-strip.png",
+    "w": 160,
+    "h": 22,
+    "frames": 4,
+    "frameW": 40,
+    "frameH": 22
+  },
+  {
+    "file": "assets/art/npcs/supporting/lawyer/prop-briefcase.png",
+    "w": 22,
+    "h": 19
+  },
+  {
+    "file": "assets/art/npcs/supporting/lawyer/prop-contracts.png",
+    "w": 22,
+    "h": 17
+  },
+  {
+    "file": "assets/art/npcs/supporting/kenji/portrait-neutral.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/supporting/kenji/portrait-delighted.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/supporting/kenji/videocall-neutral.png",
+    "w": 66,
+    "h": 58
+  },
+  {
+    "file": "assets/art/npcs/supporting/kenji/videocall-delighted.png",
+    "w": 66,
+    "h": 58
+  },
+  {
+    "file": "assets/art/npcs/supporting/kenji/sprite-stand.png",
+    "w": 56,
+    "h": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/kenji/sprite-seat.png",
+    "w": 56,
+    "h": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/kenji/sprite-seat-talk-strip.png",
+    "w": 112,
+    "h": 66,
+    "frames": 2,
+    "frameW": 56,
+    "frameH": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/kenji/sprite-walk-strip.png",
+    "w": 224,
+    "h": 66,
+    "frames": 4,
+    "frameW": 56,
+    "frameH": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/kenji/prop-question-scroll.png",
+    "w": 24,
+    "h": 72
+  },
+  {
+    "file": "assets/art/npcs/supporting/kenji/prop-lanyard-badge.png",
+    "w": 12,
+    "h": 20
+  },
+  {
+    "file": "assets/art/npcs/supporting/calloway/portrait-neutral.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/supporting/calloway/portrait-serious.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/supporting/calloway/portrait-satisfied.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/supporting/calloway/sprite-stand.png",
+    "w": 56,
+    "h": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/calloway/sprite-seat.png",
+    "w": 56,
+    "h": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/calloway/sprite-seat-talk-strip.png",
+    "w": 112,
+    "h": 66,
+    "frames": 2,
+    "frameW": 56,
+    "frameH": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/calloway/sprite-walk-strip.png",
+    "w": 224,
+    "h": 66,
+    "frames": 4,
+    "frameW": 56,
+    "frameH": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/calloway/special-doorway-backlit.png",
+    "w": 80,
+    "h": 90
+  },
+  {
+    "file": "assets/art/npcs/supporting/calloway/prop-badge.png",
+    "w": 14,
+    "h": 16
+  },
+  {
+    "file": "assets/art/npcs/supporting/calloway/prop-request-list.png",
+    "w": 20,
+    "h": 28
+  },
+  {
+    "file": "assets/art/npcs/supporting/associate/portrait-happy.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/supporting/associate/portrait-neutral.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/supporting/associate/portrait-worried.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/supporting/associate/portrait-grumpy.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/supporting/associate/sprite-stand.png",
+    "w": 56,
+    "h": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/associate/sprite-seat.png",
+    "w": 56,
+    "h": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/associate/sprite-seat-talk-strip.png",
+    "w": 112,
+    "h": 66,
+    "frames": 2,
+    "frameW": 56,
+    "frameH": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/associate/sprite-walk-strip.png",
+    "w": 224,
+    "h": 66,
+    "frames": 4,
+    "frameW": 56,
+    "frameH": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/associate/sprite-second-desk.png",
+    "w": 80,
+    "h": 66
+  },
+  {
+    "file": "assets/art/npcs/supporting/associate/sprite-second-desk-strip.png",
+    "w": 160,
+    "h": 66,
+    "frames": 2,
+    "frameW": 80,
+    "frameH": 66
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/head-round.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/head-oval.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/head-square.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/head-pointy.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/head-long.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/head-wide.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/hair-crop.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/hair-sidepart.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/hair-long.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/hair-bun.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/hair-curly.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/hair-mohawk.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/hair-ponytail.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/hair-bob.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/outfit-hoodie.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/outfit-blazer.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/outfit-labcoat.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/outfit-flannel.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/outfit-tee.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/outfit-turtleneck.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/accessory-glasses.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/accessory-headset.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/accessory-beanie.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/accessory-airpods.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/accessory-lanyard.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/accessory-laptop.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/expression-confident.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/expression-nervous.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/parts/expression-pitching.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/founder-example-1.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/founder-example-2.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/founder-example-3.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/founder-example-4.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/founder-example-5.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/founder-example-6.png",
+    "w": 48,
+    "h": 48
+  },
+  {
+    "file": "assets/art/npcs/founders/waiting-in-line-1-strip.png",
+    "w": 60,
+    "h": 46,
+    "frames": 2,
+    "frameW": 30,
+    "frameH": 46
+  },
+  {
+    "file": "assets/art/npcs/founders/waiting-in-line-1.png",
+    "w": 30,
+    "h": 46
+  },
+  {
+    "file": "assets/art/npcs/founders/waiting-in-line-2-strip.png",
+    "w": 60,
+    "h": 46,
+    "frames": 2,
+    "frameW": 30,
+    "frameH": 46
+  },
+  {
+    "file": "assets/art/npcs/founders/waiting-in-line-2.png",
+    "w": 30,
+    "h": 46
+  },
+  {
+    "file": "assets/art/npcs/founders/waiting-in-line-3-strip.png",
+    "w": 60,
+    "h": 46,
+    "frames": 2,
+    "frameW": 30,
+    "frameH": 46
+  },
+  {
+    "file": "assets/art/npcs/founders/waiting-in-line-3.png",
+    "w": 30,
+    "h": 46
+  },
+  {
+    "file": "assets/art/startup-logos/logo-rocket.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/startup-logos/logo-cloud.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/startup-logos/logo-bolt.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/startup-logos/logo-sprout.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/startup-logos/logo-cube.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/startup-logos/logo-plane.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/startup-logos/logo-drop.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/startup-logos/logo-wave.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/startup-logos/logo-mountain.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/startup-logos/logo-orbit.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/startup-logos/logo-hive.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/startup-logos/logo-fish.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/startup-logos/logo-donut.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/startup-logos/logo-burst.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/startup-logos/logo-heart.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/startup-logos/logo-eye.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/startup-logos/logo-bubble.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/startup-logos/logo-code.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/startup-logos/logo-owl.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/startup-logos/logo-avocado.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/startup-logos/logos-sheet.png",
+    "w": 144,
+    "h": 116
+  },
+  {
+    "file": "assets/art/npcs/background-lps/lp-seated-1-grandma.png",
+    "w": 56,
+    "h": 80
+  },
+  {
+    "file": "assets/art/npcs/background-lps/lp-seated-1-grandma-alt.png",
+    "w": 56,
+    "h": 80
+  },
+  {
+    "file": "assets/art/npcs/background-lps/lp-seated-2-dad.png",
+    "w": 56,
+    "h": 80
+  },
+  {
+    "file": "assets/art/npcs/background-lps/lp-seated-2-dad-alt.png",
+    "w": 56,
+    "h": 80
+  },
+  {
+    "file": "assets/art/npcs/background-lps/lp-seated-3-analyst.png",
+    "w": 56,
+    "h": 80
+  },
+  {
+    "file": "assets/art/npcs/background-lps/lp-seated-3-analyst-alt.png",
+    "w": 56,
+    "h": 80
+  },
+  {
+    "file": "assets/art/npcs/background-lps/lp-seated-4-retiree.png",
+    "w": 56,
+    "h": 80
+  },
+  {
+    "file": "assets/art/npcs/background-lps/lp-seated-4-retiree-alt.png",
+    "w": 56,
+    "h": 80
+  },
+  {
+    "file": "assets/art/npcs/background-lps/lp-seated-5-founder-lp.png",
+    "w": 56,
+    "h": 80
+  },
+  {
+    "file": "assets/art/npcs/background-lps/lp-seated-5-founder-lp-alt.png",
+    "w": 56,
+    "h": 80
+  },
+  {
+    "file": "assets/art/npcs/background-lps/lp-seated-6-flannel-guy.png",
+    "w": 56,
+    "h": 80
+  },
+  {
+    "file": "assets/art/npcs/background-lps/lp-seated-6-flannel-guy-alt.png",
+    "w": 56,
+    "h": 80
+  },
+  {
+    "file": "assets/art/npcs/background-lps/remote-lp-1-margaret-lookalike.png",
+    "w": 40,
+    "h": 40
+  },
+  {
+    "file": "assets/art/npcs/background-lps/remote-lp-2-headphones.png",
+    "w": 40,
+    "h": 40
+  },
+  {
+    "file": "assets/art/npcs/background-lps/remote-lp-3-window.png",
+    "w": 40,
+    "h": 40
+  },
+  {
+    "file": "assets/art/npcs/background-lps/remote-lp-4-cozy.png",
+    "w": 40,
+    "h": 40
+  },
+  {
+    "file": "assets/art/npcs/movers/mover-a.png",
+    "w": 56,
+    "h": 66
+  },
+  {
+    "file": "assets/art/npcs/movers/mover-a-walk-strip.png",
+    "w": 224,
+    "h": 66,
+    "frames": 4,
+    "frameW": 56,
+    "frameH": 66
+  },
+  {
+    "file": "assets/art/npcs/movers/mover-b.png",
+    "w": 56,
+    "h": 66
+  },
+  {
+    "file": "assets/art/npcs/movers/mover-b-walk-strip.png",
+    "w": 224,
+    "h": 66,
+    "frames": 4,
+    "frameW": 56,
+    "frameH": 66
+  }
+]
