@@ -49,9 +49,9 @@ export function Dialogue({ props, done }: { props: SayProps & { category?: strin
         <div style={{ fontSize: 22, lineHeight: 1.45, color: "var(--ink)", maxWidth: options?.length ? 520 : undefined }}>{t.shown}</div>
         {t.done && !options?.length && <span className="abs" style={{ right: 22, bottom: 12, animation: "blink 1s infinite", fontSize: 16, opacity: 0.6 }}>▼</span>}
       </div>
-      <div className="abs panel p-lav disp" style={{ left: BOX.x + 24, top: BOX.y - 22, height: 40, borderWidth: 12, borderImageWidth: "12px", padding: "0 10px", display: "flex", alignItems: "center", fontSize: 19, color: "var(--ink)" }}>
+      {!props.narration && <div className="abs panel p-lav disp" style={{ left: BOX.x + 24, top: BOX.y - 22, height: 40, borderWidth: 12, borderImageWidth: "12px", padding: "0 10px", display: "flex", alignItems: "center", fontSize: 19, color: "var(--ink)" }}>
         {sys ? "Inbox" : NPCS[npc as NpcId].name}
-      </div>
+      </div>}
       {t.done && options && options.length > 0 && (
         <div className="abs col slideup" style={{ right: 1280 - (BOX.x + BOX.w) + 20, width: 380, bottom: 720 - BOX.y - BOX.h + 16, gap: 4, pointerEvents: "auto" }}>
           {options.map((o, i) => (

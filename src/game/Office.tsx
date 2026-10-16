@@ -90,10 +90,25 @@ export function drawOffice(c: Ctx, tMs: number, g: GameState, v: OfficeVisual) {
   if (v.sticky) frame(c, "office/objects/sticky-under-door-strip.png", 8, 7, 203, 128);
 
   // audit corner / second desk drawn as overlays later
-  put(c, L("chair"), 0, 0);
-
-  // actor
-  if (v.actor) drawActor(c, tMs, v, tier);
+  // actor: while talking, the chair and speaker are blown up over the room so the conversation is the focus
+  const talking = !!v.actor && v.actor.phase !== "lean" && useUi.getState().modals.some((m) => m.kind === "dialogue");
+  if (talking) {
+    const ch = CH[tier];
+    c.save();
+    c.translate(TALK.x, TALK.top);
+    c.scale(TALK.scale, TALK.scale);
+    c.translate(-(ch.x + ch.w / 2), -(ch.y + ch.h - 65));
+    // the chair sits lower so its back only rises to the speaker's neck
+    c.save();
+    c.translate(0, TALK.neck);
+    put(c, L("chair"), 0, 0);
+    c.restore();
+    drawActor(c, tMs, v, tier);
+    c.restore();
+  } else {
+    put(c, L("chair"), 0, 0);
+    if (v.actor) drawActor(c, tMs, v, tier);
+  }
 
   put(c, L("desk"), 0, 0);
 
@@ -161,8 +176,8 @@ export const TRINKET_ART: Record<string, string> = {
   "first-check": "props/trinket-framed-first-check.png",
 };
 
-/** The dialogue box covers the scene below this row, so a talking actor is raised to show waist-up above it. */
-const DIALOGUE_TOP = 133;
+/** A talking actor is drawn at this scale, with their head at `top` and centred on `x`; the dialogue box covers the rest. `neck` is how far the chair is dropped so its back stops at the neck. */
+const TALK = { scale: 2, x: 185, top: 10, neck: 40 };
 
 function drawActor(c: Ctx, tMs: number, v: OfficeVisual, tier: 1 | 2 | 3) {
   const a = v.actor!;
@@ -177,9 +192,7 @@ function drawActor(c: Ctx, tMs: number, v: OfficeVisual, tier: 1 | 2 | 3) {
   if (a.phase === "lean") {
     put(c, `npcs/supporting/${a.npc}/sprite-lean-doorframe.png`, 190, 62);
   } else {
-    const talking = useUi.getState().modals.some((m) => m.kind === "dialogue");
-    const y = seatY - (talking ? seatY + 66 - DIALOGUE_TOP : 0);
-    put(c, sp.sit, seatX, y);
+    put(c, sp.sit, seatX, seatY);
   }
   c.restore();
 }

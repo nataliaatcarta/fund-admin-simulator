@@ -24,13 +24,8 @@ const label: CSSProperties = { fontSize: 15, letterSpacing: 1, textTransform: "u
 const linkBtn: CSSProperties = { background: "none", border: 0, padding: "6px 0", fontFamily: "var(--font-display)", fontSize: 20, color: "var(--ink)", opacity: 0.7 };
 
 // --------------------------------------------------------------- the day
-/** Sits over the room while you're free to act. The room's hotspots resolve it; after a quiet moment it lets a visitor knock. */
+/** Sits over the room while you're free to act. The room's hotspots resolve it. */
 export function DayOverlay({ props, done }: { props: { visitor: boolean }; done: (a: DayAction) => void }) {
-  useEffect(() => {
-    if (!props.visitor) return;
-    const t = setTimeout(() => done({ kind: "idle" }), 6000);
-    return () => clearTimeout(t);
-  }, [props.visitor, done]);
   return (
     <div className="abs" style={{ right: 20, bottom: 18, zIndex: 30 }}>
       <Button color="lav" w={190} h={52} size={19} style={{ minWidth: 0, borderWidth: 12, borderImageWidth: "12px" }} onClick={() => done({ kind: "end" })}>Call it a day ☾</Button>
