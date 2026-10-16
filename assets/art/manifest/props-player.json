@@ -1,0 +1,466 @@
+[
+  {
+    "file": "assets/art/cursors/cursor-pointer.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/cursors/cursor-hover-strip.png",
+    "w": 128,
+    "h": 32,
+    "frames": 4,
+    "frameW": 32,
+    "frameH": 32
+  },
+  {
+    "file": "assets/art/cursors/cursor-lift.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/cursors/cursor-holding.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/cursors/cursor-stamp-mode.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/cursors/cursor-pen-mode.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/cursors/cursor-no-drop.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/cursors/cursor-waiting-strip.png",
+    "w": 96,
+    "h": 32,
+    "frames": 3,
+    "frameW": 32,
+    "frameH": 32
+  },
+  {
+    "file": "assets/art/props/held-stamp-approve-rest.png",
+    "w": 14,
+    "h": 21
+  },
+  {
+    "file": "assets/art/props/held-stamp-approve-lifted.png",
+    "w": 16,
+    "h": 29
+  },
+  {
+    "file": "assets/art/props/held-stamp-reject-rest.png",
+    "w": 14,
+    "h": 21
+  },
+  {
+    "file": "assets/art/props/held-stamp-reject-lifted.png",
+    "w": 16,
+    "h": 29
+  },
+  {
+    "file": "assets/art/props/held-stamp-call-rest.png",
+    "w": 14,
+    "h": 21
+  },
+  {
+    "file": "assets/art/props/held-stamp-call-lifted.png",
+    "w": 16,
+    "h": 29
+  },
+  {
+    "file": "assets/art/props/held-pen-rest.png",
+    "w": 19,
+    "h": 19
+  },
+  {
+    "file": "assets/art/props/held-pen-lifted.png",
+    "w": 21,
+    "h": 27
+  },
+  {
+    "file": "assets/art/props/held-mug-rest.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/props/held-mug-lifted.png",
+    "w": 18,
+    "h": 24
+  },
+  {
+    "file": "assets/art/props/held-handset-rest.png",
+    "w": 25,
+    "h": 9
+  },
+  {
+    "file": "assets/art/props/held-handset-lifted.png",
+    "w": 27,
+    "h": 17
+  },
+  {
+    "file": "assets/art/props/held-binder-rest.png",
+    "w": 21,
+    "h": 23
+  },
+  {
+    "file": "assets/art/props/held-binder-lifted.png",
+    "w": 23,
+    "h": 31
+  },
+  {
+    "file": "assets/art/props/held-sticky-rest.png",
+    "w": 17,
+    "h": 17
+  },
+  {
+    "file": "assets/art/props/held-sticky-lifted.png",
+    "w": 19,
+    "h": 25
+  },
+  {
+    "file": "assets/art/props/held-wire-request-rest.png",
+    "w": 37,
+    "h": 31
+  },
+  {
+    "file": "assets/art/props/held-wire-request-lifted.png",
+    "w": 39,
+    "h": 39
+  },
+  {
+    "file": "assets/art/props/held-letter-rest.png",
+    "w": 24,
+    "h": 30
+  },
+  {
+    "file": "assets/art/props/held-letter-lifted.png",
+    "w": 26,
+    "h": 38
+  },
+  {
+    "file": "assets/art/props/held-pitch-card-rest.png",
+    "w": 24,
+    "h": 32
+  },
+  {
+    "file": "assets/art/props/held-pitch-card-lifted.png",
+    "w": 26,
+    "h": 40
+  },
+  {
+    "file": "assets/art/props/held-diligence-token-rest.png",
+    "w": 14,
+    "h": 14
+  },
+  {
+    "file": "assets/art/props/held-diligence-token-lifted.png",
+    "w": 16,
+    "h": 22
+  },
+  {
+    "file": "assets/art/props/held-receipt-rest.png",
+    "w": 14,
+    "h": 32
+  },
+  {
+    "file": "assets/art/props/held-receipt-lifted.png",
+    "w": 16,
+    "h": 40
+  },
+  {
+    "file": "assets/art/props/held-k1-form-rest.png",
+    "w": 28,
+    "h": 34
+  },
+  {
+    "file": "assets/art/props/held-k1-form-lifted.png",
+    "w": 30,
+    "h": 42
+  },
+  {
+    "file": "assets/art/props/held-pipe-piece-rest.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/props/held-pipe-piece-lifted.png",
+    "w": 26,
+    "h": 32
+  },
+  {
+    "file": "assets/art/props/held-fact-card-neutral-rest.png",
+    "w": 24,
+    "h": 32
+  },
+  {
+    "file": "assets/art/props/held-fact-card-neutral-lifted.png",
+    "w": 26,
+    "h": 40
+  },
+  {
+    "file": "assets/art/props/held-fact-card-good-rest.png",
+    "w": 24,
+    "h": 32
+  },
+  {
+    "file": "assets/art/props/held-fact-card-good-lifted.png",
+    "w": 26,
+    "h": 40
+  },
+  {
+    "file": "assets/art/props/held-fact-card-bad-rest.png",
+    "w": 24,
+    "h": 32
+  },
+  {
+    "file": "assets/art/props/held-fact-card-bad-lifted.png",
+    "w": 26,
+    "h": 40
+  },
+  {
+    "file": "assets/art/props/fx-lift-strip.png",
+    "w": 128,
+    "h": 20,
+    "frames": 4,
+    "frameW": 32,
+    "frameH": 20
+  },
+  {
+    "file": "assets/art/props/fx-drop-zone-pink.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/props/fx-drop-zone-mint.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/props/fx-valid-glow-strip.png",
+    "w": 192,
+    "h": 36,
+    "frames": 4,
+    "frameW": 48,
+    "frameH": 36
+  },
+  {
+    "file": "assets/art/props/fx-invalid-shake-strip.png",
+    "w": 288,
+    "h": 36,
+    "frames": 6,
+    "frameW": 48,
+    "frameH": 36
+  },
+  {
+    "file": "assets/art/props/fx-snap-strip.png",
+    "w": 288,
+    "h": 36,
+    "frames": 6,
+    "frameW": 48,
+    "frameH": 36
+  },
+  {
+    "file": "assets/art/props/fx-burnout-vignette.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/props/fx-burnout-blink-strip.png",
+    "w": 1280,
+    "h": 180,
+    "frames": 4,
+    "frameW": 320,
+    "frameH": 180
+  },
+  {
+    "file": "assets/art/props/fx-crunch-tint.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/props/fx-great-glow.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/props/fx-great-glow-sparkles.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/props/fx-bad-news-zoom-strip.png",
+    "w": 960,
+    "h": 180,
+    "frames": 3,
+    "frameW": 320,
+    "frameH": 180
+  },
+  {
+    "file": "assets/art/props/nameplate.png",
+    "w": 64,
+    "h": 16
+  },
+  {
+    "file": "assets/art/props/pet-frame-cat.png",
+    "w": 24,
+    "h": 28
+  },
+  {
+    "file": "assets/art/props/pet-frame-dog.png",
+    "w": 24,
+    "h": 28
+  },
+  {
+    "file": "assets/art/props/trinket-fraud-buster-mug.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/props/trinket-framed-clean-audit.png",
+    "w": 23,
+    "h": 19
+  },
+  {
+    "file": "assets/art/props/trinket-stress-ball.png",
+    "w": 14,
+    "h": 14
+  },
+  {
+    "file": "assets/art/props/trinket-ines-sticker.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/props/trinket-margaret-thank-you-note.png",
+    "w": 18,
+    "h": 16
+  },
+  {
+    "file": "assets/art/props/trinket-priya-cookie-tin.png",
+    "w": 18,
+    "h": 16
+  },
+  {
+    "file": "assets/art/props/trinket-brooke-pennant.png",
+    "w": 24,
+    "h": 20
+  },
+  {
+    "file": "assets/art/props/trinket-dex-crypto-coin.png",
+    "w": 14,
+    "h": 14
+  },
+  {
+    "file": "assets/art/props/trinket-dex-ai-hat.png",
+    "w": 24,
+    "h": 15
+  },
+  {
+    "file": "assets/art/props/trinket-dex-oat-milk-carton.png",
+    "w": 12,
+    "h": 20
+  },
+  {
+    "file": "assets/art/props/trinket-framed-first-check.png",
+    "w": 26,
+    "h": 18
+  },
+  {
+    "file": "assets/art/props/plant-stage-1.png",
+    "w": 22,
+    "h": 30
+  },
+  {
+    "file": "assets/art/props/plant-stage-2.png",
+    "w": 22,
+    "h": 30
+  },
+  {
+    "file": "assets/art/props/plant-stage-3.png",
+    "w": 22,
+    "h": 30
+  },
+  {
+    "file": "assets/art/props/plant-stage-4.png",
+    "w": 22,
+    "h": 30
+  },
+  {
+    "file": "assets/art/props/badge-first-close.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/props/badge-clean-capital-call.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/props/badge-fraud-buster.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/props/badge-unicorn-whisperer.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/props/badge-pivot-survivor.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/props/badge-rickys-favorite.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/props/badge-margaret-approved.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/props/badge-clean-audit.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/props/badge-questionnaire-champion.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/props/badge-zero-seeds-left-behind.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/props/badge-burnout-avoided.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/props/badge-fund-ii-unlocked.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/props/badge-locked-round.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/props/badge-locked-shield.png",
+    "w": 32,
+    "h": 32
+  }
+]

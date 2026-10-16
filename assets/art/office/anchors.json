@@ -1,0 +1,1152 @@
+{
+ "office/tier1-hot-desk.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180
+ },
+ "office/layers/tier1/wall.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 0,
+   "y": 0,
+   "w": 320,
+   "h": 133
+  }
+ },
+ "office/layers/tier1/tv.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 13,
+   "y": 13,
+   "w": 72,
+   "h": 50
+  }
+ },
+ "office/layers/tier1/plant.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 8,
+   "y": 39,
+   "w": 24,
+   "h": 36
+  }
+ },
+ "office/layers/tier1/trinkets.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 35,
+   "y": 55,
+   "w": 51,
+   "h": 19
+  }
+ },
+ "office/layers/tier1/shelf.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 9,
+   "y": 73,
+   "w": 80,
+   "h": 10
+  }
+ },
+ "office/layers/tier1/calendar.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 96,
+   "y": 7,
+   "w": 29,
+   "h": 46
+  }
+ },
+ "office/layers/tier1/door.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 199,
+   "y": 11,
+   "w": 56,
+   "h": 125
+  }
+ },
+ "office/layers/tier1/window-glass.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 263,
+   "y": 19,
+   "w": 48,
+   "h": 51
+  }
+ },
+ "office/layers/tier1/window-frame.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 247,
+   "y": 5,
+   "w": 73,
+   "h": 72
+  }
+ },
+ "office/layers/tier1/sill-props.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 291,
+   "y": 52,
+   "w": 9,
+   "h": 20
+  }
+ },
+ "office/layers/tier1/chair.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 137,
+   "y": 68,
+   "w": 56,
+   "h": 66
+  }
+ },
+ "office/layers/tier1/desk.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 0,
+   "y": 133,
+   "w": 320,
+   "h": 47
+  }
+ },
+ "office/layers/tier1/stamp-pad.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 101,
+   "y": 162,
+   "w": 54,
+   "h": 12
+  }
+ },
+ "office/layers/tier1/laptop.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 10,
+   "y": 101,
+   "w": 78,
+   "h": 53
+  }
+ },
+ "office/layers/tier1/phone.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 261,
+   "y": 148,
+   "w": 48,
+   "h": 24
+  }
+ },
+ "office/tier2-loft.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180
+ },
+ "office/layers/tier2/wall.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 0,
+   "y": 0,
+   "w": 320,
+   "h": 133
+  }
+ },
+ "office/layers/tier2/tv.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 13,
+   "y": 13,
+   "w": 72,
+   "h": 51
+  }
+ },
+ "office/layers/tier2/plant.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 8,
+   "y": 39,
+   "w": 24,
+   "h": 36
+  }
+ },
+ "office/layers/tier2/trinkets.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 35,
+   "y": 55,
+   "w": 51,
+   "h": 19
+  }
+ },
+ "office/layers/tier2/shelf.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 8,
+   "y": 72,
+   "w": 82,
+   "h": 15
+  }
+ },
+ "office/layers/tier2/calendar.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 96,
+   "y": 7,
+   "w": 29,
+   "h": 46
+  }
+ },
+ "office/layers/tier2/door.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 199,
+   "y": 14,
+   "w": 56,
+   "h": 122
+  }
+ },
+ "office/layers/tier2/window-glass.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 263,
+   "y": 19,
+   "w": 48,
+   "h": 51
+  }
+ },
+ "office/layers/tier2/window-frame.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 250,
+   "y": 6,
+   "w": 70,
+   "h": 71
+  }
+ },
+ "office/layers/tier2/sill-props.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 291,
+   "y": 52,
+   "w": 9,
+   "h": 20
+  }
+ },
+ "office/layers/tier2/chair.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 134,
+   "y": 72,
+   "w": 62,
+   "h": 62
+  }
+ },
+ "office/layers/tier2/desk.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 0,
+   "y": 133,
+   "w": 320,
+   "h": 47
+  }
+ },
+ "office/layers/tier2/stamp-pad.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 101,
+   "y": 162,
+   "w": 54,
+   "h": 12
+  }
+ },
+ "office/layers/tier2/laptop.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 10,
+   "y": 101,
+   "w": 78,
+   "h": 53
+  }
+ },
+ "office/layers/tier2/phone.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 261,
+   "y": 148,
+   "w": 48,
+   "h": 24
+  }
+ },
+ "office/tier3-corner-office.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180
+ },
+ "office/layers/tier3/wall.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 0,
+   "y": 0,
+   "w": 320,
+   "h": 133
+  }
+ },
+ "office/layers/tier3/tv.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 12,
+   "y": 12,
+   "w": 74,
+   "h": 52
+  }
+ },
+ "office/layers/tier3/plant.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 8,
+   "y": 39,
+   "w": 24,
+   "h": 36
+  }
+ },
+ "office/layers/tier3/trinkets.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 35,
+   "y": 55,
+   "w": 51,
+   "h": 19
+  }
+ },
+ "office/layers/tier3/shelf.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 8,
+   "y": 72,
+   "w": 82,
+   "h": 12
+  }
+ },
+ "office/layers/tier3/calendar.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 96,
+   "y": 7,
+   "w": 29,
+   "h": 46
+  }
+ },
+ "office/layers/tier3/door.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 199,
+   "y": 11,
+   "w": 56,
+   "h": 125
+  }
+ },
+ "office/layers/tier3/window-glass.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 263,
+   "y": 19,
+   "w": 48,
+   "h": 51
+  }
+ },
+ "office/layers/tier3/window-frame.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 247,
+   "y": 5,
+   "w": 73,
+   "h": 72
+  }
+ },
+ "office/layers/tier3/sill-props.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 291,
+   "y": 52,
+   "w": 9,
+   "h": 20
+  }
+ },
+ "office/layers/tier3/chair.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 131,
+   "y": 62,
+   "w": 68,
+   "h": 72
+  }
+ },
+ "office/layers/tier3/desk.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 0,
+   "y": 133,
+   "w": 320,
+   "h": 47
+  }
+ },
+ "office/layers/tier3/stamp-pad.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 101,
+   "y": 162,
+   "w": 54,
+   "h": 12
+  }
+ },
+ "office/layers/tier3/laptop.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 10,
+   "y": 101,
+   "w": 78,
+   "h": 53
+  }
+ },
+ "office/layers/tier3/phone.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "bbox": {
+   "x": 261,
+   "y": 148,
+   "w": 48,
+   "h": 24
+  }
+ },
+ "office/layers/shared/frame-spots-empty.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180
+ },
+ "office/layers/shared/second-desk.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180
+ },
+ "office/layers/shared/phone-handset-rest.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180
+ },
+ "office/layers/shared/sill-props-q1.png": {
+  "x": 256,
+  "y": 48,
+  "w": 60,
+  "h": 26
+ },
+ "office/layers/shared/sill-props-q2.png": {
+  "x": 256,
+  "y": 48,
+  "w": 60,
+  "h": 26
+ },
+ "office/layers/shared/sill-props-q3.png": {
+  "x": 256,
+  "y": 48,
+  "w": 60,
+  "h": 26
+ },
+ "office/layers/shared/sill-props-q4.png": {
+  "x": 256,
+  "y": 48,
+  "w": 60,
+  "h": 26
+ },
+ "office/layers/shared/frame-win-a-photo.png": {
+  "x": 130,
+  "y": 9,
+  "w": 23,
+  "h": 30
+ },
+ "office/layers/shared/frame-win-b-certificate.png": {
+  "x": 157,
+  "y": 9,
+  "w": 34,
+  "h": 23
+ },
+ "office/layers/shared/frame-win-c-star.png": {
+  "x": 157,
+  "y": 37,
+  "w": 17,
+  "h": 17
+ },
+ "office/layers/shared/frame-win-d-drawing.png": {
+  "x": 177,
+  "y": 37,
+  "w": 14,
+  "h": 17
+ },
+ "office/objects/laptop-idle.png": {
+  "x": 5,
+  "y": 92,
+  "w": 88,
+  "h": 64
+ },
+ "office/objects/laptop-ping-strip.png": {
+  "x": 5,
+  "y": 92,
+  "w": 88,
+  "h": 64,
+  "frames": 6
+ },
+ "office/objects/laptop-videocall.png": {
+  "x": 5,
+  "y": 92,
+  "w": 88,
+  "h": 64
+ },
+ "office/objects/laptop-videocall-strip.png": {
+  "x": 5,
+  "y": 92,
+  "w": 88,
+  "h": 64,
+  "frames": 4
+ },
+ "office/objects/phone-idle.png": {
+  "x": 250,
+  "y": 126,
+  "w": 70,
+  "h": 50
+ },
+ "office/objects/phone-ringing-strip.png": {
+  "x": 250,
+  "y": 126,
+  "w": 70,
+  "h": 50,
+  "frames": 6
+ },
+ "office/objects/phone-voicemail-strip.png": {
+  "x": 250,
+  "y": 126,
+  "w": 70,
+  "h": 50,
+  "frames": 6
+ },
+ "office/objects/phone-off-hook.png": {
+  "x": 215,
+  "y": 140,
+  "w": 100,
+  "h": 40
+ },
+ "office/objects/tv-off.png": {
+  "x": 12,
+  "y": 12,
+  "w": 74,
+  "h": 52
+ },
+ "office/objects/tv-screen-off.png": {
+  "x": 18,
+  "y": 18,
+  "w": 62,
+  "h": 33
+ },
+ "office/objects/tv-news.png": {
+  "x": 12,
+  "y": 12,
+  "w": 74,
+  "h": 52
+ },
+ "office/objects/tv-screen-news.png": {
+  "x": 18,
+  "y": 18,
+  "w": 62,
+  "h": 33
+ },
+ "office/objects/tv-linkedin-chad.png": {
+  "x": 12,
+  "y": 12,
+  "w": 74,
+  "h": 52
+ },
+ "office/objects/tv-screen-linkedin-chad.png": {
+  "x": 18,
+  "y": 18,
+  "w": 62,
+  "h": 33
+ },
+ "office/objects/tv-lp-grid.png": {
+  "x": 12,
+  "y": 12,
+  "w": 74,
+  "h": 52
+ },
+ "office/objects/tv-screen-lp-grid.png": {
+  "x": 18,
+  "y": 18,
+  "w": 62,
+  "h": 33
+ },
+ "office/objects/tv-chart.png": {
+  "x": 12,
+  "y": 12,
+  "w": 74,
+  "h": 52
+ },
+ "office/objects/tv-news-ticker-strip.png": {
+  "x": 12,
+  "y": 12,
+  "w": 74,
+  "h": 52,
+  "frames": 8
+ },
+ "office/objects/tv-lp-grid-strip.png": {
+  "x": 12,
+  "y": 12,
+  "w": 74,
+  "h": 52,
+  "frames": 8
+ },
+ "office/objects/tv-screen-news-ticker-strip.png": {
+  "x": 18,
+  "y": 18,
+  "w": 62,
+  "h": 33,
+  "frames": 8
+ },
+ "office/objects/door-closed.png": {
+  "x": 193,
+  "y": 10,
+  "w": 68,
+  "h": 126
+ },
+ "office/objects/door-knock-strip.png": {
+  "x": 193,
+  "y": 10,
+  "w": 68,
+  "h": 126,
+  "frames": 6
+ },
+ "office/objects/door-open-empty.png": {
+  "x": 193,
+  "y": 10,
+  "w": 68,
+  "h": 126
+ },
+ "office/objects/door-open-silhouette.png": {
+  "x": 193,
+  "y": 10,
+  "w": 68,
+  "h": 126
+ },
+ "office/objects/door-open-npc.png": {
+  "x": 193,
+  "y": 10,
+  "w": 68,
+  "h": 126
+ },
+ "office/objects/door-open-npc-b.png": {
+  "x": 193,
+  "y": 10,
+  "w": 68,
+  "h": 126
+ },
+ "office/objects/sticky-under-door-strip.png": {
+  "x": 203,
+  "y": 128,
+  "w": 48,
+  "h": 36,
+  "frames": 8
+ },
+ "office/objects/inbox-tray-empty.png": {
+  "x": 207,
+  "y": 123,
+  "w": 56,
+  "h": 50
+ },
+ "office/objects/inbox-tray-few.png": {
+  "x": 207,
+  "y": 123,
+  "w": 56,
+  "h": 50
+ },
+ "office/objects/inbox-tray-overflowing.png": {
+  "x": 207,
+  "y": 123,
+  "w": 56,
+  "h": 50
+ },
+ "office/objects/wall-calendar-12wk-strip.png": {
+  "x": 96,
+  "y": 13,
+  "w": 29,
+  "h": 41,
+  "frames": 12
+ },
+ "office/objects/binder-closed.png": {
+  "x": 0,
+  "y": 0,
+  "w": 21,
+  "h": 23
+ },
+ "office/objects/binder-open.png": {
+  "x": 0,
+  "y": 0,
+  "w": 47,
+  "h": 26
+ },
+ "office/objects/mug-hot-strip.png": {
+  "x": 0,
+  "y": 0,
+  "w": 16,
+  "h": 20,
+  "frames": 8
+ },
+ "office/objects/mug-cold.png": {
+  "x": 0,
+  "y": 0,
+  "w": 16,
+  "h": 20
+ },
+ "office/objects/plant-1-sprout.png": {
+  "x": 6,
+  "y": 34,
+  "w": 28,
+  "h": 42
+ },
+ "office/objects/plant-2-small.png": {
+  "x": 6,
+  "y": 34,
+  "w": 28,
+  "h": 42
+ },
+ "office/objects/plant-3-full.png": {
+  "x": 6,
+  "y": 34,
+  "w": 28,
+  "h": 42
+ },
+ "office/objects/plant-4-flowering.png": {
+  "x": 6,
+  "y": 34,
+  "w": 28,
+  "h": 42
+ },
+ "seasons/window-q1-morning.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52
+ },
+ "seasons/window-q1-afternoon.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52
+ },
+ "seasons/window-q1-night.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52
+ },
+ "seasons/window-q2-morning.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52
+ },
+ "seasons/window-q2-afternoon.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52
+ },
+ "seasons/window-q2-night.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52
+ },
+ "seasons/window-q3-morning.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52
+ },
+ "seasons/window-q3-afternoon.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52
+ },
+ "seasons/window-q3-night.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52
+ },
+ "seasons/window-q4-morning.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52
+ },
+ "seasons/window-q4-afternoon.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52
+ },
+ "seasons/window-q4-night.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52
+ },
+ "seasons/window-q1-rain-morning-strip.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52,
+  "frames": 10
+ },
+ "seasons/window-q4-snow-morning-strip.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52,
+  "frames": 16
+ },
+ "seasons/window-q1-rain-afternoon-strip.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52,
+  "frames": 10
+ },
+ "seasons/window-q4-snow-afternoon-strip.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52,
+  "frames": 16
+ },
+ "seasons/window-q1-rain-night-strip.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52,
+  "frames": 10
+ },
+ "seasons/window-q4-snow-night-strip.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52,
+  "frames": 16
+ },
+ "seasons/window-special-storm-strip.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52,
+  "frames": 8
+ },
+ "seasons/window-special-fireworks-strip.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52,
+  "frames": 14
+ },
+ "seasons/window-special-storm.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52
+ },
+ "seasons/window-special-fireworks.png": {
+  "x": 263,
+  "y": 18,
+  "w": 48,
+  "h": 52
+ },
+ "seasons/window-full-q1-afternoon.png": {
+  "x": 244,
+  "y": 2,
+  "w": 80,
+  "h": 80
+ },
+ "seasons/window-full-q2-afternoon.png": {
+  "x": 244,
+  "y": 2,
+  "w": 80,
+  "h": 80
+ },
+ "seasons/window-full-q3-afternoon.png": {
+  "x": 244,
+  "y": 2,
+  "w": 80,
+  "h": 80
+ },
+ "seasons/window-full-q4-afternoon.png": {
+  "x": 244,
+  "y": 2,
+  "w": 80,
+  "h": 80
+ },
+ "office/overlays/messy-desk.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180
+ },
+ "office/overlays/dim-lights.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180
+ },
+ "office/overlays/audit-corner.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180
+ },
+ "office/overlays/pitch-parade.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180
+ },
+ "office/overlays/pizza-night.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180
+ },
+ "office/overlays/holiday-party.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180
+ },
+ "office/overlays/bank-wobble-panic.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180
+ },
+ "office/overlays/annual-lp-meeting.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180
+ },
+ "office/overlays/desk-pileup.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180
+ },
+ "office/overlays/tint-morning.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180
+ },
+ "office/overlays/tint-afternoon.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180
+ },
+ "office/overlays/tint-night.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180
+ },
+ "office/postcards/postcard-conference.png": {
+  "x": 0,
+  "y": 0,
+  "w": 160,
+  "h": 100
+ },
+ "office/postcards/postcard-lp-dinner.png": {
+  "x": 0,
+  "y": 0,
+  "w": 160,
+  "h": 100
+ },
+ "office/postcards/postcard-founder-coffee.png": {
+  "x": 0,
+  "y": 0,
+  "w": 160,
+  "h": 100
+ },
+ "office/postcards/postcard-napa-offsite.png": {
+  "x": 0,
+  "y": 0,
+  "w": 160,
+  "h": 100
+ },
+ "office/transitions/fade-to-postcard-strip.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "frames": 8
+ },
+ "office/transitions/upgrade-tier1-to-tier2-strip.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "frames": 7
+ },
+ "office/transitions/upgrade-tier2-to-tier3-strip.png": {
+  "x": 0,
+  "y": 0,
+  "w": 320,
+  "h": 180,
+  "frames": 7
+ }
+}

@@ -1,0 +1,535 @@
+[
+  {
+    "file": "assets/art/events/card-frame-portfolio.png",
+    "w": 120,
+    "h": 136
+  },
+  {
+    "file": "assets/art/events/card-frame-lp.png",
+    "w": 120,
+    "h": 136
+  },
+  {
+    "file": "assets/art/events/card-frame-ops.png",
+    "w": 120,
+    "h": 136
+  },
+  {
+    "file": "assets/art/events/card-frame-gov.png",
+    "w": 120,
+    "h": 136
+  },
+  {
+    "file": "assets/art/events/card-frame-rival.png",
+    "w": 120,
+    "h": 136
+  },
+  {
+    "file": "assets/art/events/card-frame-market.png",
+    "w": 120,
+    "h": 136
+  },
+  {
+    "file": "assets/art/events/setup-01-rocket-empty-gauge.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/setup-02-email-avalanche.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/setup-03-wine-stained-receipt.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/setup-04-calendar-cobweb.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/setup-05-email-shady-mustache.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/setup-06-inflating-balloon.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/setup-07-two-coffee-cups.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/setup-08-phone-prayer-hands.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/setup-09-wobbly-bank-ticker.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/setup-10-endless-scroll.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/setup-11-ticking-clock-binder.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/setup-12-single-sticky-note.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/bloom-01-dex-oat-milk-apron.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/bloom-02-ricky-heart-dpi-mug.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/bloom-03-finch-holds-receipt.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/bloom-04a-margaret-nodding.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/bloom-04b-margaret-frowning.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/bloom-05a-priya-cookies.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/bloom-05b-empty-money-bag.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/bloom-06b-balloon-popping.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/bloom-07b-unicorn-laptop-sticker.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/bloom-08a-founders-cheering.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/bloom-08b-founders-cringing.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/bloom-09a-safe-vault.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/bloom-09b-frantic-phone.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/bloom-10-signed-fund-ii-letter.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/bloom-11-framed-anchor-lp-letter.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/events/bloom-12-tidy-filing-cabinet.png",
+    "w": 96,
+    "h": 64
+  },
+  {
+    "file": "assets/art/story/garden-seed.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/story/garden-sprout.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/story/garden-bud.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/story/garden-bloom-good.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/story/garden-bloom-bad.png",
+    "w": 24,
+    "h": 24
+  },
+  {
+    "file": "assets/art/story/garden-stages-strip.png",
+    "w": 120,
+    "h": 24,
+    "frames": 5,
+    "frameW": 24,
+    "frameH": 24
+  },
+  {
+    "file": "assets/art/story/garden-bed-bg.png",
+    "w": 320,
+    "h": 64
+  },
+  {
+    "file": "assets/art/story/intro-lpa-signing.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/story/first-close-celebration.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/story/season-q1.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/story/season-q2.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/story/season-q3.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/story/season-q4.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/story/year-transition.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/story/boss-finch-audit.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/story/boss-calloway-sec.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/story/ending-fund-ii-oversubscribed.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/story/ending-comeback-kid.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/story/ending-consultant-era.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/story/credits-bg.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/effects/floaty-fund-up.png",
+    "w": 24,
+    "h": 11
+  },
+  {
+    "file": "assets/art/effects/floaty-fund-down.png",
+    "w": 24,
+    "h": 11
+  },
+  {
+    "file": "assets/art/effects/floaty-cash-up.png",
+    "w": 24,
+    "h": 11
+  },
+  {
+    "file": "assets/art/effects/floaty-cash-down.png",
+    "w": 24,
+    "h": 11
+  },
+  {
+    "file": "assets/art/effects/floaty-rep-up.png",
+    "w": 24,
+    "h": 11
+  },
+  {
+    "file": "assets/art/effects/floaty-rep-down.png",
+    "w": 24,
+    "h": 11
+  },
+  {
+    "file": "assets/art/effects/floaty-comp-up.png",
+    "w": 24,
+    "h": 11
+  },
+  {
+    "file": "assets/art/effects/floaty-comp-down.png",
+    "w": 24,
+    "h": 11
+  },
+  {
+    "file": "assets/art/effects/floaty-well-up.png",
+    "w": 24,
+    "h": 11
+  },
+  {
+    "file": "assets/art/effects/floaty-well-down.png",
+    "w": 24,
+    "h": 11
+  },
+  {
+    "file": "assets/art/effects/floaty-up-strip.png",
+    "w": 168,
+    "h": 24,
+    "frames": 6,
+    "frameW": 28,
+    "frameH": 24
+  },
+  {
+    "file": "assets/art/effects/floaty-down-strip.png",
+    "w": 168,
+    "h": 24,
+    "frames": 6,
+    "frameW": 28,
+    "frameH": 24
+  },
+  {
+    "file": "assets/art/effects/payment-envelope.png",
+    "w": 18,
+    "h": 13
+  },
+  {
+    "file": "assets/art/effects/payments-arriving-strip.png",
+    "w": 320,
+    "h": 32,
+    "frames": 8,
+    "frameW": 40,
+    "frameH": 32
+  },
+  {
+    "file": "assets/art/effects/confetti-particles-strip.png",
+    "w": 48,
+    "h": 6,
+    "frames": 8,
+    "frameW": 6,
+    "frameH": 6
+  },
+  {
+    "file": "assets/art/effects/confetti-strip.png",
+    "w": 2560,
+    "h": 180,
+    "frames": 8,
+    "frameW": 320,
+    "frameH": 180
+  },
+  {
+    "file": "assets/art/effects/seed-sprout-bloom-strip.png",
+    "w": 192,
+    "h": 24,
+    "frames": 8,
+    "frameW": 24,
+    "frameH": 24
+  },
+  {
+    "file": "assets/art/events/card-back.png",
+    "w": 120,
+    "h": 136
+  },
+  {
+    "file": "assets/art/effects/card-flip-strip.png",
+    "w": 720,
+    "h": 136,
+    "frames": 6,
+    "frameW": 120,
+    "frameH": 136
+  },
+  {
+    "file": "assets/art/effects/stamp-hit-approve-strip.png",
+    "w": 288,
+    "h": 40,
+    "frames": 6,
+    "frameW": 48,
+    "frameH": 40
+  },
+  {
+    "file": "assets/art/effects/stamp-hit-reject-strip.png",
+    "w": 288,
+    "h": 40,
+    "frames": 6,
+    "frameW": 48,
+    "frameH": 40
+  },
+  {
+    "file": "assets/art/effects/stamp-hit-call-strip.png",
+    "w": 288,
+    "h": 40,
+    "frames": 6,
+    "frameW": 48,
+    "frameH": 40
+  },
+  {
+    "file": "assets/art/effects/rain-layer.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/effects/rain-strip.png",
+    "w": 1280,
+    "h": 180,
+    "frames": 4,
+    "frameW": 320,
+    "frameH": 180
+  },
+  {
+    "file": "assets/art/effects/snow-layer.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/effects/snow-strip.png",
+    "w": 1280,
+    "h": 180,
+    "frames": 4,
+    "frameW": 320,
+    "frameH": 180
+  },
+  {
+    "file": "assets/art/effects/fireworks-window-strip.png",
+    "w": 384,
+    "h": 52,
+    "frames": 8,
+    "frameW": 48,
+    "frameH": 52
+  },
+  {
+    "file": "assets/art/effects/fireworks-big-strip.png",
+    "w": 768,
+    "h": 96,
+    "frames": 8,
+    "frameW": 96,
+    "frameH": 96
+  },
+  {
+    "file": "assets/art/effects/office-upgrade-move-strip.png",
+    "w": 1280,
+    "h": 90,
+    "frames": 8,
+    "frameW": 160,
+    "frameH": 90
+  },
+  {
+    "file": "assets/art/marketing/key-art-640x360.png",
+    "w": 640,
+    "h": 360
+  },
+  {
+    "file": "assets/art/marketing/capsule-small-231x87.png",
+    "w": 231,
+    "h": 87
+  },
+  {
+    "file": "assets/art/marketing/capsule-main-616x353.png",
+    "w": 616,
+    "h": 353
+  },
+  {
+    "file": "assets/art/marketing/capsule-header-460x215.png",
+    "w": 460,
+    "h": 215
+  },
+  {
+    "file": "assets/art/marketing/app-icon-16.png",
+    "w": 16,
+    "h": 16
+  },
+  {
+    "file": "assets/art/marketing/app-icon-32.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/marketing/app-icon-64.png",
+    "w": 64,
+    "h": 64
+  },
+  {
+    "file": "assets/art/marketing/app-icon-128.png",
+    "w": 128,
+    "h": 128
+  },
+  {
+    "file": "assets/art/marketing/app-icon-256.png",
+    "w": 256,
+    "h": 256
+  },
+  {
+    "file": "assets/art/marketing/favicon-32.png",
+    "w": 32,
+    "h": 32
+  },
+  {
+    "file": "assets/art/marketing/trailer-sb-1-knock.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/marketing/trailer-sb-2-reply-all.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/marketing/trailer-sb-3-stamp.png",
+    "w": 320,
+    "h": 180
+  },
+  {
+    "file": "assets/art/marketing/trailer-sb-4-title.png",
+    "w": 320,
+    "h": 180
+  }
+]

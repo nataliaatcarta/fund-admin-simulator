@@ -1,0 +1,674 @@
+[
+  {
+    "file": "assets/art/npcs/margaret/margaret-happy.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "margaret",
+    "state": "happy"
+  },
+  {
+    "file": "assets/art/npcs/margaret/margaret-neutral.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "margaret",
+    "state": "neutral"
+  },
+  {
+    "file": "assets/art/npcs/margaret/margaret-worried.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "margaret",
+    "state": "worried"
+  },
+  {
+    "file": "assets/art/npcs/margaret/margaret-grumpy.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "margaret",
+    "state": "grumpy"
+  },
+  {
+    "file": "assets/art/npcs/ricky/ricky-happy.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "ricky",
+    "state": "happy"
+  },
+  {
+    "file": "assets/art/npcs/ricky/ricky-neutral.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "ricky",
+    "state": "neutral"
+  },
+  {
+    "file": "assets/art/npcs/ricky/ricky-worried.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "ricky",
+    "state": "worried"
+  },
+  {
+    "file": "assets/art/npcs/ricky/ricky-grumpy.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "ricky",
+    "state": "grumpy"
+  },
+  {
+    "file": "assets/art/npcs/priya/priya-happy.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "priya",
+    "state": "happy"
+  },
+  {
+    "file": "assets/art/npcs/priya/priya-neutral.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "priya",
+    "state": "neutral"
+  },
+  {
+    "file": "assets/art/npcs/priya/priya-worried.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "priya",
+    "state": "worried"
+  },
+  {
+    "file": "assets/art/npcs/priya/priya-grumpy.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "priya",
+    "state": "grumpy"
+  },
+  {
+    "file": "assets/art/npcs/dex/dex-happy.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "dex",
+    "state": "happy"
+  },
+  {
+    "file": "assets/art/npcs/dex/dex-neutral.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "dex",
+    "state": "neutral"
+  },
+  {
+    "file": "assets/art/npcs/dex/dex-worried.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "dex",
+    "state": "worried"
+  },
+  {
+    "file": "assets/art/npcs/dex/dex-grumpy.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "dex",
+    "state": "grumpy"
+  },
+  {
+    "file": "assets/art/npcs/ines/ines-happy.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "ines",
+    "state": "happy"
+  },
+  {
+    "file": "assets/art/npcs/ines/ines-neutral.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "ines",
+    "state": "neutral"
+  },
+  {
+    "file": "assets/art/npcs/ines/ines-worried.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "ines",
+    "state": "worried"
+  },
+  {
+    "file": "assets/art/npcs/ines/ines-grumpy.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "ines",
+    "state": "grumpy"
+  },
+  {
+    "file": "assets/art/npcs/brooke/brooke-happy.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "brooke",
+    "state": "happy"
+  },
+  {
+    "file": "assets/art/npcs/brooke/brooke-neutral.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "brooke",
+    "state": "neutral"
+  },
+  {
+    "file": "assets/art/npcs/brooke/brooke-worried.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "brooke",
+    "state": "worried"
+  },
+  {
+    "file": "assets/art/npcs/brooke/brooke-grumpy.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "brooke",
+    "state": "grumpy"
+  },
+  {
+    "file": "assets/art/npcs/margaret/margaret-impressed.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "margaret",
+    "state": "impressed"
+  },
+  {
+    "file": "assets/art/npcs/margaret/margaret-red-pen.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "margaret",
+    "state": "red-pen"
+  },
+  {
+    "file": "assets/art/npcs/margaret/margaret-retirement.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "margaret",
+    "state": "retirement"
+  },
+  {
+    "file": "assets/art/npcs/ricky/ricky-confused.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "ricky",
+    "state": "confused"
+  },
+  {
+    "file": "assets/art/npcs/ricky/ricky-excited.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "ricky",
+    "state": "excited"
+  },
+  {
+    "file": "assets/art/npcs/ricky/ricky-happy-hour.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "ricky",
+    "state": "happy-hour"
+  },
+  {
+    "file": "assets/art/npcs/priya/priya-twitchy.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "priya",
+    "state": "twitchy"
+  },
+  {
+    "file": "assets/art/npcs/priya/priya-cookies.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "priya",
+    "state": "cookies"
+  },
+  {
+    "file": "assets/art/npcs/priya/priya-serious.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "priya",
+    "state": "serious"
+  },
+  {
+    "file": "assets/art/npcs/priya/priya-launch.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "priya",
+    "state": "launch"
+  },
+  {
+    "file": "assets/art/npcs/dex/dex-pitching.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "dex",
+    "state": "pitching"
+  },
+  {
+    "file": "assets/art/npcs/dex/dex-bridge-round.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "dex",
+    "state": "bridge-round"
+  },
+  {
+    "file": "assets/art/npcs/dex/dex-outfit-crypto.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "dex",
+    "state": "outfit-crypto"
+  },
+  {
+    "file": "assets/art/npcs/dex/dex-outfit-ai.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "dex",
+    "state": "outfit-ai"
+  },
+  {
+    "file": "assets/art/npcs/dex/dex-outfit-oat.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "dex",
+    "state": "outfit-oat"
+  },
+  {
+    "file": "assets/art/npcs/ines/ines-shy.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "ines",
+    "state": "shy"
+  },
+  {
+    "file": "assets/art/npcs/ines/ines-laptop.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "ines",
+    "state": "laptop"
+  },
+  {
+    "file": "assets/art/npcs/ines/ines-unicorn.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "ines",
+    "state": "unicorn"
+  },
+  {
+    "file": "assets/art/npcs/brooke/brooke-tapping.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "brooke",
+    "state": "tapping"
+  },
+  {
+    "file": "assets/art/npcs/brooke/brooke-whiteboard.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "brooke",
+    "state": "whiteboard"
+  },
+  {
+    "file": "assets/art/npcs/brooke/brooke-packing.png",
+    "w": 48,
+    "h": 48,
+    "kind": "portrait",
+    "npc": "brooke",
+    "state": "packing"
+  },
+  {
+    "file": "assets/art/npcs/margaret/margaret-talk-strip.png",
+    "w": 192,
+    "h": 48,
+    "kind": "talk-strip",
+    "npc": "margaret",
+    "frames": 4,
+    "frameW": 48,
+    "frameH": 48
+  },
+  {
+    "file": "assets/art/npcs/margaret/margaret-blink-strip.png",
+    "w": 144,
+    "h": 48,
+    "kind": "blink-strip",
+    "npc": "margaret",
+    "frames": 3,
+    "frameW": 48,
+    "frameH": 48
+  },
+  {
+    "file": "assets/art/npcs/ricky/ricky-talk-strip.png",
+    "w": 192,
+    "h": 48,
+    "kind": "talk-strip",
+    "npc": "ricky",
+    "frames": 4,
+    "frameW": 48,
+    "frameH": 48
+  },
+  {
+    "file": "assets/art/npcs/ricky/ricky-blink-strip.png",
+    "w": 144,
+    "h": 48,
+    "kind": "blink-strip",
+    "npc": "ricky",
+    "frames": 3,
+    "frameW": 48,
+    "frameH": 48
+  },
+  {
+    "file": "assets/art/npcs/priya/priya-talk-strip.png",
+    "w": 192,
+    "h": 48,
+    "kind": "talk-strip",
+    "npc": "priya",
+    "frames": 4,
+    "frameW": 48,
+    "frameH": 48
+  },
+  {
+    "file": "assets/art/npcs/priya/priya-blink-strip.png",
+    "w": 144,
+    "h": 48,
+    "kind": "blink-strip",
+    "npc": "priya",
+    "frames": 3,
+    "frameW": 48,
+    "frameH": 48
+  },
+  {
+    "file": "assets/art/npcs/dex/dex-talk-strip.png",
+    "w": 192,
+    "h": 48,
+    "kind": "talk-strip",
+    "npc": "dex",
+    "frames": 4,
+    "frameW": 48,
+    "frameH": 48
+  },
+  {
+    "file": "assets/art/npcs/dex/dex-blink-strip.png",
+    "w": 144,
+    "h": 48,
+    "kind": "blink-strip",
+    "npc": "dex",
+    "frames": 3,
+    "frameW": 48,
+    "frameH": 48
+  },
+  {
+    "file": "assets/art/npcs/ines/ines-talk-strip.png",
+    "w": 192,
+    "h": 48,
+    "kind": "talk-strip",
+    "npc": "ines",
+    "frames": 4,
+    "frameW": 48,
+    "frameH": 48
+  },
+  {
+    "file": "assets/art/npcs/ines/ines-blink-strip.png",
+    "w": 144,
+    "h": 48,
+    "kind": "blink-strip",
+    "npc": "ines",
+    "frames": 3,
+    "frameW": 48,
+    "frameH": 48
+  },
+  {
+    "file": "assets/art/npcs/brooke/brooke-talk-strip.png",
+    "w": 192,
+    "h": 48,
+    "kind": "talk-strip",
+    "npc": "brooke",
+    "frames": 4,
+    "frameW": 48,
+    "frameH": 48
+  },
+  {
+    "file": "assets/art/npcs/brooke/brooke-blink-strip.png",
+    "w": 144,
+    "h": 48,
+    "kind": "blink-strip",
+    "npc": "brooke",
+    "frames": 3,
+    "frameW": 48,
+    "frameH": 48
+  },
+  {
+    "file": "assets/art/npcs/margaret/margaret-sit.png",
+    "w": 56,
+    "h": 66,
+    "kind": "sit",
+    "npc": "margaret",
+    "anchor": "chair-local (4,18): place at chair x+0,y+0 (chair 56x66)"
+  },
+  {
+    "file": "assets/art/npcs/margaret/margaret-stand.png",
+    "w": 48,
+    "h": 80,
+    "kind": "stand",
+    "npc": "margaret"
+  },
+  {
+    "file": "assets/art/npcs/margaret/margaret-walk-strip.png",
+    "w": 192,
+    "h": 80,
+    "kind": "walk-strip",
+    "npc": "margaret",
+    "frames": 4,
+    "frameW": 48,
+    "frameH": 80
+  },
+  {
+    "file": "assets/art/npcs/ricky/ricky-sit.png",
+    "w": 56,
+    "h": 66,
+    "kind": "sit",
+    "npc": "ricky",
+    "anchor": "chair-local (4,18): place at chair x+0,y+0 (chair 56x66)"
+  },
+  {
+    "file": "assets/art/npcs/ricky/ricky-stand.png",
+    "w": 48,
+    "h": 80,
+    "kind": "stand",
+    "npc": "ricky"
+  },
+  {
+    "file": "assets/art/npcs/ricky/ricky-walk-strip.png",
+    "w": 192,
+    "h": 80,
+    "kind": "walk-strip",
+    "npc": "ricky",
+    "frames": 4,
+    "frameW": 48,
+    "frameH": 80
+  },
+  {
+    "file": "assets/art/npcs/priya/priya-sit.png",
+    "w": 56,
+    "h": 66,
+    "kind": "sit",
+    "npc": "priya",
+    "anchor": "chair-local (4,18): place at chair x+0,y+0 (chair 56x66)"
+  },
+  {
+    "file": "assets/art/npcs/priya/priya-stand.png",
+    "w": 48,
+    "h": 80,
+    "kind": "stand",
+    "npc": "priya"
+  },
+  {
+    "file": "assets/art/npcs/priya/priya-walk-strip.png",
+    "w": 192,
+    "h": 80,
+    "kind": "walk-strip",
+    "npc": "priya",
+    "frames": 4,
+    "frameW": 48,
+    "frameH": 80
+  },
+  {
+    "file": "assets/art/npcs/dex/dex-sit.png",
+    "w": 56,
+    "h": 66,
+    "kind": "sit",
+    "npc": "dex",
+    "anchor": "chair-local (4,18): place at chair x+0,y+0 (chair 56x66)"
+  },
+  {
+    "file": "assets/art/npcs/dex/dex-stand.png",
+    "w": 48,
+    "h": 80,
+    "kind": "stand",
+    "npc": "dex"
+  },
+  {
+    "file": "assets/art/npcs/dex/dex-walk-strip.png",
+    "w": 192,
+    "h": 80,
+    "kind": "walk-strip",
+    "npc": "dex",
+    "frames": 4,
+    "frameW": 48,
+    "frameH": 80
+  },
+  {
+    "file": "assets/art/npcs/ines/ines-sit.png",
+    "w": 56,
+    "h": 66,
+    "kind": "sit",
+    "npc": "ines",
+    "anchor": "chair-local (4,18): place at chair x+0,y+0 (chair 56x66)"
+  },
+  {
+    "file": "assets/art/npcs/ines/ines-stand.png",
+    "w": 48,
+    "h": 80,
+    "kind": "stand",
+    "npc": "ines"
+  },
+  {
+    "file": "assets/art/npcs/ines/ines-walk-strip.png",
+    "w": 192,
+    "h": 80,
+    "kind": "walk-strip",
+    "npc": "ines",
+    "frames": 4,
+    "frameW": 48,
+    "frameH": 80
+  },
+  {
+    "file": "assets/art/npcs/brooke/brooke-sit.png",
+    "w": 56,
+    "h": 66,
+    "kind": "sit",
+    "npc": "brooke",
+    "anchor": "chair-local (4,18): place at chair x+0,y+0 (chair 56x66)"
+  },
+  {
+    "file": "assets/art/npcs/brooke/brooke-stand.png",
+    "w": 48,
+    "h": 80,
+    "kind": "stand",
+    "npc": "brooke"
+  },
+  {
+    "file": "assets/art/npcs/brooke/brooke-walk-strip.png",
+    "w": 192,
+    "h": 80,
+    "kind": "walk-strip",
+    "npc": "brooke",
+    "frames": 4,
+    "frameW": 48,
+    "frameH": 80
+  },
+  {
+    "file": "assets/art/npcs/margaret/margaret-entrance-binder.png",
+    "w": 72,
+    "h": 88,
+    "kind": "entrance",
+    "npc": "margaret"
+  },
+  {
+    "file": "assets/art/npcs/ricky/ricky-entrance-peek.png",
+    "w": 72,
+    "h": 88,
+    "kind": "entrance",
+    "npc": "ricky"
+  },
+  {
+    "file": "assets/art/npcs/priya/priya-entrance-sticky-note.png",
+    "w": 72,
+    "h": 88,
+    "kind": "entrance",
+    "npc": "priya"
+  },
+  {
+    "file": "assets/art/npcs/dex/dex-entrance-scooter.png",
+    "w": 72,
+    "h": 88,
+    "kind": "entrance",
+    "npc": "dex"
+  },
+  {
+    "file": "assets/art/npcs/ines/ines-entrance-peek.png",
+    "w": 72,
+    "h": 88,
+    "kind": "entrance",
+    "npc": "ines"
+  },
+  {
+    "file": "assets/art/npcs/brooke/brooke-entrance-barge.png",
+    "w": 72,
+    "h": 88,
+    "kind": "entrance",
+    "npc": "brooke"
+  }
+]

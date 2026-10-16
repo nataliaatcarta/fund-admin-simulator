@@ -1,0 +1,12 @@
+{
+  "name": "fund-admin-simulator-art",
+  "private": true,
+  "type": "module",
+  "description": "Procedural pixel-art generator for the Fund Admin Simulator (style guide: issue #1)",
+  "scripts": {
+    "generate": "node generate.mjs"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas": "0.1.65"
+  }
+}
