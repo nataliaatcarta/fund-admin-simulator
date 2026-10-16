@@ -1,5 +1,7 @@
 # Fund Administration Simulator
 
+https://nataliaatcarta.github.io/fund-admin-simulator/
+
 A cozy-satire job-simulator: you are a General Partner running a small venture firm,
 from a single first-person view of your office. Design: [issue #1](https://github.com/nataliaatcarta/fund-admin-simulator/issues/1).
 
