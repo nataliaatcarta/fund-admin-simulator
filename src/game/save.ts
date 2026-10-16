@@ -5,7 +5,7 @@ export interface SaveMeta { slot: number | "auto"; at: number; label: string; g:
 
 export function writeSave(slot: number | "auto", g: GameState) {
   try {
-    const meta: SaveMeta = { slot, at: Date.now(), label: `${g.player.firm}: Year ${Math.ceil(g.quarter / 4)} Q${((g.quarter - 1) % 4) + 1}, week ${g.week}`, g };
+    const meta: SaveMeta = { slot, at: Date.now(), label: `${g.player.firm}: Year ${Math.ceil(g.quarter / 4)} Q${((g.quarter - 1) % 4) + 1}, day ${g.week}`, g };
     localStorage.setItem(KEY(slot), JSON.stringify(meta));
   } catch { /* storage full or blocked */ }
 }

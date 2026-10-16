@@ -189,7 +189,7 @@ export function SaveLoad({ mode }: { mode: "save" | "load" }) {
       })}
       <BoxText box={[40, 150, 70, 18]} size={26}>Back</BoxText>
       <Hit box={[40, 150, 70, 18]} onClick={back} />
-      {mode === "save" && <At box={[120, 152, 180, 14]} style={{ fontSize: 17, fontWeight: 700, opacity: 0.8 }}>Saves the state at the start of this week.</At>}
+      {mode === "save" && <At box={[120, 152, 180, 14]} style={{ fontSize: 17, fontWeight: 700, opacity: 0.8 }}>Saves the state at the start of today.</At>}
     </div>
   );
 }

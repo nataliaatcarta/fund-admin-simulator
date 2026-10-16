@@ -1,4 +1,4 @@
-import { Achievement, FocusId, NpcId } from "./types";
+import { Achievement, NpcId } from "./types";
 
 export const FUND_SIZE = 20; // $M
 export const INVESTABLE = 16;
@@ -10,19 +10,10 @@ export const MAX_ENERGY = 5;
 export const season = (q: number) => (((q - 1) % 4) + 1) as 1 | 2 | 3 | 4;
 export const year = (q: number) => Math.ceil(q / 4);
 
-export const FOCUS: Record<FocusId, { name: string; blurb: string; icon: string }> = {
-  fundraise: { name: "Fundraise", blurb: "LPs love you this quarter. Reps up, deals slower.", icon: "ui/icons/focus/focus-fundraise.png" },
-  invest: { name: "Invest", blurb: "Pitch Day pays off: more cards, more diligence.", icon: "ui/icons/focus/focus-invest.png" },
-  support: { name: "Support portfolio", blurb: "Founders get your time. Marks drift up.", icon: "ui/icons/focus/focus-support-portfolio.png" },
-  clean: { name: "Clean house", blurb: "Books tidy, Priya relaxes, compliance risk falls.", icon: "ui/icons/focus/focus-clean-house.png" },
-};
-
-export const ACTIONS = {
-  meeting: { name: "Take a meeting", icon: "ui/icons/actions/action-meeting.png", cost: "1–2", blurb: "Someone comes in, or take a video call." },
-  desk: { name: "Desk work", icon: "ui/icons/actions/action-desk-work.png", cost: "1", blurb: "Reports, reviews, and the mini-games." },
-  out: { name: "Go out", icon: "ui/icons/actions/action-go-out.png", cost: "2", blurb: "Conference or dinner. Back with a postcard." },
-  rest: { name: "Rest", icon: "ui/icons/actions/action-rest.png", cost: "0", blurb: "Restores energy. Avoids burnout." },
-} as const;
+/** Energy cost of the things you can do in the office. Mail is free; people who drop by cost their meetingCost. */
+export const COST = { desk: 1, out: 2, break: 1 } as const;
+/** Staying late: extra cups tonight, wellbeing now, one fewer cup tomorrow. */
+export const OVERWORK = { energy: 2, wellbeing: -6 } as const;
 
 export const TRINKETS: Record<string, { name: string; art: string; how: string }> = {
   "fraud-buster-mug": { name: "Fraud Buster mug", art: "props/trinket-fraud-buster-mug.png", how: "Catch every fraudulent wire." },

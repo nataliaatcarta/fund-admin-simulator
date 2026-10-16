@@ -1,5 +1,5 @@
 // Cozy texture: ticker, wrap-up quips, kickoff/report/close lines, desk tasks, going out, invites, cards, endings, tutorial.
-import { Choice, Effects, FocusId, GameEvent, Line, Mood, NpcId } from "../game/types";
+import { Choice, Effects, GameEvent, Line, Mood, NpcId } from "../game/types";
 
 // ------------------------------------------------------------------ ticker
 export const TICKER: string[] = [
@@ -61,15 +61,12 @@ export const FRIDAY_QUIPS: string[] = [
   "Rain on the window, tea on the desk. Not bad.",
 ];
 
-// ------------------------------------------------------------------ kickoff
-export const KICKOFF_INTRO =
-  "Brooke drops into the visitor chair with two coffees and a legal pad. \"New quarter. Pick one thing to be great at. Not four. One. I'll pretend to be flexible.\"";
-
-export const KICKOFF_BROOKE: Record<FocusId, string> = {
-  fundraise: "Fundraise. Fine. Smile at LPs, say 'vintage' a lot, don't promise a unicorn. I'll do the handshakes.",
-  invest: "Invest! Finally. Big swings. Not medium ones. Let me see the Pitch Parade before the founders see me.",
-  support: "Support the portfolio. Nice. Call your founders, sit in on a board meeting, stop Dex from naming a coin.",
-  clean: "Clean house? Boring and correct. Priya will weep with joy. Don't tell her. She'll get ideas.",
+// ------------------------------------------------------------------ quarter hello (Brooke drops by on day 1)
+export const QUARTER_HELLO: Record<1 | 2 | 3 | 4, string> = {
+  1: "Brooke drops by with two coffees. \"New quarter. Twelve days. Capital call, books close on day 10, LP report on day 12. In between: big swings. And go home at night.\"",
+  2: "Brooke drops into the visitor chair. \"Q2. K-1s are out, so LPs are calm. Calm LPs are the best time to make a bold call. I'm just saying things.\"",
+  3: "Brooke arrives with a sun hat. \"Summer quarter. Everyone's at the lake, so the founders who email you now really mean it. Read those ones.\"",
+  4: "Brooke shakes snow off her coat. \"Last quarter of the year. Auditors are sharpening pencils. Keep the books tidy and I'll keep the champagne cold.\"",
 };
 
 // ------------------------------------------------------------------ report reactions
@@ -251,7 +248,7 @@ const inv = (npc: NpcId, n: number, category: GameEvent["category"], subject: st
 export const INVITES: Partial<Record<NpcId, GameEvent[]>> = {
   margaret: [
     inv("margaret", 1, "lp", "Margaret: tea and an itinerary",
-      { default: "Margaret arrives with tea, a notebook and a thermos of 'the good tea'. \"Thank you for the invitation. I've prepared four questions. Two are rhetorical.\"", mood: { happy: "Margaret sits, smiling the smile of a person who has already read your report twice. \"Your invitation was a pleasant surprise. I've brought a pastry.\"", worried: "Margaret sits straight. \"I'm glad you asked. I've been meaning to say something, and have not found the right paragraph.\"" } },
+      { default: "Margaret arrives with tea, a notebook and a thermos of 'the good tea'. \"I was passing by. I've prepared four questions. Two are rhetorical.\"", mood: { happy: "Margaret sits, smiling the smile of a person who has already read your report twice. \"I hope I'm not intruding. I've brought a pastry.\"", worried: "Margaret sits straight. \"I'm glad I caught you. I've been meaning to say something, and have not found the right paragraph.\"" } },
       [
         ch("a", "Pour the tea, ask her about the endowment's year", "She talks for twenty minutes. You learn something real about scholarships. She says: \"You're a rare listener.\"", { rel: { margaret: 5 }, wellbeing: -1 }, "happy"),
         ch("b", "Ask what she'd like to see more of in your reports", "Margaret: \"Footnotes. And a sense of humor, in moderation.\" You write both down.", { rel: { margaret: 4 }, rep: 1, compliance: -2 }, "happy"),
@@ -273,7 +270,7 @@ export const INVITES: Partial<Record<NpcId, GameEvent[]>> = {
   ],
   ricky: [
     inv("ricky", 1, "lp", "Ricky: 'a few questions' (a folder)",
-      { default: "Ricky bursts in with a folder labeled 'QUESTIONS (SMALL)'. It's three inches thick. \"GP! Thanks for the invite! I only have 40.\"", mood: { happy: "Ricky arrives with donuts. \"GP! I'm in a great mood! I told Gary about you! Gary said 'who?'. I'm proud of Gary.\"", worried: "Ricky sits slowly. \"I'm fine. I'm doing great. I've just been up since 4. Is the fund okay? Are we okay?\"" } },
+      { default: "Ricky bursts in with a folder labeled 'QUESTIONS (SMALL)'. It's three inches thick. \"GP! I was in the neighborhood! I only have 40.\"", mood: { happy: "Ricky arrives with donuts. \"GP! I'm in a great mood! I told Gary about you! Gary said 'who?'. I'm proud of Gary.\"", worried: "Ricky sits slowly. \"I'm fine. I'm doing great. I've just been up since 4. Is the fund okay? Are we okay?\"" } },
       [
         ch("a", "Answer his top five, in order", "He writes the answers on the folder. \"THIS IS THE BEST FOLDER.\" He leaves, an inch taller.", { rel: { ricky: 5 }, wellbeing: -2 }, "happy"),
         ch("b", "Let him ask all 40, with donuts", "It takes an hour. Ricky learns what 'pari passu' means and uses it as a greeting for a week.", { rel: { ricky: 6 }, wellbeing: -3, rep: 1 }, "happy"),
@@ -295,7 +292,7 @@ export const INVITES: Partial<Record<NpcId, GameEvent[]>> = {
   ],
   priya: [
     inv("priya", 1, "ops", "Priya: 'the quiet checklist'",
-      { default: "Priya sits with a short list. \"You invited me. I assumed you wanted to hear about the books. I have good news, and also facts.\"", mood: { happy: "Priya sits, with a small, unreadable smile. \"The books are boring. It's the nicest thing I can say about books.\"", worried: "Priya sits, list in hand. \"I'm glad you asked. I've been collecting small concerns. They've begun to cluster.\"" } },
+      { default: "Priya sits with a short list. \"I had a minute. I assumed you'd want to hear about the books. I have good news, and also facts.\"", mood: { happy: "Priya sits, with a small, unreadable smile. \"The books are boring. It's the nicest thing I can say about books.\"", worried: "Priya sits, list in hand. \"Got a minute? I've been collecting small concerns. They've begun to cluster.\"" } },
       [
         ch("a", "Ask what's the one thing that would help most", "Priya: \"Receipts in an envelope. On Fridays. That's all.\" You promise, and surprise yourself by keeping it.", { rel: { priya: 4 }, compliance: -4, setFlags: ["f_priya_receipt_ally"] }),
         ch("b", "Thank her for the quiet work nobody sees", "Priya looks at her hands. \"Thank you.\" It's a tiny, perfect sentence. She leaves, a little lighter.", { rel: { priya: 5 }, wellbeing: 2 }, "happy"),
@@ -317,7 +314,7 @@ export const INVITES: Partial<Record<NpcId, GameEvent[]>> = {
   ],
   dex: [
     inv("dex", 1, "portfolio", "Dex: 'I have a vision'",
-      { default: "Dex arrives on an electric scooter and parks it by the plant. \"GP! Thanks for the invite! I have a vision. It's very vision-y. Please sit.\" You are already sitting.", mood: { happy: "Dex slides in, glowing. \"GP! I have news. It's good. It's also, in some ways, bad. But the good is VERY good.\"", worried: "Dex sits, very quiet for Dex. \"So I did a thing. A small thing. It might be a big thing. I'd like to tell you before Brooke does.\"" } },
+      { default: "Dex arrives on an electric scooter and parks it by the plant. \"GP! Got a sec? I have a vision. It's very vision-y. Please sit.\" You are already sitting.", mood: { happy: "Dex slides in, glowing. \"GP! I have news. It's good. It's also, in some ways, bad. But the good is VERY good.\"", worried: "Dex sits, very quiet for Dex. \"So I did a thing. A small thing. It might be a big thing. I'd like to tell you before Brooke does.\"" } },
       [
         ch("a", "Ask for the vision, then ask for the numbers", "Dex gives the vision. Then the numbers. The numbers are smaller. They are also real. You both feel better.", { rel: { dex: 4 }, compliance: -2, wellbeing: -1 }, "neutral"),
         ch("b", "Cheer him on, and give him one rule: talk to 5 customers", "Dex: \"Five. Love it.\" He writes 'FIVE' on his hand. It rubs off by 2pm. But he does it.", { rel: { dex: 4 }, rep: 1, wellbeing: 1 }, "happy"),
@@ -339,7 +336,7 @@ export const INVITES: Partial<Record<NpcId, GameEvent[]>> = {
   ],
   ines: [
     inv("ines", 1, "portfolio", "Ines: a quiet visit",
-      { default: "Ines peeks in, enters, sits. She says nothing for a minute. It's a comfortable nothing. \"Hi. Thanks for the invite. I don't have much. Just... the desk is nice.\"", mood: { happy: "Ines sits and almost smiles. \"I fixed a bug that's been bothering me for months. I wanted to say it out loud to someone.\"" } },
+      { default: "Ines peeks in, enters, sits. She says nothing for a minute. It's a comfortable nothing. \"Hi. I was nearby. I don't have much. Just... the desk is nice.\"", mood: { happy: "Ines sits and almost smiles. \"I fixed a bug that's been bothering me for months. I wanted to say it out loud to someone.\"" } },
       [
         ch("a", "Sit in silence with her for a minute. Then ask nothing.", "Ines nods. After a long, perfect pause, she says: \"Thanks.\" It's the longest conversation you've had. It's lovely.", { rel: { ines: 5 }, wellbeing: 2 }, "happy"),
         ch("b", "Ask what she's working on, and listen to the whole thing", "She talks for twenty minutes. You understand 20%. You understand her 100%.", { rel: { ines: 4 }, rep: 1, wellbeing: -1 }, "happy"),
@@ -360,7 +357,7 @@ export const INVITES: Partial<Record<NpcId, GameEvent[]>> = {
   ],
   brooke: [
     inv("brooke", 1, "governance", "Brooke: 'make it quick'",
-      { default: "Brooke walks in and takes the good chair. \"You invited me. I've got eleven minutes. I'll use nine.\"", mood: { happy: "Brooke drops in with a big grin. \"You invited me! Good call. I was about to invite myself. Let's talk big swings.\"", grumpy: "Brooke sits, arms crossed. \"Is this a 'we should talk' talk? I hate those. Make it short.\"" } },
+      { default: "Brooke walks in and takes the good chair. \"Got a minute? I've got eleven. I'll use nine.\"", mood: { happy: "Brooke drops in with a big grin. \"I invited myself. Good call, me. Let's talk big swings.\"", grumpy: "Brooke sits, arms crossed. \"Is this a 'we should talk' talk? I hate those. Make it short.\"" } },
       [
         ch("a", "Ask what she wants more of from you", "Brooke blinks. \"...Nobody's ever asked me that.\" She answers, and it's... honest. And short. You're impressed.", { rel: { brooke: 5 }, wellbeing: -1 }, "happy"),
         ch("b", "Lay out your pace for the quarter and ask for a veto", "Brooke: \"Veto? Fine. I'll veto once.\" She does. It's, annoyingly, right.", { rel: { brooke: 3 }, rep: 1, compliance: -2 }),
@@ -513,15 +510,10 @@ export const BURNOUT_LINES: string[] = [
 ];
 
 export const TUTORIAL_TIPS: { id: string; title: string; text: string }[] = [
-  { id: "inbox", title: "The morning inbox", text: "Each week, a few emails, calls and stickies arrive. Open one to read it. Most can be handled right there, for free." },
-  { id: "quick", title: "Quick replies vs meetings", text: "Quick replies take no energy. Meetings bring the person into your office, cost energy and say more. Choose which matter." },
-  { id: "energy", title: "Energy", text: "You have 5 energy a week. Meetings, desk work and going out all spend it. Rest gives it back. Burnout takes it away." },
-  { id: "plan", title: "Planning the week", text: "After the inbox, you plan: meet, work, go out or rest. Not everything fits. That's the game." },
-  { id: "desk", title: "Desk work and 'Just sign it'", text: "Desk items open mini-games like Wire Check. You can always 'Just sign it' for an average result. But a little care often pays off." },
-  { id: "out", title: "Going out", text: "Conferences and dinners cost 2 energy and bring back a postcard, goodwill and sometimes a receipt. Mind the receipt." },
-  { id: "rest", title: "Rest and burnout", text: "Low wellbeing means fewer energy points next week. It never ends the game. Rest early and often." },
-  { id: "close", title: "Quarter close", text: "In weeks 10 and 11, Priya's checklist appears. Skipping items raises hidden compliance risk. Her mood is the hint." },
-  { id: "seeds", title: "Seeds", text: "Some choices plant seeds. They bloom into events quarters later. You won't know which. Be kind, and be careful." },
+  { id: "room", title: "The room is the menu", text: "Click things in the office. The laptop has your mail. The desk has work. The phone gets you out of the office. The window is for a break." },
+  { id: "energy", title: "Coffee cups are energy", text: "Most things cost a cup or two. Mail is free. When the cups run out, the day ends: go home and sleep, or stay late (tomorrow you'll feel it)." },
+  { id: "visitors", title: "People drop by", text: "LPs, founders and your team just show up at the door. Talking costs energy. You can always say 'not now', but people remember." },
+  { id: "learn", title: "Learning the job", text: "Capital calls, wire checks, quarter close and the LP report are the real rhythm of a fund. Hover the stars to see how the fund is doing, and why." },
 ];
 
 // ------------------------------------------------------------------ first close / intro

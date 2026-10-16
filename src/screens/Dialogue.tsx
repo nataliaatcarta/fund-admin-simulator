@@ -1,12 +1,15 @@
 import { useEffect } from "react";
 import { Sprite } from "../engine/Sprite";
 import { sfx } from "../engine/audio";
-import { useTyper } from "../engine/ui";
+import { CupText, useTyper } from "../engine/ui";
 import { NPCS } from "../game/npcs";
 import { SayProps } from "../game/uiStore";
 import { setTalking } from "../game/actions";
-import { A, At, Bg } from "./Frame";
+import { Bg } from "./Frame";
 import { Category, NpcId } from "../game/types";
+
+/** The dialogue box, in stage px. The office raises a seated speaker so they stay visible above it. */
+export const BOX = { x: 150, y: 532, w: 980, h: 168 };
 
 const CAT: Record<string, string> = { portfolio: "portfolio", lp: "lp", ops: "ops", governance: "gov", rival: "rival", market: "market" };
 
@@ -36,31 +39,34 @@ export function Dialogue({ props, done }: { props: SayProps & { category?: strin
   };
   return (
     <div className="abs" style={{ inset: 0, pointerEvents: "none", zIndex: 30 }}>
-      <Sprite src="ui/screens/dialogue-box.png" x={0} y={0} s={A} />
       {illustration && (
         <div className="abs" style={{ left: 28, top: 92, pointerEvents: "none" }}>
           <EventCard art={illustration} category={props.category ?? "lp"} s={1.4} />
         </div>
       )}
-      <At box={[18, 102, 76, 11]} style={{ display: "flex", alignItems: "center", paddingLeft: 12, fontFamily: "var(--font-display)", fontSize: 24, color: "var(--ink)" }}>
+      <div className="panel p-cream slideup" data-hot="" onClick={advance}
+        style={{ position: "absolute", left: BOX.x, top: BOX.y, width: BOX.w, height: BOX.h, borderWidth: 12, borderImageWidth: "12px", padding: "26px 32px 18px", pointerEvents: "auto" }}>
+        <div style={{ fontSize: 22, lineHeight: 1.45, color: "var(--ink)", maxWidth: options?.length ? 520 : undefined }}>{t.shown}</div>
+        {t.done && !options?.length && <span className="abs" style={{ right: 22, bottom: 12, animation: "blink 1s infinite", fontSize: 16, opacity: 0.6 }}>▼</span>}
+      </div>
+      <div className="abs panel p-lav disp" style={{ left: BOX.x + 24, top: BOX.y - 22, height: 40, borderWidth: 12, borderImageWidth: "12px", padding: "0 10px", display: "flex", alignItems: "center", fontSize: 19, color: "var(--ink)" }}>
         {sys ? "Inbox" : NPCS[npc as NpcId].name}
-      </At>
-      <At box={[16, 118, 288, 50]} onClick={advance} style={{ pointerEvents: "auto", padding: "4px 12px", fontSize: 25, lineHeight: 1.25, fontWeight: 700, color: "var(--ink)", overflow: "hidden" }} data-hot="">
-        {t.shown}
-        {t.done && !options?.length && <span className="abs" style={{ right: 16, bottom: 8, animation: "blink 1s infinite", fontSize: 20 }}>▼</span>}
-      </At>
+      </div>
       {t.done && options && options.length > 0 && (
-        <div className="abs col slideup" style={{ left: 150 * A, width: 166 * A, bottom: (180 - 108) * A, gap: 6, pointerEvents: "auto" }}>
+        <div className="abs col slideup" style={{ right: 1280 - (BOX.x + BOX.w) + 20, width: 380, bottom: 720 - BOX.y - BOX.h + 16, gap: 4, pointerEvents: "auto" }}>
           {options.map((o, i) => (
-            <button key={i} className="resp" disabled={o.disabled} onMouseEnter={() => sfx.play("hover")} onClick={() => { sfx.play("click"); done(i); }}>
-              {o.text}
-              {o.hint && <div style={{ fontSize: 17, opacity: 0.7, fontWeight: 400 }}>{o.hint}</div>}
+            <button key={i} className="resp" disabled={o.disabled} onMouseEnter={() => sfx.play("hover")} onClick={() => { sfx.play("click"); done(i); }}
+              style={{ fontSize: 18, lineHeight: 1.25, borderWidth: "12px 12px 12px 36px", borderImageWidth: "12px 12px 12px 36px", padding: "2px 4px" }}>
+              <div className="row" style={{ gap: 10, justifyContent: "space-between" }}>
+                <span>{o.text}</span>
+                {o.hint && <span className="disp" style={{ fontSize: 16, opacity: 0.7, fontWeight: 400, whiteSpace: "nowrap" }}><CupText text={o.hint} /></span>}
+              </div>
             </button>
           ))}
         </div>
       )}
       {/* clicking anywhere also advances */}
-      {!options?.length && <div className="abs" style={{ inset: 0, pointerEvents: "auto" }} onClick={advance} />}
+      {!options?.length && <div className="abs" style={{ inset: 0, pointerEvents: "auto", zIndex: -1 }} onClick={advance} />}
     </div>
   );
 }
