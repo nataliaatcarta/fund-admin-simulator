@@ -9,7 +9,7 @@ import { endOfQuarter } from "./economy";
 import { enter, leave, resetOffice, setTalking } from "./actions";
 import { setOffice, sleep } from "./officeStore";
 import { rng } from "./rng";
-import { writeSave } from "./save";
+import { deleteSave, writeSave } from "./save";
 import { addCompany, applyEffects, clamp, getG, metrics, moodFromRel, useGame } from "./state";
 import { Cancelled, ask, cancelAll, choose, say, toast, useUi } from "./uiStore";
 import { Choice, Company, Effects, GameEvent, GameState, InboxItem, MinigameResult, NpcId } from "./types";
@@ -30,8 +30,12 @@ export function stopRun() {
   resetOffice();
 }
 
+/** Set when a resumed save was made mid-day: playDay skips its morning setup once. */
+let resumeMid = false;
+
 export async function startRun(mode: "new" | "resume") {
   const id = ++runId;
+  resumeMid = mode === "resume" && getG().phase === "day" && !!getG().midDay;
   cancelAll();
   resetOffice();
   useUi.getState().go("game");
@@ -46,6 +50,7 @@ export async function startRun(mode: "new" | "resume") {
 // ------------------------------------------------------------------ campaign
 async function campaign(id: number, mode: "new" | "resume") {
   if (mode === "new") {
+    deleteSave("auto"); // a reload during the intro must not bring back the previous campaign
     await ask("card", { art: "story/intro-lpa-signing.png", title: "Welcome, General Partner", lines: D.INTRO_LPA, button: "Sign it" });
     live(id);
     mutate((g) => { g.phase = "kickoff"; });
@@ -110,6 +115,19 @@ function updateTod() {
 }
 
 async function playDay(id: number, w: number) {
+  const resuming = resumeMid;
+  resumeMid = false;
+  let snap: { rep: number; cash: number; tvpi: number; wellbeing: number };
+  if (resuming) {
+    // reloaded mid-day: the inbox, energy and log are already in the save
+    const m = getG().midDay!;
+    snap = m.snap;
+    doneToday.clear();
+    m.doneToday.forEach((t) => doneToday.add(t));
+    checkpoint = structuredClone(getG());
+    morningVisuals();
+    resetOfficeWeek();
+  } else {
   // checkpoint = start of the day, before the mail is drawn
   mutate((g) => {
     g.week = w; g.phase = "day"; g.inbox = []; g.plan = []; g.log = [];
@@ -121,13 +139,14 @@ async function playDay(id: number, w: number) {
     delete g.flags.tired; delete g.flags.overworked;
     if (g.wellbeing < 12) g.flags.burned_out = true;
     g.weekStats = { spent: 0, resolved: 0 };
+    delete g.midDay;
   });
   checkpoint = structuredClone(getG());
   writeSave("auto", checkpoint);
   if (getG().wellbeing < 25 && hash(w, getG().quarter) % 3 === 0) toast(D.BURNOUT_LINES[hash(w, getG().quarter) % D.BURNOUT_LINES.length] ?? "You are tired.");
 
   const g = getG();
-  const snap = { rep: g.rep, cash: g.cash, tvpi: metrics(g).tvpi, wellbeing: g.wellbeing };
+  snap = { rep: g.rep, cash: g.cash, tvpi: metrics(g).tvpi, wellbeing: g.wellbeing };
   const inbox = drawInbox(g);
   const drop = dropIn(g, inbox);
   if (drop) inbox.push({ uid: `${drop.id}#d${absWeek(g)}`, eventId: drop.id, quarter: g.quarter, week: g.week, status: "new" });
@@ -148,6 +167,7 @@ async function playDay(id: number, w: number) {
   if (call) await deskVisit(id, call.uid, true);
   if (w === 10) await closeVisit(id);
   live(id);
+  }
 
   // visitors arrive at the start of the day and after each thing you do, never on a timer
   let acted = true;
@@ -166,6 +186,7 @@ async function playDay(id: number, w: number) {
     }
     const v = nextVisitor(getG());
     if (v && acted) { acted = false; await visit(id, v); continue; }
+    writeSave("auto", { ...getG(), midDay: { snap, doneToday: [...doneToday] } });
     const a = await ask<DayAction>("day", { visitor: !!v });
     live(id);
     if (a.kind === "end") break;
@@ -195,7 +216,7 @@ async function playDay(id: number, w: number) {
   await sleep(250);
   const g2 = getG();
   const after = metrics(g2);
-  mutate((x) => { x.phase = "night"; });
+  mutate((x) => { x.phase = "night"; delete x.midDay; });
   await ask("night", {
     day: w,
     lines: g2.log.filter((l) => !l.startsWith("Let slide")).slice(-4),

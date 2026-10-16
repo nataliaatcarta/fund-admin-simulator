@@ -1,5 +1,7 @@
 import { create } from "zustand";
 import type { Mood, NpcId } from "./types";
+import { personalize } from "./personalize";
+import { useGame } from "./state";
 
 export type Screen = "title" | "menu" | "newgame" | "game" | "glossary" | "trophies" | "settings" | "saveload" | "credits";
 
@@ -92,7 +94,7 @@ function panels(p: SayProps): SayProps[] {
   const out: SayProps[] = [];
   for (const m of p.text.matchAll(/["“]([^"”]*)["”]|([^"“”]+)/g)) {
     const quoted = m[1] !== undefined;
-    const text = (quoted ? m[1] : m[2]).trim();
+    const text = personalize((quoted ? m[1] : m[2]).trim(), useGame.getState().g.player);
     if (text) out.push({ ...p, text, narration: !quoted, options: undefined });
   }
   if (!out.length) return [p];

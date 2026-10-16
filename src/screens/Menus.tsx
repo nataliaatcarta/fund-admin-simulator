@@ -18,13 +18,19 @@ import { A, At, Bg, BoxText, Hit } from "./Frame";
 // ------------------------------------------------------------------- TITLE
 export function Title() {
   const go = useUi((s) => s.go);
+  /** a save in progress (e.g. after a page reload) picks up right where it was left; otherwise show the menu */
+  const start = () => {
+    const save = latestSave();
+    if (save && save.g.phase !== "ended") { useGame.getState().replace(save.g); startRun("resume"); }
+    else go("menu");
+  };
   useEffect(() => {
-    const k = (e: KeyboardEvent) => { if (e.key === "Enter" || e.key === " ") go("menu"); };
+    const k = (e: KeyboardEvent) => { if (e.key === "Enter" || e.key === " ") start(); };
     window.addEventListener("keydown", k);
     return () => window.removeEventListener("keydown", k);
-  }, [go]);
+  });
   return (
-    <div className="abs" style={{ inset: 0, pointerEvents: "auto" }} onClick={() => { sfx.play("chime"); music.start(); go("menu"); }} data-hot="">
+    <div className="abs" style={{ inset: 0, pointerEvents: "auto" }} onClick={() => { sfx.play("chime"); music.start(); start(); }} data-hot="">
       <Bg src="ui/screens/title-screen.png" />
       <BoxText box={[60, 112, 140, 16]} size={26} style={{ animation: "blink 1.4s infinite" }}>Click to start</BoxText>
       <BoxText box={[4, 168, 60, 10]} size={16} display={false} align="left">v0.1 MVP</BoxText>

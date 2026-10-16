@@ -273,6 +273,8 @@ export interface GameState {
   ending?: "oversubscribed" | "comeback" | "consultant";
   /** weekly bookkeeping */
   weekStats: { spent: number; resolved: number };
+  /** set only in mid-day saves: lets a reload pick the day up where it was left */
+  midDay?: { snap: { rep: number; cash: number; tvpi: number; wellbeing: number }; doneToday: string[] };
   settings: { music: boolean; sfx: boolean; reduceMotion: boolean; bigText: boolean };
 }
 
