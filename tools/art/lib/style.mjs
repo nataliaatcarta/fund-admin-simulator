@@ -517,8 +517,8 @@ const document = { createElement: () => createCanvas(1, 1) };
     day(114, 28, P.approve); day(104, 38, P.call); day(99, 43, P.lavD);
     heart(c, 108, 33, P.heart);
 
-    blob(c, "door-frame", 199, 10, 56, 126, or(rr(0.5, 28, 55, 98, 0), ell(28, 28.5, 27.5, 28)), { fill: P.lavD, hi: P.lavL, lo: P.lavDD, openBottom: true });
-    blob(c, "door", 203, 14, 48, 122, or(rr(0.5, 24, 47, 98, 0), ell(24, 24.5, 23.5, 24)), { fill: P.lav, hi: P.lavL, lo: P.lavD, openBottom: true });
+    blob(c, "door-frame", 199, 10, 56, 126, rr(0.5, 2, 55, 124, 2), { fill: P.lavD, hi: P.lavL, lo: P.lavDD, openBottom: true });
+    blob(c, "door", 203, 14, 48, 122, rr(0.5, 2.5, 47, 120, 1), { fill: P.lav, hi: P.lavL, lo: P.lavD, openBottom: true });
     blob(c, "porthole", 213, 22, 28, 28, ell(14, 14, 13.4, 13.4), { fill: P.trim, hi: P.white, lo: P.lavD });
     blob(c, "porthole-g", 217, 26, 20, 20, ell(10, 10, 9.4, 9.4), { fill: P.blueL, hi: P.white, ol: P.lavDD });
     line(c, 222, 39, 231, 30, "rgba(255,255,255,0.7)"); line(c, 224, 41, 233, 32, "rgba(255,255,255,0.45)");
