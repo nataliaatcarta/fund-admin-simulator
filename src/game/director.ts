@@ -12,7 +12,7 @@ import { rng } from "./rng";
 import { writeSave } from "./save";
 import { addCompany, applyEffects, clamp, getG, metrics, moodFromRel, useGame } from "./state";
 import { Cancelled, ask, cancelAll, choose, say, toast, useUi } from "./uiStore";
-import { Choice, Company, GameEvent, GameState, InboxItem, MinigameResult, NpcId } from "./types";
+import { Choice, Company, Effects, GameEvent, GameState, InboxItem, MinigameResult, NpcId } from "./types";
 import { addTrophies } from "./save";
 
 let runId = 0;
@@ -312,11 +312,7 @@ async function doAction(id: number, a: DayAction) {
     if (!t) return;
     spend(COST.desk);
     doneToday.add(t.id);
-    apply(t.effects);
-    pushLog(t.title);
-    sfx.play("paper");
-    await ask("card", { title: t.title, lines: [t.result], button: "Done", short: true });
-    live(id);
+    await playTask(id, t.id, t.effects);
     return;
   }
   if (a.kind === "out") {
@@ -334,8 +330,7 @@ async function doAction(id: number, a: DayAction) {
   if (a.kind === "break") {
     spend(COST.break);
     setOffice({ mugSipped: false });
-    apply({ wellbeing: 6 });
-    pushLog("Took a real break.");
+    await playTask(id, "rest", { wellbeing: 6 });
     sfx.play("sip");
     toast(BREAKS[hash(g.rngSeed, absWeek(g), g.energy) % BREAKS.length]);
     await sleep(600);
@@ -364,10 +359,10 @@ async function runOut(id: number, outId: string) {
   sfx.play("whoosh");
   for (let f = 0; f <= 1; f += 0.1) { setOffice({ fade: f }); await sleep(40); }
   live(id);
+  const stars = await playTask(id, o.kind === "napa" ? "dinner" : o.kind, o.effects, o.title);
   await ask("postcard", { o });
   live(id);
-  apply({ ...o.effects, rep: (o.effects.rep ?? 0) });
-  pushLog(o.title);
+  void stars;
   mutate((g) => { if (o.napa) g.flags.napa_offsite = true; g.overlay = g.overlay ?? "messy-desk"; });
   for (let f = 1; f >= 0; f -= 0.1) { setOffice({ fade: f }); await sleep(40); }
   setOffice({ fade: 0 });
@@ -505,7 +500,21 @@ export async function playEvent(id: number, ev: GameEvent, uid?: string, cost = 
   await leave(speaker);
 }
 
-export async function playMinigame(id: number, game: "wire-check" | "capital-call" | "pitch-day", context?: Record<string, unknown>, ev?: GameEvent, uid?: string) {
+/** Desk tasks, close items, outings and breaks are all played. Effects scale with the stars you earn. */
+async function playTask(id: number, key: string, fx: Effects, title?: string): Promise<number> {
+  const g = getG();
+  const mod = MINIGAMES["task:" + key];
+  const diff = (1 + (g.quarter >= 3 ? 1 : 0) + (g.quarter >= 6 ? 1 : 0)) as 1 | 2 | 3;
+  const params = { state: g, quarter: g.quarter, week: g.week, difficulty: diff, seed: hash(g.rngSeed, absWeek(g), key.length * 7 + key.charCodeAt(0)), context: { fx } };
+  const result = await ask<MinigameResult>("minigame", { mod, params });
+  live(id);
+  mutate((x) => { x.log.push(`${title ?? mod.title}: ${"★".repeat(result.stars)}${"☆".repeat(3 - result.stars)}`); });
+  apply(result.effects);
+  syncTrophies();
+  return result.stars;
+}
+
+export async function playMinigame(id: number, game: string, context?: Record<string, unknown>, ev?: GameEvent, uid?: string) {
   const g = getG();
   const mod = MINIGAMES[game];
   const diff = (1 + (g.quarter >= 3 ? 1 : 0) + (g.quarter >= 6 ? 1 : 0)) as 1 | 2 | 3;
@@ -549,15 +558,13 @@ async function closeChecklist(id: number) {
   mutate((g) => { g.phase = "close"; });
   const done = await ask<string[]>("close", {});
   live(id);
-  mutate((g) => {
-    g.closeDone = done;
-    for (const it of D.CLOSE_ITEMS) {
-      const took = done.includes(it.id);
-      applyEffects(g, took ? it.done : it.skipped);
-      if (took) g.energy = Math.max(0, g.energy - it.energy);
-    }
-    g.log.push(`Quarter close: ${done.length} of ${D.CLOSE_ITEMS.length} items done.`);
-  });
+  mutate((g) => { g.closeDone = done; });
+  for (const it of D.CLOSE_ITEMS) {
+    if (!done.includes(it.id)) { apply(it.skipped); continue; }
+    mutate((g) => { g.energy = Math.max(0, g.energy - it.energy); });
+    await playTask(id, it.id, it.done, "Close: " + it.title);
+  }
+  mutate((g) => { g.log.push(`Quarter close: ${done.length} of ${D.CLOSE_ITEMS.length} items done.`); });
   syncTrophies();
 }
 

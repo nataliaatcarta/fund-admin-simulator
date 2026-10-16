@@ -35,20 +35,20 @@ export function MinigameHost(p: { mod: MinigameModule; params: MinigameParams; o
         <div className="scrim" style={{ zIndex: 60 }}>
           <div className="abs slideup" style={{ left: 160, top: 40, width: 960, height: 600 }}>
             <Sprite src="mini-games/shared/results-screen-frame.png" x={0} y={0} s={4} />
-            <Txt display size="lg" center x={0} y={60} w={960}>{mod.title}</Txt>
+            <Txt display size="lg" center x={0} y={84} w={960}>{mod.title}</Txt>
             <div className="abs row" style={{ left: 0, top: 120, width: 960, justifyContent: "center" }}>
               <Stars n={result.stars} s={6} />
             </div>
-            <div className="abs col gap8" style={{ left: 130, top: 215, width: 700, height: 230 }}>
-              {result.summary.map((l, i) => <Txt key={i} size="md">• {l}</Txt>)}
+            <div className="abs col" style={{ left: 132, top: 228, width: 440, height: 192 }}>
+              {result.summary.slice(0, 3).map((l, i) => <div key={i} style={{ height: 64, display: "flex", alignItems: "center" }}><div style={{ width: "100%", height: 44, display: "flex", alignItems: "center", background: "#fffdf8", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}><Txt size="md">{l}</Txt></div></div>)}
             </div>
             {result.comment && (
-              <div className="abs row gap16" style={{ left: 130, top: 430, width: 700 }}>
-                <Portrait npc={result.comment.npc} mood={result.comment.mood} s={1.5} />
+              <div className="abs col" style={{ left: 646, top: 244, width: 238, height: 168, background: "#e9e3fa", borderRadius: 6, alignItems: "center", justifyContent: "center", gap: 8, textAlign: "center" }}>
+                <Portrait npc={result.comment.npc} mood={result.comment.mood} s={1.2} />
                 <Txt size="sm"><b>{NPCS[result.comment.npc].short}:</b> “{result.comment.text}”</Txt>
               </div>
             )}
-            <Button color="mint" x={380} y={520} w={200} h={80} onClick={() => onFinish(result)}>Continue</Button>
+            <Button color="mint" x={355} y={473} w={250} h={70} onClick={() => onFinish(result)}>Continue</Button>
           </div>
         </div>
       )}

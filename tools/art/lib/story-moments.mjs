@@ -254,14 +254,24 @@ export function scenes() {
     bands.forEach((b, i) => R(c, 0, i * 20, 320, 20, b));
     const r = rnd(9); for (let i = 0; i < 40; i++) { const x = Math.floor(r() * 320), y = Math.floor(r() * 90); R(c, x, y, 1, 1, P.white); if (i % 5 === 0) star(c, x, y, P.white); }
     oval(c, 250, 16, 36, 36, P.butterL, { lo: P.butter }); oval(c, 262, 14, 30, 30, bands[2], { ol: null, hi: bands[2], lo: bands[2] });
-    for (const [cx, rx, ry, col, y] of [[40, 110, 30, P.lavD, 190], [240, 130, 36, P.lavDD, 196], [150, 160, 22, P.lav, 200]]) B(c, cx - rx, y - ry, rx * 2, ry * 2, ell(rx, ry, rx - 0.5, ry - 0.5), col, {});
-    // tiny office silhouette
-    box(c, 20, 140, 46, 36, P.wall, 2, { hi: P.wallL, lo: P.wallD }); box(c, 26, 146, 12, 10, P.butterL, 1, {}); box(c, 46, 146, 12, 10, P.butterL, 1, {}); box(c, 34, 160, 12, 16, P.lav, 1, {});
-    heart(c, 40, 132, P.heart, true);
-    box(c, 258, 148, 36, 28, P.wall, 2, { hi: P.wallL, lo: P.wallD }); box(c, 264, 154, 10, 8, P.butterL, 1, {}); box(c, 278, 154, 10, 8, P.butterL, 1, {});
-    // text panel
-    c.fillStyle = "rgba(255,253,248,0.55)"; c.fillRect(80, 8, 160, 164);
-    for (let y = 8; y < 172; y += 3) R(c, 80, y, 1, 1, P.pinkD); for (let y = 8; y < 172; y += 3) R(c, 239, y, 1, 1, P.pinkD);
+    // skyline: two layers of rooftops with lit windows, glowing at dusk
+    const skyline = (seed, base, minH, maxH, col, win, step) => {
+      const q = rnd(seed); let x = -4;
+      while (x < 320) {
+        const w = 14 + Math.floor(q() * 14), h = minH + Math.floor(q() * (maxH - minH));
+        R(c, x, base - h, w, h, col);
+        if (q() < 0.4) R(c, x + 2, base - h - 4, w - 4, 4, col);
+        for (let wy = base - h + 5; wy < base - 4; wy += step) for (let wx = x + 3; wx < x + w - 3; wx += 5) if (q() < 0.55) R(c, wx, wy, 2, 3, win);
+        x += w + 1;
+      }
+    };
+    skyline(21, 165, 26, 62, "#a79bd2", "#d9cdf0", 7);
+    skyline(33, 172, 14, 40, "#8d7fc0", P.butterL, 7);
+    R(c, 0, 172, 320, 8, "#7a6cb0");
+    for (let x = 6; x < 320; x += 22) R(c, x, 175, 10, 1, "#9d90cc");
+    // text panel, full height
+    c.fillStyle = "rgba(255,253,248,0.6)"; c.fillRect(80, 0, 160, 180);
+    for (let y = 0; y < 180; y += 3) R(c, 80, y, 1, 1, P.pinkD); for (let y = 0; y < 180; y += 3) R(c, 239, y, 1, 1, P.pinkD);
     for (let i = 0; i < 12; i++) heart(c, [14, 56, 250, 296, 20, 290][i % 6], 30 + i * 12 % 100, i % 2 ? P.pinkL : P.heart, true);
   };
   return out;

@@ -27,7 +27,7 @@ export function Card({ props, done }: { props: { art?: string; title: string; li
         </div>
         <div className="row" style={{ justifyContent: "flex-end", gap: 12 }}>
           {lines.length > 1 && <span style={{ fontSize: 16, opacity: 0.5 }}>{i + 1}/{lines.length}</span>}
-          <Button color="mint" w={180} h={54} size={20} style={{ minWidth: 0, borderWidth: 12, borderImageWidth: "12px" }} onClick={() => (last ? done() : setI(i + 1))}>{last ? button : "Next ▸"}</Button>
+          <Button color="mint" w={180} h={54} size={18} style={{ minWidth: 0, borderWidth: 12, borderImageWidth: "12px" }} onClick={() => (last ? done() : setI(i + 1))}>{last ? button : "Next ▸"}</Button>
         </div>
       </SmallCard>
     </div>
@@ -45,7 +45,7 @@ export function Card({ props, done }: { props: { art?: string; title: string; li
             </div>
             <div className="row" style={{ justifyContent: "flex-end", gap: 12 }}>
               {lines.length > 1 && <Txt size="sm" dim>{i + 1}/{lines.length}</Txt>}
-              <Button color="mint" w={240} h={72} size={26} onClick={() => (last ? done() : setI(i + 1))}>{last ? button : "Next ▸"}</Button>
+              <Button color="mint" w={240} h={72} size={19} onClick={() => (last ? done() : setI(i + 1))}>{last ? button : "Next ▸"}</Button>
             </div>
           </div>
         </div>
@@ -68,7 +68,7 @@ export function Postcard({ props, done }: { props: { o: { title: string; text: s
             <Txt display size="lg">{o.title}</Txt>
             <Txt size="md" style={{ fontWeight: 700 }}>{o.text}</Txt>
           </div>
-          <Button color="mint" w={240} h={72} size={26} onClick={done}>Back to the desk</Button>
+          <Button color="mint" w={240} h={72} size={19} onClick={done}>Back to the desk</Button>
         </div>
       </Panel>
     </div>
@@ -88,8 +88,8 @@ export function Tips({ done }: { done: () => void }) {
             <Txt size="md" style={{ fontWeight: 700, marginTop: 8 }}>{t.text}</Txt>
           </div>
           <div className="row" style={{ justifyContent: "space-between" }}>
-            <Button color="pink" w={200} h={72} size={24} onClick={done}>Skip tips</Button>
-            <Button color="mint" w={240} h={72} size={26} onClick={() => (i >= TUTORIAL_TIPS.length - 1 ? done() : setI(i + 1))}>{i >= TUTORIAL_TIPS.length - 1 ? "Let's go" : "Next ▸"}</Button>
+            <Button color="pink" w={200} h={72} size={18} onClick={done}>Skip tips</Button>
+            <Button color="mint" w={240} h={72} size={19} onClick={() => (i >= TUTORIAL_TIPS.length - 1 ? done() : setI(i + 1))}>{i >= TUTORIAL_TIPS.length - 1 ? "Let's go" : "Next ▸"}</Button>
           </div>
         </div>
       </Panel>

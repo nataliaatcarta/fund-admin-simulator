@@ -321,7 +321,7 @@ export interface MinigameProps {
 }
 
 export interface MinigameModule {
-  id: "wire-check" | "capital-call" | "pitch-day";
+  id: string;
   title: string;
   /** glossary entry unlocked after the first 3-star run */
   glossary: string[];
