@@ -6,7 +6,7 @@ import { TICKER } from "../content/dialogue";
 import { A, At, Box } from "./Frame";
 import { useGame } from "../game/state";
 import { setOffice, useOffice } from "../game/officeStore";
-import { toast, useUi } from "../game/uiStore";
+import { ask, toast, useUi } from "../game/uiStore";
 import { COST, season } from "../game/constants";
 import { EVENT } from "../game/events";
 import type { DayAction } from "../game/director";
@@ -47,6 +47,7 @@ export function Hotspots() {
     { id: "cal", box: [96, 13, 29, 41], label: "Calendar", on: () => toast(`Day ${g.week} of 12. Capital call on day ${callDay}, books close on day 10, LP report on day 12.`) },
     { id: "plant", box: [6, 34, 28, 42], label: "Plant", on: () => { sfx.play("sprout"); toast(g.quarter <= 2 ? "A hopeful sprout." : g.quarter <= 4 ? "Growing nicely." : g.quarter <= 6 ? "Lush and judgmental." : "It flowered. It's proud of you."); } },
     { id: "shelf", box: [35, 55, 51, 20], label: "Shelf", on: () => toast(g.trinkets.length ? `${g.trinkets.length} trinkets earned. See Trophies in the menu.` : "Empty shelf. For now.") },
+    { id: "contacts", box: [172, 146, 20, 22], label: "People I know", on: () => { sfx.play("paper"); void ask("contacts"); } },
     { id: "door", box: [193, 10, 68, 110], label: "Door", on: () => { sfx.play("knock"); toast("People come to you. They always do."); } },
   ];
   return (

@@ -378,7 +378,7 @@ const mod: MinigameModule = {
   skipResult: () => ({
     stars: 2,
     effects: { rel: { brooke: -2 } },
-    summary: ["You just signed it: nobody got funded this time."],
+    summary: ["Skipped: nobody got funded this time."],
     comment: { npc: "brooke", mood: "grumpy", text: "Nobody? Not one? Wow. Okay." },
     data: { investments: [], watchlist: [] },
   }),

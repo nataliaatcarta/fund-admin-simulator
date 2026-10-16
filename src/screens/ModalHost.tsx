@@ -2,6 +2,7 @@ import { useUi } from "../game/uiStore";
 import { Dialogue } from "./Dialogue";
 import { DayOverlay, Inbox, Night, Nightfall, Pick } from "./Day";
 import { Close, Report, Review } from "./Quarter";
+import { Contacts } from "./Contacts";
 import { Card, MinigameModal, Postcard, Tips } from "./Cards";
 
 export function ModalHost() {
@@ -22,6 +23,7 @@ export function ModalHost() {
           case "review": return <Review key={m.id} props={m.props} done={() => d()} />;
           case "card": return <Card key={m.id} props={m.props} done={() => d()} />;
           case "postcard": return <Postcard key={m.id} props={m.props} done={() => d()} />;
+          case "contacts": return <Contacts key={m.id} done={() => d()} />;
           case "tips": return <Tips key={m.id} done={() => d()} />;
           case "minigame": return <MinigameModal key={m.id} props={m.props} done={d} />;
           default: return null;

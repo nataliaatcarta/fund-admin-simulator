@@ -328,6 +328,6 @@ export interface MinigameModule {
   /** glossary entry unlocked after the first 3-star run */
   glossary: string[];
   Component: (p: MinigameProps) => import("react").ReactElement | null;
-  /** "Just sign it": an average result, instant */
+  /** "Skip": an average result, instant */
   skipResult: (p: MinigameParams) => MinigameResult;
 }

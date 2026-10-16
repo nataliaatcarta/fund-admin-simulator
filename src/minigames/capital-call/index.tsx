@@ -597,7 +597,7 @@ const mod: MinigameModule = {
     const call = Math.min(sc.maxCall, Math.round((((sc.goodLo + sc.goodHi) / 2) / STEP)) * STEP);
     const R = rng(params.seed * 31 + 7);
     const res = buildResult(params, sc, call, 0, 2);
-    res.summary = ["You just signed it."];
+    res.summary = ["You skipped the call: average result."];
     res.effects = { ...res.effects, rel: undefined, rep: undefined, compliance: undefined };
     if (R.chance(0.12)) res.effects.setFlags = ["cap_call_errors"];
     return res;
