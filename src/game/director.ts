@@ -1,5 +1,6 @@
 import * as D from "../content/dialogue";
 import { GLOSSARY } from "../content/glossary";
+import { ACT_KEY } from "../content/acts";
 import { MINIGAMES } from "../minigames";
 import { sfx, music } from "../engine/audio";
 import { ACHIEVEMENTS, ALL_NPCS, CORE_NPCS, COST, MAX_ENERGY, OVERWORK, season, year } from "./constants";
@@ -310,9 +311,10 @@ const doneToday = new Set<string>();
 async function doAction(id: number, a: DayAction) {
   const g = getG();
   if (a.kind === "inbox") {
-    const r = await ask<{ desk?: string } | undefined>("inbox", {});
+    const r = await ask<{ desk?: string; act?: { uid: string; idx: number } } | undefined>("inbox", {});
     live(id);
     if (r?.desk) await runDeskItem(id, r.desk);
+    else if (r?.act) await runQuickAct(id, r.act.uid, r.act.idx);
     return;
   }
   if (a.kind === "desk") {
@@ -416,6 +418,36 @@ export function resolveChoice(ev: GameEvent, ch: Choice, uid?: string) {
 
 function syncTrophies() { addTrophies(getG().badges); }
 
+/** Does this choice have work to do (a mini-game) before it resolves? */
+export const hasAct = (ev: GameEvent, ch: Choice) => !!(ACT_KEY[ch.id] ?? ACT_KEY[`${ev.id}.${ch.id}`]);
+
+/** A choice that is a piece of work plays its mini-game first. The stars scale what it pays. Returns the choice to resolve. */
+async function playAct(id: number, ev: GameEvent, ch: Choice): Promise<Choice> {
+  const key = ACT_KEY[ch.id] ?? ACT_KEY[`${ev.id}.${ch.id}`];
+  const mod = key ? MINIGAMES["task:" + key] : undefined;
+  if (!key || !mod) return ch;
+  const g = getG();
+  const diff = (1 + (g.quarter >= 3 ? 1 : 0) + (g.quarter >= 6 ? 1 : 0)) as 1 | 2 | 3;
+  const params = { state: g, quarter: g.quarter, week: g.week, difficulty: diff, seed: hash(g.rngSeed, absWeek(g), key.length * 7 + key.charCodeAt(key.length - 1)), context: { fx: ch.effects } };
+  const result = await ask<MinigameResult>("minigame", { mod, params });
+  live(id);
+  syncTrophies();
+  return { ...ch, effects: result.effects };
+}
+
+/** A quick mail reply that is work: play it, resolve it, then show the reply. */
+async function runQuickAct(id: number, uid: string, idx: number) {
+  const g = getG();
+  const ev = EVENT(g.inbox.find((i) => i.uid === uid)?.eventId ?? "");
+  const ch = ev && visibleChoices(ev, g)[idx];
+  if (!ev || !ch) return;
+  const picked = await playAct(id, ev, ch);
+  resolveChoice(ev, picked, uid);
+  const text = lineText(ch.reply, ev.speaker, getG());
+  if (text) await say({ npc: ev.speaker, mood: ev.speaker === "system" ? undefined : ch.replyMood ?? getG().npcs[ev.speaker].mood, text });
+  live(id);
+}
+
 export function quickReply(uid: string, idx: number) {
   const g = getG();
   const it = g.inbox.find((i) => i.uid === uid);
@@ -511,7 +543,7 @@ export async function playEvent(id: number, ev: GameEvent, uid?: string, cost = 
     first = false;
     const ch = chs[idx] ?? chs[0];
     if (!ch) break;
-    resolveChoice(cur, ch, cur === ev ? uid : undefined);
+    resolveChoice(cur, await playAct(id, cur, ch), cur === ev ? uid : undefined);
     const g3 = getG();
     const reply = lineText(ch.reply, speaker, g3);
     if (reply) await say({ npc: speaker, mood: ch.replyMood ?? g3.npcs[speaker].mood, special: ch.replyPortrait, text: reply });

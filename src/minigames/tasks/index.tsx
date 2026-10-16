@@ -4,7 +4,10 @@ import { rng } from "../../game/rng";
 import { Button, Panel, Txt } from "../../engine/ui";
 import { sfx } from "../../engine/audio";
 import { pointer } from "../../engine/pointer";
-import { Spec, SPECS } from "./specs";
+import { ACT_SPECS } from "../../content/acts";
+import { Spec, SPECS as BASE_SPECS } from "./specs";
+
+const SPECS: Record<string, Spec> = { ...BASE_SPECS, ...ACT_SPECS };
 
 const INK = "#4a3566";
 type Stars = 0 | 1 | 2 | 3;
@@ -32,7 +35,10 @@ const COMMENTS: Record<NpcId, [string, string]> = {
   margaret: ["Hm. I'll read it again myself.", "Precise. I noticed. I always notice."],
   brooke: ["Okay! Learning moment! Great energy though!", "Nailed it! I want that on a mug!"],
   ricky: ["Eh, it's fine. Mostly.", "That was smooth. Dinner's on me."],
-  dex: ["", ""], ines: ["", ""], kenji: ["", ""], chad: ["", ""],
+  finch: ["I will need a larger desk.", "Orderly. I am almost moved."],
+  kenji: ["Noted. For the appendix.", "Delighted. Truly."],
+  lawyer: ["I'll bill the redo. Gently.", "Efficient. Billing 0.1 hours."],
+  dex: ["", ""], ines: ["", ""], chad: ["", ""],
 } as Record<NpcId, [string, string]>;
 
 function buildResult(spec: Spec, params: MinigameParams, acc: number, notes: string[], forced?: Stars): MinigameResult {
@@ -239,6 +245,86 @@ function Breathe({ spec, params, onDone }: MinigameProps & { spec: Extract<Spec,
   );
 }
 
+// ------------------------------------------------------------------ type: write the words yourself
+function Type({ spec, params, onDone }: MinigameProps & { spec: Extract<Spec, { kind: "type" }> }) {
+  const [line, setLine] = useState(0);
+  const [typed, setTyped] = useState("");
+  const [wrong, setWrong] = useState(0);
+  const total = useRef(spec.lines.reduce((a, l) => a + l.length, 0));
+  const state = useRef({ line: 0, typed: "", wrong: 0, done: false });
+  const target = spec.lines[Math.min(line, spec.lines.length - 1)];
+
+  useEffect(() => {
+    const key = (e: KeyboardEvent) => {
+      const st = state.current;
+      if (st.done || e.metaKey || e.ctrlKey || e.altKey) return;
+      const t = spec.lines[st.line];
+      if (e.key === "Backspace") { e.preventDefault(); st.typed = st.typed.slice(0, -1); setTyped(st.typed); return; }
+      if (e.key.length !== 1) return;
+      e.preventDefault();
+      sfx.play("click");
+      st.typed += e.key;
+      setTyped(st.typed);
+      if (st.typed.length < t.length) return;
+      // the line is full: count the slips, move on
+      for (let i = 0; i < t.length; i++) if (st.typed[i].toLowerCase() !== t[i].toLowerCase()) st.wrong++;
+      setWrong(st.wrong);
+      if (st.line + 1 < spec.lines.length) { st.line++; st.typed = ""; setLine(st.line); setTyped(""); return; }
+      st.done = true;
+      const acc = 1 - st.wrong / total.current * 4;
+      const notes = [st.wrong === 0 ? "Not a single typo." : `${st.wrong} slip${st.wrong === 1 ? "" : "s"} along the way.`];
+      setTimeout(() => onDone(buildResult(spec, params, acc, notes)), 450);
+    };
+    window.addEventListener("keydown", key);
+    return () => window.removeEventListener("keydown", key);
+  }, []);
+
+  return (
+    <Frame spec={spec}>
+      <Txt size="sm" dim x={48} y={128} w={600}>Line {Math.min(line + 1, spec.lines.length)} of {spec.lines.length}{wrong ? ` · ${wrong} slip${wrong === 1 ? "" : "s"}` : ""}</Txt>
+      <Panel color="cream" x={120} y={190} w={1040} h={190} pad={28}>
+        <div style={{ fontSize: 34, lineHeight: "50px", color: INK, fontWeight: 700, letterSpacing: 0.5, wordBreak: "break-word", userSelect: "none" }}>
+          {[...target].map((c, i) => {
+            const ok = i < typed.length ? typed[i].toLowerCase() === c.toLowerCase() : null;
+            return <span key={i} style={{ color: ok === null ? "rgba(74,53,102,.45)" : ok ? "#2f9b62" : "#d6453a", background: ok === false ? "#ffd9d4" : i === typed.length ? "#f2d27a" : "transparent", borderRadius: 4, whiteSpace: "pre-wrap" }}>{c}</span>;
+          })}
+        </div>
+      </Panel>
+      <Txt size="md" dim center x={120} y={420} w={1040}>{typed.length ? "Backspace fixes a slip." : "Start typing on your keyboard."}</Txt>
+    </Frame>
+  );
+}
+
+// ------------------------------------------------------------------ order: do the steps in sequence
+function Order({ spec, params, onDone }: MinigameProps & { spec: Extract<Spec, { kind: "order" }> }) {
+  const shuffled = useMemo(() => rng(params.seed).shuffle(spec.steps.map((_, i) => i)), [spec, params.seed]);
+  const [next, setNext] = useState(0);
+  const [mistakes, setMistakes] = useState(0);
+  const [shake, setShake] = useState<number | null>(null);
+  const tap = (i: number) => {
+    if (i < next) return;
+    if (i === next) { sfx.play("good"); setNext(next + 1); return; }
+    sfx.play("buzz"); setMistakes((m) => m + 1); setShake(i); setTimeout(() => setShake(null), 350);
+  };
+  const finish = () => onDone(buildResult(spec, params, 1 - mistakes / spec.steps.length, [mistakes === 0 ? "Every step in the right order." : `${mistakes} wrong tap${mistakes === 1 ? "" : "s"} on the way.`]));
+  return (
+    <Frame spec={spec} onDone={finish} canDone={next >= spec.steps.length} doneLabel="Done ▸">
+      <Txt size="sm" dim x={48} y={128} w={600}>{next} of {spec.steps.length} done</Txt>
+      <div className="abs col" style={{ left: 160, top: 170, width: 960, gap: 12 }}>
+        {shuffled.map((i) => {
+          const done = i < next;
+          return (
+            <div key={i} data-hot onClick={() => tap(i)} style={{ ...chip(false, done ? "#e1f5e8" : "#fffdf6"), fontSize: 24, display: "flex", gap: 14, alignItems: "center", opacity: done ? 0.75 : 1, boxShadow: shake === i ? "0 0 0 4px #e5645a" : done ? "0 0 0 4px #7ed9a4" : "0 2px 0 rgba(120,70,90,.25)" }}>
+              <span className="disp" style={{ width: 34, textAlign: "center", color: done ? "#2f9b62" : "transparent" }}>{done ? i + 1 : "•"}</span>
+              <span>{spec.steps[i]}</span>
+            </div>
+          );
+        })}
+      </div>
+    </Frame>
+  );
+}
+
 // ------------------------------------------------------------------ registry
 function make(key: string): MinigameModule {
   const spec = SPECS[key];
@@ -249,6 +335,8 @@ function make(key: string): MinigameModule {
       case "pick": return <Pick {...p} spec={spec} />;
       case "slider": return <Slider {...p} spec={spec} />;
       case "breathe": return <Breathe {...p} spec={spec} />;
+      case "type": return <Type {...p} spec={spec} />;
+      case "order": return <Order {...p} spec={spec} />;
     }
   };
   return { id: "task:" + key, title: spec.title, glossary: [], Component: Comp, skipResult: (p) => buildResult(spec, p, 0.7, [], 2) };
