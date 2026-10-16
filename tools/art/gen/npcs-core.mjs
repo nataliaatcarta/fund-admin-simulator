@@ -217,7 +217,7 @@ export default async function () {
     // draw a determined face over: re-render head with determined expression
     drawPerson(c, 12, 6 - 1, { ...SPEC.brooke, full: { ...SPEC.brooke.full } }, "determined", { pose: "full", frame: 1 });
     const K = mk(c, 12, 6);
-    PROPS.coffee(K, SKIN.brooke);
+    PROPS.coffeeCarry(K, handSkin("brooke"));
     S.heart(c, 58, 0, P.pinkL, true);
   });
 
