@@ -32,7 +32,7 @@ export function initialState(name = "Alex", firm = "Sunny Side Ventures"): GameS
     quarter: 1, week: 1, phase: "kickoff",
     energy: MAX_ENERGY, maxEnergy: MAX_ENERGY, focus: null,
     rep: 55, compliance: 15, wellbeing: 80, cash: 24,
-    fund, portfolio: [], npcs, flags: {}, seeds: [], inbox: [], plan: [], seen: [],
+    fund, portfolio: [], npcs, flags: {}, seeds: [], inbox: [], plan: [], seen: [], seenAt: {}, weekStats: { spent: 0, resolved: 0 },
     trinkets: [], badges: [], glossary: [], grades: {}, log: [], closeDone: [], history: [],
     tier: 1, rngSeed: (Math.random() * 1e9) | 0,
     settings: { music: true, sfx: true, reduceMotion: false, bigText: false },

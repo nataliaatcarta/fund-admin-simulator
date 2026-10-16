@@ -1,14 +1,20 @@
-import { StrictMode } from "react";
+import { StrictMode, Suspense, lazy } from "react";
 import { createRoot } from "react-dom/client";
 import "./style.css";
 import { Stage } from "./engine/Stage";
 import { DevMinigame } from "./dev";
 
+const Game = lazy(() => import("./game/App"));
+const DevOffice = lazy(() => import("./devOffice"));
+
 function App() {
-  const mg = new URLSearchParams(location.search).get("mg");
+  const q = new URLSearchParams(location.search);
+  const mg = q.get("mg");
   return (
     <Stage>
-      {mg ? <DevMinigame id={mg} /> : <div className="abs" style={{ left: 40, top: 40, color: "#fff", fontSize: 40 }}>Fund Admin Simulator (booting…)</div>}
+      <Suspense fallback={null}>
+        {mg ? <DevMinigame id={mg} /> : q.has("office") ? <DevOffice /> : <Game />}
+      </Suspense>
     </Stage>
   );
 }
