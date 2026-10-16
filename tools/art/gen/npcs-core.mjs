@@ -15,7 +15,7 @@ const NAMES = ["margaret", "ricky", "priya", "dex", "ines", "brooke"];
 const SKIN = { margaret: H.RICKY_SKIN, ricky: H.RICKY_SKIN, priya: SPEC.priya.skin, dex: SPEC.dex.skin, ines: SPEC.ines.skin, brooke: SPEC.brooke.skin };
 const handSkin = n => SKIN[n];
 
-const spec = n => (n === "ricky" ? null : n === "dex" ? H.dexSpec("crypto") : SPEC[n]);
+const spec = n => (n === "ricky" ? null : n === "dex" ? H.dexSpec("dress") : SPEC[n]);
 const SIT_PROP = { margaret: "binderHeld", ricky: "mugCrypto", priya: "clipboard", dex: "energy", ines: "laptopBack", brooke: "coffee" };
 
 /** draw a bust (portrait) for npc at (ox,oy); state is a mood name, a custom expr or Ricky mood. */
@@ -184,8 +184,8 @@ export default async function () {
     S.nb(c, 54, 41, 15, 5, S.rr(0.5, 0.5, 14, 4, 2), { fill: P.lavDD, hi: P.lavD, lo: "#7d6aa8" });
     [[18, 83], [62, 83]].forEach(([x, y]) => { S.nb(c, x - 5, y - 4, 10, 10, S.ell(5, 5, 4.6, 4.6), { fill: P.pinkL, hi: P.white, lo: P.pinkD }); S.R(c, x - 1, y, 2, 2, P.ol); });
     // Dex rides it, leaning in
-    drawPerson(c, 4, 0, H.dexSpec("crypto"), "happy", { pose: "full", frame: 0 });
-    S.nb(c, 40, 36, 20, 12, S.cap(43, 39, 56, 44, 3.4), { fill: P.butter, hi: P.butterL, lo: P.butterD });
+    drawPerson(c, 4, 0, H.dexSpec("dress"), "happy", { pose: "full", frame: 0 });
+    S.nb(c, 40, 36, 20, 12, S.cap(43, 39, 56, 44, 3), { fill: P.skin, hi: P.skinL, lo: P.skinD });
     // cover feet: redraw shoes on deck (overpaint legs bottom)
     S.nb(c, 54, 41, 15, 5, S.rr(0.5, 0.5, 14, 4, 2), { fill: P.lavDD, hi: P.lavD, lo: "#7d6aa8" });
     const K = mk(c, 0, 0);

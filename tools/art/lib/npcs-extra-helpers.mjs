@@ -177,6 +177,23 @@ export function face(c, ox, oy, kind, o = {}) {
     case "satisfied":
       browsFlat(-1); downEyes(); px([[17, 22], [30, 22]], P.olD); s(18, 21, 4, 1, P.olD); blush(true);
       px([[21, 30], [22, 31], [23, 31], [24, 31], [25, 31], [26, 31], [27, 30]], P.olD); break;
+    // ---- personality resting faces
+    case "earnest": // Kenji: eager-to-please little smile, brows lifted
+      s(17, 17, 4, 1, brow); s(27, 17, 4, 1, brow); eyes(); blush(true);
+      px([[21, 30], [22, 31], [23, 31], [24, 31], [25, 31], [26, 30]], P.olD); break;
+    case "stern": // Calloway: low level brows, no blush, flat pressed mouth
+      s(17, 18, 5, 1, brow); s(26, 18, 5, 1, brow); px([[21, 19], [26, 19]], brow);
+      s(19, 20, 2, 3, P.olD); s(27, 20, 2, 3, P.olD); s(19, 20, 1, 1, P.white); s(27, 20, 1, 1, P.white);
+      s(21, 30, 6, 1, P.olD); break;
+    case "eager": // associate: bright open smile, brows up
+      s(17, 16, 4, 1, brow); s(27, 16, 4, 1, brow);
+      [19, 27].forEach(x => { s(x, 19, 2, 4, P.olD); s(x, 19, 1, 1, P.white); s(x + 1, 20, 1, 1, P.white); });
+      blush(true); s(20, 29, 8, 1, P.olD); s(20, 30, 8, 1, P.olD); s(21, 30, 6, 1, P.white); s(21, 31, 6, 1, P.olD); s(22, 31, 4, 1, "#f59bb2"); break;
+    case "smarmy": // lawyer: half-lidded, one-sided closed smile
+      browsFlat(); s(18, 20, 4, 1, P.olD); s(26, 20, 4, 1, P.olD); s(19, 21, 2, 2, P.olD); s(27, 21, 2, 2, P.olD);
+      px([[21, 30], [22, 30], [23, 30], [24, 30], [25, 30], [26, 29], [27, 28]], P.olD); break;
+    case "mild": // Finch: patient auditor, small pursed mouth
+      browsFlat(); eyes(); blush(); s(23, 30, 2, 1, P.olD); break;
     default: throw new Error("unknown face " + kind);
   }
 }
@@ -385,11 +402,11 @@ export const ACCS = {
 /**
  * spec: { head, tone, hair:{style,col}, outfit:{kind,col,opts}, brow, acc:[fn|name], back: fn(c,ox,oy), front: fn(c,ox,oy,mood) }
  */
-export function portrait(c, ox, oy, spec, mood) {
+export function portrait(c, ox, oy, spec, mood, po = {}) {
   const tone = spec.tone || TONES.light;
   if (spec.back) spec.back(c, ox, oy, mood);
   const o = spec.outfit || { kind: "tee", col: CLOTH.pink };
-  OUTFITS[o.kind](c, ox, oy, o.col, tone, o.opts || {});
+  if (!po.noOutfit) OUTFITS[o.kind](c, ox, oy, o.col, tone, o.opts || {});
   head(c, ox, oy, spec.head || "round", tone, { noEars: spec.noEars });
   if (spec.beforeFace) spec.beforeFace(c, ox, oy, mood);
   const kindFace = (spec.faceMap && spec.faceMap[mood]) || mood;
@@ -401,62 +418,89 @@ export function portrait(c, ox, oy, spec, mood) {
 
 // ---------- full-figure sprites (56 x 66; portrait head/torso reused at the same scale) ----------
 export const FIG_W = 56, FIG_H = 66;
-export const limb = (c, x1, y1, x2, y2, r, col) => S.nb(c, Math.min(x1, x2) - r - 1, Math.min(y1, y2) - r - 1, Math.abs(x2 - x1) + 2 * r + 3, Math.abs(y2 - y1) + 2 * r + 3,
-  (x, y) => cap(x1 - (Math.min(x1, x2) - r - 1), y1 - (Math.min(y1, y2) - r - 1), x2 - (Math.min(x1, x2) - r - 1), y2 - (Math.min(y1, y2) - r - 1), r)(x, y), col);
+export const limb = (c, x1, y1, x2, y2, r, col) => {
+  // integer bounding box (blob masks are indexed per pixel); the capsule itself may use fractional ends
+  const bx = Math.floor(Math.min(x1, x2) - r - 1), by = Math.floor(Math.min(y1, y2) - r - 1);
+  const bw = Math.ceil(Math.max(x1, x2) + r + 2) - bx, bh = Math.ceil(Math.max(y1, y2) + r + 2) - by;
+  return S.nb(c, bx, by, bw, bh, cap(x1 - bx, y1 - by, x2 - bx, y2 - by, r), col);
+};
 
 /**
  * pose: "stand" | "seat" | {walk: 0..3} | "lean"
  * spec.legs: {col, shoe}; spec.under: fn(c) drawn before figure (chair, door frame ...); spec.hold: fn(c, ox, oy, pose)
  */
+// torso silhouette in portrait coords: rounded shoulders narrower than the bust, gentle waist, neck on top
+const torsoMask = bottom => or(rr(10.5, 33.5, 27, 9, 5), poly([[11, 38], [37, 38], [35.4, 45], [35.8, bottom], [12.2, bottom], [12.6, 45]]), rects([[19, 29, 10, 8]]));
+/** Render the portrait outfit onto a scratch canvas, cut it to the torso silhouette and re-outline it. */
+function shapedTorso(spec, tone, tcol, bottom) {
+  const { cv, c } = make(48, 66);
+  const o = spec.outfit || { kind: "tee", col: CLOTH.pink };
+  S.nb(c, 8, 42, 32, bottom - 41, rr(0, 0, 32, bottom - 42, 3), { ...tcol }, { openBottom: bottom >= 66 });
+  OUTFITS[o.kind](c, 0, 0, o.col, tone, o.opts || {});
+  const img = c.getImageData(0, 0, 48, 66), d = img.data, M = torsoMask(bottom);
+  const inside = (x, y) => x >= 0 && y >= 0 && x < 48 && y < 66 && d[(y * 48 + x) * 4 + 3] > 0 && M(x + 0.5, y + 0.5);
+  const keep = new Uint8Array(48 * 66);
+  for (let y = 0; y < 66; y++) for (let x = 0; x < 48; x++) keep[y * 48 + x] = inside(x, y) ? 1 : 0;
+  const ol = S.P.ol.match(/\w\w/g).map(h => parseInt(h, 16));
+  for (let y = 0; y < 66; y++) for (let x = 0; x < 48; x++) {
+    const i = (y * 48 + x) * 4;
+    if (!keep[y * 48 + x]) { d[i + 3] = 0; continue; }
+    const k = (xx, yy) => xx >= 0 && yy >= 0 && xx < 48 && yy < 66 && keep[yy * 48 + xx];
+    const edge = !k(x - 1, y) || !k(x + 1, y) || !k(x, y - 1) || (!k(x, y + 1) && y < 65);
+    if (edge && y > 31) { d[i] = ol[0]; d[i + 1] = ol[1]; d[i + 2] = ol[2]; }
+  }
+  c.putImageData(img, 0, 0);
+  return cv;
+}
+
 export function figure(c, ox, oy, spec, mood = "neutral", pose = "stand") {
+  // Chibi full figure (56 x 66): the portrait head at (ox+4, oy), a shaped torso, capsule arms with mitten hands,
+  // tapered legs and rounded shoes. The outfit details come from the portrait outfit, cut to the torso silhouette.
   const tone = spec.tone || TONES.light;
   const o = spec.outfit || { kind: "tee", col: CLOTH.pink };
   const col = o.col;
   const legCol = (spec.legs && spec.legs.col) || CLOTH.suitD;
-  const shoe = (spec.legs && spec.legs.shoe) || { fill: P.ol, hi: P.olD, lo: P.olD };
+  const shoe = (spec.legs && spec.legs.shoe) || { fill: P.olD, hi: P.ol, lo: P.olD };
   const w = typeof pose === "object" ? pose.walk : -1;
-  const bob = w >= 0 && (w === 1 || w === 3) ? 1 : 0;
+  const bob = w === 1 || w === 3 ? 1 : 0;
   const seated = pose === "seat";
   if (spec.under) spec.under(c, ox, oy, pose);
-  const hx = ox + 4, hy = oy + (bob ? 1 : 0);
-  // legs (behind torso)
+  const hx = ox + 4, hy = oy + bob;
+  const tcol = o.kind === "labcoat" ? CLOTH.white : o.kind === "flannel" ? CLOTH.rose : col;
+  const sleeve = o.kind === "vest" ? CLOTH.white : tcol;
+  // legs and shoes (behind the torso)
   if (!seated) {
-    const spread = pose === "lean" ? 0 : 0;
-    const l = [[19, 55 + 0, 19, 62], [35, 55, 35, 62]];
     let dl = 0, dr = 0;
-    if (w === 0) { dl = -3; dr = 3; } else if (w === 2) { dl = 3; dr = -3; }
-    if (pose === "lean") { dl = 4; dr = -2; }
-    [[19, dl], [37, dr]].forEach(([x, d], i) => {
-      const lift = (w === 0 && i === 0) || (w === 2 && i === 1) ? -2 : 0;
-      limb(c, x + d / 2, 52, x + d, 61 + lift, 4, legCol);
-      S.nb(c, x + d - 5, 61 + lift, 11, 5, rr(0, 0, 11, 5, 2), shoe);
+    if (pose === "lean") { dl = 3; dr = -1; }
+    [[23, dl, w === 0 ? -2 : 0], [33, dr, w === 2 ? -2 : 0]].forEach(([x, d, lift], i) => {
+      limb(c, ox + x, oy + 50, ox + x + d, oy + 61 + lift, 3.2, legCol);
+      R(c, ox + x - 2 + d, oy + 52, 1, 7 + lift, legCol.hi);
+      const dir = i ? 1 : -1;
+      S.nb(c, ox + x + d - 6, oy + 58 + lift, 13, 8, or(ell(6.5 + dir, 4.6, 4.6, 2.5), rr(3.5, 2, 6, 3.4, 1.4)), shoe);
     });
+    S.nb(c, ox + 18, oy + 46 + bob, 20, 8, rr(0.5, 0.5, 19, 6.5, 3), legCol); // hips
   }
-  // torso extension below portrait shoulders
-  const bottom = seated ? FIG_H : 55;
-  const tcol = o.kind === "labcoat" ? CLOTH.white : o.kind === "cardigan" ? o.col : o.kind === "flannel" ? CLOTH.rose : o.kind === "vest" ? o.col : col;
-  S.nb(c, ox + 8, oy + 46 + (bob ? 1 : 0), 40, bottom - 46 - (bob ? 1 : 0), rr(0, 0, 40, bottom - 46, 3), { ...tcol }, { openBottom: seated });
-  if (!seated) {
-    if (o.kind === "blazer" || o.kind === "suit") R(c, ox + 28, oy + 47, 1, 8, P.ol);
-    if (o.kind === "hoodie") S.nb(c, ox + 16, oy + 48, 24, 6, rr(0, 0, 24, 6, 2), { fill: col.fill, hi: col.hi, lo: col.lo });
-  }
-  // arms behind portrait body so shoulders overlap
-  if (!seated) {
-    const swing = w === 0 ? 3 : w === 2 ? -3 : 0;
-    if (pose === "lean") {
-      limb(c, ox + 9, oy + 40, ox + 18, oy + 52, 3, col); limb(c, ox + 47, oy + 40, ox + 38, oy + 52, 3, col);
-      S.nb(c, ox + 15, oy + 49, 7, 7, ell(3.5, 3.5, 3.4, 3.4), tone); S.nb(c, ox + 34, oy + 49, 7, 7, ell(3.5, 3.5, 3.4, 3.4), tone);
-    } else {
-      limb(c, ox + 9, oy + 41, ox + 8 - swing, oy + 52 + (bob ? 1 : 0), 3, col); limb(c, ox + 47, oy + 41, ox + 48 + swing, oy + 52 + (bob ? 1 : 0), 3, col);
-      S.nb(c, ox + 4 - swing, oy + 52, 7, 7, ell(3.5, 3.5, 3.4, 3.4), tone, {});
-      S.nb(c, ox + 44 + swing, oy + 52, 7, 7, ell(3.5, 3.5, 3.4, 3.4), tone, {});
-    }
-  }
-  portrait(c, hx, hy, spec, mood);
-  // re-draw portrait body edge below chin handled by portrait; now seated arms/hands on the desk
+  // arms behind the torso so the shoulders overlap them
+  const sw = w === 0 ? 2 : w === 2 ? -2 : 0;
+  const arm = (sx, dir, s, hxx, hyy) => { hxx = Math.round(hxx); hyy = Math.round(hyy);
+    S.nb(c, Math.round(ox + hxx - 4), Math.round(oy + hyy - 4), 9, 9, ell(4, 4, 2.8, 3), tone);
+    limb(c, ox + sx, oy + 39 + bob, ox + hxx + dir * 0.4, oy + hyy - 2.4, 3, sleeve);
+  };
   if (seated) {
-    limb(c, ox + 10, oy + 46, ox + 13, oy + 60, 3, col); limb(c, ox + 46, oy + 46, ox + 43, oy + 60, 3, col);
-    S.nb(c, ox + 9, oy + 58, 7, 7, ell(3.5, 3.5, 3.4, 3.4), tone, { openBottom: true }); S.nb(c, ox + 40, oy + 58, 7, 7, ell(3.5, 3.5, 3.4, 3.4), tone, { openBottom: true });
+    // forearms resting forward on the desk
+    arm(14, -1, 0, 16, 59); arm(42, 1, 0, 40, 59);
+  } else if (pose === "lean") {
+    arm(15, -1, 0, 22, 47); arm(41, 1, 0, 34, 47);
+  } else {
+    arm(15.4, -1, sw, 12.6 + sw * 0.5, 50 + bob - Math.abs(sw) * 0.5);
+    arm(40.6, 1, -sw, 43.4 - sw * 0.5, 50 + bob - Math.abs(sw) * 0.5);
+  }
+  c.drawImage(shapedTorso(spec, tone, tcol, seated ? 66 : 50), hx, hy);
+  portrait(c, hx, hy, spec, mood, { noOutfit: true });
+  if (pose === "lean" || seated) {
+    // hands in front of the torso
+    const hands = seated ? [[16, 59], [40, 59]] : [[22, 47], [34, 47]];
+    hands.forEach(([x, y]) => S.nb(c, ox + x - 4, oy + y - 4, 9, 9, ell(4, 4, 2.8, 3), tone));
   }
   if (spec.hold) spec.hold(c, ox, oy, pose);
 }
