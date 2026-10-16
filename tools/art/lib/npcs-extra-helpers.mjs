@@ -54,9 +54,19 @@ export const HEADS = {
   pointy: [[14, 8, 20, 13], [13, 11, 22, 13], [15, 22, 18, 5], [17, 26, 14, 5], [19, 30, 10, 4]],
   long: [[14, 8, 20, 28], [13, 11, 22, 21]],
   wide: [[14, 8, 20, 12], [11, 11, 26, 18], [13, 27, 22, 6]],
+  // softer, younger face: chin tapers in steps
+  soft: [[14, 8, 20, 22], [12, 11, 24, 17], [13, 27, 22, 4], [15, 30, 18, 3], [17, 32, 14, 2]],
+  // strong square jaw
+  jaw: [[14, 8, 20, 14], [12, 11, 24, 22], [13, 32, 22, 2]],
 };
-const EARY = { round: 17, oval: 17, square: 17, pointy: 17, long: 18, wide: 17 };
-const EARX = { round: [9, 35], oval: [10, 34], square: [9, 35], pointy: [10, 34], long: [10, 34], wide: [7, 37] };
+// bald heads: a rounded dome over a face shape (functions instead of rect lists)
+const HEAD_FN = {
+  // chiselled: rounded crown, wide cheekbones, jawline angling in to a strong chin
+  chisel: or(and(ell(24, 17, 12.4, 9.4), (x, y) => y < 18), poly([[11.6, 17], [36.4, 17], [36.4, 24.6], [30.6, 33.6], [17.4, 33.6], [11.6, 24.6]])),
+  dome: or(rects([[12, 14, 24, 17], [14, 14, 20, 20]]), and(ell(24, 16.4, 12.4, 12.4), (x, y) => y < 18)),
+};
+const EARY = { round: 17, oval: 17, square: 17, pointy: 17, long: 18, wide: 17, soft: 17, jaw: 17, dome: 17, chisel: 17 };
+const EARX = { round: [9, 35], oval: [10, 34], square: [9, 35], pointy: [10, 34], long: [10, 34], wide: [7, 37], soft: [9, 35], jaw: [9, 35], dome: [9, 35], chisel: [9, 35] };
 
 export function head(c, ox, oy, shape = "round", tone = TONES.light, o = {}) {
   const [lx, rx] = EARX[shape], ey = EARY[shape];
@@ -65,7 +75,7 @@ export function head(c, ox, oy, shape = "round", tone = TONES.light, o = {}) {
     paint(c, ox, oy, rects([[rx, ey, 6, 8]]), tone, {});
     R(c, ox + lx + 2, oy + ey + 3, 1, 3, tone.lo); R(c, ox + rx + 3, oy + ey + 3, 1, 3, tone.lo);
   }
-  paint(c, ox, oy, rects(HEADS[shape]), tone);
+  paint(c, ox, oy, HEAD_FN[shape] || rects(HEADS[shape]), tone);
 }
 
 // ---------- faces ----------
@@ -174,11 +184,20 @@ export function face(c, ox, oy, kind, o = {}) {
 // ---------- hair (front layer) ----------
 export const HAIRS = {
   crop: (c, ox, oy, col) => {
-    paint(c, ox, oy, or(rr(12, 4, 24, 12, 5), rects([[12, 10, 4, 10], [32, 10, 4, 10]])), col);
+    // close crop that hugs the skull, crisp hairline with small temple corners
+    const cap0 = and(ell(24, 13.6, 12.8, 7.6), (x, y) => y < 12.2 + (Math.abs(x - 24) > 8 ? 2.6 : 0));
+    paint(c, ox, oy, or(cap0, rr(11.5, 11, 3.2, 7, 1.2), rr(33.3, 11, 3.2, 7, 1.2)), col);
+    dots(c, ox, oy, [[17, 8], [20, 7], [23, 8], [26, 7], [29, 8], [15, 11], [32, 11], [19, 10], [28, 10]], col.lo);
+    R(c, ox + 18, oy + 7, 5, 1, col.hi);
   },
   sidepart: (c, ox, oy, col) => {
-    paint(c, ox, oy, or(rr(12, 3, 24, 11, 5), poly([[12, 8], [30, 8], [23, 13], [12, 19]]), rects([[12, 10, 4, 9], [32, 10, 4, 9]])), col);
-    R(c, ox + 26, oy + 5, 6, 1, col.hi);
+    // neat side part at x=17 with a fringe swept across to the right
+    const cap0 = ell(24, 14, 13, 8.4);
+    const sweep = and(cap0, (x, y) => y < 10.6 + (x - 17) * 0.42 && x > 16.6);
+    const left = and(cap0, (x, y) => y < 12.4 - (x - 12) * 0.3 && x < 17.4);
+    paint(c, ox, oy, or(sweep, left, rr(11.5, 10, 3.4, 9, 1.4), rr(33, 10, 3.4, 8, 1.4)), col);
+    dots(c, ox, oy, [[20, 10], [22, 11], [24, 12], [27, 13], [29, 14], [31, 15]], col.hi);
+    dots(c, ox, oy, [[21, 9], [24, 10], [27, 11], [30, 12], [13, 14]], col.lo);
   },
   long: (c, ox, oy, col) => {
     paint(c, ox, oy, or(and(rr(11, 3, 26, 14, 6), not(poly([[18, 13], [24, 20], [30, 13], [30, 17], [18, 17]]))), rects([[10, 10, 6, 32], [32, 10, 6, 32]])), col);
@@ -204,16 +223,27 @@ export const HAIRS = {
     R(c, ox + 35, oy + 12, 3, 1, P.heart);
   },
   bob: (c, ox, oy, col) => {
-    paint(c, ox, oy, or(and(rr(11, 3, 26, 22, 7), not(rects([[15, 14, 18, 20]]))), rects([[11, 10, 5, 18], [32, 10, 5, 18]])), col);
-    R(c, ox + 20, oy + 4, 3, 1, col.hi);
+    // rounded chin-length bob with a soft swept fringe and the ends tucked under
+    const cap0 = ell(24, 14.4, 13.2, 8.8);
+    const fringe = and(cap0, (x, y) => y < 13.6 - Math.max(0, 22 - x) * 0.28 + Math.sin(x * 1.1) * 0.5);
+    paint(c, ox, oy, or(fringe, rr(10.5, 11, 5.4, 19, 2.6), rr(32.1, 11, 5.4, 19, 2.6)), col);
+    dots(c, ox, oy, [[19, 10], [23, 11], [27, 11], [12, 20], [35, 20], [13, 26], [34, 26]], col.lo);
+    R(c, ox + 18, oy + 7, 6, 1, col.hi); R(c, ox + 11, oy + 14, 1, 6, col.hi);
   },
   bald: (c, ox, oy, col) => {
-    // old-man sides with a shiny top: just side tufts
-    paint(c, ox, oy, rr(12, 12, 5, 10, 2), col); paint(c, ox, oy, rr(31, 12, 5, 10, 2), col);
+    // fluffy little cloud tufts above the ears and three brave strands across the top
+    const tuft = x => or(ell(x, 14.2, 2.7, 3.2), ell(x + (x < 24 ? -0.6 : 0.6), 18.4, 2.3, 2.6), ell(x + (x < 24 ? 1.2 : -1.2), 11.6, 2, 2));
+    paint(c, ox, oy, tuft(13.2), col); paint(c, ox, oy, tuft(34.8), col);
+    dots(c, ox, oy, [[12, 15], [13, 18], [35, 15], [34, 18]], col.lo);
+    dots(c, ox, oy, [[19, 8], [20, 7], [21, 7], [22, 7], [25, 7], [26, 7], [27, 7], [28, 8]], col.lo);
   },
   slick: (c, ox, oy, col) => {
-    paint(c, ox, oy, or(rr(12, 3, 24, 11, 5), rects([[12, 10, 3, 8], [33, 10, 3, 8]])), col);
-    R(c, ox + 16, oy + 5, 12, 1, col.hi); R(c, ox + 18, oy + 8, 10, 1, col.lo);
+    // slicked back with a big glossy front wave (pompadour) and short tapered sides
+    const crown = and(ell(24, 12.6, 13, 7.6), (x, y) => y < 12.2);
+    const wave = or(ell(19.4, 7.6, 7.4, 4.4), ell(28.4, 7, 7.2, 4.6));
+    paint(c, ox, oy, or(crown, wave, rr(11.5, 9, 3, 9, 1.2), rr(33.5, 9, 3, 9, 1.2)), col);
+    R(c, ox + 16, oy + 5, 6, 1, col.hi); R(c, ox + 25, oy + 4, 6, 1, col.hi); R(c, ox + 14, oy + 7, 2, 1, col.hi);
+    dots(c, ox, oy, [[22, 8], [23, 9], [24, 10], [30, 8], [31, 9], [32, 10], [17, 9], [18, 10]], col.lo);
   },
 };
 
@@ -276,7 +306,9 @@ export const OUTFITS = {
     neck(c, ox, oy, tone);
     paint(c, ox, oy, or(poly([[8, 38], [18, 35], [24, 44], [30, 35], [40, 38], [40, 50], [8, 50]]), rects([])), col, { openBottom: true });
     paint(c, ox, oy, poly([[19, 36], [29, 36], [24, 46]]), { fill: P.white, hi: P.white, lo: P.paperD }, { openBottom: true });
-    R(c, ox + 23, oy + 37, 2, 2, o.tie || P.pinkD); R(c, ox + 23, oy + 39, 2, 8, o.tie || P.pinkD); R(c, ox + 24, oy + 40, 1, 7, P.pink);
+    if (o.bow) { // bow tie
+      S.nb(c, ox + 18, oy + 34, 13, 6, or(poly([[0.5, 0.5], [6.5, 2.6], [0.5, 5.5]]), poly([[12.5, 0.5], [6.5, 2.6], [12.5, 5.5]]), ell(6.5, 3, 1.8, 1.8)), { fill: o.tie, hi: P.pinkL, lo: P.pinkD });
+    } else { R(c, ox + 23, oy + 37, 2, 2, o.tie || P.pinkD); R(c, ox + 23, oy + 39, 2, 8, o.tie || P.pinkD); R(c, ox + 24, oy + 40, 1, 7, P.pink); }
     // argyle diamonds
     [[12, 43], [34, 43], [14, 47], [32, 47]].forEach(([x, y]) => { R(c, ox + x, oy + y - 1, 1, 1, P.butterD); R(c, ox + x - 1, oy + y, 3, 1, P.butterD); R(c, ox + x, oy + y + 1, 1, 1, P.butterD); });
     R(c, ox + 9, oy + 44, 1, 1, P.white);

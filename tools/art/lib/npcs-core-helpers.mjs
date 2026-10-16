@@ -2,7 +2,7 @@
 // Face construction copies drawRicky's coordinates (48x48 bust, head x13..35 / y9..33, eyes y20..22, ears y18..24).
 import { createCanvas } from "@napi-rs/canvas";
 import * as S from "./style.mjs";
-const { P, ell, rr, poly, cap, or, and, not } = S;
+const { P, ell, rell, rr, poly, cap, or, and, not } = S;
 
 /** Local coordinate toolbox bound to a canvas + origin. All coords are portrait-space (0..48). */
 export const mk = (c, ox, oy) => {
@@ -108,9 +108,20 @@ function features(K, spec, ex) {
 function headBase(K, spec, ex) {
   const [sk, skD, skL] = spec.skin;
   K.sh([[9, 18, 4, 6]], sk); K.sh([[35, 18, 4, 6]], sk);
-  K.sh([[15, 9, 18, 24], [13, 12, 22, 18]], sk);
+  const inRects = rs => (x, y) => rs.some(([rx, ry, w, h]) => x >= rx && x < rx + w && y >= ry && y < ry + h);
+  if (spec.dome) {
+    // bald: soft-jaw face and a rounded dome drawn as one smooth shape
+    K.B(10, 2, 28, 32, or(inRects([[15, 12, 18, 18], [13, 12, 22, 15], [14, 27, 20, 3], [16, 30, 16, 2], [18, 32, 12, 1]]), and(ell(24, 16, 12.2, 12), (x, y) => y < 18)), { fill: sk, hi: skL, lo: skD });
+    K.R(18, 32, 12, 1, skD);
+  } else if (spec.jaw === "soft") {
+    // younger / rounder face: same cranium and eye line as Ricky, chin tapers in two steps
+    K.sh([[15, 9, 18, 21], [13, 12, 22, 15], [14, 27, 20, 3], [16, 30, 16, 2], [18, 32, 12, 1]], sk);
+    K.R(14, 27, 1, 2, skD); K.R(33, 26, 1, 3, skD); K.R(32, 29, 1, 1, skD); K.R(30, 31, 2, 1, skD); K.R(18, 32, 12, 1, skD);
+  } else {
+    K.sh([[15, 9, 18, 24], [13, 12, 22, 18]], sk);
+    K.R(14, 28, 2, 3, skD); K.R(32, 28, 2, 3, skD); K.R(16, 32, 16, 1, skD);
+  }
   K.R(10, 20, 1, 3, skD); K.R(11, 19, 1, 1, skD); K.R(37, 20, 1, 3, skD); K.R(36, 19, 1, 1, skD);
-  K.R(14, 28, 2, 3, skD); K.R(32, 28, 2, 3, skD); K.R(16, 32, 16, 1, skD);
   K.R(16, 11, 3, 2, skL);
 }
 
@@ -143,25 +154,33 @@ function hairCap(K, h, style) {
 
 /* ------------------------------------------------------------------ outfits (bust) */
 export const OUTFIT_BUST = {
-  cardigan(K, o) { // Margaret: blue cardigan, cream blouse, pearls
+  cardigan(K, o) { // Margaret: blue twin-set cardigan, cream blouse with a round collar, red pen in the pocket
     K.sh([[5, 37, 38, 11], [8, 35, 32, 2]], o.fill); K.R(5, 44, 38, 4, o.lo); K.R(5, 38, 3, 10, o.lo); K.R(40, 38, 3, 10, o.lo);
-    K.R(9, 37, 4, 1, o.hi); K.R(35, 37, 4, 1, o.hi);
-    K.sh([[18, 35, 12, 13]], P.cream); K.R(18, 35, 12, 1, P.white);
-    K.R(23, 40, 1, 8, P.ol); K.px([[23, 42], [23, 45]], P.heart);
-    K.sh([[12, 38, 1, 10]], o.lo); K.R(15, 38, 1, 10, o.lo);
+    K.R(9, 37, 4, 1, o.hi); K.R(35, 37, 4, 1, o.hi); K.R(6, 38, 1, 5, o.hi);
+    K.B(16, 34, 17, 15, poly([[16.5, 35], [31.5, 35], [24, 48.5]]), { fill: P.cream, hi: P.white, lo: P.paperD }, { openBottom: true });
+    [[19, 42], [21, 46], [28, 42], [26, 46]].forEach(([x, y]) => { K.R(x, y, 1, 1, P.white); K.px([[x, y + 1]], o.lo); });
+    for (let x = 7; x < 41; x += 2) if (x < 20 || x > 28) K.R(x, 45, 1, 3, o.fill); // knit rib at the hem
+    K.R(9, 40, 7, 1, o.lo); K.R(9, 41, 7, 1, o.hi); // pocket
+    K.R(11, 37, 1, 4, P.reject); K.R(11, 36, 1, 1, P.pinkL); K.R(12, 38, 1, 1, P.butterD);
   },
   pearls(K) {
-    const pts = [[18, 36], [19, 38], [21, 39], [23, 40], [25, 40], [27, 39], [29, 38], [30, 36]];
-    pts.forEach(([x, y]) => { K.R(x - 1, y - 1, 3, 3, P.white); K.R(x, y, 2, 2, P.paperD); K.R(x - 1, y - 1, 1, 1, P.white); });
-    K.px(pts.map(([x, y]) => [x, y]).slice(0, 0), P.white);
-    K.heart(22, 41, P.pink, true);
+    const pts = [[18, 35], [19, 37], [21, 38], [23, 39], [25, 39], [27, 38], [29, 37], [30, 35]];
+    pts.forEach(([x, y]) => { K.R(x, y, 2, 2, P.white); K.px([[x + 1, y + 1]], P.paperD); });
+    K.heart(22, 40, P.heart, true);
   },
-  cardiganOpen(K, o) { // Priya: mint cardigan over lavender top
+  cardiganOpen(K, o) { // Priya: mint cardigan over a lavender blouse with a little round collar
     K.sh([[5, 37, 38, 11], [8, 35, 32, 2]], o.fill); K.R(5, 44, 38, 4, o.lo); K.R(5, 38, 3, 10, o.lo); K.R(40, 38, 3, 10, o.lo);
-    K.R(9, 37, 4, 1, o.hi); K.R(35, 37, 4, 1, o.hi);
-    K.sh([[17, 35, 14, 13]], P.lav); K.R(17, 35, 14, 1, P.lavL); K.R(20, 35, 8, 2, P.lavD);
-    K.R(18, 38, 1, 10, o.fill); K.R(29, 38, 1, 10, o.fill); // fold
-    [40, 44].forEach(y => { K.R(23, y, 3, 3, P.white); K.R(24, y + 1, 1, 1, P.heart); });
+    K.R(9, 37, 4, 1, o.hi); K.R(35, 37, 4, 1, o.hi); K.R(6, 38, 1, 5, o.hi);
+    K.sh([[17, 35, 14, 13]], P.lav); K.R(17, 35, 14, 1, P.lavL); K.R(29, 38, 2, 10, P.lavD);
+    K.B(16, 33, 9, 6, ell(20.5, 35.5, 4, 2.4), { fill: P.white, hi: P.white, lo: P.paperD });
+    K.B(23, 33, 9, 6, ell(27.5, 35.5, 4, 2.4), { fill: P.white, hi: P.white, lo: P.paperD });
+    K.R(17, 38, 1, 10, P.ol); K.R(30, 38, 1, 10, P.ol); // cardigan edges
+    [40, 43, 46].forEach(y => K.R(24, y, 1, 1, P.lavDD));
+    [41, 45].forEach(y => { K.R(15, y, 1, 1, P.white); K.R(32, y, 1, 1, P.white); });
+    // calculator peeking out of the pocket
+    K.B(34, 38, 7, 8, rr(34.5, 38.5, 6, 7, 1), { fill: P.lavD, hi: P.lavL, lo: P.lavDD });
+    K.R(35, 39, 4, 2, P.glow); K.px([[35, 42], [37, 42], [39, 42]], P.white);
+    K.R(33, 43, 9, 1, P.ol); K.R(33, 44, 9, 3, o.fill); K.R(33, 44, 9, 1, o.hi);
   },
   apron(K, o) { // Dex oat milk apron over a tee
     K.sh([[5, 37, 38, 11], [8, 35, 32, 2]], P.blue); K.R(5, 44, 38, 4, P.blueD); K.R(9, 37, 4, 1, P.blueL); K.R(35, 37, 4, 1, P.blueL);
@@ -169,27 +188,30 @@ export const OUTFIT_BUST = {
     K.R(13, 35, 2, 2, P.ol); K.R(33, 35, 2, 2, P.ol); K.R(10, 40, 4, 1, o.lo); K.R(34, 40, 4, 1, o.lo);
     K.B(20, 40, 8, 7, rr(20.5, 40.5, 7, 6, 1.5), { fill: P.white, hi: P.white, lo: P.keysD }); K.R(21, 42, 6, 1, P.leafD); K.px([[24, 44], [23, 45], [25, 45]], P.butterD);
   },
-  hoodie(K, o) { // Dex: hoodie, hood bunched behind neck, drawstrings
+  hoodie(K, o) { // Dex: hoodie with the hood bunched behind the neck, thin drawstrings, kangaroo pocket
     K.sh([[5, 37, 38, 11], [8, 35, 32, 2]], o.fill); K.R(5, 44, 38, 4, o.lo); K.R(5, 38, 3, 10, o.lo); K.R(40, 38, 3, 10, o.lo);
-    K.R(9, 37, 4, 1, o.hi); K.R(35, 37, 4, 1, o.hi);
-    K.B(13, 31, 22, 9, ell(24, 36, 11, 4.4), { fill: o.lo, hi: o.fill, lo: o.lo });
-    K.sh([[21, 38, 1, 8], [26, 38, 1, 8]], P.white); K.R(21, 45, 1, 2, P.greyD); K.R(26, 45, 1, 2, P.greyD);
-    K.R(16, 44, 16, 1, o.lo); K.px([[15, 43], [32, 43]], o.lo);
+    K.R(9, 37, 4, 1, o.hi); K.R(35, 37, 4, 1, o.hi); K.R(6, 38, 1, 5, o.hi);
+    K.B(12, 31, 24, 9, ell(24, 35.5, 11.4, 4), { fill: o.lo, hi: o.fill, lo: o.lo });
+    K.B(17, 31, 14, 7, ell(24, 34, 6.2, 3), { fill: o.lo, hi: o.lo, lo: o.lo }, { ol: null });
+    [[20, 38, 6], [27, 38, 5]].forEach(([x, y, h]) => { K.R(x, y, 1, h, P.white); K.R(x + 1, y, 1, h, o.lo); K.R(x, y + h, 1, 2, P.lavDD); });
+    K.R(13, 44, 22, 1, o.lo); K.px([[12, 45], [35, 45]], o.lo); K.R(13, 45, 22, 1, o.hi);
   },
-  sweater(K, o) { // Ines: oversized sweater with cuff stripe
+  sweater(K, o) { // Ines: oversized cable-knit sweater with a ribbed mock neck
     K.sh([[4, 37, 40, 11], [8, 35, 32, 2]], o.fill); K.R(4, 44, 40, 4, o.lo); K.R(4, 38, 3, 10, o.lo); K.R(41, 38, 3, 10, o.lo);
-    K.R(9, 37, 4, 1, o.hi); K.R(35, 37, 4, 1, o.hi);
-    K.sh([[18, 34, 12, 3]], o.hi); K.R(18, 34, 12, 1, P.white);
-    [40, 43].forEach(y => K.R(8, y, 32, 1, o.hi)); K.heart(22, 44, P.heart, true);
+    K.R(9, 37, 4, 1, o.hi); K.R(35, 37, 4, 1, o.hi); K.R(5, 38, 1, 5, o.hi);
+    K.B(17, 32, 14, 6, rr(17.5, 32.5, 13, 5, 2), o);
+    for (let x = 19; x < 30; x += 2) K.R(x, 34, 1, 3, o.lo);
+    [12, 36].forEach(x => { for (let y = 39; y < 48; y += 3) { K.px([[x, y], [x + 1, y + 1], [x, y + 2]], o.lo); K.px([[x + 1, y], [x, y + 1], [x + 1, y + 2]], o.hi); } });
+    K.R(20, 41, 9, 1, o.hi); K.heart(22, 43, P.heart, true);
   },
-  blazer(K, o) { // Brooke: shoulder pads, lapels, white shirt
-    K.sh([[2, 36, 44, 12], [6, 34, 36, 2]], o.fill); K.R(2, 44, 44, 4, o.lo); K.R(2, 37, 3, 11, o.lo); K.R(43, 37, 3, 11, o.lo);
-    K.R(7, 35, 5, 1, o.hi); K.R(36, 35, 5, 1, o.hi); K.R(4, 38, 2, 1, o.hi);
-    K.sh([[18, 35, 12, 13]], P.white); K.R(18, 35, 12, 1, P.white);
-    K.sh([[14, 36, 5, 12]], o.fill); K.sh([[29, 36, 5, 12]], o.fill);
-    K.R(15, 37, 1, 6, o.hi); K.R(30, 37, 1, 5, o.hi); K.R(18, 45, 1, 3, o.lo); K.R(29, 45, 1, 3, o.lo);
-    K.R(23, 46, 2, 2, GOLD); K.px([[23, 46]], P.butterL);
-    K.R(11, 37, 1, 10, o.lo);
+  blazer(K, o) { // Brooke: big shoulder pads, sharp notched lapels, white shirt, gold buttons, pocket square
+    K.sh([[2, 36, 44, 12], [5, 34, 38, 2]], o.fill); K.R(2, 44, 44, 4, o.lo); K.R(2, 37, 3, 11, o.lo); K.R(43, 37, 3, 11, o.lo);
+    K.R(6, 35, 7, 1, o.hi); K.R(35, 35, 7, 1, o.hi); K.R(3, 37, 1, 6, o.hi);
+    K.B(17, 33, 14, 16, poly([[17.5, 34.5], [30.5, 34.5], [24, 47]]), { fill: P.white, hi: P.white, lo: P.paperD }, { openBottom: true });
+    K.B(12, 33, 13, 16, poly([[18, 34], [24, 46], [20, 48.6], [13, 41], [16.6, 39.6], [13.6, 36.4]]), { fill: o.hi, hi: P.lavL, lo: o.fill });
+    K.B(23, 33, 13, 16, poly([[30, 34], [24, 46], [28, 48.6], [35, 41], [31.4, 39.6], [34.4, 36.4]]), { fill: o.fill, hi: o.hi, lo: o.lo });
+    K.R(23, 44, 2, 2, GOLD); K.px([[23, 44]], P.butterL); K.R(23, 47, 2, 1, GOLD);
+    K.R(36, 41, 5, 1, o.lo); K.B(36, 38, 5, 4, poly([[36.5, 41.6], [37.6, 38.4], [39, 40], [40.4, 38.4], [40.6, 41.6]]), { fill: P.reject, hi: P.pinkL, lo: P.pinkD }, { ol: null });
   },
 };
 
@@ -247,7 +269,7 @@ export function drawPerson(c, ox, oy, spec, expr = "neutral", o = {}) {
   if (spec.headFn) { spec.headFn(K, c, ox, oy); return; }
   if (o.pose !== "full" && spec.bust.collar) spec.bust.collar(K);
   headBase(K, spec, ex);
-  hairCap(K, spec.hair, spec.hairStyle);
+  if (spec.hairFront) spec.hairFront(K, ex, o); else hairCap(K, spec.hair, spec.hairStyle);
   if (spec.frontHair) spec.frontHair(K, o);
   features(K, spec, ex);
   if (spec.acc) spec.acc(K, ex, o);
@@ -264,28 +286,37 @@ const col = (f, h, l) => ({ fill: f, hi: h, lo: l });
 
 export const SPEC = {};
 
+const MH = { fill: "#e6deef", hi: "#f8f3fc", lo: "#b9aed0" }, MHD = "#9d90b8";
 SPEC.margaret = {
-  skin: skinFair, hair: ["#e6deef", "#f8f3fc", "#b9aed0"], hairStyle: "swept", brow: "#b9aed0", eyeCol: P.blueD, mouthY: 28,
+  skin: skinFair, hair: [MH.fill, MH.hi, MH.lo], brow: MH.lo, eyeCol: P.blueD, mouthY: 28, jaw: "soft", lip: "#e0708e",
   backHair(K) {
-    K.B(16, 0, 16, 12, ell(24, 6.2, 7.6, 6), { fill: "#e6deef", hi: "#f8f3fc", lo: "#b9aed0" });
-    K.R(22, 3, 4, 1, "#b9aed0"); K.R(21, 5, 5, 1, "#b9aed0");
-    K.B(11, 5, 26, 28, rr(11.5, 5.5, 25, 26, 11), { fill: "#e6deef", hi: "#f8f3fc", lo: "#b9aed0" });
-    K.heart(33, 2, P.heart, true); // hair clip heart
+    // a neat silver chignon sitting on top, then a soft rounded set of waves around the head
+    K.B(16, -1, 17, 12, or(ell(24.5, 5, 7.2, 5.2), ell(19, 7, 3, 2.6), ell(30, 7, 3, 2.6)), MH);
+    K.px([[21, 3], [22, 2], [23, 2], [26, 4], [27, 5], [24, 6], [25, 7]], MH.lo);
+    K.B(31, 0, 5, 5, ell(33.5, 2.5, 2, 2), { fill: P.white, hi: P.white, lo: P.paperD }); // pearl hair pin
+    K.B(8, 4, 32, 26, or(ell(24, 17, 14.6, 12.4), ell(12.5, 22, 4, 5.5), ell(35.5, 22, 4, 5.5)), MH);
+    K.px([[11, 14], [10, 17], [11, 20], [37, 14], [38, 17], [37, 20], [12, 25], [36, 25]], MH.lo);
+  },
+  hairFront(K) {
+    // side-swept fringe: deep on the left temple, lifting toward the right, with two soft curls at the temples
+    const fringe = and(ell(24, 15.5, 12.4, 8.6), (x, y) => y < 14.2 - (x - 13) * 0.17 + Math.sin(x * 0.9) * 0.6);
+    K.B(10, 5, 28, 16, or(fringe, ell(14, 16, 2.4, 4.4)), MH);
+    K.px([[17, 11], [18, 12], [19, 12], [22, 10], [23, 11], [24, 11], [28, 9], [29, 10], [14, 15], [14, 18]], MH.lo);
+    K.R(17, 8, 6, 1, MH.hi); K.R(15, 9, 2, 1, MH.hi);
   },
   bust: { kind: "cardigan", ...col(P.blue, P.blueL, P.blueD), over: K => OUTFIT_BUST.pearls(K) },
-  acc(K, ex, o) { // reading glasses; "lowered" pushes them to the nose tip
+  acc(K, ex, o) { // gold cat-eye reading glasses on a chain; "lowered" slides them to the nose tip
     const low = o.glassesLow ? 3 : 0;
     const gy = 19 + low;
-    [17, 26].forEach(x => {
-      K.R(x, gy, 6, 1, GOLD); K.R(x, gy + 5, 6, 1, GOLD); K.R(x, gy + 1, 1, 4, GOLD); K.R(x + 5, gy + 1, 1, 4, GOLD);
-      K.R(x + 1, gy + 1, 4, 4, "rgba(214,233,250,0.55)"); K.R(x + 1, gy + 1, 1, 1, P.white);
+    [17, 26].forEach((x, i) => {
+      K.R(x, gy, 6, 1, GOLD); K.R(x + 1, gy + 4, 4, 1, GOLD); K.R(x, gy + 1, 1, 3, GOLD); K.R(x + 5, gy + 1, 1, 3, GOLD);
+      K.R(x + 1, gy + 1, 4, 3, "rgba(214,233,250,0.5)"); K.R(x + 1, gy + 1, 1, 1, P.white);
+      K.px([[i ? x + 6 : x - 1, gy - 1]], GOLD); // cat-eye flick at the outer corner
     });
-    K.R(23, gy + 2, 3, 1, GOLD);
-    if (!low) { K.px([[16, gy + 1], [32, gy + 1]], GOLD); }
-    // chain
-    K.px([[16, 24 + low], [15, 26 + low]], GOLD); K.px([[32, 24 + low], [33, 26 + low]], GOLD);
-    // wrinkles
-    K.px([[16, 23], [32, 23]], skinFair[1]);
+    K.R(23, gy + 1, 3, 1, GOLD);
+    K.px([[16, gy + 1], [32, gy + 1]], GOLD); // temples
+    K.px([[16, 23], [32, 23]], skinFair[1]); // crow's feet
+    [10, 36].forEach(x => { K.R(x, 24, 2, 2, P.white); K.px([[x + 1, 25]], P.paperD); }); // pearl earrings
   },
   full: {
     outfit: col(P.blue, P.blueL, P.blueD), bodyKind: "skirt", skirt: col(P.lavD, P.lav, P.lavDD),
@@ -294,76 +325,152 @@ SPEC.margaret = {
   },
 };
 
+const hex = c => [1, 3, 5].map(i => parseInt(c.slice(i, i + 2), 16));
+/** Repaint pixels inside pred(x, y) (portrait coords) whose colour is one of pairs' "from" colours. Ignores-transform safe. */
+function recolor(K, pred, pairs) {
+  const { c } = K, m = c.getTransform(), ox = K.ox + m.e, oy = K.oy + m.f; // pixel access ignores the transform (strip frames)
+  const img = c.getImageData(ox, oy, 48, 48), d = img.data, P2 = pairs.map(([f, t]) => [hex(f), hex(t)]);
+  for (let y = 0; y < 48; y++) for (let x = 0; x < 48; x++) {
+    if (!pred(x + 0.5, y + 0.5)) continue;
+    const i = (y * 48 + x) * 4;
+    for (const [f, t] of P2) if (d[i] === f[0] && d[i + 1] === f[1] && d[i + 2] === f[2] && d[i + 3] === 255) { d[i] = t[0]; d[i + 1] = t[1]; d[i + 2] = t[2]; break; }
+  }
+  c.putImageData(img, ox, oy);
+}
+// Priya's vitiligo: lighter, irregular patches (around the left eye, the forehead, a mouth corner, the neck)
+const VIT = ["#f4d6c2", "#e2b49a", "#fdebe0"];
+const BUZZ = ["#c09479", "#a98068", "#cfa489"];
+const VIT_PATCHES = or(
+  ell(17.6, 21.4, 3.6, 3.2), ell(15.4, 24.6, 2.2, 1.8), ell(19.6, 18.2, 1.6, 1.2),
+  rell(29.2, 11.8, 3.6, 2.2, 0.4), ell(32.2, 14.4, 1.4, 1.6), ell(21.6, 7.6, 2.4, 1.6),
+  ell(27.4, 29.6, 2.6, 1.8), ell(30.2, 27.6, 1.2, 1.2),
+  rell(22.4, 34.2, 2.6, 1.6, -0.3), ell(10.6, 21.6, 1.4, 2), ell(37, 19.6, 1, 1.2)
+);
+const PH = { fill: "#7e5040", hi: "#a06c58", lo: "#5c3a2f" };
+// a wavy vertical lock: x0..x1 at the top, the edges ripple with y
+const wavyLock = (x0, x1, y0, y1, ph = 0) => (x, y) => {
+  if (y < y0 || y > y1) return false;
+  const w = Math.sin((y + ph) * 0.62) * 1.1, t = (y - y0) / (y1 - y0);
+  const taper = t > 0.85 ? (t - 0.85) * 14 : 0;
+  return x >= x0 + w + taper * 0.5 && x <= x1 + w - taper * 0.5;
+};
 SPEC.priya = {
-  skin: skinBrown, hair: ["#6e5470", "#8d7392", "#4f3a55"], hairStyle: "bob", brow: "#4f3a55", eyeCol: P.leafD, mouthY: 28, lash: false,
+  skin: skinBrown, hair: [PH.fill, PH.hi, PH.lo], brow: PH.lo, eyeCol: P.leafD, mouthY: 28, lash: true, jaw: "soft",
   backHair(K) {
-    K.B(9, 7, 30, 28, rr(9.5, 7.5, 29, 26, 11), { fill: "#6e5470", hi: "#8d7392", lo: "#4f3a55" });
+    // long, full, wavy hair falling past the shoulders
+    K.B(5, 3, 38, 45, or(ell(24, 15.4, 14.6, 12.2), wavyLock(7.5, 16, 14, 47, 0), wavyLock(32, 40.5, 14, 47, 2)), PH);
   },
-  frontHair(K) {
-    K.B(11, 22, 5, 11, rr(0.5, 0.5, 4, 10, 2), { fill: "#6e5470", hi: "#8d7392", lo: "#4f3a55" });
-    K.B(32, 22, 5, 11, rr(0.5, 0.5, 4, 10, 2), { fill: "#6e5470", hi: "#8d7392", lo: "#4f3a55" });
-    K.px([[34, 30]], "#4f3a55");
+  hairFront(K) {
+    // middle part: two curtain halves sweeping down to the temples, then wavy locks over the shoulders
+    const cap0 = ell(24, 15.2, 12.8, 8.8);
+    const curtL = and(cap0, (x, y) => x < 24 && y < 9.4 + (24 - x) * 0.62);
+    const curtR = and(cap0, (x, y) => x >= 24 && y < 9.4 + (x - 23) * 0.62);
+    K.B(7, 5, 34, 43, or(curtL, curtR, wavyLock(9.5, 15.6, 13, 45, 1), wavyLock(32.4, 38.5, 13, 45, 3)), PH);
+    K.R(23, 8, 1, 2, PH.lo); K.px([[24, 9]], PH.lo); // the part
+    K.px([[19, 10], [17, 11], [15, 13], [28, 10], [30, 11], [32, 13]], PH.hi);
+    [[12, 0], [35, 2]].forEach(([x, ph]) => {
+      for (let y = 18; y < 44; y += 1) { const w = Math.round(Math.sin((y + ph) * 0.62) * 1.1); if (y % 6 === 0) K.px([[x + w, y]], PH.lo); if (y % 6 === 3) K.px([[x + w - 1, y]], PH.hi); }
+    });
   },
   bust: { kind: "cardiganOpen", ...col(P.mint, P.mintL, P.mintD) },
-  acc(K) { K.px([[16, 25]], "#c2876a"); K.R(36, 22, 2, 2, GOLD); K.R(10, 22, 2, 2, GOLD); K.px([[36, 22], [10, 22]], P.butterL); },
+  acc(K) {
+    recolor(K, VIT_PATCHES, [[skinBrown[0], VIT[0]], [skinBrown[1], VIT[1]], [skinBrown[2], VIT[2]]]);
+    // pencil tucked behind the right ear, poking out of the hair
+    K.B(34, 7, 9, 10, cap(35.5, 9, 40.5, 14.5, 1.3), { fill: P.butter, hi: P.butterL, lo: P.butterD });
+    K.R(35, 8, 2, 2, P.pink); K.px([[41, 15]], P.olD);
+  },
   full: {
     outfit: col(P.mint, P.mintL, P.mintD), legs: col(P.lavD, P.lav, P.lavDD), shoes: col(P.white, P.white, P.greyD),
     detail(K, y0) { K.sh([[19, 34 + y0, 10, 20]], P.lav); K.R(23, 36 + y0, 1, 17, P.mintD); [40, 46].forEach(y => { K.R(22, y, 3, 3, P.white); K.R(23, y + 1, 1, 1, P.heart); }); },
   },
 };
 
+const DH = { fill: "#f6d892", hi: "#fff0c4", lo: "#dcb56a" };
+// a long bouncy curl: wavy edges that flare wider toward the ends (volume at the bottom)
+const bouncy = (cx, y0, y1, w0, w1, ph = 0) => (x, y) => {
+  if (y < y0 || y > y1) return false;
+  const t = (y - y0) / (y1 - y0), w = w0 + (w1 - w0) * t + Math.sin((y + ph) * 0.7) * 1.2;
+  const end = t > 0.88 ? (t - 0.88) * 30 : 0;
+  return Math.abs(x - cx - Math.sin((y + ph) * 0.35) * 1.2) <= w - end;
+};
 SPEC.dex = {
-  skin: skinFair, hair: ["#f2cf8a", "#ffe8b0", "#d9ae64"], hairStyle: "messy", brow: "#d9ae64", eyeCol: P.blueD, mouthY: 28,
+  skin: skinFair, hair: [DH.fill, DH.hi, DH.lo], brow: DH.lo, eyeCol: P.blueD, mouthY: 28, jaw: "soft", lash: true,
   backHair(K) {
-    const tuft = (a, b, c2) => poly([a, b, c2]);
-    K.B(6, -2, 36, 30, or(ell(17, 8, 6.5, 5.5), ell(25, 5, 7, 5.5), ell(32, 9, 6, 5.5), ell(24, 16, 12.5, 10), ell(11, 15, 3.4, 5.5), ell(37, 14, 3.4, 5),
-      tuft([12, 8], [8, 0], [18, 5]), tuft([21, 4], [24, -2], [29, 4]), tuft([30, 6], [38, 1], [35, 12]), tuft([10, 14], [6, 10], [12, 9])),
-      { fill: "#f2cf8a", hi: "#ffe8b0", lo: "#d9ae64" });
+    // big, bouncy blonde blowout: lots of volume on top and big curls past the shoulders
+    K.B(2, 1, 44, 47, or(ell(24, 15, 16, 13.4), bouncy(10, 14, 47, 5, 7.4, 0), bouncy(38, 14, 47, 5, 7.4, 2)), DH);
+    K.px([[8, 26], [9, 33], [7, 40], [40, 27], [39, 34], [41, 41]], DH.lo); K.px([[6, 22], [42, 22]], DH.hi);
+  },
+  hairFront(K) {
+    // signature curtain bangs: split in the middle, sweeping out over the brows to the cheekbones
+    const cap0 = ell(24, 15.4, 13.4, 9.4);
+    const bangs = and(cap0, (x, y) => y < 15 + Math.abs(x - 24) * 0.3 && Math.abs(x - 24) > (y - 10.5) * 0.7);
+    const bangL = bangs, bangR = bangs;
+    K.B(5, 5, 38, 43, or(bangL, bangR, bouncy(12, 13, 45, 3.2, 5, 1), bouncy(36, 13, 45, 3.2, 5, 3)), DH);
+    K.px([[21, 12], [19, 13], [17, 15], [27, 12], [29, 13], [31, 15], [22, 10], [26, 10]], DH.lo);
+    K.px([[19, 10], [17, 12], [29, 10], [31, 12], [11, 22], [37, 22], [10, 30], [38, 30]], DH.hi);
+    K.px([[12, 27], [13, 34], [11, 40], [36, 28], [35, 35], [37, 41]], DH.lo);
   },
   bust: { kind: "hoodie", ...col(P.butter, P.butterL, P.butterD) },
-  acc(K) { K.px([[17, 23], [19, 25], [30, 23], [28, 25], [31, 25]], "#e9b793"); },
+  acc(K) {
+    K.px([[17, 24], [18, 25], [16, 25], [30, 24], [31, 25], [29, 25]], "#e9b793"); // freckles
+  },
   full: {
     outfit: col(P.butter, P.butterL, P.butterD), legs: col(P.blueD, P.blue, "#7e9bc9"), shoes: col(P.white, P.white, P.greyD),
     detail(K, y0) { K.R(19, 44, 10, 1, P.butterD); K.sh([[17, 46, 14, 7]], P.butter); K.R(17, 52, 14, 1, P.butterD); K.sh([[21, 34, 1, 8], [26, 34, 1, 8]], P.white); },
   },
 };
 
+const IH = { fill: "#5d5b8a", hi: "#7a78a8", lo: "#47456b" };
+const inesLocks = K => {
+  // long straight locks falling in front of the shoulders, joined to the crown
+  K.B(8, 12, 10, 35, or(rr(8.5, 13, 7.5, 30, 3), poly([[8.5, 38], [16, 38], [15, 46.5], [10.5, 46.5]])), IH);
+  K.B(30, 12, 10, 35, or(rr(32, 13, 7.5, 30, 3), poly([[32, 38], [39.5, 38], [37.5, 46.5], [33, 46.5]])), IH);
+  K.px([[12, 26], [12, 27], [13, 33], [13, 34], [11, 40], [36, 28], [36, 29], [35, 35], [35, 36], [37, 41]], IH.lo);
+  K.R(10, 18, 1, 6, IH.hi); K.R(34, 18, 1, 5, IH.hi);
+};
+const INES_SW = col("#c7c0ec", "#e0dbf8", "#a49ad6");
 SPEC.ines = {
-  skin: skinPale, hair: ["#5d5b8a", "#7a78a8", "#47456b"], hairStyle: "bangs", brow: "#47456b", eyeCol: P.pinkD, mouthY: 28,
-  backHair(K) { K.B(8, 6, 32, 38, rr(8.5, 6.5, 31, 36, 13), { fill: "#5d5b8a", hi: "#7a78a8", lo: "#47456b" }); },
-  frontHair(K) {
-    K.B(9, 24, 6, 20, rr(0.5, 0.5, 5, 19, 2.5), { fill: "#5d5b8a", hi: "#7a78a8", lo: "#47456b" });
-    K.B(33, 24, 6, 20, rr(0.5, 0.5, 5, 19, 2.5), { fill: "#5d5b8a", hi: "#7a78a8", lo: "#47456b" });
+  skin: skinPale, hair: [IH.fill, IH.hi, IH.lo], brow: IH.lo, eyeCol: P.pinkD, mouthY: 28, jaw: "soft", lash: true,
+  backHair(K) { K.B(7, 4, 34, 34, or(ell(24, 16, 15, 12.4), rr(8, 16, 32, 21, 5)), IH); },
+  hairFront(K) {
+    // blunt, slightly uneven bangs that sit just above the brows
+    const bangs = and(ell(24, 15.6, 12.6, 9), (x, y) => y < 15.6 - (Math.floor(x) % 5 === 0 ? 1 : 0));
+    K.B(10, 5, 28, 12, bangs, IH);
+    K.px([[18, 12], [18, 13], [23, 11], [23, 12], [23, 13], [28, 12], [28, 13]], IH.lo); K.R(17, 8, 7, 1, IH.hi); K.R(15, 9, 2, 1, IH.hi);
+    inesLocks(K);
   },
-  bust: { kind: "sweater", ...col("#f9cdb3", "#fde4d3", "#eaa98d") },
-  acc(K, ex, o) { // headphones
-    K.B(10, 1, 28, 20, and(ell(24, 16, 14.5, 14.5), not(ell(24, 16, 12, 12)), (x, y) => y < 17), { fill: P.pinkL, hi: P.white, lo: P.pinkD });
-    K.B(6, 14, 7, 14, rr(6.5, 14.5, 6, 13, 3), { fill: P.pink, hi: P.pinkL, lo: P.pinkD });
-    K.B(35, 14, 7, 14, rr(35.5, 14.5, 6, 13, 3), { fill: P.pink, hi: P.pinkL, lo: P.pinkD });
-    K.heart(8, 19, P.white, true); K.heart(37, 19, P.white, true);
+  bust: { kind: "sweater", ...INES_SW },
+  acc(K, ex, o) { // pink over-ear headphones
+    K.B(9, 1, 30, 18, and(ell(24, 16.5, 14.6, 14), not(ell(24, 16.5, 12.2, 11.6)), (x, y) => y < 16), { fill: P.pinkL, hi: P.white, lo: P.pinkD });
+    [[5, 14], [36, 14]].forEach(([x, y]) => {
+      K.B(x, y, 8, 13, rr(x + 0.5, y + 0.5, 7, 12, 3.4), { fill: P.pink, hi: P.pinkL, lo: P.pinkD });
+      K.B(x + 2, y + 3, 4, 7, rr(x + 2.5, y + 3.5, 3, 6, 1.4), { fill: P.pinkD, hi: P.pinkD, lo: P.pinkD }, { ol: null });
+      K.heart(x + 2, y + 5, P.white, true);
+    });
   },
   full: {
-    outfit: col("#f9cdb3", "#fde4d3", "#eaa98d"), legs: col(P.blueD, P.blue, "#7e9bc9"), shoes: col(P.pinkL, P.white, P.pinkD),
-    detail(K, y0) { K.R(13, 46, 22, 1, "#fde4d3"); K.R(13, 49, 22, 1, "#fde4d3"); K.heart(22, 40, P.heart, true); },
-  },
-  fullOver(K) { // headphones + long hair locks in full pose
-    SPEC.ines.acc(K);
-    K.B(9, 24, 6, 20, rr(0.5, 0.5, 5, 19, 2.5), { fill: "#5d5b8a", hi: "#7a78a8", lo: "#47456b" });
-    K.B(33, 24, 6, 20, rr(0.5, 0.5, 5, 19, 2.5), { fill: "#5d5b8a", hi: "#7a78a8", lo: "#47456b" });
+    outfit: INES_SW, legs: col(P.blueD, P.blue, "#7e9bc9"), shoes: col(P.pinkL, P.white, P.pinkD),
+    detail(K, y0) { K.R(13, 46, 22, 1, INES_SW.hi); K.R(13, 49, 22, 1, INES_SW.hi); K.heart(22, 40, P.heart, true); },
   },
 };
 SPEC.ines.fullOver = K => { SPEC.ines.acc(K); };
-// in full pose the locks must sit over the body: draw via frontHair already (called for both poses).
 
 SPEC.brooke = {
-  skin: skinTan, hair: ["#c26a5a", "#dd8a78", "#9b4d44"], hairStyle: "swept", brow: "#9b4d44", eyeCol: P.leafD, mouthY: 28, lash: true, lip: "#e0507a",
-  backHair(K) { // high ponytail swinging off to the right
-    K.B(28, 1, 18, 28, poly([[30, 3], [38, 1], [45, 8], [46, 20], [43, 28], [40, 20], [37, 12], [31, 9]]), { fill: "#c26a5a", hi: "#dd8a78", lo: "#9b4d44" });
-    K.B(12, 6, 26, 24, rr(12.5, 6.5, 25, 22, 10), { fill: "#c26a5a", hi: "#dd8a78", lo: "#9b4d44" });
-    K.B(30, 4, 5, 5, ell(32.5, 6.5, 2.4, 2.4), { fill: GOLD, hi: P.butterL, lo: "#d9a94e" });
+  skin: skinTan, hair: ["#6b4338", "#8a5848", "#6b4338"], brow: "#6b4338", eyeCol: P.leafD, mouthY: 28, lash: true, lip: "#e0507a", jaw: "soft", dome: true,
+  hairFront(K) {
+    // buzz cut: a soft stubble shadow over the scalp (no shine), crisp hairline, short at the temples
+    const scalp = (x, y) => y < 12.4 + (x < 16 || x > 32 ? 4.2 : 0) + (x < 14.6 || x > 33.4 ? 2.4 : 0) - Math.abs(x - 24) * 0.04;
+    recolor(K, scalp, [[skinTan[0], BUZZ[0]], [skinTan[1], BUZZ[1]], [skinTan[2], BUZZ[2]], [P.white, BUZZ[2]]]);
+    // feathered edge: every other pixel along the hairline
+    recolor(K, (x, y) => !scalp(x, y) && scalp(x, y - 1) && Math.floor(x) % 2 === 0, [[skinTan[0], BUZZ[0]], [skinTan[2], BUZZ[2]]]);
+    K.px([[19, 6], [23, 5], [27, 6], [17, 9], [21, 8], [25, 8], [29, 9], [31, 11]], BUZZ[1]);
   },
-  bust: { kind: "blazer", ...col(P.lavDD, P.lavD, "#7d6aa8") },
-  acc(K) { K.R(10, 24, 2, 3, GOLD); K.R(36, 24, 2, 3, GOLD); K.px([[10, 24], [36, 24]], P.butterL); },
+  bust: { kind: "blazer", ...col(P.lavDD, P.lavD, "#7d6aa8"), over: K => { K.R(19, 35, 10, 1, GOLD); K.px([[20, 36], [27, 36], [23, 36], [24, 36]], GOLD); K.px([[21, 35], [25, 35]], P.butterL); K.R(23, 37, 2, 2, GOLD); K.px([[23, 37]], P.butterL); } },
+  acc(K) {
+    // statement gold: big hoops and a little cuff climbing the right ear
+    [11, 37].forEach(cx => K.B(cx - 4, 24, 9, 10, and(ell(cx, 28.6, 3.6, 3.9), not(ell(cx, 28.6, 2.3, 2.6))), { fill: GOLD, ol: "#c9973f" })); [11, 37].forEach(cx => K.px([[cx - 3, 27], [cx - 2, 25]], P.butterL));
+    K.px([[37, 18], [38, 19], [38, 21]], GOLD); K.px([[37, 19]], P.butterL);
+  },
   full: {
     outfit: col(P.lavDD, P.lavD, "#7d6aa8"), legs: col("#7d6aa8", P.lavDD, "#665590"), shoes: col(P.reject, P.pinkL, P.pinkD), bodyKind: "heels",
     detail(K, y0) { K.sh([[19, 34 + y0, 10, 12]], P.white); K.sh([[14, 36 + y0, 5, 18]], P.lavDD); K.sh([[29, 36 + y0, 5, 18]], P.lavDD); K.R(23, 48, 2, 2, GOLD); },

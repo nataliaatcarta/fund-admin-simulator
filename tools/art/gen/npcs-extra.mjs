@@ -103,59 +103,120 @@ function suitcase(c, x, y, wob = 0) {
 
 // ---------------------------------------------------------------- character specs
 const grey = HAIR.grey;
+const { paint } = H;
+const px = (c, ox, oy, pts, col) => dots(c, ox, oy, pts, col);
+const brows = (c, ox, oy, col, thick = 2) => { R(c, ox + 16, oy + 17, 6, thick, col); R(c, ox + 26, oy + 17, 6, thick, col); };
+const SILVER = { fill: "#ece6f2", hi: P.white, lo: "#c4b9cb" };
 const SPECS = {
   finch: {
-    head: "oval", tone: TONES.fair, brow: P.greyD,
-    hair: { style: "bald", col: grey },
-    outfit: { kind: "vest", col: CLOTH.leaf, opts: { tie: P.pinkD } },
+    // kindly owl of an auditor: shiny dome, cloud-puff tufts, bushy brows, little round specs, walrus moustache, bow tie
+    head: "dome", tone: TONES.fair, brow: P.greyD,
+    hair: { style: "none" },
+    outfit: { kind: "vest", col: CLOTH.leaf, opts: { tie: P.reject, bow: true } },
     acc: [(c, ox, oy) => {
-      // little round glasses, gold rims + wispy white tuft on top
+      R(c, ox + 18, oy + 7, 4, 1, P.white); R(c, ox + 17, oy + 8, 2, 1, "#fff3ea"); // scalp shine
+      [12.6, 35.4].forEach(x => paint(c, ox, oy, or(ell(x, 14.6, 3, 3.2), ell(x + (x < 24 ? -0.4 : 0.4), 19, 2.6, 2.8), ell(x + (x < 24 ? 1.8 : -1.8), 11.6, 2.2, 2)), SILVER));
+      px(c, ox, oy, [[12, 15], [13, 19], [35, 15], [34, 19]], SILVER.lo);
+      // bushy white brows sit above the specs
+      [[16, 17], [26, 17]].forEach(([x, y]) => { R(c, ox + x, oy + y - 1, 6, 2, P.white); px(c, ox, oy, [[x, y + 1], [x + 5, y - 2], [x + 2, y - 2]], P.white); R(c, ox + x, oy + y, 6, 1, SILVER.lo); });
       const col = P.butterD;
-      const fr = x => { R(c, ox + x, oy + 19, 6, 1, col); R(c, ox + x, oy + 24, 6, 1, col); R(c, ox + x, oy + 20, 1, 4, col); R(c, ox + x + 5, oy + 20, 1, 4, col); R(c, ox + x, oy + 19, 1, 1, P.ol); };
-      fr(17); fr(26); R(c, ox + 23, oy + 21, 3, 1, col); R(c, ox + 18, oy + 20, 1, 1, P.white); R(c, ox + 27, oy + 20, 1, 1, P.white);
-      dots(c, ox, oy, [[22, 8], [24, 7], [26, 8], [23, 7], [25, 6]], P.white);
-      // moustache
-      R(c, ox + 20, oy + 27, 8, 2, P.grey); R(c, ox + 19, oy + 28, 3, 1, P.greyD); R(c, ox + 26, oy + 28, 3, 1, P.greyD); R(c, ox + 21, oy + 26, 6, 1, P.white);
+      [19.5, 28.5].forEach(cx => nb(c, ox + cx - 4, oy + 17, 9, 9, and(ell(4.5, 4.5, 3.9, 3.9), not(ell(4.5, 4.5, 2.7, 2.7))), { fill: col }, { ol: "#d9a94e" }));
+      R(c, ox + 23, oy + 21, 2, 1, col); R(c, ox + 18, oy + 20, 1, 1, P.white); R(c, ox + 27, oy + 20, 1, 1, P.white);
+      // walrus moustache
+      paint(c, ox, oy, or(ell(21.2, 27.6, 3.6, 1.9), ell(26.8, 27.6, 3.6, 1.9)), SILVER);
+      px(c, ox, oy, [[19, 28], [29, 28]], SILVER.lo);
     }],
   },
   chad: {
-    head: "square", tone: TONES.tan, brow: "#c9a45a",
-    hair: { style: "slick", col: HAIR.blonde },
+    // rival GP: square jaw with a chin cleft, swoopy blond side part, sunglasses parked on top, fleece vest over a button-down
+    head: "chisel", tone: TONES.tan, brow: "#c9a45a",
+    hair: { style: "none" },
     outfit: { kind: "fleece", col: CLOTH.blue },
-    acc: [(c, ox, oy) => { // sunglasses pushed up on the hair
-      R(c, ox + 16, oy + 8, 16, 1, P.olD); nb(c, ox + 15, oy + 6, 8, 4, rr(0, 0, 8, 4, 1.5), { fill: P.screen, hi: P.screenL, lo: P.screen });
-      nb(c, ox + 25, oy + 6, 8, 4, rr(0, 0, 8, 4, 1.5), { fill: P.screen, hi: P.screenL, lo: P.screen }); R(c, ox + 16, oy + 7, 2, 1, P.white);
+    acc: [(c, ox, oy) => {
+      const col = HAIR.blonde;
+      const crown = and(ell(24, 13.6, 13, 7.6), (x, y) => y < 12.4 + (x < 18 ? (18 - x) * 0.7 : 0));
+      const swoop = or(ell(26.5, 8.4, 9.6, 4.6), ell(18, 9.4, 5, 3.4), poly([[30, 6], [38, 7.4], [36.4, 12], [32, 11]]));
+      paint(c, ox, oy, or(crown, swoop, rr(11.5, 10, 3, 8, 1.2)), col);
+      R(c, ox + 21, oy + 5, 8, 1, col.hi); R(c, ox + 31, oy + 7, 3, 1, col.hi); px(c, ox, oy, [[18, 10], [22, 9], [26, 9], [30, 10], [33, 11]], col.lo);
+      // sunglasses parked on the swoop
+      nb(c, ox + 15, oy + 6, 8, 4, rr(0, 0, 8, 4, 1.5), { fill: P.screen, hi: P.screenL, lo: P.screen });
+      nb(c, ox + 25, oy + 6, 8, 4, rr(0, 0, 8, 4, 1.5), { fill: P.screen, hi: P.screenL, lo: P.screen });
+      R(c, ox + 22, oy + 7, 4, 1, P.olD); R(c, ox + 16, oy + 7, 2, 1, P.white); R(c, ox + 26, oy + 7, 2, 1, P.white);
+      R(c, ox + 24, oy + 32, 1, 2, TONES.tan.lo); // chin cleft
+      px(c, ox, oy, [[14, 26], [15, 27], [16, 28], [33, 26], [32, 27], [31, 28]], TONES.tan.lo); // jawline
     }],
   },
   lawyer: {
-    head: "oval", tone: TONES.light, brow: P.greyD,
-    hair: { style: "slick", col: grey },
+    // silver fox: combed-back silver hair with a clean part, half-moon glasses, pinstripes, gold tie and a pocket square
+    head: "round", tone: TONES.light, brow: P.greyD,
+    hair: { style: "none" },
     outfit: { kind: "blazer", col: CLOTH.suitD, opts: { tie: P.butterD, stripes: CLOTH.suitD.hi, pin: P.butter } },
-    acc: [(c, ox, oy) => { // half-moon glasses low on the nose
-      const col = P.olD;
-      R(c, ox + 17, oy + 21, 6, 1, col); R(c, ox + 26, oy + 21, 6, 1, col); R(c, ox + 17, oy + 22, 1, 2, col); R(c, ox + 22, oy + 22, 1, 2, col); R(c, ox + 26, oy + 22, 1, 2, col); R(c, ox + 31, oy + 22, 1, 2, col);
-      R(c, ox + 18, oy + 24, 4, 1, col); R(c, ox + 27, oy + 24, 4, 1, col); R(c, ox + 23, oy + 22, 3, 1, col);
+    acc: [(c, ox, oy) => {
+      const crown = and(ell(24, 13.4, 13, 7.8), (x, y) => y < 11.6 + (x > 27 ? (x - 27) * 0.5 : 0) + (x < 15 ? 4 : 0));
+      paint(c, ox, oy, or(crown, ell(29, 8.4, 7.6, 3.8), rr(11.5, 10, 3.4, 10, 1.4), rr(33.2, 10, 3.2, 9, 1.4)), SILVER);
+      R(c, ox + 18, oy + 7, 1, 4, SILVER.lo); // the part
+      px(c, ox, oy, [[21, 8], [24, 8], [27, 7], [30, 7], [33, 9], [13, 14], [34, 13]], SILVER.lo);
+      R(c, ox + 22, oy + 6, 6, 1, P.white);
+      brows(c, ox, oy, SILVER.lo, 1);
+      const col = P.olD; // half-moon glasses low on the nose
+      [17, 26].forEach(x => { R(c, ox + x, oy + 21, 6, 1, col); R(c, ox + x, oy + 22, 1, 2, col); R(c, ox + x + 5, oy + 22, 1, 2, col); R(c, ox + x + 1, oy + 24, 4, 1, col); R(c, ox + x + 1, oy + 22, 1, 1, P.white); });
+      R(c, ox + 23, oy + 22, 3, 1, col);
+      px(c, ox, oy, [[15, 26], [32, 26]], TONES.light.lo); // smile lines
+      nb(c, ox + 33, oy + 38, 6, 4, poly([[0.5, 3.6], [1.6, 0.4], [3, 2], [4.4, 0.4], [5.5, 3.6]]), { fill: P.reject, hi: P.pinkL, lo: P.pinkD }, { ol: null });
     }],
   },
   kenji: {
-    head: "round", tone: TONES.tan, brow: "#5a4660",
-    hair: { style: "sidepart", col: HAIR.black },
+    // earnest pension analyst: soft round face, tidy side part with a cowlick, round glasses, cardigan, lanyard
+    head: "soft", tone: TONES.tan, brow: "#5a4660",
+    hair: { style: "none" },
     outfit: { kind: "cardigan", col: CLOTH.blue, opts: { under: P.white } },
-    acc: ["glasses", (c, ox, oy) => H.ACCS.lanyard(c, ox, oy, P.leafD)],
+    acc: [(c, ox, oy) => {
+      const col = HAIR.black;
+      const cap0 = ell(24, 14, 13, 8.4);
+      const sweep = and(cap0, (x, y) => y < 11.8 + (x - 15) * 0.32);
+      paint(c, ox, oy, or(sweep, rr(11.5, 10, 3.2, 8, 1.4), rr(33.2, 10, 3.2, 7, 1.4), poly([[27, 7], [29.5, 1.5], [31, 6.4]])), col);
+      px(c, ox, oy, [[17, 10], [20, 11], [23, 12], [26, 13], [29, 14]], col.hi); px(c, ox, oy, [[19, 9], [24, 10], [29, 11], [13, 14]], col.lo);
+      [19.5, 28.5].forEach(cx => nb(c, ox + cx - 4, oy + 17, 9, 9, and(ell(4.5, 4.5, 4, 4), not(ell(4.5, 4.5, 2.8, 2.8))), { fill: P.olD }, { ol: null }));
+      R(c, ox + 23, oy + 21, 2, 1, P.olD); R(c, ox + 18, oy + 19, 1, 1, P.white); R(c, ox + 27, oy + 19, 1, 1, P.white);
+      H.ACCS.lanyard(c, ox, oy, P.leafD);
+    }],
   },
   calloway: {
-    head: "square", tone: TONES.brown, brow: "#463550",
-    hair: { style: "crop", col: HAIR.black },
+    // SEC examiner: crisp line-up fade, neat full beard, sharp dark suit, skinny tie, the badge
+    head: "jaw", tone: TONES.brown, brow: "#463550",
+    hair: { style: "none" },
     outfit: { kind: "blazer", col: { fill: "#6f6699", hi: "#867eb0", lo: "#554c7d" }, opts: { tie: P.olD } },
-    acc: [(c, ox, oy) => { // lapel badge
+    acc: [(c, ox, oy) => {
+      const col = HAIR.black;
+      paint(c, ox, oy, or(and(ell(24, 13, 12.4, 6.6), (x, y) => y < 11.2), rr(12.5, 10, 2.6, 7, 0.6), rr(32.9, 10, 2.6, 7, 0.6)), col);
+      px(c, ox, oy, [[16, 8], [19, 7], [22, 8], [25, 7], [28, 8], [31, 9]], col.hi);
+      R(c, ox + 13, oy + 11, 1, 6, "#9a7058"); R(c, ox + 34, oy + 11, 1, 6, "#9a7058"); // faded sides
+      // beard + moustache framing the mouth (mouth stays clear)
+      // short boxed beard along the jaw and chin, thin moustache; the mouth stays clear
+      const beard = and(or(H.rects([[13, 24, 3, 9], [32, 24, 3, 9]]), and(H.rects([[13, 30, 22, 4]]), not(rr(19.4, 29.4, 9.2, 2.6, 1)))), (x, y) => y < 34);
+      paint(c, ox, oy, or(beard, rr(20, 28, 8, 1.2, 0.5)), { fill: "#4e3d55", hi: "#5f4c68", lo: "#3d2f45" }, { ol: null });
+
+      brows(c, ox, oy, "#463550", 1);
       badge(c, ox + 31, oy + 38);
     }],
   },
   associate: {
-    head: "oval", tone: TONES.light, brow: "#b3704b",
-    hair: { style: "bob", col: HAIR.ginger },
+    // eager first hire: big ginger curls, freckles, mint blouse, lanyard
+    head: "soft", tone: TONES.light, brow: "#b3704b",
+    hair: { style: "none" },
+    back: (c, ox, oy) => {
+      const pts = [[13, 12], [17, 7], [23, 5], [29, 6], [34, 10], [11, 18], [37, 18], [10, 25], [38, 25], [11, 31], [37, 31], [14, 35], [34, 35]];
+      paint(c, ox, oy, or(...pts.map(([x, y]) => ell(x, y, 5, 5))), HAIR.ginger);
+    },
     outfit: { kind: "blouse", col: CLOTH.mint },
-    acc: [(c, ox, oy) => H.ACCS.lanyard(c, ox, oy, P.pink)],
+    acc: [(c, ox, oy) => {
+      const col = HAIR.ginger;
+      const curls = [[15, 11], [19, 9], [24, 9], [29, 9], [33, 11], [13, 16], [35, 16]];
+      paint(c, ox, oy, or(...curls.map(([x, y]) => ell(x, y, 3.6, 3.4)), and(ell(24, 13, 12, 6), (x, y) => y < 11)), col);
+      curls.forEach(([x, y]) => { R(c, ox + x - 1, oy + y - 1, 2, 1, col.hi); R(c, ox + x, oy + y + 1, 1, 1, col.lo); });
+      px(c, ox, oy, [[16, 24], [17, 25], [18, 24], [30, 24], [31, 25], [29, 25], [23, 23], [25, 23]], "#e6a988"); // freckles
+      H.ACCS.lanyard(c, ox, oy, P.pink);
+    }],
   },
 };
 const legs = {
