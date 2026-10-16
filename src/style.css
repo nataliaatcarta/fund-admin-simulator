@@ -22,12 +22,12 @@ body { font-family: var(--font-ui); color: var(--ink); user-select: none; -webki
 .spr, img.spr { image-rendering: pixelated; display: block; user-select: none; -webkit-user-drag: none; }
 #cursor, #held { position: absolute; left: 0; top: 0; pointer-events: none; z-index: 9999; image-rendering: pixelated; background-repeat: no-repeat; will-change: transform; }
 @keyframes spr-strip { to { background-position: var(--end) 0; } }
-@keyframes pop { 0% { transform: scale(.6); opacity: 0 } 70% { transform: scale(1.06) } 100% { transform: scale(1); opacity: 1 } }
-@keyframes shake { 0%,100% { transform: translateX(0) } 20% { transform: translateX(-10px) } 40% { transform: translateX(9px) } 60% { transform: translateX(-6px) } 80% { transform: translateX(4px) } }
-@keyframes floatup { 0% { transform: translateY(0); opacity: 0 } 15% { opacity: 1 } 100% { transform: translateY(-70px); opacity: 0 } }
+@keyframes pop { from { opacity: 0 } to { opacity: 1 } }
+@keyframes shake { 0%,100% { opacity: 1 } 50% { opacity: .4 } }
+@keyframes floatup { 0% { opacity: 0 } 15% { opacity: 1 } 100% { opacity: 0 } }
 @keyframes fadein { from { opacity: 0 } to { opacity: 1 } }
-@keyframes slideup { from { transform: translateY(40px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
-@keyframes bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-6px) } }
+@keyframes slideup { from { opacity: 0 } to { opacity: 1 } }
+@keyframes bob { 0%,100% { opacity: 1 } }
 @keyframes blink { 0%,100% { opacity: 1 } 50% { opacity: .35 } }
 .shake { animation: shake .35s; }
 .pop { animation: pop .3s ease-out; }

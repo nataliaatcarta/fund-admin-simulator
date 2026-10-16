@@ -2,16 +2,18 @@ import { create } from "zustand";
 import { NpcId, Mood } from "./types";
 import { autoplay } from "./uiStore";
 
+export const ACTOR_FADE_MS = 450;
+
 export type TimeOfDay = "morning" | "afternoon" | "night";
 export type DoorState = "closed" | "knock" | "silhouette" | "open-empty" | "open-npc";
-export type ActorPhase = "walkin" | "sit" | "talk" | "walkout" | "stand" | "peek" | "lean";
+export type ActorPhase = "sit" | "talk" | "lean";
 
 export interface Actor {
   npc: NpcId;
   phase: ActorPhase;
+  /** when the actor started fading in (or out, when `out` is set) */
   since: number;
-  /** for 'special' entrances (scooter etc.) */
-  entrance?: string;
+  out?: boolean;
   mood?: Mood;
 }
 
