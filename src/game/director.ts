@@ -11,7 +11,7 @@ import { setOffice, sleep } from "./officeStore";
 import { rng } from "./rng";
 import { deleteSave, writeSave } from "./save";
 import { addCompany, applyEffects, clamp, getG, metrics, moodFromRel, useGame } from "./state";
-import { Cancelled, ask, cancelAll, choose, say, toast, useUi } from "./uiStore";
+import { Cancelled, Tip, ask, cancelAll, choose, say, toast, useUi } from "./uiStore";
 import { Choice, Company, Effects, GameEvent, GameState, InboxItem, MinigameResult, NpcId } from "./types";
 import { addTrophies } from "./save";
 
@@ -53,7 +53,7 @@ async function campaign(id: number, mode: "new" | "resume") {
     deleteSave("auto"); // a reload during the intro must not bring back the previous campaign
     await ask("card", { art: "story/intro-lpa-signing.png", title: "Welcome, General Partner", lines: D.INTRO_LPA, button: "Sign it" });
     live(id);
-    mutate((g) => { g.phase = "kickoff"; });
+    mutate((g) => { g.phase = "kickoff"; g.glossary.push("lp-gp", "lpa"); }); // the intro card explains both
   }
   for (;;) {
     const g = getG();
@@ -297,7 +297,7 @@ async function quarterHello(id: number) {
 async function closeVisit(id: number) {
   await enter("priya");
   live(id);
-  await say({ npc: "priya", mood: getG().npcs.priya.mood, text: "Priya, holding a clipboard like a shield: \"Quarter close. Tick what we'll do today. Each item makes the books more true. Skipped ones I will remember, quietly.\"" });
+  await say({ npc: "priya", mood: getG().npcs.priya.mood, text: D.CLOSE_HELLO, tip: teach(["quarter-close", "capital-account"]) });
   live(id);
   await leave("priya");
   await closeChecklist(id);
@@ -444,7 +444,7 @@ async function deskVisit(id: number, uid: string, mandatory: boolean) {
   await enter(ev.speaker);
   live(id);
   const options = mandatory ? [{ text: "Let's do it" }] : [{ text: "Let's do it", hint: `${cost} ☕` }, { text: "Not today" }];
-  const idx = await choose({ npc: ev.speaker, mood: getG().npcs[ev.speaker].mood, text: lineText(ev.setup, ev.speaker, getG()), options });
+  const idx = await choose({ npc: ev.speaker, mood: getG().npcs[ev.speaker].mood, text: lineText(ev.setup, ev.speaker, getG()), tip: teach(ev.teaches), options });
   live(id);
   await leave(ev.speaker);
   if (idx === 1) { decline(ev, uid); return; }
@@ -474,7 +474,7 @@ function decline(ev: GameEvent, uid?: string) {
 export async function playEvent(id: number, ev: GameEvent, uid?: string, cost = 0) {
   const speaker = ev.speaker;
   if (speaker === "system") {
-    const idx = await choose({ npc: "system", text: lineText(ev.setup, speaker, getG()), options: visibleChoices(ev, getG()).map((c) => ({ text: c.text })) });
+    const idx = await choose({ npc: "system", text: lineText(ev.setup, speaker, getG()), tip: teach(ev.teaches), options: visibleChoices(ev, getG()).map((c) => ({ text: c.text })) });
     const ch = visibleChoices(ev, getG())[idx];
     resolveChoice(ev, ch, uid);
     return;
@@ -487,13 +487,14 @@ export async function playEvent(id: number, ev: GameEvent, uid?: string, cost = 
   setOffice({ tv: speaker === "chad" ? "chad" : "news" });
   let cur: GameEvent | undefined = ev;
   let first = true;
+  const tip = teach(ev.teaches);
   while (cur) {
     const gg = getG();
     const chs = visibleChoices(cur, gg);
     const due = first ? cost : 0;
     const canDecline = first && cost > 0;
     const idx = await choose({
-      npc: speaker, mood: gg.npcs[speaker].mood, special: cur.portrait, text: lineText(cur.setup, speaker, gg), illustration: cur.illustration, category: cur.category,
+      npc: speaker, mood: gg.npcs[speaker].mood, special: cur.portrait, text: lineText(cur.setup, speaker, gg), illustration: cur.illustration, category: cur.category, tip: first ? tip : undefined,
       options: [
         ...chs.map((c) => { const n = due + (c.energyCost ?? 0); return { text: c.text, disabled: n > gg.energy, hint: n ? `${n} ☕` : undefined }; }),
         ...(canDecline ? [{ text: "Sorry, not right now" }] : []),
@@ -651,6 +652,22 @@ async function ending(id: number) {
   await ask("card", { art: end.art, title: end.title, lines: end.paras, button: "Roll credits" });
   live(id);
   useUi.getState().go("credits");
+}
+
+/** Unmet terms among `ids`, in the order the event lists them (at most two, so the card stays small). */
+const fresh = (ids: string[] | undefined, g: GameState) =>
+  (ids ?? []).filter((id) => !g.glossary.includes(id)).map((id) => GLOSSARY.find((e) => e.id === id)!).filter(Boolean).slice(0, 2);
+const toTip = (e: (typeof GLOSSARY)[number]): Tip => ({ term: e.term, text: e.short, icon: e.icon });
+/** Terms in `ids` the player hasn't met yet, as "New term" tips. */
+export function newTips(ids: string[] | undefined, g: GameState): Tip[] {
+  return fresh(ids, g).map(toTip);
+}
+/** Tips for a scene that is about to play: shown once, then saved to the glossary so they never repeat. */
+function teach(ids: string[] | undefined): Tip[] | undefined {
+  const es = fresh(ids, getG());
+  if (!es.length) return undefined;
+  mutate((g) => { for (const e of es) g.glossary.push(e.id); });
+  return es.map(toTip);
 }
 
 export function glossaryUnlocked(g: GameState) {

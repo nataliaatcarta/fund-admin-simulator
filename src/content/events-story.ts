@@ -27,22 +27,22 @@ const dexBridge: GameEvent = {
   kind: "call",
   subject: "Quick bridge?? (just to the next milestone)",
   setup: {
-    default: `Hey!! Quick one. Tiny bridge round, just to get to the next milestone. The milestone is a surprise. Even to me. The rocket is basically at the pad. The gauge says "E" but it means "Epic".`,
-    mood: { worried: `Okay, so, the runway is... a concept. A bridge would be a super light touch. Like a feather. A feather that costs one million dollars.` },
+    default: `"Hey!! Quick one. We need a tiny bridge round. Just enough cash to get us to the Series A. We're launching DexCoin! It's a coin. The rocket is basically on the pad. The fuel gauge says ‘E’, but that stands for ‘Epic’."`,
+    mood: { worried: `"Okay, so, the runway is... a concept. A bridge would be a super light touch. Like a feather. A feather that costs one million dollars."` },
   },
   portrait: "bridge-round",
   illustration: E("setup-01-rocket-empty-gauge"),
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("fund", `Fund the bridge: $1M, no questions`, `You are a LEGEND. I'm putting you on the cap table AND the group chat. The group chat is called "Milestone Gang".`, "happy", {
+    ch("fund", `Fund the bridge: $1M, no questions`, `"You are a LEGEND. I'm putting you on the cap table AND the group chat. The group chat is called ‘Milestone Gang’."`, "happy", {
       dryPowder: -1,
       rel: { dex: 10 },
       setFlags: ["bridge_funded", "invested_dex"],
       trinket: "dex-coin",
       seeds: [{ id: "dex-bridge", bloom: "s_dex_oat", afterQuarters: 2, label: "Dex's next milestone" }],
     }),
-    ch("half", `$500K, tied to a real milestone with a date`, `A milestone with a DATE? Bold. I respect it. I hate it. Deal.`, "neutral", {
+    ch("half", `$500K, tied to a real milestone with a date`, `"A milestone with a DATE? Bold. I respect it. I hate it. Deal."`, "neutral", {
       dryPowder: -0.5,
       rel: { dex: 3 },
       rep: 1,
@@ -50,7 +50,7 @@ const dexBridge: GameEvent = {
       setFlags: ["bridge_funded", "bridge_half", "invested_dex"],
       seeds: [{ id: "dex-bridge", bloom: "s_dex_oat", afterQuarters: 2, label: "Dex's next milestone" }],
     }),
-    ch("pass", `Pass. Show me the milestone first.`, `Totally fair. Fair! I'll just... pivot to wherever the money is. Don't worry about it. I'm worried about it.`, "worried", {
+    ch("pass", `Pass. Show me the milestone first.`, `"Totally fair. Fair! I'll just... pivot to wherever the money is. Don't worry about it. I'm worried about it."`, "worried", {
       rel: { dex: -6 },
       wellbeing: 3,
       setFlags: ["dex_passed"],
@@ -59,7 +59,7 @@ const dexBridge: GameEvent = {
   ],
   ignored: { rel: { dex: -4 }, mood: { dex: "worried" } },
   when: { quarters: [1], weeks: [3, 4, 5, 6] },
-  teaches: ["dry-powder", "reserves"],
+  teaches: ["bridge", "dry-powder"],
 };
 
 const dexAi: GameEvent = {
@@ -69,24 +69,24 @@ const dexAi: GameEvent = {
   speaker: "dex",
   kind: "call",
   subject: "We are an AI company now (the hat is a model)",
-  setup: `I have news. Remember the coin thing? Gone. We're AI now. Everything is AI. The hat is AI. I asked it for a business plan and it wrote "buy more hats". Visionary.`,
+  setup: `"I have news. Remember DexCoin? Gone. We're AI now. Everything is AI. The hat is AI. I asked it for a business plan and it wrote ‘buy more hats’. Visionary."`,
   portrait: "outfit-ai",
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("back", `Back the AI era. Show me the hat.`, `The hat has a SUBSCRIPTION. Okay, you can keep this one. Take it. Wear it. Feel the inference.`, "happy", {
+    ch("back", `Back the AI era. Show me the hat.`, `"The hat has a SUBSCRIPTION. Okay, you can keep this one. Take it. Wear it. Feel the inference."`, "happy", {
       rel: { dex: 6 },
       trinket: "dex-hat",
       setFlags: ["dex_ai"],
       marks: 2,
     }),
-    ch("revenue", `Ask for a revenue plan before you say yes`, `Revenue is a mindset. ...I'll make a slide. A slide about the mindset.`, "worried", {
+    ch("revenue", `Ask for a revenue plan before you say yes`, `"Revenue is a mindset. ...I'll make a slide. A slide about the mindset."`, "worried", {
       rel: { dex: -2 },
       compliance: -2,
       rep: 1,
       setFlags: ["dex_ai"],
     }),
-    ch("nope", `Tell him to pick one lane and stay in it`, `A lane. You want me in a LANE. Interesting. I'll think about it on my scooter.`, "grumpy", {
+    ch("nope", `Tell him to pick one lane and stay in it`, `"A lane. You want me in a LANE. Interesting. I'll think about it on my scooter."`, "grumpy", {
       rel: { dex: -8 },
       wellbeing: 2,
       setFlags: ["dex_ai", "dex_scolded"],
@@ -104,27 +104,27 @@ const dexOat: GameEvent = {
   kind: "call",
   subject: "Big news: we are now... a dairy-adjacent company",
   setup: {
-    default: `Crypto is over. AI is over. We are OAT MILK. Artisanal. Cold-pressed. The coin was a seed round for the oats, you see. Come to the loading dock. There's tasting.`,
-    flags: { bridge_half: `Crypto is over. AI is over. We are OAT MILK. You only funded half, so we only half-pivoted. We're "oat-ish". Come taste.` },
+    default: `"Crypto is over. AI is over. We are OAT MILK. Artisanal. Cold-pressed. The coin was a seed round for the oats, you see. Come to the loading dock. There's tasting."`,
+    flags: { bridge_half: `"Crypto is over. AI is over. We are OAT MILK. You only funded half, so we only half-pivoted. We're ‘oat-ish’. Come taste."` },
   },
   portrait: "outfit-oat",
   illustration: E("bloom-01-dex-oat-milk-apron"),
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("back", `Back the oat pivot. Founders adapt.`, `You get it. You GET it. I made you a carton with your face on it. It's the wrong face but the thought!`, "happy", {
+    ch("back", `Back the oat pivot. Founders adapt.`, `"You get it. You GET it. I made you a carton with your face on it. It's the wrong face but the thought!"`, "happy", {
       rel: { dex: 6 },
       trinket: "dex-oat",
       rep: -1,
       setFlags: ["dex_oat_backed"],
     }),
-    ch("taste", `Taste the oat milk first`, `Be honest. ...It's shockingly good? Yes! I know! Nobody's more surprised than me. I'm very surprised.`, "happy", {
+    ch("taste", `Taste the oat milk first`, `"Be honest. ...It's shockingly good? Yes! I know! Nobody's more surprised than me. I'm very surprised."`, "happy", {
       rel: { dex: 4 },
       wellbeing: 4,
       trinket: "dex-oat",
       setFlags: ["dex_oat_backed", "dex_oat_tasted"],
     }),
-    ch("refund", `Ask him to return the bridge money`, `Return it? It's... in oats. It is currently oats. Can I give you oats?`, "grumpy", {
+    ch("refund", `Ask him to return the bridge money`, `"Return it? It's... in oats. It is currently oats. Can I give you oats?"`, "grumpy", {
       rel: { dex: -10 },
       marks: -3,
       compliance: -3,
@@ -144,25 +144,25 @@ const dexFinale: GameEvent = {
   speaker: "dex",
   kind: "call",
   subject: "A grocery chain wants 40 stores (and a mascot)",
-  setup: `A grocery chain wants us in 40 stores. They also want a mascot. The mascot is a cow in a hat. The hat is AI. Sell the brand, or hold for a Series A? Please say something wise. Briefly.`,
+  setup: `"Okay. A grocery chain wants us in 40 stores. They want a mascot, a cow in a hat. And they offered to buy the whole brand. Sell now, or hold out for a Series A? Say something wise. Briefly."`,
   portrait: "outfit-oat",
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("deal", `Take the grocery deal. Cash is oat milk, too.`, `The cow is signing as we speak. I am so proud of us. I have a tear. It is oat-based.`, "happy", {
+    ch("deal", `Sell the brand. Cash back to LPs is real.`, `"The cow is signing as we speak. I am so proud of us. I have a tear. It is oat-based."`, "happy", {
       marks: 6,
       rep: 3,
       rel: { dex: 8 },
       badge: "pivot-survivor",
       setFlags: ["dex_finale_done"],
     }),
-    ch("hold", `Hold for the Series A. Bet on the cow.`, `Betting on the cow. That is my favorite thing anyone has said to me.`, "happy", {
+    ch("hold", `Hold for the Series A. Bet on the cow.`, `"Betting on the cow. That is my favorite thing anyone has said to me."`, "happy", {
       marks: 3,
       rel: { dex: 10 },
       badge: "pivot-survivor",
       setFlags: ["dex_finale_done", "dex_hold"],
     }),
-    ch("barista", `Remind him he's a founder, not a barista`, `A fair note. A rude note. A fair, rude note. I'll put it on the wall.`, "neutral", {
+    ch("barista", `Remind him he's a founder, not a barista`, `"A fair note. A rude note. A fair, rude note. I'll put it on the wall."`, "neutral", {
       rel: { dex: -3 },
       wellbeing: 2,
       setFlags: ["dex_finale_done"],
@@ -210,7 +210,7 @@ const rickyDpi: GameEvent = {
   kind: "email",
   subject: "REPLY ALL: what does DPI mean?? (asking for all of us)",
   setup: {
-    default: `Hi everyone!! My nephew says to ask: what does DPI mean? Dots per inch? Is TVPI a typo? I'm replying ALL so we ALL learn. Love, Ricky. P.S. 61 LPs just got a feature film.`,
+    default: `Hi everyone!! My nephew says to ask: what does DPI mean? Dots per inch? Is TVPI a typo? I'm replying ALL so we ALL learn. Love, Ricky. P.S. How do you un-reply-all?`,
     mood: { happy: `Hi everyone!! BIG question: what does DPI mean?! I'm replying ALL so we ALL learn. Love, Ricky. P.S. Is it dots per inch?`, worried: `Hi everyone... what does DPI mean? I said it at dinner and nobody laughed. Which is worse. Replying all so someone tells me. Ricky.` },
   },
   illustration: E("setup-02-email-avalanche"),
@@ -339,14 +339,14 @@ const finchNapa: GameEvent = {
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("own", `Own it: reclassify and repay the fund`, `Thank you. That is rare. I'll note the correction and not the wine.`, "happy", {
+    ch("own", `Own it: reclassify and repay the fund`, `"Thank you. That is rare. I'll note the correction and not the wine."`, "happy", {
       compliance: -8,
       cash: -1.5,
       rel: { finch: 6 },
       rep: -1,
       setFlags: ["napa_fixed"],
     }, { replyPortrait: "approving" }),
-    ch("argue", `Argue it was "portfolio support"`, `A tasting is not support. Neither is a "strategy soak". I will make a note. It will be a long note.`, "grumpy", {
+    ch("argue", `Argue it was "portfolio support"`, `"A tasting is not support. Neither is a ‘strategy soak’. I will make a note. It will be a long note."`, "grumpy", {
       compliance: 5,
       rep: -4,
       rel: { finch: -6 },
@@ -354,7 +354,7 @@ const finchNapa: GameEvent = {
       setFlags: ["napa_argued"],
       overlay: "audit-corner",
     }),
-    ch("blame", `Say it was Brooke's idea (it was)`, `Truthful, and unhelpful. Brooke will hear of this. I do not gossip. I merely copy people.`, "worried", {
+    ch("blame", `Say it was Brooke's idea (it was)`, `"Truthful, and unhelpful. Brooke will hear of this. I do not gossip. I merely copy people."`, "worried", {
       rel: { finch: -2, brooke: -10 },
       compliance: -2,
       setFlags: ["napa_blamed_brooke"],
@@ -374,16 +374,16 @@ const lateLp: GameEvent = {
   title: "A very safe drawer",
   speaker: "ricky",
   kind: "call",
-  subject: "Capital call is 'in the mail' (it has been three weeks)",
+  subject: "Capital call: the check is 'basically sent' (three weeks late)",
   setup: {
-    default: `About the capital call! I wrote the check. It's in a drawer. A very safe drawer. Is this a scam? Is it you who sent it? Is Tuesday okay? Also, my wife says hi. (She does not.)`,
-    flags: { ricky_advocate: `About the capital call! I wrote the check. It's in a very safe drawer. Don't worry, I TOLD everyone how DPI works! Is Tuesday okay?` },
+    default: `"GP! About the capital call. I wrote the check! It's in a drawer. A very safe drawer. I just haven't... mailed it. Is Tuesday okay? Also my wife says hi. She doesn't. She says ‘mail the check, Richard’."`,
+    flags: { ricky_advocate: `"GP! About the capital call. The check is written! It's in a very safe drawer. But good news, I explained DPI to the whole golf club! Is Tuesday okay?"` },
   },
   illustration: E("setup-04-calendar-cobweb"),
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("grace", `Give him a documented ten-day grace period`, `Ten days! IN WRITING! I'll frame it next to my fishing certificate.`, "happy", {
+    ch("grace", `Give him a documented ten-day grace period`, `"Ten days! IN WRITING! I'll frame it next to my fishing certificate."`, "happy", {
       rel: { ricky: 6 },
       cash: -0.5,
       compliance: -2,
@@ -391,13 +391,13 @@ const lateLp: GameEvent = {
       glossary: ["capital-call"],
       seeds: [{ id: "late-grace", bloom: "s_late_good", afterQuarters: 1, label: "A patient reply" }],
     }),
-    ch("plan", `Call him: two payments, in writing, both on the calendar`, `Two halves! Like pizza! You're a gentleman. A gentleperson. A person.`, "happy", {
+    ch("plan", `Call him: two payments, in writing, both on the calendar`, `"Two halves! Like pizza! You're a gentleman. A gentleperson. A person."`, "happy", {
       rel: { ricky: 8 },
       wellbeing: -3,
       setFlags: ["late_grace"],
       seeds: [{ id: "late-grace", bloom: "s_late_good", afterQuarters: 1, label: "A patient reply" }],
     }, { energyCost: 1 }),
-    ch("default", `Send the default notice, per the LPA`, `A... notice? With a seal? My hands are shaking. I'll get the check out of the drawer. I'm sorry. I'm so sorry.`, "worried", {
+    ch("default", `Send the default notice, per the LPA`, `"A... notice? With a seal? My hands are shaking. I'll get the check out of the drawer. I'm sorry. I'm so sorry."`, "worried", {
       rel: { ricky: -12 },
       rep: 1,
       compliance: -3,
@@ -407,7 +407,7 @@ const lateLp: GameEvent = {
   ],
   ignored: { rel: { ricky: -4 }, compliance: 3 },
   when: { quarters: [2, 3, 4], weeks: [7, 8, 9] },
-  teaches: ["capital-call", "commitment"],
+  teaches: ["default", "commitment"],
 };
 
 const lateGood: GameEvent = {
@@ -468,7 +468,7 @@ const wireNewBank: GameEvent = {
   speaker: "system",
   kind: "email",
   subject: "URGENT: new bank details, wire today pls!!",
-  setup: `From: dex@dexcorp.co (note: .co, not .com). "Hi! We changed banks. Wire the $250K to this NEW account TODAY. CEO boarding a plane! No signal. Do NOT call. Thx!!" The mustache in the signature is, somehow, suspicious.`,
+  setup: `From: dex@dexcorp.co (note: .co, not .com). "Hi! We changed banks. Wire the $250K to this NEW account TODAY. CEO boarding a plane! No signal. Do NOT call. Thx!!" The signature has a mustache emoji. Dex does not have a mustache.`,
   illustration: E("setup-05-email-shady-mustache"),
   mode: "quick",
   choices: [
@@ -480,7 +480,7 @@ const wireNewBank: GameEvent = {
       glossary: ["wire-fraud"],
       seeds: [{ id: "wire-verified", bloom: "s_priya_cookies", afterQuarters: 1, label: "Something is baking" }],
     }),
-    ch("wire", `Wire it. A boarding CEO sounds legit.`, `Sent! The confirmation arrives and feels, somehow, like a dropped stomach. The mustache in the signature seems to smirk.`, "worried", {
+    ch("wire", `Wire it. A boarding CEO sounds legit.`, `Sent! The confirmation arrives and feels like your stomach dropped. The mustache emoji seems to smirk.`, "worried", {
       cash: -3,
       rep: -2,
       compliance: 8,
@@ -521,25 +521,25 @@ const whereMoneyWent: GameEvent = {
   speaker: "priya",
   kind: "call",
   subject: "Recall request, bank says 'sigh'",
-  setup: `The $250K is gone. The account closed within the hour. The bank calls this a "recall request", as if it were a shrug. I made a spreadsheet called WHERE_DID_THE_MONEY_GO_v1. v2 is already open.`,
+  setup: `"The $250K is gone. The account closed within the hour. The bank calls this a ‘recall request’, as if it were a shrug. I made a spreadsheet called WHERE_DID_THE_MONEY_GO_v1. v2 is already open."`,
   portrait: "serious",
   illustration: E("bloom-05b-empty-money-bag"),
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("file", `File with the bank, the FBI and the insurer, today`, `Done in one afternoon. Do not thank me. Hold the stapler.`, "neutral", {
+    ch("file", `File with the bank, the FBI and the insurer, today`, `"Done in one afternoon. Do not thank me. Hold the stapler."`, "neutral", {
       compliance: -4,
       rel: { priya: 6 },
       wellbeing: -5,
       cash: 1,
       setFlags: ["recovery_started"],
     }, { energyCost: 1 }),
-    ch("lawyer", `Hand it to the lawyer`, `The lawyer's first email arrives before you can click away. Billing time: 0.1 hours. The clock is ticking beautifully.`, "neutral", {
+    ch("lawyer", `Hand it to the lawyer`, `The lawyer's first email arrives before you close the tab. It has already been billed: 0.1 hours.`, "neutral", {
       cash: -1,
       rel: { lawyer: 3, priya: 2 },
       setFlags: ["recovery_started"],
     }),
-    ch("hope", `Hope it is a timing issue`, `It is not. But I admire the optimism. It is the optimism of a person who has never seen a SWIFT message.`, "worried", {
+    ch("hope", `Hope it is a timing issue`, `"It is not. But I admire the optimism. It is the optimism of someone who has never tried to un-send a wire."`, "worried", {
       rep: -3,
       compliance: 6,
       wellbeing: -6,
@@ -579,13 +579,13 @@ const valuationMark: GameEvent = {
   speaker: "brooke",
   kind: "email",
   subject: "Mark Dex's company up 3x?? (it's a vibe)",
-  setup: `Dex raised on a napkin. Napkin valuation: 3x. I say we mark it. LPs love a number going up. Finch loves a different number. Big swings, remember? I've already inflated the slide.`,
+  setup: `"Dex says a new investor ‘basically agreed’ to value his company at 3x. On a napkin. I say we mark it up. LPs love a number going up. Finch loves a different number. Big swings, remember? I already updated the slide."`,
   portrait: "whiteboard",
   illustration: E("setup-06-inflating-balloon"),
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("big", `Mark it up 3x. Big swings.`, `THAT is the energy. I'm framing this email.`, "happy", {
+    ch("big", `Mark it up 3x. Big swings.`, `"THAT is the energy. I'm framing this email."`, "happy", {
       marks: 6,
       rep: 1,
       compliance: 6,
@@ -594,7 +594,7 @@ const valuationMark: GameEvent = {
       glossary: ["valuation-mark"],
       seeds: [{ id: "aggressive-mark", bloom: "s_writedown", afterQuarters: 2, label: "A balloon, inflating" }],
     }),
-    ch("mid", `Mark it up 1.3x and footnote the napkin`, `Boring. Defensible. Annoying. Fine.`, "neutral", {
+    ch("mid", `Mark it up 1.3x and footnote the napkin`, `"Boring. Defensible. Annoying. Fine."`, "neutral", {
       marks: 2,
       compliance: -3,
       rel: { brooke: -4, finch: 3 },
@@ -602,7 +602,7 @@ const valuationMark: GameEvent = {
       glossary: ["valuation-mark"],
       seeds: [{ id: "modest-mark", bloom: "s_mark_vindicated", afterQuarters: 2, label: "A modest footnote" }],
     }),
-    ch("hold", `Hold at cost until there is a real round`, `Cost? COST? That's not a mark, that's a nap.`, "grumpy", {
+    ch("hold", `Hold at cost until there is a real round`, `"Cost? COST? That's not a mark, that's a nap."`, "grumpy", {
       compliance: -6,
       rel: { brooke: -8, finch: 4 },
       setFlags: ["mark_hold"],
@@ -621,27 +621,27 @@ const writedown: GameEvent = {
   speaker: "brooke",
   kind: "call",
   subject: "Re: the 3x (don't read this yet)",
-  setup: `So. The 3x is now 0.4x. The napkin was a napkin. Finch sent a one-line email: "Noted." That is his version of screaming. LPs will see it in the next report. Say something big.`,
+  setup: `"So. The 3x is now 0.4x. The napkin was a napkin. Finch sent a one-line email: ‘Noted.’ That is his version of screaming. LPs will see it in the next report. Say something big."`,
   portrait: "tapping",
   illustration: E("bloom-06b-balloon-popping"),
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("honest", `Take the hit and tell LPs plainly`, `...Okay. Okay. I don't love it, but I'd rather be wrong out loud. Let's draft it. With footnotes. Many footnotes.`, "worried", {
+    ch("honest", `Take the hit and tell LPs plainly`, `"...Okay. Okay. I don't love it, but I'd rather be wrong out loud. Let's draft it. With footnotes. Many footnotes."`, "worried", {
       marks: -10,
       rep: -2,
       compliance: -4,
       rel: { brooke: -2, margaret: 3 },
       setFlags: ["writedown_honest"],
     }),
-    ch("market", `Blame the market`, `The market! Love it. The market did this. It's a big, faceless market.`, "happy", {
+    ch("market", `Blame the market`, `"The market! Love it. The market did this. It's a big, faceless market."`, "happy", {
       marks: -10,
       rep: -5,
       compliance: 5,
       rel: { brooke: 2 },
       setFlags: ["writedown_blamed_market"],
     }),
-    ch("lesson", `Tell her big swings need small footnotes`, `Big swings, small footnotes. I'm putting that on a pennant. Don't tell anyone I said you were right.`, "neutral", {
+    ch("lesson", `Tell her big swings need small footnotes`, `"Big swings, small footnotes. I'm putting that on a pennant. Don't tell anyone I said you were right."`, "neutral", {
       marks: -10,
       rep: -3,
       rel: { brooke: 4 },
@@ -683,25 +683,25 @@ const inesFeedback: GameEvent = {
   kind: "email",
   subject: "Sorry, would you have 30 min? (no slides)",
   setup: {
-    default: `Hi. Sorry. Would you have 30 minutes to look at the product? Only if you're free. No slides. Just a demo. I made coffee. Two coffees. In case.`,
-    mood: { worried: `Hi. Sorry. I know you're busy. If there's any 30 minutes... Only a demo. I made two coffees. In case. They're cold now, probably.` },
+    default: `"Hi. Sorry. Would you have 30 minutes to look at the product? Only if you're free. No slides. Just a demo. I made coffee. Two coffees. In case."`,
+    mood: { worried: `"Hi. Sorry. I know you're busy. If there's any 30 minutes... Only a demo. I made two coffees. In case. They're cold now, probably."` },
   },
   portrait: "shy",
   illustration: E("setup-07-two-coffee-cups"),
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("show", `Show up, laptop closed, ask her to demo`, `Oh. You want to see the actual thing? Okay. Okay! There's a bug. It's a feature. It's a bug. Let me show you.`, "happy", {
+    ch("show", `Show up, laptop closed, ask her to demo`, `"Oh. You want to see the actual thing? Okay. Okay! There's a bug. It's a feature. It's a bug. Let me show you."`, "happy", {
       rel: { ines: 12 },
       wellbeing: 3,
       setFlags: ["ines_showed"],
       seeds: [{ id: "ines-arc", bloom: "s_ines_sticker", afterQuarters: 1, label: "Something quietly compiling" }],
     }, { replyPortrait: "laptop" }),
-    ch("written", `Send written feedback tonight instead`, `That's very kind. I'll read it twice. Maybe three times. Thank you.`, "neutral", {
+    ch("written", `Send written feedback tonight instead`, `"That's very kind. I'll read it twice. Maybe three times. Thank you."`, "neutral", {
       rel: { ines: 4 },
       setFlags: ["ines_written"],
     }),
-    ch("cancel", `Reschedule, honestly. The week is slammed.`, `No worries. Totally. I'll just... be here. With the coffee.`, "worried", {
+    ch("cancel", `Reschedule, honestly. The week is slammed.`, `"No worries. Totally. I'll just... be here. With the coffee."`, "worried", {
       rel: { ines: -8 },
       setFlags: ["ines_ghosted"],
       seeds: [{ id: "ines-ghosted", bloom: "s_ines_ghost", afterQuarters: 2, label: "A quiet inbox" }],
@@ -770,24 +770,24 @@ const inesArc2: GameEvent = {
   speaker: "ines",
   kind: "call",
   subject: "A fund wants to lead my Series A (help?)",
-  setup: `A big fund wants to lead my Series A. They want a call. I'd rather code. Could you... come? Or lead it yourselves? Or tell me what a "pro-rata" is? I looked it up. Now I have two questions.`,
+  setup: `"A big fund wants to lead my Series A. They want a call. I'd rather code. Could you... come? Or lead it yourselves? Or tell me what a ‘pro-rata’ is? I looked it up. Now I have two questions."`,
   portrait: "laptop",
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("follow", `Reserve $1.5M to follow on, pro-rata`, `You'd... double down on me? That's. That's a lot of trust. I'm going to fix a bug so I don't cry.`, "happy", {
+    ch("follow", `Reserve $1.5M to follow on, pro-rata`, `"You'd... double down on me? That's. That's a lot of trust. I'm going to fix a bug so I don't cry."`, "happy", {
       dryPowder: -1.5,
       rel: { ines: 8 },
       marks: 4,
       setFlags: ["invested_ines", "ines_followon"],
       glossary: ["pro-rata", "reserves"],
     }),
-    ch("advise", `Join her call, no check, just advice`, `I wasn't ready to say the numbers out loud. Now I am. Thanks.`, "happy", {
+    ch("advise", `Join her call, no check, just advice`, `"I wasn't ready to say the numbers out loud. Now I am. Thanks."`, "happy", {
       rel: { ines: 10 },
       wellbeing: -3,
       setFlags: ["ines_advised"],
     }, { energyCost: 1 }),
-    ch("best", `Tell her to take the best offer`, `Okay. That's a very fair thing to say. I'll... take the best offer. Thanks.`, "neutral", {
+    ch("best", `Tell her to take the best offer`, `"Okay. That's a very fair thing to say. I'll... take the best offer. Thanks."`, "neutral", {
       rel: { ines: 3 },
       rep: 1,
       setFlags: ["ines_independent"],
@@ -805,19 +805,19 @@ const inesArc3: GameEvent = {
   speaker: "ines",
   kind: "call",
   subject: "We hit a billion (on paper) (I think)",
-  setup: `We hit a billion. On paper. A big one. I asked the team what that means and they hugged me. I wanted to say something. So. Thank you. You showed up first. The sticker is on my laptop too.`,
+  setup: `"We hit a billion. On paper. A big one. I asked the team what that means and they hugged me. I wanted to say something. So. Thank you. You showed up first. The sticker is on my laptop too."`,
   portrait: "unicorn",
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("cry", `Cry, professionally`, `You cry. She cries. A unicorn flickers on the screen. It is, impossibly, ten out of ten.`, "happy", {
+    ch("cry", `Cry, professionally`, `You cry. She cries. The unicorn sticker on her laptop catches the light. Ten out of ten.`, "happy", {
       marks: 15,
       rep: 4,
       rel: { ines: 10 },
       badge: "unicorn-whisperer",
       setFlags: ["ines_unicorn"],
     }),
-    ch("mark", `Say: mark it, carefully. Finch is watching.`, `Of course. Footnotes first. Then confetti. Okay. Confetti second.`, "happy", {
+    ch("mark", `Say: mark it, carefully. Finch is watching.`, `"Of course. Footnotes first. Then confetti. Okay. Confetti second."`, "happy", {
       marks: 8,
       rep: 3,
       compliance: -3,
@@ -825,7 +825,7 @@ const inesArc3: GameEvent = {
       badge: "unicorn-whisperer",
       setFlags: ["ines_unicorn"],
     }),
-    ch("pizza", `Ask for a pizza party for the whole team`, `They would LOVE that. They don't know how to ask for things either. It's contagious.`, "happy", {
+    ch("pizza", `Ask for a pizza party for the whole team`, `"They would LOVE that. They don't know how to ask for things either. It's contagious."`, "happy", {
       marks: 12,
       rep: 3,
       wellbeing: 6,
@@ -854,20 +854,20 @@ const chadLinkedin: GameEvent = {
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("clap", `Comment: "Congrats! Interesting term sheet, Chad."`, `Oh, a comment. Under MY post. With the ratio incoming. Bold. Love the engagement.`, "grumpy", {
+    ch("clap", `Comment: "Congrats! Interesting term sheet, Chad."`, `"Oh, a comment. Under MY post. With the ratio incoming. Bold. Love the engagement."`, "grumpy", {
       rep: -2,
       wellbeing: 3,
       rel: { chad: -6 },
       setFlags: ["chad_feud"],
       seeds: [{ id: "chad-feud", bloom: "s_founders_cringe", afterQuarters: 1, label: "A comment, sitting in the wind" }],
     }, { replyPortrait: "annoyed" }),
-    ch("grace", `Like it, comment: "Congrats, Chad! Great team."`, `Wow. Gracious. I... don't know what to do with that. I'll screenshot it.`, "neutral", {
+    ch("grace", `Like it, comment: "Congrats, Chad! Great team."`, `"Wow. Gracious. I... don't know what to do with that. I'll screenshot it."`, "neutral", {
       rep: 2,
       wellbeing: -2,
       setFlags: ["chad_gracious"],
       seeds: [{ id: "chad-graceful", bloom: "s_founders_cheer", afterQuarters: 1, label: "A kind comment, floating" }],
     }, { replyPortrait: "smug" }),
-    ch("ignore", `Mute the post, mute the TV, make tea`, `The TV goes silent. The tea is perfect. Chad is still posting, somewhere, to no one.`, "neutral", {
+    ch("ignore", `Mute the post, mute the TV, make tea`, `The TV goes quiet. The tea is perfect. Somewhere, Chad is still posting.`, "neutral", {
       rep: 1,
       wellbeing: 6,
       setFlags: ["chad_ignored"],
@@ -885,7 +885,7 @@ const foundersCheer: GameEvent = {
   speaker: "system",
   kind: "email",
   subject: "FWD: you're trending in the founder chat (nicely)",
-  setup: `A founder group chat leaked: "The GP who didn't clap back at Chad? First call from now on." Fourteen hearts. A gif of a cat in a tiny suit. Someone typed "legend". Someone typed "she just sat there. iconic."`,
+  setup: `A founder group chat leaked: "The GP who didn't clap back at Chad? First call from now on." Fourteen hearts. A gif of a cat in a tiny suit. Someone typed "legend". Someone typed "no clapback. iconic."`,
   illustration: E("bloom-08a-founders-cheering"),
   mode: "quick",
   choices: [
@@ -979,15 +979,15 @@ const bankFrantic: GameEvent = {
   speaker: "priya",
   kind: "call",
   subject: "Hold music (Vivaldi, day 3)",
-  setup: `We spent three days calling the bank from your desk phone. It has a dent. We got the money out eventually. "Eventually" is doing a lot of work in that sentence. I would like a nap and a policy.`,
+  setup: `"We spent three days calling the bank from your desk phone. It has a dent. We got the money out eventually. ‘Eventually’ is doing a lot of work in that sentence. I would like a nap and a policy."`,
   portrait: "twitchy",
   illustration: E("bloom-09b-frantic-phone"),
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("home", `Send everyone home; try again at 9 sharp`, `Home. Sleep. The hold music will hold. We'll resume. This is humane. I am grateful.`, "happy", { rel: { priya: 4 }, wellbeing: 4, cash: -0.5 }),
-    ch("camp", `Camp by the phone until it picks up`, `You hold. You hold again. At 3am a human says "hello?" and you almost weep. Recovery: mostly.`, "worried", { wellbeing: -6, cash: 0.5, compliance: -3 }, { energyCost: 1 }),
-    ch("tv", `Blame the TV (it said "totally different")`, `The TV does not respond. It never does. It only wobbles.`, "grumpy", { rep: -1, rel: { priya: -2 }, wellbeing: 2 }),
+    ch("home", `Send everyone home; try again at 9 sharp`, `"Home. Sleep. The hold music will hold. We'll resume. This is humane. I am grateful."`, "happy", { rel: { priya: 4 }, wellbeing: 4, cash: -0.5 }),
+    ch("camp", `Camp by the phone until it picks up`, `You hold. You hold again. At 3am a human says ‘hello?’ and you almost weep. Most of the money comes back.`, "worried", { wellbeing: -6, cash: 0.5, compliance: -3 }, { energyCost: 1 }),
+    ch("tv", `Blame the TV (it said "totally different")`, `The TV does not respond. It never does. Priya stares at you until you look away.`, "grumpy", { rep: -1, rel: { priya: -2 }, wellbeing: 2 }),
   ],
   ignored: { cash: -1, wellbeing: -3 },
   bloomOf: "bank-frantic",
@@ -1004,12 +1004,12 @@ const kenjiDdq: GameEvent = {
   speaker: "kenji",
   kind: "email",
   subject: "Due diligence questionnaire (214 questions, some with parts a-f)",
-  setup: `Hello! I have a few questions. 214, with parts (a) through (f). Please include your ESG policy, your pet policy, and "describe your culture in three colors". Fund II is "under consideration". No pressure.`,
+  setup: `"Hello! I have a few questions. 214, with parts (a) through (f). Please include your ESG policy, your pet policy, and ‘describe your culture in three colors’. Fund II is ‘under consideration’. No pressure."`,
   illustration: E("setup-10-endless-scroll"),
   mode: "meeting",
   meetingCost: 2,
   choices: [
-    ch("full", `Answer all 214 (it will cost real energy)`, `Wonderful! Question 215 is a follow-up. I'm joking. Welcome to Fund II, tentatively. I may cry. It is a spreadsheet cry.`, "happy", {
+    ch("full", `Answer all 214 (it will cost real energy)`, `"Wonderful! Question 215 is a follow-up. I'm joking. Welcome to Fund II, tentatively. I may cry. It is a spreadsheet cry."`, "happy", {
       rel: { kenji: 12 },
       rep: 2,
       wellbeing: -6,
@@ -1017,13 +1017,13 @@ const kenjiDdq: GameEvent = {
       setFlags: ["kenji_commit"],
       seeds: [{ id: "kenji-fund2", bloom: "s_kenji_commit", afterQuarters: 2, label: "A very long review" }],
     }, { energyCost: 1, replyPortrait: "delighted" }),
-    ch("main", `Answer the 60 that matter; attach last year's`, `Reasonable. I will count the other 154 as "reviewed in spirit". My supervisor will not.`, "neutral", {
+    ch("main", `Answer the 60 that matter; attach last year's`, `"Reasonable. I will count the other 154 as ‘reviewed in spirit’. My supervisor will not."`, "neutral", {
       rel: { kenji: 3 },
       wellbeing: -2,
       compliance: 2,
       setFlags: ["kenji_partial"],
     }),
-    ch("room", `Send him to the data room: "see folder 7"`, `Folder 7 is empty. I'll note that. In the appendix. Which will be 40 pages.`, "grumpy", {
+    ch("room", `Send him to the data room: "see folder 7"`, `"Folder 7 is empty. I'll note that. In the appendix. Which will be 40 pages."`, "grumpy", {
       rel: { kenji: -8 },
       compliance: 3,
       rep: -1,
@@ -1032,6 +1032,7 @@ const kenjiDdq: GameEvent = {
   ],
   ignored: { rel: { kenji: -4 }, rep: -1 },
   when: { quarters: [2, 3, 4], weeks: [3, 4, 5, 6, 7] },
+  teaches: ["ddq"],
 };
 
 const kenjiCommit: GameEvent = {
@@ -1122,28 +1123,28 @@ const priyaTalk: GameEvent = {
   kind: "sticky",
   subject: "We need to talk about the reconciliation",
   setup: {
-    default: `We need to talk about the reconciliation. There are 41 unmatched items. One is "Misc". One is "Misc (2)". One is a $9 charge labelled "dog". We do not have a dog.`,
-    mood: { worried: `We need to talk. Not "talk" talk. Reconciliation talk. 41 unmatched items. Including "Misc (3)". My eye has a thing it does now.` },
+    default: `"We need to talk about the cash reconciliation. The bank says one thing, our books say another, and 41 items don't match. One is ‘Misc’. One is ‘Misc (2)’. One is a $9 charge labelled ‘dog’. We do not have a dog."`,
+    mood: { worried: `"We need to talk. Not ‘talk’ talk. Reconciliation talk. 41 unmatched items. Including ‘Misc (3)’. My eye has a thing it does now."` },
   },
   portrait: "twitchy",
   illustration: E("setup-12-single-sticky-note"),
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("clean", `Block a clean-up week with Priya`, `Thank you. I brought labels. And a second pair of labels, in case the first pair fail.`, "happy", {
+    ch("clean", `Block a clean-up week with Priya`, `"Thank you. I brought labels. And a second pair of labels, in case the first pair fail."`, "happy", {
       compliance: -15,
       rel: { priya: 10 },
       wellbeing: -3,
       setFlags: ["cleanup_started"],
       seeds: [{ id: "cleanup", bloom: "s_tidy_cabinet", afterQuarters: 1, label: "A cabinet, quietly sorting" }],
     }, { energyCost: 1, replyPortrait: "serious" }),
-    ch("temp", `Hire a temp to help (costs firm cash)`, `A temp. Brave. I will train them in the sacred arts. Please keep them away from the dog charge.`, "neutral", {
+    ch("temp", `Hire a temp to help (costs firm cash)`, `"A temp. Brave. I will train them in the sacred arts. Please keep them away from the dog charge."`, "neutral", {
       cash: -2,
       compliance: -8,
       rel: { priya: 3 },
       setFlags: ["cleanup_temp"],
     }),
-    ch("brush", `It's fine, we'll sort it at quarter close`, `...Understood. I will write it down. In the margins. Of a folder. That you will not open.`, "worried", {
+    ch("brush", `It's fine, we'll sort it at quarter close`, `"...Understood. I will write it down. In the margins. Of a folder. That you will not open."`, "worried", {
       compliance: 6,
       rel: { priya: -8 },
       mood: { priya: "worried" },
@@ -1152,7 +1153,7 @@ const priyaTalk: GameEvent = {
   ],
   ignored: { compliance: 5, rel: { priya: -3 }, overlay: "messy-desk" },
   when: { cond: { minCompliance: 55 } },
-  teaches: ["fund-vs-mgmt-expense"],
+  teaches: ["reconciliation"],
 };
 
 const tidyCabinet: GameEvent = {
@@ -1162,7 +1163,7 @@ const tidyCabinet: GameEvent = {
   speaker: "priya",
   kind: "sticky",
   subject: "Sticky note: everything matches",
-  setup: `Every item matched. The tabs are color-coded. The filing cabinet closes, and closes quietly. Mr. Finch would weep. I may weep. The dog charge was a dog treat. For your dog. I owe you an apology.`,
+  setup: `Every item matched. The tabs are color-coded. The filing cabinet closes, and closes quietly. Mr. Finch would weep. I may weep. The dog charge was Brooke's. Her dog came to a board meeting. I moved it to the management company. Brooke owes me a dog treat.`,
   portrait: "happy",
   illustration: E("bloom-12-tidy-filing-cabinet"),
   mode: "quick",
@@ -1184,8 +1185,8 @@ const k1Pile: GameEvent = {
   title: "K-1 season begins",
   speaker: "priya",
   kind: "sticky",
-  subject: "K-1s due: 18 LPs, 3 states, 1 printer",
-  setup: `K-1 season. The printer is jammed. LP #14 moved states. LP #9 moved countries. LP #3 is "Ricky, who has asked what a K-1 is, twice." Start now, or wait for the extension?`,
+  subject: "K-1s due: 9 LPs, 4 states, 1 printer",
+  setup: `K-1 season. The printer is jammed. Oakmont moved states. Dr. Alvarez moved countries. Ricky has asked what a K-1 is, twice. Do we start now, or file for the extension?`,
   portrait: "worried",
   mode: "quick",
   choices: [
@@ -1268,7 +1269,7 @@ const auditY1: GameEvent = {
   mode: "meeting",
   meetingCost: 2,
   choices: [
-    ch("clean", `Hand over the neat binder (Priya's labels)`, `...No findings. I am almost moved. Almost. I will unfold the desk anyway, for comfort.`, "happy", {
+    ch("clean", `Hand over the neat binder (Priya's labels)`, `"...No findings. I am almost moved. Almost. I will unfold the desk anyway, for comfort."`, "happy", {
       rel: { finch: 10, priya: 5 },
       rep: 4,
       compliance: -5,
@@ -1277,7 +1278,7 @@ const auditY1: GameEvent = {
       setFlags: ["audit_clean"],
       overlay: "audit-corner",
     }, { cond: { maxCompliance: 40 }, replyPortrait: "approving" }),
-    ch("box", `Hand over a banker's box of unsorted receipts`, `Mm. I will need a larger desk. And a second pair of glasses. And possibly a day off.`, "worried", {
+    ch("box", `Hand over a banker's box of unsorted receipts`, `"Mm. I will need a larger desk. And a second pair of glasses. And possibly a day off."`, "worried", {
       rel: { finch: -3 },
       wellbeing: -6,
       rep: -2,
@@ -1285,7 +1286,7 @@ const auditY1: GameEvent = {
       setFlags: ["audit_messy"],
       overlay: "audit-corner",
     }, { cond: { minCompliance: 41 }, replyPortrait: "sigh" }),
-    ch("coffee", `Offer coffee and full cooperation`, `Coffee. Noted. I will say that cooperation is a more modest virtue than tidiness. But I will take the coffee.`, "neutral", {
+    ch("coffee", `Offer coffee and full cooperation`, `"Coffee. Noted. I will say that cooperation is a more modest virtue than tidiness. But I will take the coffee."`, "neutral", {
       rel: { finch: 5 },
       wellbeing: -3,
       compliance: -3,
@@ -1295,6 +1296,7 @@ const auditY1: GameEvent = {
   ],
   ignored: { compliance: 6, rep: -2, overlay: "audit-corner" },
   when: { quarters: [1], weeks: [5, 6] },
+  teaches: ["audit"],
 };
 
 const auditY2: GameEvent = {
@@ -1324,13 +1326,13 @@ const annualLp = (id: string, quarter: number, title: string, setup: Line, extra
   mode: "meeting",
   meetingCost: 2,
   choices: [
-    ch("real", `Show the real numbers, flat and honest`, `A flat deck. Flat is respectable. No adjectives. I applaud. Silently. With my pen.`, "happy", {
+    ch("real", `Show the real numbers, flat and honest`, `"A plain deck. No adjectives. I approve." Margaret taps her pen twice. From her, that is applause.`, "happy", {
       rep: 4,
       rel: { margaret: 6, brooke: -2 },
       compliance: -3,
       glossary: ["tvpi", "dpi"],
     }),
-    ch("polish", `Polish the deck; lead with the good news`, `A sparkly deck. Many gradients. Ricky points at a pie chart and says, "Is that pie?"`, "neutral", {
+    ch("polish", `Polish the deck; lead with the good news`, `A sparkly deck with lots of gradients. Ricky points at a pie chart. "Is that pie?"`, "neutral", {
       rep: 2,
       compliance: 5,
       rel: { brooke: 4, margaret: -2 },
@@ -1347,8 +1349,8 @@ const annualLpY1 = annualLp(
   2,
   "Annual LP meeting",
   {
-    default: `Folding chairs. 14 LPs. Ricky front row with a notebook. Margaret on the aisle with a red pen. The TV beams in three remote LPs, one of whom is on mute. The coffee urn is... ambitious. It is your meeting.`,
-    flags: { ricky_advocate: `Folding chairs. 14 LPs. Ricky front row. His name tag says "FINANCE GUY". Margaret on the aisle with a red pen. Two remote LPs are on mute, one has a cat on camera.` },
+    default: `Folding chairs. Fourteen people from nine LPs. Ricky front row with a notebook. Margaret on the aisle with a red pen. The TV beams in three remote LPs, one of whom is on mute. The coffee urn is... ambitious. It is your meeting.`,
+    flags: { ricky_advocate: `Folding chairs. Fourteen people from nine LPs. Ricky front row. His name tag says ‘FINANCE GUY’. Margaret on the aisle with a red pen. Two remote LPs are on mute, one has a cat on camera.` },
   },
   [
     ch("toast", `Let Ricky give the opening toast`, `Ricky stands and tears up. "I didn't know what DPI was. Now I do. To DPI." Applause. A sniffle from the back.`, "happy", {
@@ -1365,7 +1367,7 @@ const annualLpY2 = annualLp(
   6,
   "The second annual meeting",
   {
-    default: `Folding chairs again, now with slightly better folding. The TV shows 22 remote LPs. Margaret's red pen has been replaced by a red pen of higher quality. Ricky has a laser pointer. Please, no one let him have the laser pointer.`,
+    default: `Folding chairs again, now with slightly better folding. The TV shows six remote guests. Margaret's red pen has been replaced by a red pen of higher quality. Ricky has a laser pointer. Please, no one let him have the laser pointer.`,
     flags: {
       margaret_anchor: `Folding chairs. Margaret sits in the front row, red pen capped. Your framed letter is on the table behind you. Ricky has a laser pointer. Please, no one let him have the laser pointer.`,
       kenji_commit: `Folding chairs. Kenji joins on the TV with a 214-page appendix and a thumbs-up. Margaret nods. Ricky points a laser pointer at the pie chart. It trembles.`,
@@ -1388,12 +1390,12 @@ const holidayY1: GameEvent = {
   speaker: "ricky",
   kind: "sticky",
   subject: "Holiday party in your office (I bring the eggnog)",
-  setup: `Snow on the window. Paper snowflakes on the TV. Ricky brought eggnog, a speaker, and a playlist called "Finance Jams". Priya is wearing a very tiny hat. Brooke is on the stapler, plotting karaoke.`,
+  setup: `Snow on the window. Paper snowflakes on the TV. Ricky brought eggnog, a speaker, and a playlist called ‘Finance Jams’. Priya is wearing a very tiny hat. Brooke is on the stapler, plotting karaoke.`,
   portrait: "happy-hour",
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("toast", `Give a short, warm toast to the whole crew`, `A toast: "To DPI, to clean books, to napkins that become policy." Everyone cheers. Priya almost smiles.`, "happy", {
+    ch("toast", `Give a short, warm toast to the whole crew`, `Your toast is short: to DPI, to clean books, to the people in this room. Everyone cheers. Priya almost smiles.`, "happy", {
       overlay: "holiday-party",
       wellbeing: 6,
       rep: 1,
@@ -1485,12 +1487,12 @@ const lawyerMfn: GameEvent = {
   speaker: "lawyer",
   kind: "email",
   subject: "New LP wants a side letter (clock started: 2.5 hrs)",
-  setup: `A new LP wants a side letter: a fee discount, plus an "MFN". Most Favored Nation, not a country. I have started the clock explaining it. 2.5 hours so far. For the explanation. Of the clause. About favors.`,
+  setup: `"A new LP wants a side letter: a fee discount, plus an ‘MFN’. Most Favored Nation, not a country. I have started the clock explaining it. 2.5 hours so far. For the explanation. Of the clause. About favors."`,
   portrait: "billing",
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("cap", `Grant the fee break but cap the MFN`, `A capped MFN. Elegant. Billing: 3.1 hours. It is a little work of art.`, "neutral", {
+    ch("cap", `Grant the fee break but cap the MFN`, `"A capped MFN. Elegant. Billing: 3.1 hours. It is a little work of art."`, "neutral", {
       cash: -1,
       rep: 2,
       compliance: -2,
@@ -1498,14 +1500,14 @@ const lawyerMfn: GameEvent = {
       setFlags: ["sideletter_capped"],
       glossary: ["side-letter", "mfn"],
     }),
-    ch("no", `Decline politely; same terms as everyone`, `A polite no. Simple. Clean. Under budget at 1.2 hours. I'll bill you for being efficient.`, "neutral", {
+    ch("no", `Decline politely; same terms as everyone`, `"A polite no. Simple. Clean. Under budget at 1.2 hours. I'll bill you for being efficient."`, "neutral", {
       rep: -1,
       compliance: -3,
       rel: { lawyer: -1 },
       setFlags: ["sideletter_declined"],
       glossary: ["side-letter", "mfn"],
     }),
-    ch("all", `Grant everything; the MFN goes to everyone`, `Every LP now has the right to elect the best terms of any other LP. The clause is called "the gift that keeps giving". I'll bill for the clause.`, "worried", {
+    ch("all", `Grant everything; the MFN goes to everyone`, `"Every LP now has the right to elect the best terms of any other LP. The clause is called ‘the gift that keeps giving’. I'll bill for the clause."`, "worried", {
       cash: -2.5,
       rep: 3,
       compliance: 6,
@@ -1531,13 +1533,13 @@ const callowayExam: GameEvent = {
   mode: "meeting",
   meetingCost: 2,
   choices: [
-    ch("organized", `Hand over everything, organized`, `Everything is organized. Even the manual has a manual. I find... nothing to find. Good afternoon.`, "happy", {
+    ch("organized", `Hand over everything, organized`, `"Everything is organized. Even the manual has a manual. I find... nothing to find. Good afternoon."`, "happy", {
       compliance: -8,
       rep: 3,
       rel: { calloway: 6 },
       setFlags: ["calloway_clean"],
     }, { cond: { maxCompliance: 45 }, replyPortrait: "satisfied" }),
-    ch("scramble", `Hand over everything, in the box labelled "misc"`, `A box. Labelled "misc". I will need an entire week. And a thermos.`, "worried", {
+    ch("scramble", `Hand over everything, in the box labelled "misc"`, `"A box. Labelled ‘misc’. I will need an entire week. And a thermos."`, "worried", {
       compliance: -4,
       rep: -3,
       wellbeing: -8,
@@ -1587,21 +1589,21 @@ const margaretRetire1: GameEvent = {
   speaker: "margaret",
   kind: "call",
   subject: "A private matter (tea, if you have it)",
-  setup: `I am, ahem, retiring. In two years. I am telling you first because you are tidy. My successor is a bright man named Theo who uses emoji. In a formal context. I have questions about this.`,
+  setup: `"I am, ahem, retiring. In two years. I am telling you first because you are tidy. My successor is a bright man named Theo who uses emoji. In a formal context. I have questions about this."`,
   portrait: "retirement",
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("irreplaceable", `Tell her she's irreplaceable (it's true)`, `Flattery is a poor currency. But it is accepted. In this case, at a favorable rate.`, "happy", {
+    ch("irreplaceable", `Tell her she's irreplaceable (it's true)`, `"Flattery is a poor currency. But it is accepted. In this case, at a favorable rate."`, "happy", {
       rel: { margaret: 6 },
       wellbeing: 3,
       setFlags: ["margaret_retire_known"],
     }),
-    ch("theo", `Ask what Theo needs to see from a manager`, `Clarity. A cover page. An index. And "no adjectives". He will love you. He will tell you he does not.`, "happy", {
+    ch("theo", `Ask what Theo needs to see from a manager`, `"Clarity. A cover page. An index. And ‘no adjectives’. He will love you. He will tell you he does not."`, "happy", {
       rel: { margaret: 8 },
       setFlags: ["margaret_retire_known", "margaret_coaching"],
     }),
-    ch("who", `Ask who she'd recommend for Fund II`, `Direct. I approve of direct. But not today. Today is for tea.`, "neutral", {
+    ch("who", `Ask who she'd recommend for Fund II`, `"Direct. I approve of direct. But not today. Today is for tea."`, "neutral", {
       rel: { margaret: 2 },
       rep: 1,
       setFlags: ["margaret_retire_known"],
@@ -1618,12 +1620,12 @@ const margaretRetire2: GameEvent = {
   speaker: "margaret",
   kind: "call",
   subject: "Theo is visiting (he has a vest)",
-  setup: `Theo is visiting. He has a vest. I have asked him to read every report you send. Tell him one thing about how you work. One. Do not use the word "synergy". He is allergic.`,
+  setup: `"Theo is visiting. He has a vest. I have asked him to read every report you send. Tell him one thing about how you work. One. Do not use the word ‘synergy’. He is allergic."`,
   portrait: "neutral",
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("honest", `"Radical transparency, even when it stings."`, `Theo writes it down. Then crosses out "radical". Then writes "reasonable". Margaret nods.`, "happy", {
+    ch("honest", `"Radical transparency, even when it stings."`, `Theo writes it down. Crosses out ‘radical’. Writes ‘reasonable’. Margaret nods, satisfied.`, "happy", {
       rep: 3,
       rel: { margaret: 6 },
       setFlags: ["theo_met"],
@@ -1633,7 +1635,7 @@ const margaretRetire2: GameEvent = {
       rel: { margaret: 8 },
       setFlags: ["theo_met"],
     }, { cond: { flag: "margaret_anchor" } }),
-    ch("coffee", `Offer Theo coffee and a data room login`, `A data room login. He kisses it. Not literally. But the face did.`, "neutral", {
+    ch("coffee", `Offer Theo coffee and a data room login`, `Theo holds the data room login like a gift. Margaret: "He'll read all of it tonight. He's that sort."`, "neutral", {
       rel: { margaret: 4 },
       compliance: -2,
       setFlags: ["theo_met"],
@@ -1650,17 +1652,17 @@ const margaretRecommend: GameEvent = {
   speaker: "margaret",
   kind: "call",
   subject: "A recommendation (printed, with margins)",
-  setup: `My last act as CIO is a recommendation letter to Theo. I wrote it in the margins of your own report. It says, in part: "Reliable. Tidy. Kind to Ricky." I could not improve upon it.`,
+  setup: `"My last act as CIO is a recommendation letter to Theo. I wrote it in the margins of your own report. It says, in part: ‘Reliable. Tidy. Kind to Ricky.’ I could not improve upon it."`,
   portrait: "retirement",
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("gratitude", `Accept with deep gratitude`, `You are welcome. And you have been a good and tidy colleague. Do not cry in my office. Use the hallway.`, "happy", {
+    ch("gratitude", `Accept with deep gratitude`, `"You are welcome. And you have been a good and tidy colleague. Do not cry in my office. Use the hallway."`, "happy", {
       rep: 6,
       rel: { margaret: 8 },
       setFlags: ["margaret_recommended"],
     }),
-    ch("aloud", `Ask her to read it aloud`, `She reads it aloud. Then pauses. Then reads it again. Her voice goes, for a half-second, soft. Priya passes you a tissue, silently.`, "happy", {
+    ch("aloud", `Ask her to read it aloud`, `She reads it aloud, then reads it again. For half a second her voice goes soft. Priya, in the doorway, passes you a tissue.`, "happy", {
       rep: 5,
       rel: { margaret: 10 },
       wellbeing: 5,
@@ -1681,23 +1683,23 @@ const rickyLearn1: GameEvent = {
   speaker: "ricky",
   kind: "call",
   subject: "I BOUGHT A NOTEBOOK (lessons??)",
-  setup: `Teach me finance! I bought a notebook. On page 1 I wrote "TVPI" and drew a pony. Can we do lessons? Tuesdays? I'll bring a thermos. A thermos of coffee. Not money. Although a thermos of money would be nice.`,
+  setup: `"Teach me finance! I bought a notebook. On page 1 I wrote ‘TVPI’ and drew a pony. Can we do lessons? Tuesdays? I'll bring a thermos. A thermos of coffee. Not money. Although a thermos of money would be nice."`,
   portrait: "excited",
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("weekly", `Weekly lunch-and-learn (costs real energy)`, `TUESDAYS! Aunt Carol is bringing a folding chair! This is the best thing that has happened to me since the grandkids!`, "happy", {
+    ch("weekly", `Weekly lunch-and-learn (costs real energy)`, `"TUESDAYS! Aunt Carol is bringing a folding chair! This is the best thing that has happened to me since the grandkids!"`, "happy", {
       rel: { ricky: 10 },
       wellbeing: -2,
       setFlags: ["ricky_student"],
       glossary: ["tvpi", "irr"],
     }, { energyCost: 1 }),
-    ch("once", `One lesson: the basics`, `One lesson! Okay! I'll write it ALL down! Even the parts I don't get!`, "happy", {
+    ch("once", `One lesson: the basics`, `"One lesson! Okay! I'll write it ALL down! Even the parts I don't get!"`, "happy", {
       rel: { ricky: 5 },
       setFlags: ["ricky_student"],
       glossary: ["tvpi"],
     }),
-    ch("books", `Send him a book list`, `A list... of books. A READING list. I'll do my best. Is there a movie version?`, "neutral", {
+    ch("books", `Send him a book list`, `"A list... of books. A READING list. I'll do my best. Is there a movie version?"`, "neutral", {
       rel: { ricky: 1 },
       setFlags: ["ricky_bookworm"],
     }),
@@ -1741,19 +1743,19 @@ const rickyHappyHour: GameEvent = {
   speaker: "ricky",
   kind: "call",
   subject: "I'M HOSTING AN LP HAPPY HOUR (there's a deck, it has clipart)",
-  setup: `I'm hosting an LP happy hour! At my house! There's a deck! It has clipart! Margaret says she'll come if there's a chair. Can you give a ten-minute talk? About DPI? You know DPI.`,
+  setup: `"I'm hosting an LP happy hour! At my house! There's a deck! It has clipart! Margaret says she'll come if there's a chair. Can you give a ten-minute talk? About DPI? You know DPI."`,
   portrait: "happy-hour",
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("talk", `Give the talk (with a dry powder pun)`, `The pun lands. "Dry powder? Ha! Dry... ha." Applause. The cheese plate is thrilled. So is Ricky.`, "happy", {
+    ch("talk", `Give the talk (with a dry powder pun)`, `Your dry-powder pun lands. Mostly. Applause. The cheese plate is a hit. So is Ricky.`, "happy", {
       rep: 4,
       rel: { ricky: 10 },
       wellbeing: -2,
       setFlags: ["ricky_happyhour", "fund2_family"],
       glossary: ["dry-powder", "dpi"],
     }),
-    ch("snacks", `Bring snacks and skip the talk`, `Snacks! Dips! A fruit that looks like a flower! Everyone is thrilled. Ricky gives the talk, sort of.`, "happy", {
+    ch("snacks", `Bring snacks and skip the talk`, `Snacks, dips, a fruit shaped like a flower. Everyone is thrilled. Ricky gives the talk himself, sort of.`, "happy", {
       rep: 2,
       rel: { ricky: 5 },
       setFlags: ["ricky_happyhour"],
@@ -1778,22 +1780,22 @@ const priyaDream: GameEvent = {
   speaker: "priya",
   kind: "sticky",
   subject: "Lunch? (I need to say something with my face normal)",
-  setup: `Lunch? I need to say something with my face in a normal position. I'm thinking about starting my own fund admin firm. "Calm Books LLC". I made a logo. It's a checkmark. Please do not laugh. Please laugh a little.`,
+  setup: `"Lunch? I need to say something with my face in a normal position. I'm thinking about starting my own fund admin firm. ‘Calm Books LLC’. I made a logo. It's a checkmark. Please do not laugh. Please laugh a little."`,
   portrait: "serious",
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("crush", `Tell her she would crush it`, `Thank you. I will remember you said that. I will quote it. In a footnote.`, "happy", {
+    ch("crush", `Tell her she would crush it`, `"Thank you. I will remember you said that. I will quote it. In a footnote."`, "happy", {
       rel: { priya: 10 },
       wellbeing: 2,
       setFlags: ["priya_dream"],
     }),
-    ch("plan", `Ask what she'd charge and what she'd need`, `Fees: modest. Needs: a client, a printer, courage. I have two of those three.`, "neutral", {
+    ch("plan", `Ask what she'd charge and what she'd need`, `"Fees: modest. Needs: a client, a printer, courage. I have two of those three."`, "neutral", {
       rel: { priya: 6 },
       setFlags: ["priya_dream"],
       glossary: ["management-fee"],
     }),
-    ch("stay", `Ask her to stay through Fund II, selfishly`, `Understood. I will think. Quietly. In my own cabinet.`, "worried", {
+    ch("stay", `Ask her to stay through Fund II, selfishly`, `"Understood. I will think. Quietly. In my own cabinet."`, "worried", {
       rel: { priya: -3 },
       setFlags: ["priya_dream", "priya_asked_stay"],
     }),
@@ -1809,23 +1811,23 @@ const priyaLaunch: GameEvent = {
   speaker: "priya",
   kind: "sticky",
   subject: "I'm doing it (business cards enclosed)",
-  setup: `I'm doing it. Calm Books LLC. I have a business card and a printer. I have zero clients and one very specific mug. One more thing: you'd be a very good first client. It is fine if you say no. It is fine. It is a little not fine.`,
+  setup: `"I'm doing it. Calm Books LLC. I have a business card and a printer. I have zero clients and one very specific mug. One more thing: you'd be a very good first client. It is fine if you say no. It is fine. It is a little not fine."`,
   portrait: "launch",
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("client", `Yes: be her first client`, `Calm Books has a first client. It's you. I'm going to sit down. I'm already sitting down. I'm going to sit down more.`, "happy", {
+    ch("client", `Yes: be her first client`, `"Calm Books has a first client. It's you. I'm going to sit down. I'm already sitting down. I'm going to sit down more."`, "happy", {
       cash: -1,
       compliance: -6,
       rel: { priya: 12 },
       setFlags: ["priya_firstclient"],
     }),
-    ch("reference", `Wish her luck and offer a reference`, `A reference. Written. On letterhead? ...I'll frame it. It's going on the wall. Next to the checkmark.`, "happy", {
+    ch("reference", `Wish her luck and offer a reference`, `"A reference. Written. On letterhead? ...I'll frame it. It's going on the wall. Next to the checkmark."`, "happy", {
       rel: { priya: 6 },
       rep: 1,
       setFlags: ["priya_reference"],
     }),
-    ch("counter", `Counter: partner on Fund II's finance team`, `A partnership. With equity? With a title? With a printer? I will consider. Carefully. With labels.`, "neutral", {
+    ch("counter", `Counter: partner on Fund II's finance team`, `"A partnership. With equity? With a title? With a printer? I will consider. Carefully. With labels."`, "neutral", {
       cash: -1,
       rel: { priya: 8 },
       setFlags: ["priya_stays"],
@@ -1878,12 +1880,12 @@ const brookeSwing: GameEvent = {
   speaker: "brooke",
   kind: "email",
   subject: "BIG SWING (whiteboard attached, it is pigeons)",
-  setup: `Whiteboard time. A $3M check into a company that makes "AI for pigeons". Hear me out. Pigeons are everywhere. Big swing. I have already drawn the pigeon. The pigeon looks confident.`,
+  setup: `"Whiteboard time. A $3M check into a company that makes ‘AI for pigeons’. Hear me out. Pigeons are everywhere. Big swing. I have already drawn the pigeon. The pigeon looks confident."`,
   portrait: "whiteboard",
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("back", `Back the swing: $3M`, `THIS is why I'm your partner. The pigeon will remember this. I made you a pennant. It says BIG SWINGS ONLY.`, "happy", {
+    ch("back", `Back the swing: $3M`, `"THIS is why I'm your partner. The pigeon will remember this. I made you a pennant. It says BIG SWINGS ONLY."`, "happy", {
       dryPowder: -3,
       rel: { brooke: 10 },
       marks: 3,
@@ -1891,13 +1893,13 @@ const brookeSwing: GameEvent = {
       trinket: "brooke-pennant",
       setFlags: ["brooke_backed"],
     }),
-    ch("half", `Back it at $1M, with reserves for later`, `A million. And a reserve. A ... responsible pigeon. Okay. Fine. I'll take half a swing.`, "neutral", {
+    ch("half", `Back it at $1M, with reserves for later`, `"A million. And a reserve. A ... responsible pigeon. Okay. Fine. I'll take half a swing."`, "neutral", {
       dryPowder: -1,
       rel: { brooke: 4 },
       setFlags: ["brooke_half"],
       glossary: ["reserves"],
     }),
-    ch("pass", `Pass. Pigeons are not an asset class.`, `Not an asset class. I'm writing that down so I can be mad at it later.`, "grumpy", {
+    ch("pass", `Pass. Pigeons are not an asset class.`, `"Not an asset class. I'm writing that down so I can be mad at it later."`, "grumpy", {
       rel: { brooke: -8 },
       setFlags: ["brooke_passed"],
     }),
@@ -1913,22 +1915,22 @@ const brookeClash: GameEvent = {
   speaker: "brooke",
   kind: "call",
   subject: "Priya won't reimburse a napkin (tell her to relax)",
-  setup: `Priya won't sign the expense because the receipt is a napkin. A NAPKIN, I admit. But the napkin is from a founder dinner that closed a deal. Tell her to relax. Or tell me. One of us.`,
+  setup: `"Priya won't sign the expense because the receipt is a napkin. A NAPKIN, I admit. But the napkin is from a founder dinner that closed a deal. Tell her to relax. Or tell me. One of us."`,
   portrait: "tapping",
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("priya", `Side with Priya: no receipt, no reimbursement`, `Fine. Ketchup stain: unreimbursed. I'll send a grudge in a nice envelope.`, "grumpy", {
+    ch("priya", `Side with Priya: no receipt, no reimbursement`, `"Fine. The napkin goes unreimbursed. I'll send you a grudge. In a nice envelope."`, "grumpy", {
       rel: { priya: 8, brooke: -8 },
       compliance: -6,
       setFlags: ["sided_priya"],
     }),
-    ch("brooke", `Side with Brooke, just this once`, `YES. Big swings, small receipts. Priya, I love you, I'm sorry.`, "happy", {
+    ch("brooke", `Side with Brooke, just this once`, `"YES. Big swings, small receipts. Priya, I love you, I'm sorry."`, "happy", {
       rel: { brooke: 8, priya: -8 },
       compliance: 7,
       setFlags: ["sided_brooke"],
     }),
-    ch("policy", `Make a policy: napkins count if photographed and noted`, `A policy for napkins? Brilliant. Hated. I'll comply. I'll draw a smiley on the napkin.`, "neutral", {
+    ch("policy", `Make a policy: napkins count if photographed and noted`, `"A policy for napkins? Brilliant. Hated. I'll comply. I'll draw a smiley on the napkin."`, "neutral", {
       rel: { brooke: 3, priya: 3 },
       compliance: -3,
       setFlags: ["policy_napkin"],
@@ -1945,24 +1947,24 @@ const brookeLeave: GameEvent = {
   speaker: "brooke",
   kind: "sticky",
   subject: "Sticky note: Can we talk? (there's a box)",
-  setup: `There's a box on my desk. It has my pennant in it. I want bigger swings than this fund lets me take. I'm starting my own fund. Big Swing Capital. I made the logo. It's a swing. Come on, I know you love it.`,
+  setup: `"There's a box on my desk. It has my pennant in it. I want bigger swings than this fund lets me take. I'm starting my own fund. Big Swing Capital. I made the logo. It's a swing. Come on, I know you love it."`,
   portrait: "packing",
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("go", `Let her go with a handshake and a non-solicit`, `A handshake. And a non-solicit. You're a professional. I hate it. I respect it. I'll send you a swing basket.`, "neutral", {
+    ch("go", `Let her go with a handshake and a non-solicit`, `"A handshake. And a non-solicit. You're a professional. I hate it. I respect it. I'll send you a swing basket."`, "neutral", {
       rep: -2,
       rel: { brooke: 4 },
       setFlags: ["brooke_left", "brooke_rival"],
     }),
-    ch("stay", `Offer her a bigger carry share to stay`, `A bigger share? ...That's not nothing. Okay. One more fund. But I get the whiteboard. All the whiteboards.`, "happy", {
+    ch("stay", `Offer her a bigger carry share to stay`, `"A bigger share? ...That's not nothing. Okay. One more fund. But I get the whiteboard. All the whiteboards."`, "happy", {
       cash: -2,
       rel: { brooke: 10 },
       compliance: 3,
       setFlags: ["brooke_stays"],
       glossary: ["carry"],
     }),
-    ch("lp", `Wish her luck and offer to be her first LP`, `You're... backing me. From the OUTSIDE? That is the most unhinged, supportive thing I've ever heard. Deal.`, "happy", {
+    ch("lp", `Wish her luck and offer to be her first LP`, `"You're... backing me. From the OUTSIDE? That is the most unhinged, supportive thing I've ever heard. Deal."`, "happy", {
       rel: { brooke: 12 },
       rep: 1,
       dryPowder: -0.5,
@@ -1980,18 +1982,18 @@ const brookeStay: GameEvent = {
   speaker: "brooke",
   kind: "sticky",
   subject: "Sticky note: Fund II, but twice the size",
-  setup: `There's no box on my desk. There's a pennant. Fund II should be twice the size. I've drawn it on the whiteboard. It's a very big arrow. Pointing up. Say yes. Say a nice yes. Maybe a "let me think". No, say yes.`,
+  setup: `"There's no box on my desk. There's a pennant. Fund II should be twice the size. I've drawn it on the whiteboard. It's a very big arrow. Pointing up. Say yes. Say a nice yes. Maybe a ‘let me think’. No, say yes."`,
   portrait: "whiteboard",
   mode: "meeting",
   meetingCost: 1,
   choices: [
-    ch("yes", `Say yes to the big plan`, `I will put this on a mug. A mug with an arrow. YES. We swing.`, "happy", {
+    ch("yes", `Say yes to the big plan`, `"I will put this on a mug. A mug with an arrow. YES. We swing."`, "happy", {
       rep: 3,
       compliance: 3,
       rel: { brooke: 6 },
       setFlags: ["fund2_big"],
     }),
-    ch("sheet", `Ask for a spreadsheet first`, `A spreadsheet. With NUMBERS. Fine. I'll make a spreadsheet. It will have color.`, "neutral", {
+    ch("sheet", `Ask for a spreadsheet first`, `"A spreadsheet. With NUMBERS. Fine. I'll make a spreadsheet. It will have color."`, "neutral", {
       rel: { brooke: 3 },
       compliance: -3,
       setFlags: ["fund2_planned"],

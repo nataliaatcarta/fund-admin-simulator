@@ -30,7 +30,7 @@ export const TRINKETS: Record<string, { name: string; art: string; how: string }
 };
 
 export const ACHIEVEMENTS: Achievement[] = [
-  { id: "first-close", name: "First Close", how: "Send your first capital call.", icon: "props/badge-first-close.png" },
+  { id: "first-close", name: "First Capital Call", how: "Send your first capital call.", icon: "props/badge-first-close.png" },
   { id: "clean-capital-call", name: "Clean Capital Call", how: "Three stars on a Capital Call.", icon: "props/badge-clean-capital-call.png" },
   { id: "fraud-buster", name: "Fraud Buster", how: "Catch every fraud in a Wire Check.", icon: "props/badge-fraud-buster.png" },
   { id: "unicorn-whisperer", name: "Unicorn Whisperer", how: "Complete Ines' arc.", icon: "props/badge-unicorn-whisperer.png" },
