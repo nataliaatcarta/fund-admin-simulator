@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import type { Mood, NpcId } from "./types";
+import { NPCS } from "./npcs";
 import { personalize } from "./personalize";
 import { useGame } from "./state";
 
@@ -85,17 +86,45 @@ export interface SayProps {
   options?: { text: string; disabled?: boolean; hint?: string }[];
   /** narration panel: no speaker tag */
   narration?: boolean;
+  /** quoted line said by someone other than `npc` (e.g. Ricky's toast while Margaret visits) */
+  tag?: NpcId;
+  /** "New term" tip shown beside the dialogue the first time a concept comes up */
+  tip?: Tip[];
   /** don't wait for a click (returns immediately after typing) */
   video?: boolean;
 }
-/** Narration and speech get their own panels: quoted text is the speaker's (tagged), everything else is untagged narration. */
+export interface Tip { term: string; text: string; icon: string }
+
+const VOICES: [RegExp, NpcId][] = [
+  ...(Object.values(NPCS).filter((n) => n.id !== "lawyer" && n.id !== "associate").map((n) => [new RegExp(`\\b${n.short}\\b`, "g"), n.id] as [RegExp, NpcId])),
+  [/\b[Tt]he lawyer\b/g, "lawyer"],
+];
+/** The NPC named last in a stretch of narration: whoever is about to speak. */
+function lastNamed(s: string): NpcId | undefined {
+  let best: NpcId | undefined;
+  let at = -1;
+  for (const [re, id] of VOICES) for (const m of s.matchAll(re)) if (m.index! > at) { at = m.index!; best = id; }
+  return best;
+}
+/** Narration that leads into a quote ("...follows. Priya, from the doorway:") loses its short "who speaks" clause: the name tag says it. */
+function trimLeadIn(text: string): string {
+  if (!/[:,]$/.test(text)) return text;
+  const cut = text.search(/[^.!?)]*[:,]$/);
+  return text.slice(cut).trim().split(/\s+/).length <= 5 ? text.slice(0, cut).trim() : text.replace(/[:,]$/, ".");
+}
+
+/** Narration and speech get their own panels: quoted text is spoken (tagged with whoever was just named), everything else is untagged narration. */
 function panels(p: SayProps): SayProps[] {
   if (p.npc === "system") return [p];
   const out: SayProps[] = [];
+  let voice: NpcId | undefined;
   for (const m of p.text.matchAll(/["“]([^"”]*)["”]|([^"“”]+)/g)) {
     const quoted = m[1] !== undefined;
-    const text = personalize((quoted ? m[1] : m[2]).trim(), useGame.getState().g.player);
-    if (text) out.push({ ...p, text, narration: !quoted, options: undefined });
+    let text = personalize((quoted ? m[1] : m[2]).trim(), useGame.getState().g.player);
+    if (!quoted) { voice = lastNamed(text) ?? voice; text = trimLeadIn(text); }
+    if (!text) continue;
+    const tag = quoted && voice && voice !== p.npc ? voice : undefined;
+    out.push({ ...p, text, narration: !quoted, options: undefined, ...(tag ? { tag } : {}) });
   }
   if (!out.length) return [p];
   out[out.length - 1].options = p.options;

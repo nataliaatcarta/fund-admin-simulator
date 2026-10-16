@@ -5,6 +5,20 @@ const icon = (n: string) => `ui/icons/glossary/glossary-${n}.png`;
 
 export const GLOSSARY: GlossaryEntry[] = [
   {
+    id: "lp-gp",
+    term: "LPs and GP",
+    icon: icon("commitment"),
+    short: "LPs put money in the fund. The GP (you) decides how to invest it.",
+    long: `A venture fund is a partnership. The Limited Partners (LPs), like Margaret's endowment and Uncle Ricky, provide the money but have no say in day-to-day decisions. The General Partner (GP), you and Brooke, picks the investments, runs the fund and reports back. LPs trust you with their money; your job is to be worth that trust.`,
+  },
+  {
+    id: "lpa",
+    term: "LPA",
+    icon: icon("side-letter"),
+    short: "The Limited Partnership Agreement: the fund's rulebook.",
+    long: `The LPA is the contract every LP and the GP sign. It sets the fund size, the fees, how capital is called, what happens if someone pays late, and how profits are split. When anyone asks "are we allowed to do that?", the answer is somewhere in its 112 pages.`,
+  },
+  {
     id: "tvpi",
     term: "TVPI",
     icon: icon("tvpi"),
@@ -37,7 +51,7 @@ export const GLOSSARY: GlossaryEntry[] = [
     term: "Commitment",
     icon: icon("commitment"),
     short: "The amount an LP promises to invest over the life of the fund.",
-    long: `A commitment is a promise, not a deposit. Margaret's endowment might commit $4M of your $20M fund, and wire it only when you call capital. Commitments sum to the fund size, and they are legally binding, which is why late payers matter.`,
+    long: `A commitment is a promise, not a deposit. Margaret's endowment committed $5M of your $20M fund, and wires it a slice at a time, only when you call capital. Commitments sum to the fund size, and they are legally binding, which is why late payers matter.`,
   },
   {
     id: "capital-call",
@@ -72,7 +86,7 @@ export const GLOSSARY: GlossaryEntry[] = [
     term: "Management fee",
     icon: icon("management-fee"),
     short: "Annual fee the fund pays the GP to run the firm.",
-    long: `The management fee pays for salaries, rent, and Priya's labels. A typical rate is 2% of committed capital per year, so about $400K a year for your $20M fund. It is the firm's runway, which the game shows as months of cash.`,
+    long: `The management fee pays for salaries, rent, and Priya's labels. A typical rate is 2% of committed capital per year, so about $400K a year for your $20M fund. It is the firm's runway: the Runway meter shows how many months it keeps the lights on.`,
   },
   {
     id: "fund-vs-mgmt-expense",
@@ -107,7 +121,7 @@ export const GLOSSARY: GlossaryEntry[] = [
     term: "K-1",
     icon: icon("k1"),
     short: "The tax form telling each LP their share of fund income.",
-    long: `A K-1 reports each partner's share of the fund's income, gains and losses so they can file taxes. It is not a vitamin. A fund with 18 LPs across three states makes a very stressful March, and Priya starts it early.`,
+    long: `A K-1 reports each partner's share of the fund's income, gains and losses so they can file their own taxes. It is not a vitamin. A late K-1 means nine unhappy LPs and their accountants. Priya starts in January.`,
   },
   {
     id: "waterfall",
@@ -145,10 +159,66 @@ export const GLOSSARY: GlossaryEntry[] = [
     long: `A term sheet lays out valuation, check size, board seats, and rights, such as pro-rata, before lawyers write the long documents. It is mostly non-binding, but the terms that stick are the ones people argue about at 11pm.`,
   },
   {
+    id: "default",
+    term: "Default",
+    icon: icon("capital-call"),
+    short: "When an LP misses a capital call. The LPA sets the penalties.",
+    long: `If an LP does not pay a capital call by the due date, they are in default. The LPA usually allows interest, penalties, even losing part of their stake. Most funds start with a phone call and a reminder email, because most late payers are just late, like Ricky and his very safe drawer.`,
+  },
+  {
+    id: "distribution",
+    term: "Distribution",
+    icon: icon("dpi"),
+    short: "Money the fund sends back to LPs, usually after an exit.",
+    long: `When a portfolio company is sold, the fund gets cash and passes it back to the LPs, split by the waterfall. That is a distribution. It is the opposite of a capital call, it is what raises DPI, and it is the moment LPs remember most fondly.`,
+  },
+  {
+    id: "bridge",
+    term: "Bridge round",
+    icon: icon("dry-powder"),
+    short: "A small, quick investment to carry a startup to its next real round.",
+    long: `A bridge is short-term money from existing investors, to "bridge" a company to its next priced round. It can save a good company that is a few months short. It can also delay the end of a bad one. The question is always: bridge to where?`,
+  },
+  {
+    id: "quarter-close",
+    term: "Quarter close",
+    icon: icon("term-sheet"),
+    short: "Finishing the books for the quarter so the numbers can be reported.",
+    long: `Every quarter the fund closes its books: the cash is reconciled, the expenses are booked, the portfolio is valued and every LP's capital account is updated. The result goes out as the quarterly Financial Package. Skip steps and the report is wrong. Do them all and the report is boring, which is the goal.`,
+  },
+  {
+    id: "capital-account",
+    term: "Capital account (PCAP)",
+    icon: icon("commitment"),
+    short: "Each LP's running balance: paid in, gains or losses, distributions.",
+    long: `Every LP has a capital account: what they paid in, plus their share of gains and losses, minus fees and distributions. Each quarter they get a capital account statement, the PCAP, so they can see exactly where their money stands. Ricky reads his. Margaret audits hers.`,
+  },
+  {
+    id: "reconciliation",
+    term: "Cash reconciliation",
+    icon: icon("fund-vs-mgmt-expense"),
+    short: "Checking that the bank statement and the books agree, line by line.",
+    long: `The bank records what really moved. The fund's books, the general ledger, record what you think moved. Reconciling means matching every line between them and explaining every gap: a timing difference, a missing entry, or a $9 charge called "dog". Unmatched items are how mistakes and fraud hide.`,
+  },
+  {
+    id: "audit",
+    term: "Fund audit",
+    icon: icon("fund-vs-mgmt-expense"),
+    short: "An independent accountant checks the fund's yearly books.",
+    long: `Once a year an outside auditor, like Mr. Finch, tests the fund's financial statements: they ask for receipts, bank statements and proof for every valuation. A "clean opinion" tells LPs they can trust your numbers. A messy shoebox of receipts tells Mr. Finch to unfold his desk.`,
+  },
+  {
+    id: "ddq",
+    term: "DDQ",
+    icon: icon("term-sheet"),
+    short: "Due diligence questionnaire: what big LPs ask before investing.",
+    long: `Before a pension or endowment commits to a fund, its analysts send a due diligence questionnaire. It covers your team, process, controls, past results and, apparently, your pet policy. Answering it well is slow, and it is how institutional money decides to trust you.`,
+  },
+  {
     id: "j-curve",
     term: "J-curve",
     icon: icon("irr"),
     short: "Returns dip early (fees, write-offs), then rise as winners mature.",
-    long: `Early in a fund's life, fees are paid and companies are held at cost, so returns look negative. As winners grow, the line bends upward like a letter J. Do not panic in year one: Margaret has seen the J before and brings a pen.`,
+    long: `Early in a fund's life, fees are paid and companies are held at cost, so returns look negative. As winners grow, the line bends upward like a letter J. Do not panic in year one: Margaret has seen the J before. She brings a pen, not a lawyer.`,
   },
 ];

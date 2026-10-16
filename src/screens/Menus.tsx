@@ -229,17 +229,28 @@ export function Glossary({ inGame }: { inGame?: boolean }) {
   const unlocked = new Set(g.glossary);
   const people = ALL_NPCS.filter((n) => NPCS[n].core || g.npcs[n].rel !== 50 || true);
   const seenEvents = g.seen.map((id) => EVENT(id)).filter(Boolean).slice(-20);
-  const entries = tab === 0 ? GLOSSARY : tab === 1 ? people : seenEvents;
+  // learned terms first, then the locked ones; 20 tiles per page
+  const terms = [...GLOSSARY].sort((a, b) => Number(unlocked.has(b.id)) - Number(unlocked.has(a.id)));
+  const entries = tab === 0 ? terms : tab === 1 ? people : seenEvents;
+  const [page, setPage] = useState(0);
+  const PER = 20;
+  const pages = Math.max(1, Math.ceil(entries.length / PER));
   const back = () => (inGame ? useUi.getState().setPaused(false) : go("menu"));
   const cur = entries[sel] ?? entries[0];
   return (
     <div className="abs" style={{ inset: 0, pointerEvents: "auto", zIndex: inGame ? 60 : 1 }}>
       <Bg src="ui/screens/glossary.png" />
       {["Terms", "People", "Events"].map((t, i) => (
-        <div key={t}><BoxText box={[12 + i * 62, 9, 52, 11]} size={20} style={{ fontWeight: tab === i ? 700 : 400, textDecoration: tab === i ? "underline" : "none" }}>{t}</BoxText><Hit box={[12 + i * 62, 9, 52, 11]} onClick={() => { setTab(i); setSel(0); sfx.play("paper"); }} /></div>
+        <div key={t}><BoxText box={[12 + i * 62, 9, 52, 11]} size={20} style={{ fontWeight: tab === i ? 700 : 400, textDecoration: tab === i ? "underline" : "none" }}>{t}</BoxText><Hit box={[12 + i * 62, 9, 52, 11]} onClick={() => { setTab(i); setSel(0); setPage(0); sfx.play("paper"); }} /></div>
       ))}
-      {entries.slice(0, 20).map((e, i) => {
-        const x = 13 + (i % 5) * 36, y = 27 + Math.floor(i / 5) * 36;
+      {pages > 1 && [-1, 1].map((d) => (
+        <div key={d}><BoxText box={[d < 0 ? 210 : 280, 160, 26, 10]} size={18} style={{ opacity: page + d < 0 || page + d >= pages ? 0.3 : 1 }}>{d < 0 ? "‹ Prev" : "Next ›"}</BoxText>
+          <Hit box={[d < 0 ? 210 : 280, 160, 26, 10]} onClick={() => { const n = page + d; if (n >= 0 && n < pages) { setPage(n); setSel(n * PER); sfx.play("paper"); } }} /></div>
+      ))}
+      {pages > 1 && <BoxText box={[240, 160, 36, 10]} size={18}>{page + 1} / {pages}</BoxText>}
+      {entries.slice(page * PER, page * PER + PER).map((e, j) => {
+        const i = page * PER + j;
+        const x = 13 + (j % 5) * 36, y = 27 + Math.floor(j / 5) * 36;
         let icon: React.ReactNode, locked = false;
         if (tab === 0) { const en = e as (typeof GLOSSARY)[number]; locked = !unlocked.has(en.id); icon = <Sprite src={locked ? "ui/icons/glossary/glossary-locked.png" : en.icon} x={(x + 9) * A} y={(y + 9) * A} s={A} />; }
         else if (tab === 1) icon = <Portrait npc={e as NpcId} mood={g.npcs[e as NpcId].mood} x={(x + 1) * A} y={(y + 1) * A} s={A * 0.6} />;

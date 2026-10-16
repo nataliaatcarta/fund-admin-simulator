@@ -5,7 +5,7 @@ import { Button, CupText } from "../engine/ui";
 import { COST, OVERWORK } from "../game/constants";
 import { EVENT, lineText, visibleChoices } from "../game/events";
 import { NPCS } from "../game/npcs";
-import { quickReply, DayAction } from "../game/director";
+import { quickReply, newTips, DayAction } from "../game/director";
 import { useGame } from "../game/state";
 
 const KIND_ICON = { email: "ui/icons/inbox/inbox-email.png", call: "ui/icons/inbox/inbox-call.png", sticky: "ui/icons/inbox/inbox-sticky-note.png" };
@@ -43,6 +43,8 @@ export function Inbox({ done }: { done: (r?: { desk?: string }) => void }) {
   const ev = item && EVENT(item.eventId);
   const chs = ev ? visibleChoices(ev, g) : [];
   const resolved = item?.status === "resolved" || item?.status === "ignored";
+  // a concept this mail is the first to mention: explained here, saved to the glossary once you reply
+  const tips = ev && !resolved ? newTips(ev.teaches, g) : [];
   const reply = (idx: number) => {
     const r = quickReply(item.uid, idx);
     if (r) setReplied((p) => ({ ...p, [item.uid]: r.text || "Sent." }));
@@ -80,6 +82,12 @@ export function Inbox({ done }: { done: (r?: { desk?: string }) => void }) {
                   <div style={{ fontSize: 20, lineHeight: 1.45 }}>
                     {replied[item.uid] ? <span className="good">“{replied[item.uid]}”</span> : lineText(ev.setup, ev.speaker, g)}
                   </div>
+                  {tips.map((t) => (
+                    <div key={t.term} className="row" style={{ gap: 10, alignItems: "flex-start", marginTop: 12, padding: "8px 12px", borderRadius: 10, background: "#efe7fb", fontSize: 16, lineHeight: 1.35 }}>
+                      <Sprite src={t.icon} s={2} />
+                      <div><b>New term · {t.term}</b>: {t.text}</div>
+                    </div>
+                  ))}
                 </div>
                 <div className="col" style={{ gap: 4 }}>
                   {ev.mode === "quick" && !resolved && chs.slice(0, 2).map((c, i) => (

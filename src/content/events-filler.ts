@@ -27,6 +27,8 @@ interface QuickSpec {
   weeks?: number[];
   ignored?: Effects;
   portrait?: string;
+  /** glossary ids this mail is the first to mention (shown as a "New term" tip) */
+  teaches?: string[];
 }
 
 const quick = (s: QuickSpec): GameEvent => ({
@@ -41,6 +43,7 @@ const quick = (s: QuickSpec): GameEvent => ({
   mode: "quick",
   choices: [mk(s.id, s.a, 0), mk(s.id, s.b, 1)],
   ...(s.ignored ? { ignored: s.ignored } : {}),
+  ...(s.teaches ? { teaches: s.teaches } : {}),
   when: {
     once: false,
     weight: s.w ?? 1,
@@ -61,6 +64,7 @@ interface MeetSpec {
   w?: number;
   seasons?: (1 | 2 | 3 | 4)[];
   portrait?: string;
+  teaches?: string[];
 }
 
 const meet = (s: MeetSpec): GameEvent => ({
@@ -75,6 +79,7 @@ const meet = (s: MeetSpec): GameEvent => ({
   mode: "meeting",
   meetingCost: 1,
   choices: s.opts.map((o, i) => mk(s.id, o, i)),
+  ...(s.teaches ? { teaches: s.teaches } : {}),
   when: { once: false, weight: s.w ?? 1, ...(s.cond ? { cond: s.cond } : {}), ...(s.seasons ? { seasons: s.seasons } : {}) },
 });
 
@@ -88,6 +93,7 @@ interface WireSpec {
   w?: number;
   cond?: Cond;
   seasons?: (1 | 2 | 3 | 4)[];
+  teaches?: string[];
 }
 
 const wire = (s: WireSpec): GameEvent => ({
@@ -102,6 +108,7 @@ const wire = (s: WireSpec): GameEvent => ({
   desk: { game: "wire-check", context: { kind: s.kind, name: s.name } },
   choices: [],
   ignored: { compliance: 3, wellbeing: -1 },
+  ...(s.teaches ? { teaches: s.teaches } : {}),
   when: { once: false, weight: s.w ?? 1, ...(s.cond ? { cond: s.cond } : {}), ...(s.seasons ? { seasons: s.seasons } : {}) },
 });
 
@@ -117,8 +124,9 @@ export const FILLER_EVENTS: GameEvent[] = [
       default: "GP!!! A letter came asking me for MONEY. It has a logo and everything. Your name is on it but SCAMMERS CAN TYPE NAMES. Please advise. Also is the pickle jar tax deductible?",
       mood: { worried: "GP. I did not sleep. A letter asked me for money and I am a man who reads letters. Please tell me it's you. Please tell me it's a capital call. Please tell me what that is." },
     },
-    a: ["Call him and walk through the notice, line by line", "Ricky: \"Oh!! It's the PEOPLE'S money thing! My money! Going to a good place!\" He is delighted to have been called.", { rel: { ricky: 4 }, wellbeing: -1 }, "happy"],
-    b: ["Reply: it's real, see page 4 of the LPA", "Ricky: \"Page 4. Got it. I will read page 4 with a highlighter.\" He will not read page 4.", { rel: { ricky: 1 }, compliance: -2 }],
+    teaches: ["capital-call"],
+    a: ["Call him and walk through the notice, line by line", "Ricky: \"Oh!! So it's MY money, going into the fund, like I promised! That's fine! That's great!\" He wires it that afternoon. Priya marks him as paid.", { rel: { ricky: 4 }, wellbeing: -1 }, "happy"],
+    b: ["Reply: it's real, see page 4 of the LPA", "Ricky: \"Page 4. Got it. I'll read it with a highlighter.\" He will not read page 4. He does wire the money.", { rel: { ricky: 1 }, compliance: -2 }],
     w: 2,
     ignored: { rel: { ricky: -3 } },
   }),
@@ -163,8 +171,8 @@ export const FILLER_EVENTS: GameEvent[] = [
     who: "ricky",
     kind: "call",
     subj: "Ricky: \"Don't tell anyone, but\"",
-    setup: "\"Don't tell anyone, but I heard another LP is thinking about moving their money. I won't say who. It was Dennis. Dennis is thinking about it. Is Dennis okay?\"",
-    a: ["Thank him and quietly check in with Dennis", "Dennis was just curious about a different fund's fonts. Ricky glows. You are now his intelligence agency.", { rel: { ricky: 3 }, rep: 1, wellbeing: -1 }],
+    setup: "\"Don't tell anyone, but I heard another LP is thinking about selling their stake. I won't say who. It's Lakeshore. Lakeshore Partners. Are they okay? Are WE okay?\"",
+    a: ["Thank him and quietly call Lakeshore", "Lakeshore was just asking around about prices, out of curiosity. They're staying. Ricky is thrilled to have been your spy.", { rel: { ricky: 3 }, rep: 1, wellbeing: -1 }],
     b: ["Ask him gently not to speculate", "Ricky: \"Understood. Lips sealed.\" By Thursday the entire golf club has heard about the sealed lips.", { rel: { ricky: -1 }, rep: 1 }, "worried"],
     cond: { minRel: { ricky: 30 } },
   }),
@@ -191,6 +199,7 @@ export const FILLER_EVENTS: GameEvent[] = [
     who: "margaret",
     kind: "email",
     subj: "Management fee: reconciliation request",
+    teaches: ["management-fee"],
     setup: "Dear GP, I recalculated the management fee independently. I arrived at a figure $212 different from yours. I am sure there is a rounding explanation. I would like to see it, however, written down. Warm regards, M.H.",
     a: ["Send the rounding walk-through, with a thank-you", "Margaret: \"Rounded half up. Of course. Thank you for the thoroughness.\" Priya, over your shoulder, nods once.", { rel: { margaret: 3, priya: 1 }, compliance: -3 }, "happy"],
     b: ["Reply 'it's $212, the fund can live with it'", "Margaret: \"I see.\" Two words. You'd have preferred a sigh.", { rel: { margaret: -2 }, cash: 0.5 }, "worried"],
@@ -215,9 +224,10 @@ export const FILLER_EVENTS: GameEvent[] = [
     who: "priya",
     kind: "sticky",
     subj: "Sticky: six receipts, one coat",
-    setup: "Found six receipts in a coat pocket. Dated March. One says 'Team Bonding: Axes'. I need to know whose coat. I need to know whose axes. - P",
-    a: ["Own up: the coat is yours, and so are the axes", "Priya: \"Thank you.\" She tapes the receipts to a folder labeled AXES (FUND? MGMT CO? ALSO: WHY).", { rel: { priya: 3 }, compliance: -3 }, "neutral"],
-    b: ["Say you'll look into it. Eventually.", "Priya adds a second sticky: 'Eventually' is not a date. It is, however, a vibe.", { rel: { priya: -1 }, compliance: 2 }, "worried"],
+    setup: "Found six receipts in a coat pocket. Dated March. One says 'Team Bonding: Axe Throwing'. Is that a fund expense or a management company expense? (It is the second one.) Whose coat is this? - P",
+    teaches: ["fund-vs-mgmt-expense"],
+    a: ["Own up: the coat is yours, and so is the axe throwing", "Priya: \"Thank you.\" She files the axe throwing under management company, with a note: ALSO, WHY.", { rel: { priya: 3 }, compliance: -3 }, "neutral"],
+    b: ["Say you'll look into it. Eventually.", "A second sticky appears: 'Eventually' is not a date.", { rel: { priya: -1 }, compliance: 2 }, "worried"],
     w: 2,
     ignored: { compliance: 3 },
   }),
@@ -227,6 +237,7 @@ export const FILLER_EVENTS: GameEvent[] = [
     who: "priya",
     kind: "sticky",
     subj: "Sticky: coffee, $412",
+    teaches: ["fund-vs-mgmt-expense"],
     setup: "A line item says 'Coffee, $412'. It is classified as 'Portfolio Support'. It was a very supportive coffee. I will need a sentence of explanation for the file. - P",
     a: ["Write the sentence honestly: founder coffee run, 30 people", "Priya: \"A real sentence. Beautiful.\" She files it under 'Things I did not have to chase'.", { rel: { priya: 3 }, compliance: -3 }, "happy"],
     b: ["Reclassify it as management company, it was mostly you", "Priya sighs the sigh of the correct. \"Correct, actually. Thank you for not arguing.\"", { rel: { priya: 2 }, compliance: -2, cash: -0.5 }],
@@ -237,6 +248,7 @@ export const FILLER_EVENTS: GameEvent[] = [
     who: "priya",
     kind: "sticky",
     subj: "Sticky: bank ties out",
+    teaches: ["reconciliation"],
     setup: "Bank statement ties to the ledger. To the cent. I'm smiling. Please don't make it weird. - P",
     a: ["Leave a thank-you sticky and a single cookie", "She will never mention it. The cookie is gone by lunch. The sticky is on her monitor for a month.", { rel: { priya: 4 }, wellbeing: 2 }, "happy"],
     b: ["Don't make it weird. Nod from across the room.", "Priya nods back. It is the most professional moment of your week.", { rel: { priya: 2 }, wellbeing: 1 }, "happy"],
@@ -250,7 +262,7 @@ export const FILLER_EVENTS: GameEvent[] = [
     subj: "Sticky: please stop saving to Desktop",
     setup: "I counted 61 files on your Desktop. Three are named 'LP_list_final'. Two are named 'LP_list_final_2'. I'd like to introduce you to folders. They're lovely. - P",
     a: ["Let Priya organize it and watch with awe", "Priya returns in an hour. The Desktop has a wallpaper again. You'd forgotten there was a wallpaper.", { rel: { priya: 3 }, wellbeing: 2, compliance: -2 }, "happy"],
-    b: ["Promise to make a folder. Make one called 'Folder'.", "Priya: \"Progress.\" It is, she says, a start. Folder is empty.", { rel: { priya: 1 }, wellbeing: 1 }],
+    b: ["Promise to make a folder. Make one called 'Folder'.", "Priya: \"Progress.\" The folder is empty, but it exists.", { rel: { priya: 1 }, wellbeing: 1 }],
   }),
 
   // ------------------------------------------------------------ Dex
@@ -296,7 +308,7 @@ export const FILLER_EVENTS: GameEvent[] = [
     subj: "update",
     setup: "Shipped the new indexer. Latency down 40%. Two customers asked for it. Slept 6 hours. Good week. - I",
     portrait: "shy",
-    a: ["Reply: \"Great week. Take Friday off.\"", "Ines: \"ok.\" She does. This is, you realize, the best response you've ever received.", { rel: { ines: 3 }, wellbeing: 1 }, "happy"],
+    a: ["Reply: \"Great week. Take Friday off.\"", "Ines: \"ok.\" She actually takes it. That's a first.", { rel: { ines: 3 }, wellbeing: 1 }, "happy"],
     b: ["Ask if she needs anything, specifically anything", "Ines: \"quiet.\" You send her nothing. She sends a thank-you in a single emoji, which is a fish.", { rel: { ines: 2 }, rep: 1 }],
     w: 2,
   }),
@@ -319,7 +331,7 @@ export const FILLER_EVENTS: GameEvent[] = [
     subj: "Sticky: thanks for not asking for a deck",
     setup: "Thanks for not asking for a deck. - I",
     portrait: "shy",
-    a: ["Slip a note under her door: \"Anytime.\"", "Ines keeps the note. She has a drawer for such things. The drawer is mostly you.", { rel: { ines: 3 }, wellbeing: 1 }, "happy"],
+    a: ["Slip a note under her door: \"Anytime.\"", "Ines keeps the note in a drawer of nice things. It's a small drawer.", { rel: { ines: 3 }, wellbeing: 1 }, "happy"],
     b: ["Reply: \"Please send me a deck.\" (Joking.)", "Ines: \"...\" Then, one minute later: \"I'm making one.\" You hear faint typing. You are somewhat responsible.", { rel: { ines: 1 }, wellbeing: -1 }, "worried"],
     cond: { minRel: { ines: 35 } },
   }),
@@ -356,7 +368,7 @@ export const FILLER_EVENTS: GameEvent[] = [
     kind: "email",
     subj: "Fwd: Uber for Uber",
     setup: "Forwarded deck: 'Uber for Uber'. Slide 3 is a picture of two cars. I love it. I don't know why. Look at it and tell me if I'm crazy. - B",
-    a: ["Tell her you'll look, and mean it", "You read the deck. It's, somehow, a bit good. Brooke: \"I KNEW IT.\" You've created a monster.", { rel: { brooke: 3 }, wellbeing: -1 }, "happy"],
+    a: ["Tell her you'll look, and mean it", "You read the deck. It's actually not bad. Brooke: \"I KNEW IT.\" You've created a monster.", { rel: { brooke: 3 }, wellbeing: -1 }, "happy"],
     b: ["Tell her it sounds like a ride-share for ride-shares", "Brooke: \"That's the whole joke!\" She is laughing in the doorway. You didn't hear her arrive.", { rel: { brooke: 1 }, wellbeing: 1 }, "happy"],
     cond: { minQuarter: 2 },
   }),
@@ -406,9 +418,10 @@ export const FILLER_EVENTS: GameEvent[] = [
     who: "lawyer",
     kind: "email",
     subj: "Side letter, most-favored-nation clause",
+    teaches: ["side-letter", "mfn"],
     setup: "Quick question on the side letter. If one LP gets a lower fee, do the others get it too? Short answer: it depends. Long answer: 3 pages, attached. Medium answer: call me, billed hourly.",
     portrait: "billing",
-    a: ["Read the 3 pages. All 3.", "You understand MFN rights for exactly eleven minutes. You use them to impress Priya.", { compliance: -4, wellbeing: -2, rel: { priya: 1 }, glossary: ["side-letter"] }],
+    a: ["Read the 3 pages. All 3.", "MFN, it turns out: if one LP gets a better deal, the others can ask for it too. You explain it to Priya. She already knew. She lets you finish.", { compliance: -4, wellbeing: -2, rel: { priya: 1 }, glossary: ["side-letter"] }],
     b: ["Take the call. It is, by design, a long one.", "The lawyer explains MFN beautifully. The meter reads 1.5 hours. Worth it, you tell yourself.", { compliance: -3, cash: -0.5 }],
     cond: { minQuarter: 2 },
   }),
@@ -431,7 +444,7 @@ export const FILLER_EVENTS: GameEvent[] = [
     kind: "email",
     subj: "Which of these is the real one?",
     setup: "In the shared folder: LP_Report_FINAL.pdf, LP_Report_FINAL_v2.pdf, LP_Report_FINAL_v7_REAL.pdf, LP_Report_FINAL_v7_REAL_USE_THIS.pdf. Four files. One truth. Please tell me which. - P",
-    a: ["Point to the one with the most capital letters", "It was, miraculously, correct. Priya renames the others to 'Do Not Open'. You have never been prouder.", { rel: { priya: 2 }, compliance: -3 }, "happy"],
+    a: ["Point to the one with the most capital letters", "It was correct, somehow. Priya renames the other three 'Do Not Open'.", { rel: { priya: 2 }, compliance: -3 }, "happy"],
     b: ["Admit you don't know and promise to fix the folder", "Priya: \"Thank you. That's rare and helpful.\" She builds a naming convention. It has a legend.", { rel: { priya: 3 }, compliance: -4, wellbeing: -1 }],
     w: 2,
   }),
@@ -508,9 +521,10 @@ export const FILLER_EVENTS: GameEvent[] = [
     who: "priya",
     kind: "sticky",
     subj: "Sticky: K-1 season (rain edition)",
-    setup: "It's raining. The K-1 pile is also raining, metaphorically. 14 LPs have asked where theirs is. Eleven of those are Ricky. Please don't let me explain the rest. - P",
-    a: ["Bring Priya tea and tackle five K-1s yourself", "Five K-1s sorted. Priya is almost warm. The rain drums gently on the window, as if applauding.", { rel: { priya: 3 }, wellbeing: -2, compliance: -3 }, "happy"],
-    b: ["Tell LPs the K-1s are on the way, and mean it", "A short, honest note goes out. Twelve LPs thank you. Ricky replies 'WHEN IS ON THE WAY'.", { rel: { ricky: -1, priya: 1 }, rep: 1 }],
+    setup: "It's raining. The K-1 pile is also raining, metaphorically. Eleven emails asking where a K-1 is. Ten are from Ricky. The other one is also Ricky, from his wife's account. - P",
+    teaches: ["k1"],
+    a: ["Bring Priya tea and tackle five K-1s yourself", "Five K-1s done. Priya almost smiles. The rain keeps drumming on the window.", { rel: { priya: 3 }, wellbeing: -2, compliance: -3 }, "happy"],
+    b: ["Tell LPs the K-1s are on the way, and mean it", "A short, honest note goes out. Eight LPs say thanks. Ricky replies 'WHEN IS ON THE WAY'.", { rel: { ricky: -1, priya: 1 }, rep: 1 }],
     seasons: [1],
     w: 3,
   }),
@@ -534,7 +548,7 @@ export const FILLER_EVENTS: GameEvent[] = [
     subj: "Sticky: spring cleaning",
     setup: "The window is open. A bird walked across my keyboard. I came back to a clean mailbox, which I'm choosing to take as a sign. Would you like to clean out the data room with me? - P",
     a: ["Sure. Bring snacks. We'll do it together.", "You delete 140 'Untitled' files. One was a half-written LP letter. It was, honestly, better unwritten.", { rel: { priya: 3 }, compliance: -3, wellbeing: 1 }, "happy"],
-    b: ["Wave from the desk and send emotional support", "Priya cleans solo. It's done by lunch. She leaves a sticky: 'Support received.'", { rel: { priya: 1 }, wellbeing: 1 }],
+    b: ["Wave from the desk and send emotional support", "Priya cleans it alone. Done by lunch. A sticky on your desk: 'Support received.'", { rel: { priya: 1 }, wellbeing: 1 }],
     seasons: [2],
     w: 2,
   }),
@@ -580,7 +594,7 @@ export const FILLER_EVENTS: GameEvent[] = [
     kind: "call",
     subj: "Voicemail: Ricky and the holiday cards",
     setup: "\"GP, I'm doing holiday cards for everyone in the fund. I need addresses. All of them. I won't use them for anything else. I'll tell Gary. Also: is Hanukkah a 'Q4 event' or 'a different event'?\"",
-    a: ["Send him a short, approved list. Add a note about privacy.", "Ricky: \"Privacy! Love it. Very secure.\" He writes the cards in red pen. Several are signed 'Your GP'. You are mortified. And touched.", { rel: { ricky: 3 }, rep: 1, compliance: 2 }, "happy"],
+    a: ["Send him a short, approved list. Add a note about privacy.", "Ricky: \"Privacy! Love it. Very secure.\" He writes the cards in red pen and signs several of them 'Your GP'. Mortifying. Also sweet.", { rel: { ricky: 3 }, rep: 1, compliance: 2 }, "happy"],
     b: ["Offer to mail them yourself, with his message inside", "Ricky: \"A MAILMAN!\" He writes a 4-page message. Priya licks 40 envelopes. You owe her.", { rel: { ricky: 4, priya: -1 }, wellbeing: -2 }],
     seasons: [4],
   }),
@@ -591,7 +605,7 @@ export const FILLER_EVENTS: GameEvent[] = [
     kind: "sticky",
     subj: "Sticky: it's snowing, I'm still here",
     setup: "It's snowing. The office is empty except me and a heater that smells like toast. Year-end checklist is 60% done. I'll be here until 40%. Don't worry about me. Worry about the other 40. - P",
-    a: ["Stay late, help with the checklist, and order soup", "You finish a third of the 40. The soup is, quietly, the real hero. Priya almost smiles at the window.", { rel: { priya: 4 }, wellbeing: -3, compliance: -3 }, "happy"],
+    a: ["Stay late, help with the checklist, and order soup", "You get through a third of what's left. The soup is the real hero. Priya almost smiles.", { rel: { priya: 4 }, wellbeing: -3, compliance: -3 }, "happy"],
     b: ["Send her home with a thank-you and a gift card", "Priya: \"Thank you. I'll be here at 7.\" She is. She is always here at 7.", { rel: { priya: 2 }, wellbeing: 1, cash: -0.5 }],
     seasons: [4],
     w: 3,
@@ -604,7 +618,7 @@ export const FILLER_EVENTS: GameEvent[] = [
     subj: "Next year's budget (be brave)",
     setup: "It's budget season. I've drafted next year's plan. It has a 'Big Swings' line item. It's bigger than 'Rent'. Please read it before you panic. Or after. But definitely before the holiday party. - B",
     a: ["Trim the Big Swings line by a third, kindly", "Brooke: \"A third is a start.\" She renames the line 'Medium-Large Swings'. It's progress.", { rel: { brooke: 1, priya: 1 }, cash: 0.5 }],
-    b: ["Approve it. We only live once, and the fund is 10 years.", "Brooke high-fives you. You've never been high-fived by her before. It stings, a little, and in a good way.", { rel: { brooke: 4 }, cash: -0.5, compliance: 2 }, "happy"],
+    b: ["Approve it. We only live once, and the fund is 10 years.", "Brooke high-fives you, hard. First high-five ever. Your hand stings, in a good way.", { rel: { brooke: 4 }, cash: -0.5, compliance: 2 }, "happy"],
     seasons: [4],
   }),
   quick({
@@ -613,6 +627,7 @@ export const FILLER_EVENTS: GameEvent[] = [
     who: "finch",
     kind: "email",
     subj: "Audit prep: a list of 'minor' requests",
+    teaches: ["audit"],
     setup: "Dear GP, in preparation for fieldwork, please assemble the following: all bank statements (all), invoices (all), and 'anything you would rather I did not find' (optional). I find it is most efficient to find these things together. - Finch",
     portrait: "neutral",
     a: ["Assemble it all. Label everything. Smile at the folder.", "Finch, the next day: \"Labeled. Colored. A little warm to the touch. Well done.\" He sighs, but contentedly.", { rel: { finch: 3 }, compliance: -4, wellbeing: -2 }, "happy"],
@@ -628,7 +643,7 @@ export const FILLER_EVENTS: GameEvent[] = [
     subj: "Follow-up to question 87 (of 214)",
     setup: "Hello! Thank you for question 86. A tiny follow-up on 87: could you define 'tiny'? I do not mean to be tedious. I mean to be complete. I look forward to your reply, and question 88.",
     portrait: "neutral",
-    a: ["Define 'tiny' in a graceful paragraph", "Kenji: \"Delighted.\" He sends a PDF titled 'Delighted.pdf'. It is, itself, 14 pages.", { rel: { kenji: 3 }, wellbeing: -2, rep: 1 }, "happy"],
+    a: ["Define 'tiny' in a graceful paragraph", "Kenji: \"Delighted.\" He sends a PDF titled 'Delighted.pdf'. It is 14 pages.", { rel: { kenji: 3 }, wellbeing: -2, rep: 1 }, "happy"],
     b: ["Reply 'tiny is a feeling' and attach nothing", "Kenji: \"A feeling. Noted for the record.\" The record is long and getting longer.", { rel: { kenji: -1 }, wellbeing: 1 }],
     cond: { minQuarter: 3 },
   }),
@@ -640,15 +655,15 @@ export const FILLER_EVENTS: GameEvent[] = [
     who: "margaret",
     subj: "Margaret: a visit, no agenda (she brought an agenda)",
     setup: {
-      default: "Margaret sits, folds her hands, and says, \"I thought I'd stop by. I have 3 topics. I'll go in order of importance, which I'll reveal at the end.\"",
+      default: "Margaret sits and folds her hands. \"I thought I'd stop by. I have 3 topics. I'll go in order of importance, which I'll reveal at the end.\"",
       mood: { happy: "Margaret smiles, a tiny and precise smile. \"Your last report was the first I read this year without a pen in hand. I thought you'd like to know.\"", worried: "Margaret sits very straight. \"I have a concern. It is small, and I'd prefer to discuss it before it is large.\"" },
       flags: { margaret_early_habit: "Margaret: \"I stopped by. I've begun scheduling my quarter around your report dates. That is the highest compliment I have.\"" },
     },
     cond: { minRel: { margaret: 50 } },
     w: 2,
     opts: [
-      ["Ask what's on her mind and just listen", "She speaks for twenty minutes about endowment spending. You nod. She says, \"You're an excellent listener.\" You were mostly listening to the clock.", { rel: { margaret: 4 }, wellbeing: -1 }, "happy"],
-      ["Ask her honestly what she'd do differently", "Margaret thinks. Long. \"I would report quarterly, not annually. Oh, you do. Then I'd frame it.\" She frames it.", { rel: { margaret: 3 }, rep: 2, compliance: -2 }, "happy"],
+      ["Ask what's on her mind and just listen", "She talks for twenty minutes about how the endowment spends its returns. \"You're an excellent listener,\" she says. You learned a lot, actually.", { rel: { margaret: 4 }, wellbeing: -1 }, "happy"],
+      ["Ask her honestly what she'd do differently", "Margaret thinks for a long time. \"I'd send the capital account statements with the report, not a week after.\" Fair. You start doing that.", { rel: { margaret: 3 }, rep: 2, compliance: -2 }, "happy"],
     ],
   }),
   meet({
@@ -665,7 +680,7 @@ export const FILLER_EVENTS: GameEvent[] = [
     opts: [
       ["Walk her through your process, honestly, mess included", "She notes the mess. She notes the honesty. \"Messy, but legible. I can work with legible.\"", { rel: { margaret: 4 }, wellbeing: -2, compliance: -2 }, "neutral"],
       ["Promise a fresh, improved process by next quarter", "Margaret writes it down. \"By next quarter.\" She underlines 'next'. Twice.", { rel: { margaret: 2 }, wellbeing: -3, rep: 1 }, "neutral"],
-      ["Admit the process is 'Priya, mostly'", "A beat. Then Margaret's mouth twitches. \"That's a good process.\" Priya, somewhere, sneezes.", { rel: { margaret: 3, priya: 2 } }, "happy"],
+      ["Admit the process is 'Priya, mostly'", "A beat. Margaret's mouth twitches. \"Honestly, that's a good process.\"", { rel: { margaret: 3, priya: 2 } }, "happy"],
     ],
   }),
   meet({
@@ -673,14 +688,15 @@ export const FILLER_EVENTS: GameEvent[] = [
     cat: "lp",
     who: "ricky",
     subj: "Ricky: \"just dropping by!\"",
+    teaches: ["j-curve"],
     setup: {
       default: "Ricky is in the visitor chair before you've finished saying 'come in'. He has a box of donuts, a folder labeled 'QUESTIONS', and a very serious face. \"GP. Explain the 'J-curve'. I've been nodding about it for a year.\"",
       mood: { happy: "Ricky beams, donuts held like a trophy. \"GP! I told 11 people about your fund. Eight did not care. Three asked for a deck. I did not have a deck. Do we have a deck?\"" },
     },
     w: 2,
     opts: [
-      ["Draw the J-curve on a napkin", "Ricky frames the napkin. He explains the J-curve to the next person he meets. They stare politely.", { rel: { ricky: 4 }, rep: 1, wellbeing: -1, glossary: ["j-curve"] }, "happy"],
-      ["Explain it with a fishing metaphor", "\"The first year, you buy gear. Then you wait. Then you catch.\" Ricky: \"I AM THE FISH.\" He is not. But he is happy.", { rel: { ricky: 3 }, wellbeing: 1 }, "happy"],
+      ["Draw the J-curve on a napkin", "Down first, from fees and early write-offs, then up as the winners grow. Ricky frames the napkin and explains it to the next person he meets.", { rel: { ricky: 4 }, rep: 1, wellbeing: -1, glossary: ["j-curve"] }, "happy"],
+      ["Explain it with a fishing metaphor", "You explain: first you buy gear, then you wait, then you catch fish. Ricky: \"So I'M THE FISH.\" He is not. He is very happy anyway.", { rel: { ricky: 3 }, wellbeing: 1 }, "happy"],
       ["Trade a donut for a promise: no reply-all", "Ricky solemnly eats a donut. \"Reply-all is a sacred trust.\" He sends a reply-all about it within the hour.", { rel: { ricky: 1 }, rep: 1, wellbeing: 2 }],
     ],
   }),
@@ -713,8 +729,8 @@ export const FILLER_EVENTS: GameEvent[] = [
     w: 2,
     opts: [
       ["Ask for the one real metric, and listen", "Dex gives the real number. It's small. It's honest. You and Dex share a quiet, rare moment.", { rel: { dex: 4 }, compliance: -2, wellbeing: -1 }, "neutral"],
-      ["Cheer him on and hand him a notebook", "Dex writes 'FOCUS' on page one. By page two, it's a drawing of a rocket. But the intent was real.", { rel: { dex: 3 }, wellbeing: 1 }, "happy"],
-      ["Tell him: no new pivots until you've talked to five customers", "Dex: \"Five. Okay. Could one be my mom?\" You say yes. Because, honestly, she's great.", { rel: { dex: 1 }, rep: 1, compliance: -2 }, "worried"],
+      ["Cheer him on and hand him a notebook", "Dex writes FOCUS on page one. Page two is a drawing of a rocket. Still, it's a start.", { rel: { dex: 3 }, wellbeing: 1 }, "happy"],
+      ["Tell him: no new pivots until you've talked to five customers", "Dex: \"Five. Okay. Can one be my mom?\" You say yes. She's his best customer.", { rel: { dex: 1 }, rep: 1, compliance: -2 }, "worried"],
     ],
   }),
   meet({
@@ -729,7 +745,7 @@ export const FILLER_EVENTS: GameEvent[] = [
     cond: { minRel: { ines: 45 } },
     w: 2,
     opts: [
-      ["Nod. Slowly. Warmly. Say nothing.", "Ines nods back. A full, quiet minute passes. She leaves, taller. \"Thanks. That was exactly it.\"", { rel: { ines: 5 }, wellbeing: 2 }, "happy"],
+      ["Nod. Slowly. Warmly. Say nothing.", "Ines nods back. A quiet minute passes. On her way out: \"Thanks. That was exactly it.\"", { rel: { ines: 5 }, wellbeing: 2 }, "happy"],
       ["Ask about the benchmark and listen to the whole thing", "She explains it for fifteen minutes. You understand 20%. You understand her 100%.", { rel: { ines: 4 }, wellbeing: -1, rep: 1 }, "happy"],
     ],
   }),
@@ -746,7 +762,7 @@ export const FILLER_EVENTS: GameEvent[] = [
     w: 2,
     opts: [
       ["Hear her out: what would a big swing look like?", "She describes it in 90 seconds. It's actually a good idea. Annoyingly. You take notes.", { rel: { brooke: 4 }, wellbeing: -1, rep: 1 }, "happy"],
-      ["Name the tension: you two want different paces", "Brooke goes quiet. \"Yeah.\" Long pause. \"Let's make a rule, then. Whoever's slower wins... twice a quarter.\"", { rel: { brooke: 3 }, compliance: -2 }, "neutral"],
+      ["Name the tension: you two want different paces", "Brooke goes quiet. \"Yeah.\" Long pause. \"Okay. Rule: you get to slow me down twice a quarter. The rest of the time, I swing.\"", { rel: { brooke: 3 }, compliance: -2 }, "neutral"],
       ["Offer a bet: a small swing first, as a test", "Brooke: \"You're on.\" She writes your names on a sticky. It says 'LOSER BUYS LUNCH.' It does not say who is the loser.", { rel: { brooke: 3 }, wellbeing: 1 }, "happy"],
     ],
   }),
@@ -762,8 +778,8 @@ export const FILLER_EVENTS: GameEvent[] = [
     cond: { minRel: { brooke: 60 } },
     w: 1,
     opts: [
-      ["Accept the coffee. Accept the 12%.", "Brooke: \"Don't make it weird.\" Priya, for the second time this week, hears 'weird' through the wall.", { rel: { brooke: 4 }, wellbeing: 2 }, "happy"],
-      ["Ask what she'd bet on, if it were all hers", "She tells you. It's brave. It's slightly unhinged. You're, to your surprise, tempted.", { rel: { brooke: 3 }, rep: 1, compliance: 2 }, "happy"],
+      ["Accept the coffee. Accept the 12%.", "Brooke: \"Don't make it weird.\" You don't. Mostly.", { rel: { brooke: 4 }, wellbeing: 2 }, "happy"],
+      ["Ask what she'd bet on, if it were all hers", "She tells you. It's brave and slightly unhinged. You're surprised to find yourself tempted.", { rel: { brooke: 3 }, rep: 1, compliance: 2 }, "happy"],
     ],
   }),
 
@@ -819,7 +835,8 @@ export const FILLER_EVENTS: GameEvent[] = [
     id: "f_wire_lp_distribution",
     who: "system",
     subj: "Distribution wire: Holloway Endowment",
-    setup: "Please process the Q distribution to the LP's account on file. A notice arrived by email updating the LP's bank details. It was sent from a slightly different address. It's, probably, fine.",
+    teaches: ["distribution"],
+    setup: "Please process the Q distribution to the LP's account on file. A notice arrived by email updating the LP's bank details. It came from a slightly different email address than usual. It's probably fine. Probably.",
     kind: "lp",
     name: "Holloway Endowment",
     cond: { minQuarter: 3 },

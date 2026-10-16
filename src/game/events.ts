@@ -8,8 +8,8 @@ import { Choice, Cond, GameEvent, GameState, InboxItem, Line, NpcId } from "./ty
 
 export const SYS_CAPITAL_CALL: GameEvent = {
   id: "sys_capital_call", category: "ops", title: "Capital call week", speaker: "priya", kind: "sticky",
-  subject: "Capital call day: how much do we call?", setup: "Priya, at the door with a calculator: \"It's capital call day. We ask the LPs for part of what they promised. You pick the amount, we check each LP's share, then we hit send. I'll check the math. Nervously.\"",
-  mode: "desk", desk: { game: "capital-call" }, choices: [],
+  subject: "Capital call day: how much do we call?", setup: "Priya appears at the door with a calculator. \"Capital call day! We ask every LP for a slice of what they promised. You pick how much. I'll check everyone's share before we hit send. I'm a little nervous. A normal amount.\"",
+  mode: "desk", desk: { game: "capital-call" }, choices: [], teaches: ["capital-call", "pro-rata"],
 };
 export const SYS_PITCH: GameEvent = {
   id: "sys_pitch_parade", category: "portfolio", title: "Pitch Parade", speaker: "brooke", kind: "email",
