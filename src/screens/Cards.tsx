@@ -7,6 +7,7 @@ import { MinigameModule, MinigameParams, MinigameResult } from "../game/types";
 import { A, Bg } from "./Frame";
 import { sfx } from "../engine/audio";
 import { useEffect } from "react";
+import { Card as SmallCard } from "./Day";
 
 /** Story card: a full-bleed illustration with a caption panel. Click through the lines. */
 export function Card({ props, done }: { props: { art?: string; title: string; lines: string[]; button?: string; icon?: string; short?: boolean }; done: () => void }) {
@@ -14,6 +15,23 @@ export function Card({ props, done }: { props: { art?: string; title: string; li
   const [i, setI] = useState(0);
   const last = i >= lines.length - 1;
   useEffect(() => { sfx.play("chime"); }, []);
+  if (!art) return (
+    <div className="abs fadein" style={{ inset: 0, zIndex: 35, pointerEvents: "auto", background: "rgba(60,35,55,.28)" }}>
+      <SmallCard x={340} y={200} w={600}>
+        <div className="row" style={{ gap: 18, alignItems: "flex-start" }}>
+          {icon && <Sprite src={icon} s={3} />}
+          <div style={{ flex: 1 }}>
+            <div className="disp" style={{ fontSize: 28 }}>{title}</div>
+            <div style={{ fontSize: 20, lineHeight: 1.45, margin: "10px 0 22px" }}>{lines[i]}</div>
+          </div>
+        </div>
+        <div className="row" style={{ justifyContent: "flex-end", gap: 12 }}>
+          {lines.length > 1 && <span style={{ fontSize: 16, opacity: 0.5 }}>{i + 1}/{lines.length}</span>}
+          <Button color="mint" w={180} h={54} size={20} style={{ minWidth: 0, borderWidth: 12, borderImageWidth: "12px" }} onClick={() => (last ? done() : setI(i + 1))}>{last ? button : "Next ▸"}</Button>
+        </div>
+      </SmallCard>
+    </div>
+  );
   return (
     <div className="abs fadein" style={{ inset: 0, zIndex: 35, pointerEvents: "auto" }}>
       {art ? <Bg src={art} /> : <div className="abs" style={{ inset: 0, background: "rgba(60,35,55,.5)" }} />}

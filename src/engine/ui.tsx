@@ -207,3 +207,15 @@ export function useTyper(text: string, cps = 60, enabled = true) {
 }
 
 export { art };
+
+/** Text where every "☕" is drawn as the pixel energy cup (the emoji doesn't exist in the pixel font). */
+export function CupText({ text }: { text: string }) {
+  const parts = text.split("☕");
+  return (
+    <>
+      {parts.map((p, i) => (
+        <span key={i}>{p}{i < parts.length - 1 && <Sprite src="ui/widgets/cost-mini-cup.png" s={2} style={{ display: "inline-block", verticalAlign: "-2px", marginLeft: 2 }} />}</span>
+      ))}
+    </>
+  );
+}

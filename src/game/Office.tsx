@@ -162,7 +162,7 @@ export const TRINKET_ART: Record<string, string> = {
 };
 
 /** The dialogue box covers the scene below this row, so a talking actor is raised to show waist-up above it. */
-const DIALOGUE_TOP = 112;
+const DIALOGUE_TOP = 133;
 
 function drawActor(c: Ctx, tMs: number, v: OfficeVisual, tier: 1 | 2 | 3) {
   const a = v.actor!;

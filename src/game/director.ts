@@ -2,8 +2,8 @@ import * as D from "../content/dialogue";
 import { GLOSSARY } from "../content/glossary";
 import { MINIGAMES } from "../minigames";
 import { sfx, music } from "../engine/audio";
-import { ACHIEVEMENTS, ALL_NPCS, CORE_NPCS, MAX_ENERGY, season, year } from "./constants";
-import { EVENT, ALL_EVENTS, absWeek, checkCond, drawInbox, effectScore, hash, lineText, visibleChoices } from "./events";
+import { ACHIEVEMENTS, ALL_NPCS, CORE_NPCS, COST, MAX_ENERGY, OVERWORK, season, year } from "./constants";
+import { EVENT, ALL_EVENTS, SYS_CAPITAL_CALL, SYS_PITCH, absWeek, checkCond, drawInbox, effectScore, hash, lineText, visibleChoices } from "./events";
 import { NPCS } from "./npcs";
 import { endOfQuarter } from "./economy";
 import { enter, leave, resetOffice, setTalking } from "./actions";
@@ -12,7 +12,7 @@ import { rng } from "./rng";
 import { writeSave } from "./save";
 import { addCompany, applyEffects, clamp, getG, metrics, moodFromRel, useGame } from "./state";
 import { Cancelled, ask, cancelAll, choose, say, toast, useUi } from "./uiStore";
-import { Choice, Company, GameEvent, GameState, MinigameResult, NpcId, PlannedAction } from "./types";
+import { Choice, Company, GameEvent, GameState, InboxItem, MinigameResult, NpcId } from "./types";
 import { addTrophies } from "./save";
 
 let runId = 0;
@@ -68,7 +68,7 @@ async function playQuarter(id: number) {
   }
   for (let w = getG().week; w <= 12; w++) {
     live(id);
-    await playWeek(id, w);
+    await playDay(id, w);
   }
   await finishQuarter(id);
 }
@@ -93,65 +93,90 @@ async function maybeUpgradeOffice(id: number) {
 
 async function kickoff(id: number) {
   mutate((g) => { g.phase = "kickoff"; g.week = 1; g.closeDone = []; g.focus = null; Object.values(g.npcs).forEach((n) => { if (n.moodUntil && n.moodUntil < g.quarter) delete n.moodUntil; }); });
-  setOffice({ tod: "morning", tv: "news" });
-  await enter("brooke");
-  live(id);
-  await say({ npc: "brooke", mood: "neutral", text: D.KICKOFF_INTRO });
-  const focus = await ask<string>("kickoff", {});
-  live(id);
-  mutate((g) => { g.focus = focus as GameState["focus"]; });
-  const f = focus as keyof typeof D.KICKOFF_BROOKE;
-  await say({ npc: "brooke", mood: focus === "invest" ? "happy" : "neutral", text: D.KICKOFF_BROOKE[f] });
-  await leave("brooke");
-  live(id);
+  void id;
 }
 
-// ---------------------------------------------------------------------- week
-async function playWeek(id: number, w: number) {
-  // checkpoint = start of week, before the inbox is drawn
+// ----------------------------------------------------------------------- day
+/** What the player did in the room (resolved by the hotspots / the day overlay). `idle` = nobody clicked for a while, so a visitor may knock. */
+export type DayAction = { kind: "inbox" | "desk" | "out" | "break" | "end" | "idle" };
+
+const spend = (n: number) => mutate((g) => { g.energy = Math.max(0, g.energy - n); g.weekStats.spent += n; });
+
+/** The light outside follows how much of the day you've used. */
+function updateTod() {
+  const g = getG();
+  const used = g.weekStats.spent / Math.max(1, g.weekStats.spent + g.energy);
+  setOffice({ tod: g.energy <= 0 || used >= 0.75 ? "night" : used >= 0.34 ? "afternoon" : "morning" });
+}
+
+async function playDay(id: number, w: number) {
+  // checkpoint = start of the day, before the mail is drawn
   mutate((g) => {
-    g.week = w; g.phase = "inbox"; g.inbox = []; g.plan = []; g.log = [];
+    g.week = w; g.phase = "day"; g.inbox = []; g.plan = []; g.log = [];
     g.overlay = undefined; g.window = undefined;
     const burn = g.wellbeing < 12 ? 2 : g.wellbeing < 25 ? 1 : 0;
-    g.energy = Math.max(2, MAX_ENERGY - burn + (g.flags.rested ? 1 : 0));
-    delete g.flags.rested;
-    if (burn) g.log.push("You are running on fumes this week: less energy.");
+    g.energy = Math.max(2, MAX_ENERGY - burn - (g.flags.tired ? 1 : 0));
+    if (g.flags.tired) g.log.push("Still tired from staying late: one less cup today.");
+    if (burn) g.log.push("Running on fumes: fewer cups today.");
+    delete g.flags.tired; delete g.flags.overworked;
     if (g.wellbeing < 12) g.flags.burned_out = true;
     g.weekStats = { spent: 0, resolved: 0 };
   });
   checkpoint = structuredClone(getG());
   writeSave("auto", checkpoint);
-  if (getG().wellbeing < 25) toast(D.BURNOUT_LINES[hash(w, getG().quarter) % D.BURNOUT_LINES.length] ?? "You are tired.");
+  if (getG().wellbeing < 25 && hash(w, getG().quarter) % 3 === 0) toast(D.BURNOUT_LINES[hash(w, getG().quarter) % D.BURNOUT_LINES.length] ?? "You are tired.");
 
   const g = getG();
   const snap = { rep: g.rep, cash: g.cash, tvpi: metrics(g).tvpi, wellbeing: g.wellbeing };
   const inbox = drawInbox(g);
+  const drop = dropIn(g, inbox);
+  if (drop) inbox.push({ uid: `${drop.id}#d${absWeek(g)}`, eventId: drop.id, quarter: g.quarter, week: g.week, status: "new" });
   mutate((x) => {
     x.inbox = inbox;
     for (const it of inbox) { const ev = EVENT(it.eventId); if (ev?.bloomOf) { const s = x.seeds.find((q) => q.id === ev.bloomOf); if (s) s.fired = true; } }
   });
+  doneToday.clear();
   morningVisuals();
   resetOfficeWeek();
   sfx.play("ping");
   if (w === 1 && getG().quarter === 1) await ask("tips", {});
   live(id);
 
-  await ask("inbox", {});
+  // the day's fixed beats arrive on their own, first thing
+  if (w === 1) await quarterHello(id);
+  const call = getG().inbox.find((i) => i.eventId === SYS_CAPITAL_CALL.id);
+  if (call) await deskVisit(id, call.uid, true);
+  if (w === 10) await closeVisit(id);
   live(id);
 
-  if (w === 10) { await closeChecklist(id); }
+  let acted = false;
+  for (;;) {
+    live(id);
+    updateTod();
+    if (getG().energy <= 0) {
+      const late = await ask<"sleep" | "overwork">("nightfall", { canOverwork: !getG().flags.overworked });
+      live(id);
+      if (late === "overwork") {
+        mutate((x) => { x.flags.overworked = true; x.flags.tired = true; x.energy += OVERWORK.energy; x.wellbeing = clamp(x.wellbeing + OVERWORK.wellbeing); x.log.push("Stayed late. The cleaners know your name now."); });
+        sfx.play("sip");
+        continue;
+      }
+      break;
+    }
+    const v = nextVisitor(getG());
+    if (v && acted) { acted = false; await visit(id, v); continue; }
+    const a = await ask<DayAction>("day", { visitor: !!v });
+    live(id);
+    if (a.kind === "idle") { acted = true; continue; }
+    if (a.kind === "end") break;
+    await doAction(id, a);
+    acted = true;
+  }
 
-  mutate((x) => { x.phase = "plan"; });
-  const plan = await ask<PlannedAction[]>("plan", {});
-  live(id);
-  mutate((x) => { x.plan = plan; x.phase = "execute"; });
-  await executePlan(id, plan);
-  live(id);
-
-  // unresolved items
+  // anything left unanswered today
   mutate((x) => {
     for (const it of x.inbox) {
-      if (it.status === "resolved") continue;
+      if (it.status === "resolved" || it.status === "ignored") continue;
       const ev = EVENT(it.eventId);
       if (!ev) continue;
       it.status = "ignored";
@@ -163,24 +188,27 @@ async function playWeek(id: number, w: number) {
     }
   });
 
-  endOfWeekRules();
+  endOfDayRules();
   checkAchievements();
   setOffice({ tod: "night", tv: "off" });
   if (w === 11) mutate((x) => { if (!x.overlay) x.overlay = "pizza-night"; });
   await sleep(250);
   const g2 = getG();
   const after = metrics(g2);
-  mutate((x) => { x.phase = "wrapup"; });
-  await ask("wrapup", {
-    lines: g2.log.slice(-5),
+  mutate((x) => { x.phase = "night"; });
+  await ask("night", {
+    day: w,
+    lines: g2.log.filter((l) => !l.startsWith("Let slide")).slice(-4),
+    missed: g2.log.filter((l) => l.startsWith("Let slide")).length,
     quip: D.FRIDAY_QUIPS[hash(g2.rngSeed, g2.quarter, w) % D.FRIDAY_QUIPS.length],
     deltas: [
       { label: "Reputation", from: snap.rep, to: g2.rep, unit: "" },
-      { label: "Runway", from: snap.cash, to: g2.cash, unit: "mo" },
-      { label: "Fund", from: snap.tvpi, to: after.tvpi, unit: "x", dec: 2 },
+      { label: "Runway", from: snap.cash, to: g2.cash, unit: " mo" },
+      { label: "TVPI", from: snap.tvpi, to: after.tvpi, unit: "x", dec: 2 },
       { label: "Wellbeing", from: snap.wellbeing, to: g2.wellbeing, unit: "" },
     ],
     last: w === 12,
+    tired: !!g2.flags.tired,
   });
   live(id);
 }
@@ -193,29 +221,156 @@ function morningVisuals() {
   const g = getG();
   const kinds = g.inbox.map((i) => EVENT(i.eventId));
   const hasChad = kinds.some((e) => e?.speaker === "chad");
+  const mail = kinds.some((e) => e?.mode === "quick");
   setOffice({
     tod: "morning",
     tv: hasChad ? "chad" : g.week >= 11 ? "chart" : "news",
-    laptop: g.inbox.length ? "ping" : "idle",
-    phone: kinds.some((e) => e?.kind === "call") ? "ringing" : "idle",
+    laptop: mail ? "ping" : "idle",
+    phone: "idle",
     sticky: kinds.some((e) => e?.kind === "sticky"),
     doorSince: performance.now(),
   });
-  setTimeout(() => setOffice({ phone: kinds.some((e) => e?.kind === "call") ? "voicemail" : "idle" }), 4000);
   setTimeout(() => setOffice({ sticky: false }), 1400);
 }
 
-function endOfWeekRules() {
+function endOfDayRules() {
   mutate((g) => {
     const spent = g.weekStats.spent;
-    const rests = g.plan.filter((p) => p.kind === "rest").length;
     let dw = 0;
-    if (rests) dw += 10 * rests;
-    if (spent >= 5) dw -= 4; else if (spent <= 3) dw += 3;
+    if (!g.flags.overworked && spent <= 2) dw += 3;
+    else if (spent >= 5) dw -= 2;
     g.wellbeing = clamp(g.wellbeing + dw);
     for (const id of ALL_NPCS) g.npcs[id].mood = g.npcs[id].moodUntil && g.npcs[id].moodUntil! >= g.quarter ? g.npcs[id].mood : moodFromRel(g.npcs[id].rel);
-    if (rests) g.flags.rested = true;
   });
+}
+
+/** On a day with nobody scheduled, someone you know may just drop by for a chat. */
+function dropIn(g: GameState, inbox: InboxItem[]): GameEvent | undefined {
+  if (inbox.some((i) => EVENT(i.eventId)?.mode === "meeting")) return undefined;
+  const r = rng(hash(g.rngSeed, absWeek(g), 77));
+  if (!r.chance(0.55)) return undefined;
+  const fresh = (Object.values(D.INVITES).flat() as GameEvent[]).filter((e) => absWeek(g) - (g.seenAt[e.id] ?? -99) >= 12 && g.npcs[e.speaker as NpcId].rel > 0);
+  return fresh.length ? r.pick(fresh) : undefined;
+}
+
+/** The next person waiting to come in, if you have the energy to talk. */
+function nextVisitor(g: GameState): string | undefined {
+  for (const it of g.inbox) {
+    if (it.status === "resolved" || it.status === "ignored") continue;
+    const ev = EVENT(it.eventId);
+    if (!ev) continue;
+    const cost = ev.desk ? COST.desk : ev.meetingCost ?? 1;
+    if ((ev.mode === "meeting" || ev.id === SYS_PITCH.id) && cost <= g.energy) return it.uid;
+  }
+  return undefined;
+}
+
+async function quarterHello(id: number) {
+  await enter("brooke");
+  live(id);
+  await say({ npc: "brooke", mood: getG().npcs.brooke.mood, text: D.QUARTER_HELLO[season(getG().quarter)] });
+  await leave("brooke");
+  live(id);
+}
+
+async function closeVisit(id: number) {
+  await enter("priya");
+  live(id);
+  await say({ npc: "priya", mood: getG().npcs.priya.mood, text: "Priya, holding a clipboard like a shield: \"Quarter close. Tick what we'll do today. Each item makes the books more true. Skipped ones I will remember, quietly.\"" });
+  live(id);
+  await leave("priya");
+  await closeChecklist(id);
+}
+
+// ---------------------------------------------------------------- activities
+/** Desk tasks already done today (one of each per day). */
+const doneToday = new Set<string>();
+
+async function doAction(id: number, a: DayAction) {
+  const g = getG();
+  if (a.kind === "inbox") {
+    const r = await ask<{ desk?: string } | undefined>("inbox", {});
+    live(id);
+    if (r?.desk) await runDeskItem(id, r.desk);
+    return;
+  }
+  if (a.kind === "desk") {
+    const r = rng(hash(g.rngSeed, absWeek(g), 3));
+    const items = g.inbox.filter((it) => { const ev = EVENT(it.eventId); return ev?.mode === "desk" && ev.id !== SYS_CAPITAL_CALL.id && it.status !== "resolved" && it.status !== "ignored"; });
+    const tasks = r.shuffle(D.DESK_TASKS).slice(0, 3);
+    const pick = await ask<string | null>("pick", {
+      title: "At your desk", sub: "Pick something to work on.", energy: g.energy,
+      options: [
+        ...items.map((it) => ({ value: "item:" + it.uid, label: EVENT(it.eventId)!.subject, sub: "From today's mail", cost: COST.desk, icon: "ui/icons/actions/action-desk-work.png" })),
+        ...tasks.map((t) => ({ value: "task:" + t.id, label: t.title, sub: t.blurb, cost: COST.desk, done: doneToday.has(t.id) })),
+      ],
+    });
+    live(id);
+    if (!pick) return;
+    if (pick.startsWith("item:")) { await runDeskItem(id, pick.slice(5)); return; }
+    const t = D.DESK_TASKS.find((x) => x.id === pick.slice(5));
+    if (!t) return;
+    spend(COST.desk);
+    doneToday.add(t.id);
+    apply(t.effects);
+    pushLog(t.title);
+    sfx.play("paper");
+    await ask("card", { title: t.title, lines: [t.result], button: "Done", short: true });
+    live(id);
+    return;
+  }
+  if (a.kind === "out") {
+    const r = rng(hash(g.rngSeed, absWeek(g), 9));
+    const kinds = ["coffee", "dinner", "conference"] as const;
+    const name = { conference: "Go to a conference", dinner: "Dinner with LPs", coffee: "Coffee with a founder" };
+    const opts = kinds.map((k) => { const list = D.OUT_EVENTS.filter((e) => e.kind === k && !e.napa); const o = list.length ? r.pick(list) : D.OUT_EVENTS[0]; return { value: o.id, label: name[k], sub: o.title, cost: COST.out }; });
+    const pick = await ask<string | null>("pick", { title: "Get out of the office", sub: "A few calls and you're out the door. Back with a postcard.", energy: g.energy, options: opts });
+    live(id);
+    if (!pick) return;
+    spend(COST.out);
+    await runOut(id, pick);
+    return;
+  }
+  if (a.kind === "break") {
+    spend(COST.break);
+    setOffice({ mugSipped: false });
+    apply({ wellbeing: 6 });
+    pushLog("Took a real break.");
+    sfx.play("sip");
+    toast(BREAKS[hash(g.rngSeed, absWeek(g), g.energy) % BREAKS.length]);
+    await sleep(600);
+  }
+}
+
+const BREAKS = [
+  "You stare out the window. A cloud looks like a pie chart. You let it.",
+  "Five minutes, no inbox. The plant seems to approve.",
+  "You stretch. Something in your back files a complaint, then withdraws it.",
+  "Tea. Window. Nothing urgent. Bliss, briefly.",
+];
+
+async function runDeskItem(id: number, uid: string) {
+  const g = getG();
+  const item = g.inbox.find((i) => i.uid === uid);
+  const ev = item ? EVENT(item.eventId) : undefined;
+  if (!ev?.desk || item!.status === "resolved") return;
+  if (g.energy < COST.desk) { sfx.play("buzz"); toast("Too tired for that today."); return; }
+  spend(COST.desk);
+  await playMinigame(id, ev.desk.game, ev.desk.context, ev, uid);
+}
+
+async function runOut(id: number, outId: string) {
+  const o = D.OUT_EVENTS.find((x) => x.id === outId) ?? D.OUT_EVENTS[0];
+  sfx.play("whoosh");
+  for (let f = 0; f <= 1; f += 0.1) { setOffice({ fade: f }); await sleep(40); }
+  live(id);
+  await ask("postcard", { o });
+  live(id);
+  apply({ ...o.effects, rep: (o.effects.rep ?? 0) });
+  pushLog(o.title);
+  mutate((g) => { if (o.napa) g.flags.napa_offsite = true; g.overlay = g.overlay ?? "messy-desk"; });
+  for (let f = 1; f >= 0; f -= 0.1) { setOffice({ fade: f }); await sleep(40); }
+  setOffice({ fade: 0 });
 }
 
 // ------------------------------------------------------------------ resolution
@@ -257,39 +412,50 @@ export function quickReply(uid: string, idx: number) {
   return { choice: ch, text: lineText(ch.reply, ev.speaker, getG()) };
 }
 
-// ---------------------------------------------------------------------- plan
-async function executePlan(id: number, plan: PlannedAction[]) {
-  for (const a of plan) {
-    live(id);
-    mutate((g) => { g.energy = Math.max(0, g.energy - a.cost); g.weekStats.spent += a.cost; });
-    if (a.kind === "meeting") await runMeeting(id, a);
-    else if (a.kind === "desk") await runDesk(id, a);
-    else if (a.kind === "out") await runOut(id, a);
-    else await runRest(id);
-    await sleep(200);
-  }
-}
-
-async function runMeeting(id: number, a: PlannedAction) {
-  const g = getG();
-  let ev: GameEvent | undefined;
-  let uid: string | undefined;
-  if (a.target?.startsWith("invite:")) {
-    const npc = a.target.slice(7) as NpcId;
-    const list = D.INVITES[npc] ?? [];
-    const r = rng(hash(g.rngSeed, absWeek(g), npc.length));
-    const fresh = list.filter((e) => absWeek(g) - (g.seenAt[e.id] ?? -99) >= 12);
-    ev = r.pick(fresh.length ? fresh : list);
-    if (!ev) return;
-  } else {
-    uid = a.target;
-    ev = EVENT(g.inbox.find((i) => i.uid === uid)?.eventId ?? "");
-  }
+// ------------------------------------------------------------------ visitors
+async function visit(id: number, uid: string) {
+  const ev = EVENT(getG().inbox.find((i) => i.uid === uid)?.eventId ?? "");
   if (!ev) return;
-  await playEvent(id, ev, uid);
+  if (ev.desk) { await deskVisit(id, uid, false); return; }
+  await playEvent(id, ev, uid, ev.meetingCost ?? 1);
 }
 
-export async function playEvent(id: number, ev: GameEvent, uid?: string) {
+/** Someone comes in with a mini-game (capital call, Pitch Parade). The capital call can't be put off. */
+async function deskVisit(id: number, uid: string, mandatory: boolean) {
+  const ev = EVENT(getG().inbox.find((i) => i.uid === uid)?.eventId ?? "");
+  if (!ev?.desk || ev.speaker === "system") return;
+  const cost = mandatory ? 0 : COST.desk;
+  await enter(ev.speaker);
+  live(id);
+  const options = mandatory ? [{ text: "Let's do it" }] : [{ text: "Let's do it", hint: `${cost} ☕` }, { text: "Not today" }];
+  const idx = await choose({ npc: ev.speaker, mood: getG().npcs[ev.speaker].mood, text: lineText(ev.setup, ev.speaker, getG()), options });
+  live(id);
+  await leave(ev.speaker);
+  if (idx === 1) { decline(ev, uid); return; }
+  spend(cost);
+  await playMinigame(id, ev.desk.game, ev.desk.context, ev, uid);
+}
+
+const NOT_NOW: Record<string, string> = {
+  happy: "\"No problem at all. I'll catch you another time.\"",
+  neutral: "\"Ah. Okay. Another time, then.\"",
+  worried: "\"Oh. Right. Sure. I'll just... hold onto this.\"",
+  grumpy: "\"Noted.\" The door closes a little harder than usual.",
+};
+
+function decline(ev: GameEvent, uid?: string) {
+  mutate((g) => {
+    const it = uid ? g.inbox.find((i) => i.uid === uid) : undefined;
+    if (it) it.status = "ignored";
+    g.seenAt[ev.id] = absWeek(g);
+    if (!g.seen.includes(ev.id) && (ev.when?.once ?? ev.id.startsWith("s_"))) g.seen.push(ev.id);
+    applyEffects(g, ev.ignored);
+    g.log.push(`Not now: ${ev.subject}`);
+  });
+}
+
+/** A visit: the speaker comes in and talks. `cost` is charged on the first real answer; until then you can say "not now" for free. */
+export async function playEvent(id: number, ev: GameEvent, uid?: string, cost = 0) {
   const speaker = ev.speaker;
   if (speaker === "system") {
     const idx = await choose({ npc: "system", text: lineText(ev.setup, speaker, getG()), options: visibleChoices(ev, getG()).map((c) => ({ text: c.text })) });
@@ -297,7 +463,6 @@ export async function playEvent(id: number, ev: GameEvent, uid?: string) {
     resolveChoice(ev, ch, uid);
     return;
   }
-  const g = getG();
   if (/^s_audit_y\d/.test(ev.id)) await ask("card", { art: "story/boss-finch-audit.png", title: "Boss fight: the audit", lines: ["Mr. Finch has arrived with a rolling suitcase of folders.", "He is wearing a sweater vest. He is unbothered. You are not."], button: "Brace yourself" });
   else if (ev.id === "s_calloway_exam") await ask("card", { art: "story/boss-calloway-sec.png", title: "Surprise: SEC exam", lines: ["Agent Calloway is backlit in your doorway. The document request list is long."], button: "Deep breath" });
   live(id);
@@ -309,12 +474,23 @@ export async function playEvent(id: number, ev: GameEvent, uid?: string) {
   while (cur) {
     const gg = getG();
     const chs = visibleChoices(cur, gg);
-    const text = first ? lineText(cur.setup, speaker, gg) : lineText(cur.setup, speaker, gg);
+    const due = first ? cost : 0;
+    const canDecline = first && cost > 0;
     const idx = await choose({
-      npc: speaker, mood: gg.npcs[speaker].mood, special: cur.portrait, text, illustration: cur.illustration, category: cur.category,
-      options: chs.map((c) => ({ text: c.text, disabled: !!c.energyCost && c.energyCost > gg.energy, hint: c.energyCost ? `costs ${c.energyCost} energy` : undefined })),
+      npc: speaker, mood: gg.npcs[speaker].mood, special: cur.portrait, text: lineText(cur.setup, speaker, gg), illustration: cur.illustration, category: cur.category,
+      options: [
+        ...chs.map((c) => { const n = due + (c.energyCost ?? 0); return { text: c.text, disabled: n > gg.energy, hint: n ? `${n} ☕` : undefined }; }),
+        ...(canDecline ? [{ text: "Sorry, not right now" }] : []),
+      ],
     });
     live(id);
+    if (canDecline && idx === chs.length) {
+      decline(cur, uid);
+      await say({ npc: speaker, mood: gg.npcs[speaker].mood, text: NOT_NOW[gg.npcs[speaker].mood] });
+      live(id);
+      break;
+    }
+    if (due) spend(due);
     first = false;
     const ch = chs[idx] ?? chs[0];
     if (!ch) break;
@@ -327,25 +503,6 @@ export async function playEvent(id: number, ev: GameEvent, uid?: string) {
   }
   setTalking(false);
   await leave(speaker);
-  void g;
-}
-
-async function runDesk(id: number, a: PlannedAction) {
-  const g = getG();
-  if (a.target?.startsWith("task:")) {
-    const t = D.DESK_TASKS.find((x) => x.id === a.target!.slice(5));
-    if (!t) return;
-    apply(t.effects);
-    pushLog(t.title);
-    sfx.play("paper");
-    await ask("card", { title: t.title, lines: [t.blurb, t.result], button: "Done", icon: "ui/icons/actions/action-desk-work.png", short: true });
-    return;
-  }
-  const uid = a.target?.startsWith("item:") ? a.target.slice(5) : undefined;
-  const item = g.inbox.find((i) => i.uid === uid);
-  const ev = item ? EVENT(item.eventId) : undefined;
-  if (!ev?.desk) return;
-  await playMinigame(id, ev.desk.game, ev.desk.context, ev, uid);
 }
 
 export async function playMinigame(id: number, game: "wire-check" | "capital-call" | "pitch-day", context?: Record<string, unknown>, ev?: GameEvent, uid?: string) {
@@ -385,30 +542,6 @@ export async function playMinigame(id: number, game: "wire-check" | "capital-cal
     await ask("card", { art: "story/first-close-celebration.png", title: D.FIRST_CLOSE.title, lines: D.FIRST_CLOSE.lines, button: "Cheers" });
     live(id);
   }
-}
-
-async function runOut(id: number, a: PlannedAction) {
-  const o = D.OUT_EVENTS.find((x) => x.id === a.target?.slice(4)) ?? D.OUT_EVENTS[0];
-  sfx.play("whoosh");
-  for (let f = 0; f <= 1; f += 0.1) { setOffice({ fade: f }); await sleep(40); }
-  live(id);
-  await ask("postcard", { o });
-  live(id);
-  apply({ ...o.effects, rep: (o.effects.rep ?? 0) });
-  pushLog(o.title);
-  mutate((g) => { if (o.napa) g.flags.napa_offsite = true; g.overlay = g.overlay ?? "messy-desk"; });
-  for (let f = 1; f >= 0; f -= 0.1) { setOffice({ fade: f }); await sleep(40); }
-  setOffice({ fade: 0 });
-  toast("Back at the desk: the pile grew while you were out.");
-}
-
-async function runRest(id: number) {
-  setOffice({ mugSipped: false });
-  apply({ wellbeing: 8, energy: 1 });
-  pushLog("Took a real lunch break.");
-  sfx.play("sip");
-  await ask("card", { title: "Rest", lines: ["You put your feet up, stared at the plant, and did not look at your inbox. The plant is doing great."], button: "Ahh", icon: "ui/icons/actions/action-rest.png", short: true });
-  live(id);
 }
 
 // ------------------------------------------------------------- quarter beats

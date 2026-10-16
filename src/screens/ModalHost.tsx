@@ -1,7 +1,7 @@
 import { useUi } from "../game/uiStore";
 import { Dialogue } from "./Dialogue";
-import { Inbox, Plan, Wrapup } from "./Weekly";
-import { Close, Kickoff, Report, Review } from "./Quarter";
+import { DayOverlay, Inbox, Night, Nightfall, Pick } from "./Day";
+import { Close, Report, Review } from "./Quarter";
 import { Card, MinigameModal, Postcard, Tips } from "./Cards";
 
 export function ModalHost() {
@@ -12,10 +12,11 @@ export function ModalHost() {
         const d = (v?: unknown) => m.resolve(v);
         switch (m.kind) {
           case "dialogue": return <Dialogue key={m.id} props={m.props} done={d} />;
-          case "inbox": return <Inbox key={m.id} done={() => d()} />;
-          case "plan": return <Plan key={m.id} done={d} />;
-          case "wrapup": return <Wrapup key={m.id} props={m.props} done={() => d()} />;
-          case "kickoff": return <Kickoff key={m.id} done={d} />;
+          case "day": return <DayOverlay key={m.id} props={m.props} done={d} />;
+          case "inbox": return <Inbox key={m.id} done={d} />;
+          case "pick": return <Pick key={m.id} props={m.props} done={d} />;
+          case "nightfall": return <Nightfall key={m.id} props={m.props} done={d} />;
+          case "night": return <Night key={m.id} props={m.props} done={() => d()} />;
           case "close": return <Close key={m.id} done={d} />;
           case "report": return <Report key={m.id} props={m.props} done={() => d()} />;
           case "review": return <Review key={m.id} props={m.props} done={() => d()} />;

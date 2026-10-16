@@ -16,7 +16,6 @@ export function endOfQuarter(g: GameState): string[] {
     else if (c.outcome === "solid") m = 1.01 + r.next() * 0.13;
     else if (c.outcome === "zombie") m = 0.97 + r.next() * 0.05;
     else m = 0.78 + r.next() * 0.15;
-    if (g.focus === "support") m *= 1.03;
     c.mark = +(c.mark * m).toFixed(3);
     if (c.outcome === "dud" && held >= 3 && c.mark < c.invested * 0.35) {
       c.status = "written-off"; c.mark = 0;
@@ -33,9 +32,8 @@ export function endOfQuarter(g: GameState): string[] {
     else if (c.outcome === "dud" && m < 0.85) lines.push(`${c.name} had a rough quarter. They are "pivoting".`);
   });
   g.fund.feesPaid = +(g.fund.feesPaid + 0.1).toFixed(3);
-  g.cash = clamp(g.cash - 1.5 + (g.focus === "fundraise" ? 1 : 0), 0, 36);
-  g.compliance = clamp(g.compliance + 2 + (g.focus === "clean" ? -10 : 0));
-  if (g.focus === "fundraise") g.rep = clamp(g.rep + 2);
+  g.cash = clamp(g.cash - 1, 0, 36);
+  g.compliance = clamp(g.compliance + 2);
   g.rep = clamp(Math.round(g.rep + (55 - g.rep) * 0.12));
   const after = metrics(g);
   g.history.push({

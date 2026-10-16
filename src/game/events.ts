@@ -7,12 +7,12 @@ import { Choice, Cond, GameEvent, GameState, InboxItem, Line, NpcId } from "./ty
 
 export const SYS_CAPITAL_CALL: GameEvent = {
   id: "sys_capital_call", category: "ops", title: "Capital call week", speaker: "priya", kind: "sticky",
-  subject: "Capital call week: how much do we call?", setup: "Priya's sticky note: 'It's capital call week. Decide the amount, check the LP grid, then hit send. I'll check the math (nervously).'",
+  subject: "Capital call day: how much do we call?", setup: "Priya, at the door with a calculator: \"It's capital call day. We ask the LPs for part of what they promised. You pick the amount, we check each LP's share, then we hit send. I'll check the math. Nervously.\"",
   mode: "desk", desk: { game: "capital-call" }, choices: [],
 };
 export const SYS_PITCH: GameEvent = {
   id: "sys_pitch_parade", category: "portfolio", title: "Pitch Parade", speaker: "brooke", kind: "email",
-  subject: "Pitch Parade: founders lining up in the hallway", setup: "Brooke: 'Five founders, one hallway, zero chairs. Take the pitches, flip the cards that matter, and please pick a winner. Big swings only.'",
+  subject: "Pitch Parade: founders lining up in the hallway", setup: "Brooke, out of breath: \"Pitch Parade! Five founders, one hallway, zero chairs. Take the pitches, flip the cards that matter, and pick a winner. Big swings only.\"",
   mode: "desk", desk: { game: "pitch-day" }, choices: [],
 };
 

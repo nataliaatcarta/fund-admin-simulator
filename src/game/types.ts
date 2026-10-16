@@ -234,9 +234,10 @@ export interface GameState {
   player: { name: string; firm: string; pet: "cat" | "dog" | "none" };
   quarter: number; // 1..8 campaign quarter
   week: number; // 1..12
-  phase: "inbox" | "plan" | "execute" | "wrapup" | "kickoff" | "close" | "report" | "review" | "ended";
+  phase: "day" | "night" | "kickoff" | "close" | "report" | "review" | "ended";
   energy: number;
   maxEnergy: number;
+  /** legacy (quarter focus was removed); always null */
   focus: FocusId | null;
   rep: number;
   compliance: number;

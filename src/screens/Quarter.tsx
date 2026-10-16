@@ -2,44 +2,12 @@ import { useState } from "react";
 import { Sprite } from "../engine/Sprite";
 import { art } from "../engine/assets";
 import { sfx } from "../engine/audio";
-import { Portrait, Txt, Button, Panel } from "../engine/ui";
-import { CLOSE_ITEMS, KICKOFF_BROOKE } from "../content/dialogue";
-import { FOCUS } from "../game/constants";
+import { CupText, Portrait, Txt, Button, Panel } from "../engine/ui";
+import { CLOSE_ITEMS } from "../content/dialogue";
 import { NPCS } from "../game/npcs";
 import { useGame, metrics } from "../game/state";
-import { FocusId, NpcId, Mood } from "../game/types";
+import { NpcId, Mood } from "../game/types";
 import { A, At, Bg, BoxText, Hit } from "./Frame";
-
-// ----------------------------------------------------------------- KICKOFF
-export function Kickoff({ done }: { done: (f: FocusId) => void }) {
-  const [sel, setSel] = useState<FocusId | null>(null);
-  const ids = Object.keys(FOCUS) as FocusId[];
-  return (
-    <div className="abs fadein" style={{ inset: 0, zIndex: 20, pointerEvents: "auto" }}>
-      <Bg src="ui/screens/quarter-kickoff.png" />
-      <BoxText box={[100, 6, 120, 16]} size={30}>Pick this quarter's focus</BoxText>
-      {ids.map((id, i) => {
-        const x = 10 + i * 76;
-        const f = FOCUS[id];
-        return (
-          <div key={id}>
-            {sel === id && <div className="abs" style={{ left: x * A, top: 28 * A, width: 68 * A, height: 112 * A, borderStyle: "solid", borderWidth: 32, borderImage: `url(${art("ui/widgets/focus-card-selected.png")}) 8 fill / 32px stretch`, imageRendering: "pixelated", pointerEvents: "none" }} />}
-            <Sprite src={f.icon} x={(x + 18) * A} y={37 * A} s={8} />
-            <BoxText box={[x + 6, 74, 56, 12]} size={20}>{f.name}</BoxText>
-            <At box={[x + 6, 88, 56, 32]} style={{ fontSize: 18, lineHeight: 1.1, fontWeight: 700, textAlign: "center", color: "var(--ink)", overflow: "hidden" }}>{f.blurb}</At>
-            <BoxText box={[x + 8, 122, 52, 14]} size={20}>{sel === id ? "Picked ♥" : "Choose"}</BoxText>
-            <Hit box={[x, 28, 68, 112]} onClick={() => { sfx.play("click"); setSel(id); }} label={f.blurb} />
-          </div>
-        );
-      })}
-      <At box={[18, 150, 220, 20]} style={{ fontSize: 22, fontWeight: 700, lineHeight: 1.1, display: "flex", alignItems: "center", color: "var(--ink)" }}>
-        {sel ? `Brooke: “${KICKOFF_BROOKE[sel]}”` : "Brooke: “Pick one. I'm not saying a wrong answer exists, but a bold one does.”"}
-      </At>
-      <BoxText box={[246, 150, 64, 22]} size={28} style={{ opacity: sel ? 1 : 0.5 }}>Confirm ▸</BoxText>
-      <Hit box={[246, 150, 64, 22]} disabled={!sel} onClick={() => sel && done(sel)} />
-    </div>
-  );
-}
 
 // ------------------------------------------------------------------- CLOSE
 export function Close({ done }: { done: (ids: string[]) => void }) {
@@ -67,7 +35,7 @@ export function Close({ done }: { done: (ids: string[]) => void }) {
           <div key={it.id}>
             <Sprite src={on ? "ui/widgets/checkbox-on.png" : "ui/widgets/checkbox-off.png"} x={94 * A} y={(y + 2) * A} s={A} />
             <At box={[112, y, 126, 16]} style={{ display: "flex", alignItems: "center", fontSize: 21, fontWeight: 700, color: "var(--ink)", lineHeight: 1.05, overflow: "hidden" }}>
-              {it.title}{it.energy ? <span className="disp" style={{ marginLeft: 8 }}>{it.energy}☕</span> : null}
+              {it.title}{it.energy ? <span className="disp" style={{ marginLeft: 8 }}><CupText text={`${it.energy} ☕`} /></span> : null}
             </At>
             <div onMouseEnter={() => setHover(it.id)} onMouseLeave={() => setHover(null)}>
               <Hit box={[92, y, 150, 16]} onClick={() => toggle(it.id, it.energy)} />

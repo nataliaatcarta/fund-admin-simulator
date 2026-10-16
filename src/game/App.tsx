@@ -9,7 +9,6 @@ import { Credits, Glossary, Menu, NewGame, Pause, SaveLoad, Settings, Title, Tro
 import { Hotspots } from "../screens/Hotspots";
 import { loadSettings } from "./save";
 import { music } from "../engine/audio";
-import { Button } from "../engine/ui";
 import { startRun } from "./director";
 
 export default function App() {
@@ -21,7 +20,7 @@ export default function App() {
   const [sub, setSub] = useState<null | "settings" | "save" | "glossary" | "trophies">(null);
   const inGame = screen === "game";
   const inMinigame = modals.some((m) => m.kind === "minigame");
-  const hudHidden = modals.some((m) => ["kickoff", "close", "report", "review", "card", "postcard", "wrapup", "tips"].includes(m.kind));
+  const hudHidden = modals.some((m) => ["close", "report", "review", "postcard", "night", "tips"].includes(m.kind) || (m.kind === "card" && m.props.art));
 
   useEffect(() => {
     preloadOffice();
@@ -67,17 +66,12 @@ export default function App() {
           {!inMinigame && <Hotspots />}
           {!inMinigame && !hudHidden && <Hud />}
           <ModalHost />
-          {!modals.length && !paused && (
-            <div className="abs" style={{ right: 10, top: 96, zIndex: 50, pointerEvents: "auto" }}>
-              <Button color="lav" w={64} h={64} size={20} style={{ minWidth: 0, padding: 0, borderWidth: 16, borderImageWidth: "16px" }} onClick={() => useUi.getState().setPaused(true)}>II</Button>
-            </div>
-          )}
           {paused && !sub && <Pause onSettings={() => setSub("settings")} onSave={() => setSub("save")} />}
           {paused && sub === "settings" && <Settings inGame />}
           {paused && sub === "save" && <SaveLoad mode="save" />}
-          <div className="abs col" style={{ left: 0, right: 0, top: 120, alignItems: "center", gap: 8, zIndex: 70, pointerEvents: "none" }}>
+          <div className="abs col" style={{ left: 0, right: 0, top: 84, alignItems: "center", gap: 8, zIndex: 70, pointerEvents: "none" }}>
             {toasts.map((t) => (
-              <div key={t.id} className="panel p-butter slideup" style={{ borderWidth: 16, borderImageWidth: "16px", padding: "4px 16px", fontSize: 24, fontWeight: 700 }}>{t.text}</div>
+              <div key={t.id} className="panel p-cream slideup" style={{ borderWidth: 12, borderImageWidth: "12px", padding: "2px 14px", fontSize: 19, maxWidth: 760, textAlign: "center", lineHeight: 1.35 }}>{t.text}</div>
             ))}
           </div>
         </>

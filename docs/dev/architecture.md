@@ -37,6 +37,10 @@ CSS animation helper classes: `pop shake fadein slideup hot`. Native cursor is h
 `src/game/types.ts` is the contract for state, content and mini-games. `src/game/npcs.ts` has the NPC registry + `portrait(npc, moodOrSpecial)`.
 Game state is in `src/game/state.ts` (zustand `useGame`, `metrics(state)`, `applyEffects`).
 
+## The day loop
+
+A quarter is 12 days (internally still `g.week` 1..12). Each day starts with 5 energy cups (fewer when burned out or after staying late). There is no planner: the room is the menu (`src/screens/Hotspots.tsx`). Laptop = mail (free), desk = desk tasks and mini-games, phone = head out, window = a break; the mug is +1 cup once a day. Costs live in `COST` (`src/game/constants.ts`). People with `meeting` events show up on their own after an action or a quiet moment, and the player can always say "not now" for free (applies `ignored`). When the cups run out the player goes home or stays late (`OVERWORK`). Fixed beats arrive by themselves: Brooke on day 1, Priya with the capital call (day 4/8) and the quarter close (day 10). Days with no visitor may get a drop-in chat from `INVITES` in `content/dialogue.ts`.
+
 ### Content schema (events)
 See `GameEvent`, `Choice`, `Effects`, `Line`, `Cond` in `types.ts`. Rules of thumb:
 - `mode: "quick"`: appears in the morning inbox with **two quick replies** (`choices[0]`, `choices[1]`), free, no NPC visit. Use for emails/calls/sticky notes.
@@ -54,8 +58,8 @@ Design rules (design doc §6): untimed/accuracy over speed; 0 stars is never gam
 
 ```
 src/engine/    stage, sprite, cursor, audio, ui kit, minigame host
-src/game/      types, state/rules, npcs, constants, director (week loop), office scene
-src/screens/   title, menu, inbox, planner, wrap-up, kickoff, close, report, review, glossary, trophies, settings…
+src/game/      types, state/rules, npcs, constants, director (day loop), office scene
+src/screens/   title, menu, day (mail, pick menu, nightfall, night card), hotspots, HUD, close, report, review, glossary, trophies, settings…
 src/content/   events-story.ts, events-filler.ts, dialogue.ts, glossary.ts  (data only)
 src/minigames/ wire-check, capital-call, pitch-day
 ```
