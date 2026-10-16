@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Effects, MinigameModule, MinigameParams, MinigameProps, MinigameResult, Mood, NpcId, Outcome } from "../../game/types";
 import { Button, CornerCommentary, Floaty, Panel, Txt, useTimeout } from "../../engine/ui";
 import { Sprite } from "../../engine/Sprite";
+import { art } from "../../engine/assets";
 import { sfx } from "../../engine/audio";
 import { CARD_KINDS, CardKind, KIND_LABEL, PitchCard, Startup, generateLineup, isGood } from "./startups";
 
@@ -233,7 +234,7 @@ function PowderBar({ powder, total }: { powder: number; total: number }) {
   return (
     <div style={{ position: "relative", width: 110 * s, height: 16 * s }}>
       <Sprite src={`${MG}dry-powder-bar-frame.png`} x={0} y={0} s={s} />
-      <div className="abs" style={{ left: 16 * s, top: 3 * s, width: 89 * s * pct, height: 10 * s, overflow: "hidden", transition: "width .5s ease", backgroundImage: `url(/art/${MG}dry-powder-bar-fill.png)`, backgroundSize: `${8 * s}px ${10 * s}px`, backgroundRepeat: "repeat-x", imageRendering: "pixelated" }} />
+      <div className="abs" style={{ left: 16 * s, top: 3 * s, width: 89 * s * pct, height: 10 * s, overflow: "hidden", transition: "width .5s ease", backgroundImage: `url(${art(`${MG}dry-powder-bar-fill.png`)})`, backgroundSize: `${8 * s}px ${10 * s}px`, backgroundRepeat: "repeat-x", imageRendering: "pixelated" }} />
       <Txt display size="sm" x={118 * s + 6} y={4} w={220} style={{ fontSize: 22, whiteSpace: "nowrap" }}>Dry powder {fmt(powder)}</Txt>
     </div>
   );
