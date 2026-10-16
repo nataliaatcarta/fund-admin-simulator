@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-/** Art lives in /assets/art and is served from /art (see vite.config.ts publicDir). */
-export const art = (path: string) => `/art/${path}`;
+/** Art lives in /assets/art and is served from <base>art (see vite.config.ts publicDir and base). */
+export const art = (path: string) => `${import.meta.env.BASE_URL}art/${path}`;
 
 export const U = 4; // stage pixels per art pixel
 export const STAGE_W = 1280;
