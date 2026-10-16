@@ -2,6 +2,7 @@ import { CSSProperties, useEffect, useState } from "react";
 import { Sprite } from "../engine/Sprite";
 import { useGame, metrics } from "../game/state";
 import { useUi } from "../game/uiStore";
+import { fundName } from "../game/personalize";
 import { season, year } from "../game/constants";
 import { Floaty } from "../engine/ui";
 
@@ -43,7 +44,7 @@ export function Hud() {
 
       {hover && (
         <div className="abs panel p-cream fadein" style={{ right: 16, top: 70, width: 500, borderWidth: 12, borderImageWidth: "12px", padding: "12px 18px", pointerEvents: "none" }}>
-          <div className="disp" style={{ fontSize: 22, marginBottom: 8 }}>{g.player.firm} Fund I · Year {year(g.quarter)}</div>
+          <div className="disp" style={{ fontSize: 22, marginBottom: 8 }}>{fundName(g.player)} · Year {year(g.quarter)}</div>
           <Stat k="TVPI" v={`${m.tvpi.toFixed(2)}x`} hint="total value ÷ money paid in" />
           <Stat k="DPI" v={`${m.dpi.toFixed(2)}x`} hint="cash returned ÷ paid in" />
           <Stat k="Dry powder" v={`$${m.dryPowder.toFixed(1)}M`} hint="left to invest" />

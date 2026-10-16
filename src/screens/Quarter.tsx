@@ -5,6 +5,7 @@ import { sfx } from "../engine/audio";
 import { CupText, Portrait, Txt, Button, Panel } from "../engine/ui";
 import { CLOSE_ITEMS } from "../content/dialogue";
 import { NPCS } from "../game/npcs";
+import { fundName } from "../game/personalize";
 import { useGame, metrics } from "../game/state";
 import { NpcId, Mood } from "../game/types";
 import { A, At, Bg, BoxText, Hit } from "./Frame";
@@ -67,7 +68,7 @@ export function Report({ props, done }: { props: { quality: "great" | "ok" | "po
   const path = pts.map((v, i) => `${i === 0 ? "M" : "L"}${(i / Math.max(1, pts.length - 1)) * (W - 24) + 12},${H - 10 - ((v - min) / (max - min)) * (H - 24)}`).join(" ");
   const tabs = ["Summary", "Performance", "Notes"];
   const body = [
-    <>This quarter, {g.player.firm} Fund I is at <b>{m.tvpi.toFixed(2)}x</b> TVPI with {g.portfolio.filter((c) => c.status === "active").length} active companies and <b>${m.dryPowder.toFixed(1)}M</b> of dry powder left.</>,
+    <>This quarter, {fundName(g.player)} is at <b>{m.tvpi.toFixed(2)}x</b> TVPI with {g.portfolio.filter((c) => c.status === "active").length} active companies and <b>${m.dryPowder.toFixed(1)}M</b> of dry powder left.</>,
     <>TVPI {m.tvpi.toFixed(2)}x · DPI {m.dpi.toFixed(2)}x · IRR {m.irr.toFixed(1)}%<br />Called ${g.fund.called.toFixed(1)}M of ${g.fund.committed}M committed.</>,
     <>Quarter close: {g.closeDone.length} of {CLOSE_ITEMS.length} checklist items done. {props.quality === "great" ? "Books look tidy." : props.quality === "poor" ? "Footnotes may be… candid." : "Perfectly adequate."}</>,
   ];
