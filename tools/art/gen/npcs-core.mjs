@@ -151,20 +151,29 @@ export default async function () {
     save(cv, `npcs/${n}/${n}-entrance-${name}.png`, { kind: "entrance", npc: n, w: ENT_W, h: ENT_H });
     out(n, `entrance-${name}`, cv);
   };
+  // The game places entrances at (DOOR.x - 1, 40) over the open-door art, so local x 59..63 is the right jamb.
+  // Peekers are clipped at the jamb and the jamb is redrawn over them: they lean in from behind the wall.
+  const JAMB_X = 59;
+  const jamb = c => S.nb(c, JAMB_X, -2, 5, ENT_H + 2, S.rr(0.5, 0, 4, ENT_H + 2, 0), { fill: P.lavD, hi: P.lavL, lo: P.lavDD, openBottom: true });
+  const behindJamb = (c, draw) => { c.save(); c.beginPath(); c.rect(0, 0, JAMB_X, ENT_H); c.clip(); draw(); c.restore(); jamb(c); };
   entrance("margaret", "binder", c => {
-    slab(c, 0, 0, 10, 84); knock(c, 12, 14);
+    knock(c, 6, 14); // polite double tap, then in through the open door
     standDraw(c, "margaret", 0, 18, 6);
     S.binder(c, 33, 47);
     const K = mk(c, 18, 6); H.hand(K, 11, 49, ...SKIN.margaret); H.hand(K, 31, 53, ...SKIN.margaret);
   });
   entrance("ricky", "peek", c => {
-    // head and shoulders leaning in past the door edge, one hand on the frame
-    S.drawRicky(c, 20, 40, "happy", 0);
-    slab(c, 0, 0, 30, 88, { r: 1 });
-    S.nb(c, 28, 56, 9, 9, S.ell(4.5, 4.5, 4.2, 4.2), { fill: P.skin, hi: P.skinL, lo: P.skinD });
-    S.R(c, 30, 53, 1, 3, P.skinD); S.R(c, 32, 52, 1, 4, P.skinD); S.R(c, 34, 53, 1, 3, P.skinD);
+    // leans in from behind the right jamb, grinning, one hand curled around the frame
+    behindJamb(c, () => {
+      drawPerson(c, 30, 4, SPEC.ricky, "neutral", { pose: "full", frame: 0 });
+      const { cv: hv, c: hc } = make(48, 48); S.drawRicky(hc, 0, 0, "happy", 0);
+      c.drawImage(hv, 0, 0, 48, 34, 30, 4, 48, 34); // happy head on the standing body
+    });
+    jamb(c);
+    S.nb(c, 55, 44, 9, 9, S.ell(4.5, 4.5, 4, 4.2), { fill: P.skin, hi: P.skinL, lo: P.skinD });
+    S.R(c, 57, 46, 1, 3, P.skinD); S.R(c, 59, 45, 1, 4, P.skinD);
     // shave-and-a-haircut: 5 knock marks
-    [[40, 12], [46, 12], [52, 14], [58, 12], [64, 12]].forEach(([x, y]) => { S.R(c, x, y, 2, 1, P.heart); S.R(c, x + 1, y - 3, 1, 4, P.heart); });
+    [[8, 12], [14, 12], [20, 14], [26, 12], [32, 12]].forEach(([x, y]) => { S.R(c, x, y, 2, 1, P.heart); S.R(c, x + 1, y - 3, 1, 4, P.heart); });
   });
   entrance("priya", "sticky-note", c => {
     // door seen low: a sticky note slid out from under it, then a calm knock
@@ -195,19 +204,14 @@ export default async function () {
     S.heart(c, 58, 28, P.heart); S.heart(c, 3, 8, P.pinkL, true);
   });
   entrance("ines", "peek", c => {
-    c.save(); c.beginPath(); c.rect(0, 0, ENT_W, 56); c.clip();
-    drawPerson(c, 24, 20, SPEC.ines, "shy", {});
-    c.restore();
-    slab(c, 0, 0, 40, 88, { r: 1 });
-    S.R(c, 40, 0, 0, 0, 0);
-    // her fingers curl around the door edge
-    S.nb(c, 38, 40, 8, 9, S.ell(4, 4.5, 3.8, 4.2), { fill: P.skinL, hi: P.white, lo: "#e8b8a6" });
-    S.R(c, 39, 37, 1, 3, "#e8b8a6"); S.R(c, 42, 36, 1, 4, "#e8b8a6");
-    S.heart(c, 56, 12, P.pinkL, true);
+    // only half of her leans in from behind the right jamb, fingers curled around the frame
+    behindJamb(c, () => drawPerson(c, 34, 8, SPEC.ines, "shy", { pose: "full", frame: 0 }));
+    S.nb(c, 55, 46, 8, 9, S.ell(4, 4.5, 3.6, 4), { fill: P.skinL, hi: P.white, lo: "#e8b8a6" });
+    S.R(c, 57, 47, 1, 3, "#e8b8a6"); S.R(c, 59, 46, 1, 4, "#e8b8a6");
+    S.heart(c, 44, 4, P.pinkL, true);
   });
   entrance("brooke", "barge", c => {
-    // door flung open behind her, motion lines, coffee in hand
-    S.nb(c, 54, 4, 18, 80, S.poly([[0.5, 4], [17.5, 0.5], [17.5, 79.5], [0.5, 76]]), { fill: P.lav, hi: P.lavL, lo: P.lavD });
+    // through the open door without knocking: motion lines, coffee in hand
     [[2, 24, 16], [0, 34, 20], [3, 46, 14], [1, 58, 18]].forEach(([x, y, l]) => S.R(c, x, y, l, 1, P.pinkL));
     standDraw(c, "brooke", 1, 12, 6, { eye: "open" });
     // draw a determined face over: re-render head with determined expression

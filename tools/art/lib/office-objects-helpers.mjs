@@ -230,7 +230,7 @@ export function phoneOffHook(c) {
 
 // ---------------------------------------------------------------- Door states (region 193,10 68x126)
 export const DOOR = { x: 193, y: 10, w: 68, h: 126 };
-const openingMask = or(rr(0.5, 24, 47, 98, 0), ell(24, 24.5, 23.5, 24)); // relative to (203,14), 48x122
+const openingMask = rr(0.5, 2.5, 47, 120, 1); // rectangular opening, relative to (203,14), 48x122
 export function doorOpenBase(c, { light = true } = {}) {
   H.doorFrame(c);
   for (let y = 0; y < 122; y++) for (let x = 0; x < 48; x++) {
@@ -253,8 +253,8 @@ export function doorOpenBase(c, { light = true } = {}) {
   const edge = (x, y) => openingMask(x + 0.5, y + 0.5);
   for (let y = 0; y < 122; y++) { if (edge(1, y) && !edge(0, y - 0)) { } }
   // open door leaf, seen edge-on at the left jamb (swung into the hallway)
-  nb(c, 203, 14, 7, 122, poly([[0.5, 25], [0.5, 122], [6.5, 122], [6.5, 31], [4, 9], [0.5, 25]]), { fill: P.lav, hi: P.lavL, lo: P.lavD, openBottom: true });
-  R(c, 203, 36, 1, 80, P.lavL);
+  nb(c, 203, 14, 7, 122, poly([[0.5, 2.5], [0.5, 122], [6.5, 122], [6.5, 6.5]]), { fill: P.lav, hi: P.lavL, lo: P.lavD, openBottom: true });
+  R(c, 203, 20, 1, 96, P.lavL);
   nb(c, 205, 86, 5, 6, ell(2.5, 3, 2.3, 2.8), { fill: P.butter, hi: P.white, lo: P.butterD });
 }
 export function doorKnock(c, f) {
