@@ -1,6 +1,7 @@
 import { CSSProperties, ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { Effects, MinigameModule, MinigameParams, MinigameProps, MinigameResult } from "../../game/types";
 import { rng } from "../../game/rng";
+import { fundName as fundNameOf } from "../../game/personalize";
 import { Button, CornerCommentary, Panel, Txt, useTimeout } from "../../engine/ui";
 import { Sprite } from "../../engine/Sprite";
 import { art } from "../../engine/assets";
@@ -126,7 +127,7 @@ function CapitalCall({ params, onDone }: MinigameProps) {
   const sc = useMemo(() => makeScenario(params), [params]);
   const { state } = params;
   const lps = state.fund.lps;
-  const fundName = `${state.player.firm} Fund I`;
+  const fundName = fundNameOf(state.player);
   const [phase, setPhase] = useState<Phase>("amount");
   const [call, setCall] = useState(sc.startCall);
   const [fixed, setFixed] = useState<Set<string>>(new Set());

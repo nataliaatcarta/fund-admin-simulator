@@ -7,6 +7,7 @@ import { EVENT, lineText, visibleChoices } from "../game/events";
 import { NPCS } from "../game/npcs";
 import { quickReply, newTips, DayAction } from "../game/director";
 import { useGame } from "../game/state";
+import { personalize } from "../game/personalize";
 
 const KIND_ICON = { email: "ui/icons/inbox/inbox-email.png", call: "ui/icons/inbox/inbox-call.png", sticky: "ui/icons/inbox/inbox-sticky-note.png" };
 
@@ -68,7 +69,7 @@ export function Inbox({ done }: { done: (r?: { desk?: string }) => void }) {
                     style={{ gap: 12, padding: "10px 12px", borderRadius: 10, background: i === sel ? "#fde3ec" : "transparent", opacity: done_ ? 0.45 : 1 }}>
                     <Sprite src={KIND_ICON[e.kind]} s={2} />
                     <div style={{ flex: 1, fontSize: 17, lineHeight: 1.2, fontWeight: it.status === "new" ? 700 : 400, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>
-                      {done_ ? "✓ " : ""}{e.subject}
+                      {done_ ? "✓ " : ""}{personalize(e.subject, g.player)}
                     </div>
                   </div>
                 );
@@ -78,7 +79,7 @@ export function Inbox({ done }: { done: (r?: { desk?: string }) => void }) {
               <div className="col" style={{ flex: 1, borderLeft: "2px dashed #ecd2dc", paddingLeft: 28, justifyContent: "space-between" }}>
                 <div>
                   <div style={label}>{ev.speaker === "system" ? "Inbox" : NPCS[ev.speaker].name}</div>
-                  <div className="disp" style={{ fontSize: 26, margin: "6px 0 12px" }}>{ev.title}</div>
+                  <div className="disp" style={{ fontSize: 26, margin: "6px 0 12px" }}>{personalize(ev.title, g.player)}</div>
                   <div style={{ fontSize: 20, lineHeight: 1.45 }}>
                     {replied[item.uid] ? <span className="good">“{replied[item.uid]}”</span> : lineText(ev.setup, ev.speaker, g)}
                   </div>

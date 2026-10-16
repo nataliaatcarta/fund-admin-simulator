@@ -5,6 +5,8 @@ import { TUTORIAL_TIPS } from "../content/dialogue";
 import { MinigameHost } from "../engine/MinigameHost";
 import { MinigameModule, MinigameParams, MinigameResult } from "../game/types";
 import { A, Bg } from "./Frame";
+import { useGame } from "../game/state";
+import { personalizeDeep } from "../game/personalize";
 import { sfx } from "../engine/audio";
 import { useEffect } from "react";
 import { Card as SmallCard } from "./Day";
@@ -77,7 +79,8 @@ export function Postcard({ props, done }: { props: { o: { title: string; text: s
 
 export function Tips({ done }: { done: () => void }) {
   const [i, setI] = useState(0);
-  const t = TUTORIAL_TIPS[i];
+  const player = useGame((s) => s.g.player);
+  const t = personalizeDeep(TUTORIAL_TIPS[i], player);
   return (
     <div className="scrim" style={{ zIndex: 35, pointerEvents: "auto" }}>
       <Panel color="paper-stitch" x={250} y={150} w={780} h={420} pad={0} className="pop">

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import type { Mood, NpcId } from "./types";
 import { NPCS } from "./npcs";
-import { personalize } from "./personalize";
+import { personalize, personalizeDeep } from "./personalize";
 import { useGame } from "./state";
 
 export type Screen = "title" | "menu" | "newgame" | "game" | "glossary" | "trophies" | "settings" | "saveload" | "credits";
@@ -48,7 +48,8 @@ let tid = 0;
 /** Show a modal panel and wait for it to resolve. Rejects with Cancelled if the run is abandoned. */
 export const autoplay: { fn: ((kind: string, props: any) => any) | null } = { fn: null };
 
-export function ask<T = void>(kind: string, props: object = {}): Promise<T> {
+export function ask<T = void>(kind: string, rawProps: object = {}): Promise<T> {
+  const props = personalizeDeep(rawProps, useGame.getState().g.player);
   if (autoplay.fn) {
     const fn = autoplay.fn;
     return new Promise<T>((resolve) => setTimeout(() => resolve(fn(kind, props)), 0));
