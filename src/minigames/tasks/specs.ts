@@ -10,7 +10,7 @@ export type Spec = { title: string; npc: NpcId; intro: string; result: string } 
 );
 
 const sort = (title: string, npc: NpcId, intro: string, result: string, bins: string[], items: [string, number][]): Spec =>
-  ({ kind: "sort", title, npc, intro, result, bins, items: items.map(([text, bin]) => ({ text, bin })) });
+  ({ kind: "sort", title, npc, intro: intro + " Drag each one into a box.", result, bins, items: items.map(([text, bin]) => ({ text, bin })) });
 const spot = (title: string, npc: NpcId, intro: string, result: string, items: string[], targets: number[], grid?: number): Spec =>
   ({ kind: "spot", title, npc, intro, result, items, targets, grid });
 const pick = (title: string, npc: NpcId, intro: string, result: string, rounds: [string, [string, 0 | 1 | 2, string][]][]): Spec =>
@@ -28,11 +28,11 @@ export const SPECS: Record<string, Spec> = {
     "Two sentences. She bills 0.3 hours to read them. Worth it.",
     ["Approved, please send.", "As I mentioned in my previous seven emails,", "I hope this finds you well and rested.", "The fee cap stays as drafted.", "Per my earlier recollection of our conversation last spring,", "Please don't call, I will be in meetings."], [1, 2, 4]),
   data_room: sort("Tidy the data room", "priya", "Keep what a buyer should see. Trash the rest.",
-    "Eighteen versions of a deck, gone. Priya sniffs. In respect.",
+    "Eighteen versions of one deck, gone. Priya nods, approvingly.",
     ["Keep", "Trash"],
     [["Signed SPA", 0], ["Untitled (3)", 1], ["Founder lunch order.xlsx", 1], ["Cap table, Q3", 0], ["Deck v3 (old, old)", 1], ["KYC: Oakmont", 0], ["Cat photo.jpg", 1]]),
   model: spot("Update the model", "priya", "Find the cells that were typed in by hand. Real formulas start with =.",
-    "Cell F47 turns out to be hard-coded. You hug the spreadsheet and move on.",
+    "Cell F47 was typed in by hand. Fixed before it reached the report.",
     ["=B2*1.1", "=B3*1.1", "=C2+C3", "4,210", "=D2/E2", "=E3*0.2", "=F2-F3", "=G2*G3", "1.35", "=H2+H3", "=I2/2", "=J2*1.02"], [3, 8], 4),
   inbox_zero: sort("Reach Inbox Zero", "brooke", "Archive the noise. Keep what actually needs you.",
     "Inbox Zero lasts 11 seconds. A founder says “quick question”. Zero is a lie.",
@@ -58,24 +58,24 @@ export const SPECS: Record<string, Spec> = {
      ["Founder 3, in a hammock: “Everything is great.”", [["Walk me through the cash.", 2, "The hammock stops swinging. The cash is walked through."], ["Enjoy the hammock!", 0, "He will. Fully."], ["Is that a mango?", 1, "It is. You are now friends."]]]]),
 
   // ---------------------------------------------------------------- quarter close
-  mark: { kind: "slider", title: "Mark the portfolio", npc: "priya", name: "Kettle AI", intro: "Set the mark you can defend. Read the evidence first.",
+  mark: { kind: "slider", title: "Value the portfolio", npc: "priya", name: "Kettle AI", intro: "Set the mark you can defend. Read the evidence first.",
     result: "A number you can defend, not a mood you can hope for.",
     evidence: ["Last round: $40M valuation, 8 months ago.", "Revenue up 20% since then.", "Two public comparables are down 15%.", "No new round is planned."], lo: 36, hi: 44, min: 20, max: 60, unit: "$M" },
-  bank: sort("Reconcile the bank", "priya", "Sort each bank line: matches the ledger, a timing difference, or unrecorded.",
+  bank: sort("Reconcile cash", "priya", "Sort each bank line: matches the ledger, a timing difference, or unrecorded.",
     "Bank and ledger agree, to the cent. Priya brings the highlighter.",
     ["Matches ledger", "Timing", "Unrecorded"],
     [["Wire to Orchard Labs $500K: in the ledger", 0], ["Cheque dated Dec 31, cleared Jan 2", 1], ["Bank fee $45: not in the ledger", 2], ["Capital call receipt $2M: in the ledger", 0], ["Interest $312: not in the ledger", 2], ["Vendor payment sent last day, clears next", 1]]),
   expenses: sort("Sort the expenses", "priya", "The fund pays for fund things. The management company pays for its own.",
-    "Every receipt has a home. Napa is, sadly, a management company thing.",
+    "Every receipt has a home. Napa, sadly, is a management company thing.",
     ["Fund", "Management company"],
     [["Legal fees for a portfolio deal", 0], ["Napa offsite", 1], ["Fund audit fee", 0], ["Office coffee", 1], ["Diligence travel for a deal", 0], ["Team scooter", 1]]),
   receipts: spot("Chase the stray receipts", "priya", "Find the real receipts hiding in the coat. Click them.",
-    "Six receipts from one coat. Priya would like to know the coat.",
+    "Six receipts from one coat. Mr. Finch will be pleased.",
     ["Receipt: taxi to diligence", "Gum wrapper", "Receipt: Cloud $120", "Movie ticket stub", "Receipt: bag of chips (very specific)", "Napkin with a phone number", "Receipt: counsel $850", "Parking ticket"], [0, 2, 4, 6]),
-  ledger: sort("Update the LP ledger", "margaret", "Record who has paid. Paid in full, partial, or owes.",
-    "A ledger is a promise to your future self. Dennis is on notice.",
-    ["Paid in full", "Partial", "Owes"],
-    [["Oakmont: $2.0M of $2.0M", 0], ["Northlight: $1.0M of $1.5M", 1], ["Sunrise: $0 of $0.5M", 2], ["Dennis: $0 of $0.25M, “I thought it was optional”", 2], ["Lakeshore: $0.75M of $0.75M", 0], ["Pemberton: $0.3M of $1.0M", 1]]),
+  ledger: sort("Update capital accounts", "margaret", "Mark who has paid this call: paid in full, partially paid, or unpaid.",
+    "Every capital account is right. Dr. Alvarez has been sent a friendly reminder.",
+    ["Paid", "Partially Paid", "Unpaid"],
+    [["Oakmont: $2.0M of $2.0M", 0], ["Northlight: $1.0M of $1.5M", 1], ["Sunrise: $0 of $0.5M", 2], ["Dr. Alvarez: $0 of $0.25M, “I thought it was optional”", 2], ["Lakeshore: $0.75M of $0.75M", 0], ["Pemberton: $0.3M of $1.0M", 1]]),
 
   // ---------------------------------------------------------------- outings and rest
   coffee: pick("Coffee with a founder", "brooke", "Keep the conversation going. Say the useful thing.",

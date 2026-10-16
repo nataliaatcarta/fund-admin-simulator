@@ -3,6 +3,7 @@ import { Effects, MinigameModule, MinigameParams, MinigameProps, MinigameResult,
 import { rng } from "../../game/rng";
 import { Button, Panel, Txt } from "../../engine/ui";
 import { sfx } from "../../engine/audio";
+import { pointer } from "../../engine/pointer";
 import { Spec, SPECS } from "./specs";
 
 const INK = "#4a3566";
@@ -60,13 +61,43 @@ const chip = (on: boolean, color = "#fffdf6"): React.CSSProperties => ({
   boxShadow: on ? "0 0 0 4px #f2b04a" : "0 2px 0 rgba(120,70,90,.25)", cursor: "pointer", lineHeight: "24px",
 });
 
-// ------------------------------------------------------------------ sort: pick a thing, then a bin
+// ------------------------------------------------------------------ sort: drag each thing into a box
 function Sort({ spec, params, onDone }: MinigameProps & { spec: Extract<Spec, { kind: "sort" }> }) {
   const order = useMemo(() => rng(params.seed).shuffle(spec.items.map((_, i) => i)), [spec, params.seed]);
   const [placed, setPlaced] = useState<Record<number, number>>({});
+  const [drag, setDrag] = useState<{ i: number; x: number; y: number } | null>(null);
   const [sel, setSel] = useState<number | null>(null);
+  const binEls = useRef<(HTMLDivElement | null)[]>([]);
+  const poolEl = useRef<HTMLDivElement | null>(null);
+  const dragRef = useRef<{ i: number; sx: number; sy: number; moved: boolean } | null>(null);
   const loose = order.filter((i) => placed[i] === undefined);
-  const put = (bin: number) => { if (sel === null) return; sfx.play("paper"); setPlaced((p) => ({ ...p, [sel]: bin })); setSel(null); };
+
+  const place = (i: number, bin: number | null) => {
+    sfx.play("paper");
+    setPlaced((p) => { const n = { ...p }; if (bin === null) delete n[i]; else n[i] = bin; return n; });
+  };
+  const inside = (el: HTMLElement | null, x: number, y: number) => { if (!el) return false; const r = el.getBoundingClientRect(); return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom; };
+
+  useEffect(() => {
+    const move = (e: PointerEvent) => {
+      const d = dragRef.current; if (!d) return;
+      if (!d.moved && Math.hypot(e.clientX - d.sx, e.clientY - d.sy) > 6) d.moved = true;
+      if (d.moved) setDrag({ i: d.i, x: pointer.x, y: pointer.y });
+    };
+    const up = (e: PointerEvent) => {
+      const d = dragRef.current; if (!d) return;
+      dragRef.current = null; setDrag(null);
+      if (!d.moved) { sfx.play("click"); setSel((s) => (s === d.i ? null : d.i)); return; }
+      const bin = binEls.current.findIndex((el) => inside(el, e.clientX, e.clientY));
+      if (bin >= 0) { place(d.i, bin); setSel(null); }
+      else if (inside(poolEl.current, e.clientX, e.clientY)) place(d.i, null);
+    };
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", up);
+    return () => { window.removeEventListener("pointermove", move); window.removeEventListener("pointerup", up); };
+  }, []);
+
+  const grab = (i: number) => (e: React.PointerEvent) => { e.preventDefault(); dragRef.current = { i, sx: e.clientX, sy: e.clientY, moved: false }; };
   const finish = () => {
     const wrong = spec.items.filter((it, i) => placed[i] !== it.bin);
     const acc = 1 - wrong.length / spec.items.length;
@@ -75,20 +106,21 @@ function Sort({ spec, params, onDone }: MinigameProps & { spec: Extract<Spec, { 
   const bw = Math.min(380, Math.floor(760 / spec.bins.length) - 16);
   return (
     <Frame spec={spec} onDone={finish} canDone={loose.length === 0} doneLabel="Done ▸">
-      <div className="abs col gap8" style={{ left: 48, top: 140, width: 440 }}>
-        {loose.length === 0 && <Txt size="md" dim>All sorted. Click an item in a box to take it back.</Txt>}
-        {loose.map((i) => <div key={i} data-hot onClick={() => { sfx.play("click"); setSel(i === sel ? null : i); }} style={chip(sel === i)}>{spec.items[i].text}</div>)}
+      <div ref={poolEl} className="abs col gap8" style={{ left: 48, top: 140, width: 440, minHeight: 440, userSelect: "none" }}>
+        {loose.length === 0 && <Txt size="md" dim>All sorted. Drag an item out of a box to move it.</Txt>}
+        {loose.map((i) => <div key={i} data-hot onPointerDown={grab(i)} style={{ ...chip(sel === i), opacity: drag?.i === i ? 0.35 : 1, touchAction: "none" }}>{spec.items[i].text}</div>)}
       </div>
-      <div className="abs row gap16" style={{ left: 520, top: 140, width: 740, alignItems: "flex-start" }}>
+      <div className="abs row gap16" style={{ left: 520, top: 140, width: 740, alignItems: "flex-start", userSelect: "none" }}>
         {spec.bins.map((b, bi) => (
-          <div key={b} data-hot onClick={() => put(bi)} style={{ width: bw, minHeight: 360, background: sel !== null ? "#e9f7ee" : "#f1e6f5", borderRadius: 14, padding: 12, outline: sel !== null ? "4px dashed #7ed9a4" : "none", display: "flex", flexDirection: "column", gap: 8 }}>
+          <div key={b} ref={(el) => { binEls.current[bi] = el; }} data-hot onClick={() => { if (sel !== null) { place(sel, bi); setSel(null); } }} style={{ width: bw, minHeight: 360, background: drag || sel !== null ? "#e9f7ee" : "#f1e6f5", borderRadius: 14, padding: 12, outline: drag || sel !== null ? "4px dashed #7ed9a4" : "none", display: "flex", flexDirection: "column", gap: 8 }}>
             <div className="disp" style={{ color: INK, fontSize: 24, textAlign: "center" }}>{b}</div>
             {order.filter((i) => placed[i] === bi).map((i) => (
-              <div key={i} onClick={(e) => { e.stopPropagation(); setPlaced((p) => { const n = { ...p }; delete n[i]; return n; }); }} style={{ ...chip(false, "#fff"), fontSize: 17, lineHeight: "20px" }}>{spec.items[i].text}</div>
+              <div key={i} onPointerDown={(e) => { e.stopPropagation(); grab(i)(e); }} style={{ ...chip(false, "#fff"), fontSize: 17, lineHeight: "20px", opacity: drag?.i === i ? 0.35 : 1, touchAction: "none" }}>{spec.items[i].text}</div>
             ))}
           </div>
         ))}
       </div>
+      {drag && <div className="abs" style={{ left: drag.x - 150, top: drag.y - 22, width: 300, ...chip(true), pointerEvents: "none", zIndex: 40, transform: "rotate(-2deg)" }}>{spec.items[drag.i].text}</div>}
     </Frame>
   );
 }
@@ -219,7 +251,7 @@ function make(key: string): MinigameModule {
       case "breathe": return <Breathe {...p} spec={spec} />;
     }
   };
-  return { id: "task:" + key, title: spec.title, glossary: [], Component: Comp, skipResult: (p) => buildResult(spec, p, 0.7, ["Done quickly. Average result."], 2) };
+  return { id: "task:" + key, title: spec.title, glossary: [], Component: Comp, skipResult: (p) => buildResult(spec, p, 0.7, [], 2) };
 }
 
 export const TASK_GAMES: Record<string, MinigameModule> = Object.fromEntries(Object.keys(SPECS).map((k) => ["task:" + k, make(k)]));

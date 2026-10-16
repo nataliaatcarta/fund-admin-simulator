@@ -249,7 +249,7 @@ export function buildResult(log: RunLog): MinigameResult {
 
 export function skipResult(seed: number): MinigameResult {
   const r = rng(seed * 31 + 5);
-  const summary = ["You just signed it.", "Nobody opened the binder. It all worked out. Probably."];
+  const summary = ["You skipped the checks.", "Nobody opened the binder. It all worked out. Probably."];
   const effects: Effects = { glossary: ["wire-fraud"] };
   if (r.chance(0.12)) {
     effects.seeds = [{ id: "where-did-the-money-go", bloom: "s_where_money_went", afterQuarters: 1, label: "A wire left… somewhere" }];
