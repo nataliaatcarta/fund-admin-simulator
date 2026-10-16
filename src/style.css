@@ -49,7 +49,7 @@ body { font-family: var(--font-ui); color: var(--ink); user-select: none; -webki
 .p-paper-stitch { border-image-source: url(/art/ui/widgets/panel-paper-stitch.png); }
 .p-pink-stitch { border-image-source: url(/art/ui/widgets/panel-pink-stitch.png); }
 
-.btn { font-family: var(--font-display); font-size: 30px; line-height: 1; color: var(--ink); border-style: solid; border-width: 24px; border-image-slice: 6 fill; border-image-width: 24px; background: none; padding: 0 8px; margin: 0; display: inline-flex; align-items: center; justify-content: center; text-align: center; image-rendering: pixelated; min-width: 120px; height: 80px; white-space: nowrap; }
+.btn { font-family: var(--font-display); font-size: 21px; line-height: 1; color: var(--ink); border-style: solid; border-width: 24px; border-image-slice: 6 fill; border-image-width: 24px; background: none; padding: 0 8px; margin: 0; display: inline-flex; align-items: center; justify-content: center; text-align: center; image-rendering: pixelated; min-width: 120px; height: 80px; white-space: nowrap; }
 .btn span { transform: translateY(-2px); }
 .btn.c-pink { border-image-source: url(/art/ui/widgets/button-pink-normal.png); }
 .btn.c-pink:hover { border-image-source: url(/art/ui/widgets/button-pink-hover.png); }
@@ -65,13 +65,13 @@ body { font-family: var(--font-ui); color: var(--ink); user-select: none; -webki
 .btn.c-butter:active { border-image-source: url(/art/ui/widgets/button-butter-pressed.png); }
 .btn:disabled { border-image-source: url(/art/ui/widgets/button-disabled.png) !important; opacity: .7; }
 
-.resp { font-family: var(--font-ui); font-weight: 700; font-size: 26px; line-height: 1.15; text-align: left; color: var(--ink); border-style: solid; border-width: 24px 24px 24px 56px; border-image-slice: 6 6 6 14 fill; border-image-width: 24px 24px 24px 56px; border-image-source: url(/art/ui/widgets/response-button-normal.png); background: none; padding: 0 4px; width: 100%; display: block; image-rendering: pixelated; }
+.resp { font-family: var(--font-ui); font-weight: 700; font-size: 18px; line-height: 1.15; text-align: left; color: var(--ink); border-style: solid; border-width: 24px 24px 24px 56px; border-image-slice: 6 6 6 14 fill; border-image-width: 24px 24px 24px 56px; border-image-source: url(/art/ui/widgets/response-button-normal.png); background: none; padding: 0 4px; width: 100%; display: block; image-rendering: pixelated; }
 .resp:hover { border-image-source: url(/art/ui/widgets/response-button-hover.png); }
 .resp:active { border-image-source: url(/art/ui/widgets/response-button-pressed.png); }
 .resp:disabled { border-image-source: url(/art/ui/widgets/response-button-disabled.png); opacity: .7; }
 
 .disp { font-family: var(--font-display); }
-.t-sm { font-size: 22px; } .t-md { font-size: 28px; } .t-lg { font-size: 40px; } .t-xl { font-size: 64px; }
+.t-sm { font-size: 15px; } .t-md { font-size: 19px; } .t-lg { font-size: 27px; } .t-xl { font-size: 44px; }
 .t-dim { opacity: .65; }
 .t-c { text-align: center; }
 .abs { position: absolute; }

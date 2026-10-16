@@ -690,14 +690,14 @@ export const FILLER_EVENTS: GameEvent[] = [
     who: "priya",
     subj: "Priya: \"Do you have a minute? It's about the minute.\"",
     setup: {
-      default: "Priya enters, sits, and puts a single document on your desk. \"It's nothing. It's a small thing. It's a very small thing that has been growing for six weeks.\"",
+      default: "Priya puts a one-page list on your desk. \"Quarter close is coming and I have 14 open items: unmatched bank lines, missing receipts, and one expense nobody will claim. None is big. Together, they are a lot.\"",
       mood: { happy: "Priya sits down with two mugs. \"I made tea. Don't read into it. Also: the books are, for the first time, boring. I wanted to share that.\"", worried: "Priya sits, eyebrow slightly raised. \"I have a list. It is organized by 'concerning' and 'extremely concerning'. We should begin with the first.\"" },
       flags: { f_priya_receipt_ally: "Priya: \"Since you started sending me receipts on time, I have, quite literally, nothing to complain about. It's unsettling. Do you want to talk about it?\"" },
     },
     w: 2,
     opts: [
-      ["Ask her to walk you through it. All of it.", "Priya does. At the end she says, \"Thank you for letting me finish.\" It is the nicest thing she has said all week.", { rel: { priya: 4 }, compliance: -4, wellbeing: -2 }, "happy"],
-      ["Ask what she needs from you to make it smaller", "Priya: \"Receipts. On Fridays. In an envelope.\" It's a very Priya answer. You write it on your hand.", { rel: { priya: 3 }, compliance: -3, setFlags: ["f_priya_receipt_ally"] }],
+      ["Go through all 14 items with her, line by line", "You clear them one by one. At the end she says, \"Thank you for letting me finish.\" It is the nicest thing she has said all week.", { rel: { priya: 4 }, compliance: -4, wellbeing: -2 }, "happy"],
+      ["Ask what she needs from you to shrink the list", "Priya: \"Receipts. On Fridays. In an envelope.\" It's a very Priya answer. You write it on your hand.", { rel: { priya: 3 }, compliance: -3, setFlags: ["f_priya_receipt_ally"] }],
     ],
   }),
   meet({
